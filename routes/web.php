@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Auth User
-Auth::routes();
+// Auth::routes();
 
 // Auth Manager
 Route::group(['prefix' => 'manager'], function () {
@@ -90,26 +90,3 @@ Route::get('/kursus', 'Web\FrontController@kursus')->name('front.kursus');
 Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
 Route::get('/kursus/{slug}', 'Web\FrontController@show')->name('front.detail');
 Route::get('/kursus/review/{slug}', 'Web\FrontController@review')->name('front.review');
-
-// Route Profil
-Route::group(['prefix' => 'profile'], function () {
-    Route::put('update/{id}/profile', 'Web\ProfileController@update_profile')->name('profile.update');
-    Route::get('/', 'Web\ProfileController@profile')->name('profile.index');
-    Route::get('kursus', 'Web\ProfileController@kursus')->name('profile.kursus');
-    Route::put('update/{id}/pengaturan', 'Web\ProfileController@update_pengaturan')->name('pengaturan.update');
-    Route::get('pengaturan', 'Web\ProfileController@pengaturan')->name('profile.pengaturan');
-});
-// Route Order
-Route::post('/order/post/{slug}', 'Web\OrderController@orderPost')->name('order.post');
-Route::get('/order/success', 'Web\OrderController@success')->name('order.success');
-Route::get('/order/cart', 'Web\OrderController@view')->name('order.view');
-Route::get('/order/cart/pending', 'Web\OrderController@updateToPending')->name('order.update.cancel');
-Route::delete('/order/cart/{id}', 'Web\OrderController@updateToDelete')->name('order.delete.pesanan');
-Route::post('/order/cart/upload_bukti', 'Web\OrderController@uploadFile')->name('order.post.pembayaran');
-Route::patch('/order/cart/upload_bukti', 'Web\OrderController@updateFile')->name('order.patch.pembayaran');
-Route::patch('/order/checkout/{id}', 'Web\OrderController@deleteCheckout')->name('order.delete.checkout');
-
-// Route Kursus
-Route::get('/user/kursus-saya', 'Web\KursusUserController@kursus_success')->name('user.kursus.success');
-Route::get('/user/kursus-review/{slug}', 'Web\KursusUserController@kursusKelas')->middleware('user.kursus')->name('user.kursus.kelas');
-Route::post('/user/kursus/{slug}', 'Web\KursusUserController@kursusKelasKomentar')->name('user.kursus.komentar');

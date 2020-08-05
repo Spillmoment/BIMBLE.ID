@@ -21,7 +21,7 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
             
-            @guest
+          
             <li class="nav-item"><a href="{{ route('front.index') }}" class="nav-link 
                 {{ (Request::route()->getName() == 'front.index') ? 'active' : '' }}">Beranda</a></li>
             <li class="nav-item"><a href="{{ route('front.pusat') }}" class="nav-link 
@@ -33,54 +33,7 @@
                 }}">
                   Kursus
                   </a></li>
-
-            @if (Route::has('register'))
-            <li class="nav-item"><a href="{{ route('register') }}" class="nav-link  
-                {{ (Request::route()->getName() == 'register') ? 'active' : '' }}">Daftar</a></li>
-            <li class="nav-item"><a href="{{ route('login') }}" class="nav-link 
-                 {{ (Request::route()->getName() == 'login') ? 'active' : '' }}">
-                    Masuk
-                </a></li>
-            @endif
-                @endguest
-           
-                @auth
-                <li class="nav-item"><a href="{{ route('front.index') }}" class="nav-link 
-                    {{ (Request::route()->getName() == 'front.index') ? 'active' : '' }}">
-                        Beranda
-                    </a></li>
-                    <li class="nav-item"><a href="{{ route('front.pusat') }}" class="nav-link 
-                      {{ (Request::route()->getName() == 'front.pusat') ? 'active' : '' }}">Pusat Bantuan</a></li>
-                <li class="nav-item"><a href="{{ route('front.kursus') }}" class="nav-link 
-                    {{ (Request::route()->getName() == 'front.kursus') ? 'active' : '' ||
-                       (Request::route()->getName() == 'front.detail') ? 'active' : '' ||
-                       (Request::route()->getName() == 'front.review') ? 'active' : ''
-                    }}">
-                      Kursus
-                      </a></li>
-        
-                <li class="nav-item"><a href="{{ route('order.view') }}" class="nav-link 
-                    {{ (Request::route()->getName() == 'order.view') ? 'active' : '' }}">
-                        Pesanan
-                    </a></li>
-                <li class="nav-item dropdown ml-lg-3">
-                    <a id="userDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <img src="{{ Storage::url('uploads/pendaftar/profile/'.Auth::user()->foto ) }}"
-                class="avatar avatar-sm avatar-border-white mr-2">
-                </a>
-                <div class="d-flex">
-                    <div class="dropdown-menu dropdown-menu-right z-index-1;">
-                        <a class="dropdown-item {{ Route::currentRouteName() == 'profile.index' ? 'active' : '' }}" href="{{ route('profile.index') }}">Profil</a>
-                        <a class="dropdown-item  {{ Route::currentRouteName() == 'user.kursus.success' ? 'active' : '' }}" href="{{ route('user.kursus.success') }}">Kursus Saya</a>
-                        <a class="dropdown-item" href="{{ route('user.logout') }}">
-                            <i class="fas fa-sign-out-alt mr-2 text-muted"></i>
-                            Keluar
-                        </a>
-                    </div>
-                </div>
-                </li>
-                @endauth
+            
           </ul>
         </div>
       </div>
