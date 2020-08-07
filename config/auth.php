@@ -58,14 +58,14 @@ return [
             'hash' => false,
         ],
 
-        'tutor' => [
+        'unit' => [
             'driver' => 'session',
-            'provider' => 'tutors',
+            'provider' => 'units',
         ],
 
-        'api-tutor' => [
+        'api-unit' => [
             'driver' => 'token',
-            'provider' => 'tutors',
+            'provider' => 'units',
             'hash' => false,
         ],
     ],
@@ -96,9 +96,9 @@ return [
             'driver' => 'eloquent',
             'model' => App\Manager::class,
         ],
-        'tutors' => [
+        'units' => [
             'driver' => 'eloquent',
-            'model' => App\Tutor::class,
+            'model' => App\Unit::class,
         ],
 
         // 'users' => [
@@ -135,8 +135,8 @@ return [
             'expire' => 15,
             'throttle' => 15,
         ],
-        'tutors' => [
-            'provider' => 'tutors',
+        'units' => [
+            'provider' => 'units',
             'table' => 'password_resets',
             'expire' => 15,
             'throttle' => 15,
