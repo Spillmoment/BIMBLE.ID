@@ -9,9 +9,7 @@
         <!-- Widgets  -->
         <div class="row">
 
-
-
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-4 col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-five">
@@ -29,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-4 col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-five">
@@ -38,8 +36,8 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">{{ $tutor }}</span></div>
-                                    <div class="stat-heading">Tutor</div>
+                                    <div class="stat-text"><span class="count">{{ $unit }}</span></div>
+                                    <div class="stat-heading">Unit</div>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +46,7 @@
             </div>
 
 
-            <div class="col-lg-3 col-md-3">
+            {{-- <div class="col-lg-3 col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-five">
@@ -84,14 +82,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
         <!-- /Widgets -->
         <!--  /Traffic -->
         <div class="clearfix"></div>
         <!-- Orders -->
-        <div class="orders">
+        {{-- <div class="orders">
             <div class="row">
                 <div class="col-xl-8">
                     <div class="card">
@@ -129,7 +127,7 @@
                                                         <span class="badge badge-danger">
                                                             {{-- @elseif($item->status_kursus == "CANCEL")
                                                             <span class="badge badge-danger"> --}}
-                                                                @elseif($item->status_kursus == "PROCESS")
+                                                                {{-- @elseif($item->status_kursus == "PROCESS")
                                                                 <span class="badge badge-secondary">
                                                                     <span>
                                                                         @endif
@@ -148,9 +146,9 @@
                             </div>
                         </div>
                     </div> <!-- /.card -->
-                </div> <!-- /.col-lg-8 -->
+                </div> <!-- /.col-lg-8 --> --}}
 
-                <div class="col-xl-4">
+                {{-- <div class="col-xl-4">
                     <div class="row">
                         <div class="col-lg-6 col-xl-12">
                             <div class="card br-0">
@@ -163,8 +161,8 @@
                         </div>
                     </div>
                 </div> <!-- /.col-md-4 -->
-            </div>
-        </div>
+            </div> --}}
+        {{-- </div> --}} 
         <!-- /.orders -->
         <!-- /#add-category -->
     </div>
@@ -174,7 +172,7 @@
 
 @push('after-script')
     <!--Local Stuff-->
-    <script>
+    {{-- <script>
         jQuery(document).ready(function($) {
             "use strict";
             // Pie chart flotPie1
@@ -359,5 +357,5 @@
             });
             // Bar Chart #flotBarChart End
         });
-    </script>
+    </script> --}}
 @endpush
