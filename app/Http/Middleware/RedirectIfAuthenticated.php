@@ -25,9 +25,9 @@ class RedirectIfAuthenticated
                 }
                 break;
 
-            case 'tutor':
+            case 'unit':
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('tutor.home');
+                    return redirect()->route('unit.home');
                 }
                 break;
 
