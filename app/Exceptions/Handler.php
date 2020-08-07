@@ -66,7 +66,7 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if($request->expectsJson()){
+        if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
@@ -75,11 +75,11 @@ class Handler extends ExceptionHandler
             case 'manager':
                 $login = 'manager.login';
                 break;
-            
-                case 'tutor':
-                $login = 'tutor.login';
+
+            case 'tutor':
+                $login = 'unit.login';
                 break;
-            
+
             default:
                 $login = 'login';
                 break;
