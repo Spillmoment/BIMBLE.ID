@@ -34,8 +34,6 @@
         <div class="card-body card-block">
             <form method="post" enctype="multipart/form-data" action="{{route('kursus.store')}}">
                 @csrf
-
-
                 <div class="form-group ">
                     <label for="nama_kursus">Nama Kursus</label>
                     <input type="text" class="form-control {{ $errors->first('nama_kursus') ? 'is-invalid' : '' }}"
@@ -53,79 +51,6 @@
                 </div>
                 <div class="invalid-feedback">
                     {{$errors->first('gambar_kursus')}}
-                </div>
-
-                <div class="form-group">
-                    <label for="kategori">Kategori Kursus</label>
-                    <select class="form-control  {{ $errors->first('id_kategori') ? 'is-invalid' : '' }}"
-                        name="id_kategori" id="id_kategori">
-                        @foreach ($kategori as $kt)
-                        <option value="{{ $kt->id }}">{{ $kt->nama_kategori }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="invalid-feedback">
-                    {{$errors->first('id_kategori')}}
-                </div>
-
-                <div class="form-group">
-                    <label for="tutor">Tutor Kursus</label>
-                    <select class="form-control  {{ $errors->first('id_tutor') ? 'is-invalid' : '' }}" name="id_tutor"
-                        id="id_tutor">
-                        @foreach ($tutor as $kt)
-                        <option value="{{ $kt->id }}">{{ $kt->nama_tutor }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="invalid-feedback">
-                    {{$errors->first('id_tutor')}}
-                </div>
-
-                <div class="form-group ">
-                    <label for="biaya_kursus">Biaya Kursus</label>
-                    <input type="number" class="form-control {{ $errors->first('biaya_kursus') ? 'is-invalid' : '' }}"
-                        name="biaya_kursus" id="biaya_kursus" value="{{old('biaya_kursus')}}"
-                        placeholder="Biaya Kursus">
-                    <div class="invalid-feedback">
-                        {{$errors->first('biaya_kursus')}}
-                    </div>
-                </div>
-
-                <div class="form-group ">
-                    <label for="diskon_kursus">Diskon Kursus</label>
-                    <input type="number" class="form-control {{ $errors->first('diskon_kursus') ? 'is-invalid' : '' }}"
-                        name="diskon_kursus" id="diskon_kursus" value="{{old('diskon_kursus')}}"
-                        placeholder="Diskon Kursus">
-                    <div class="invalid-feedback">
-                        {{$errors->first('diskon_kursus')}}
-                    </div>
-                </div>
-
-                <div class="form-group ">
-                    <label for="lama_kursus">Lama Kursus</label>
-                    <input type="text" class="form-control {{ $errors->first('lama_kursus') ? 'is-invalid' : '' }}"
-                        name="lama_kursus" id="lama_kursus" value="{{old('lama_kursus')}}" placeholder="Lama Kursus">
-                    <div class="invalid-feedback">
-                        {{$errors->first('lama_kursus')}}
-                    </div>
-                </div>
-
-                <div class="form-group ">
-                    <label for="latitude">Latitude</label>
-                    <input type="number" class="form-control {{ $errors->first('latitude') ? 'is-invalid' : '' }}"
-                        name="latitude" id="latitude" value="{{old('latitude')}}" placeholder="Latitude">
-                    <div class="invalid-feedback">
-                        {{$errors->first('latitude')}}
-                    </div>
-                </div>
-
-                <div class="form-group ">
-                    <label for="longitude">Longitude</label>
-                    <input type="number" class="form-control {{ $errors->first('longitude') ? 'is-invalid' : '' }}"
-                        name="longitude" id="longitude" value="{{old('longitude')}}" placeholder="Longitude">
-                    <div class="invalid-feedback">
-                        {{$errors->first('longitude')}}
-                    </div>
                 </div>
 
 

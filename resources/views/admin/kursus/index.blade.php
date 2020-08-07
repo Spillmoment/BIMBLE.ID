@@ -3,7 +3,6 @@
 @section('title','Bimble - Data Kursus')
 @section('content')
 
-
 <div class="breadcrumbs">
     <div class="breadcrumbs-inner">
         <div class="row m-0">
@@ -51,8 +50,8 @@
                     <div class="card-header">
                         <strong class="card-title">Table Kursus</strong>
 
-                        <a class="btn btn-primary btn-sm float-right" href="{{ route('kursus.create') }}"> <i
-                                class="fa fa-plus" aria-hidden="true"></i> Add Kursus</a>
+                        <a class="btn btn-primary btn-sm float-right" href="{{ route('kursus.create') }}"> Tambah
+                            Kursus</a>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -61,8 +60,7 @@
                                     <th>No</th>
                                     <th width="300">Nama Kursus</th>
                                     <th width="150">Gambar Kursus</th>
-                                    <th width="200">Kategori Kursus</th>
-                                    <th width="200">Tutor Kursus</th>
+                                    <th width="200">Keterangan</th>
                                     <th width="210">Option</th>
                                 </tr>
                             </thead>
@@ -78,21 +76,9 @@
                                     Tidak Ada Gambar
                                     @endif
                                     <td>
-                                        @foreach ($krs->kategori as $item)
-                                        {{$item->nama_kategori}}
-                                        @endforeach
+                                        {{ $krs->keterangan }}
                                     </td>
                                     <td>
-                                        @foreach ($krs->tutor as $sensei)
-                                        {{$sensei->nama_tutor}}
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('kursus.gallery', $krs->id) }}" class="btn btn-success btn-sm">
-                                            <i class="fa fa-picture-o"></i>
-                                        </a>
-                                        <a class="btn btn-primary btn-sm" href="{{route('kursus.show',
-                                     [$krs->id])}}"> <i class="fa fa-eye"></i> </a>
                                         <a class="btn btn-warning btn-sm text-light" href="{{route('kursus.edit',
                                        [$krs->id])}}"> <i class="fa fa-pencil"></i></a>
 
