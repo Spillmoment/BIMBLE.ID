@@ -31,34 +31,34 @@ Route::group(['prefix' => 'manager'], function () {
     Route::post('/password/reset', 'AuthManager\ResetPasswordController@reset');
 });
 
-// Auth Tutor
-Route::group(['prefix' => 'tutor'], function () {
-    Route::get('/login', 'AuthTutor\LoginController@showLoginForm')->name('tutor.login');
-    Route::post('/login', 'AuthTutor\LoginController@login')->name('tutor.login.submit');
+// Auth Unit
+Route::group(['prefix' => 'unit'], function () {
+    Route::get('/login', 'AuthUnit\LoginController@showLoginForm')->name('unit.login');
+    Route::post('/login', 'AuthUnit\LoginController@login')->name('unit.login.submit');
 
-    Route::get('/logout', 'AuthTutor\LoginController@logoutTutor')->name('tutor.logout');
-    Route::get('/password/reset', 'AuthTutor\ForgotPasswordController@showLinkRequestForm')->name('tutor.password.request');
-    Route::post('/password/email', 'AuthTutor\ForgotPasswordController@sendResetLinkEmail')->name('tutor.password.email');
-    Route::get('/password/reset/{token}', 'AuthTutor\ResetPasswordController@showResetForm')->name('tutor.password.reset');
-    Route::post('/password/reset', 'AuthTutor\ResetPasswordController@reset');
+    Route::get('/logout', 'AuthUnit\LoginController@logoutUnit')->name('unit.logout');
+    Route::get('/password/reset', 'AuthUnit\ForgotPasswordController@showLinkRequestForm')->name('unit.password.request');
+    Route::post('/password/email', 'AuthUnit\ForgotPasswordController@sendResetLinkEmail')->name('unit.password.email');
+    Route::get('/password/reset/{token}', 'AuthUnit\ResetPasswordController@showResetForm')->name('unit.password.reset');
+    Route::post('/password/reset', 'AuthUnit\ResetPasswordController@reset');
 });
 
-Route::prefix('tutor')
-    ->middleware('auth:tutor')
+Route::prefix('unit')
+    ->middleware('auth:unit')
     ->group(function () {
 
-        Route::get('/', 'Tutor\DashboardController@index')->name('tutor.home');
-        Route::put('/profile/{id}/update', 'Tutor\DashboardController@update_profile')->name('tutor.update-profil');
-        Route::get('/profile', 'Tutor\DashboardController@profile')->name('tutor.profile');
-        Route::put('/pengaturan/{id}/update', 'Tutor\DashboardController@update_pengaturan')->name('tutor.update-pengaturan');
-        Route::get('/pengaturan', 'Tutor\DashboardController@pengaturan')->name('tutor.pengaturan');
-        Route::put('siswa/nilai/{id}', 'Tutor\SiswaController@add_nilai')->name('siswa.add');
-        Route::get('siswa/nilai/{id}/edit', 'Tutor\SiswaController@nilai')->name('siswa.nilai');
-        Route::get('kursus/{slug}/nilai/', 'Tutor\NilaiController@kursus_nilai')->name('kursus.nilai');
-        Route::resource('siswa', 'Tutor\SiswaController');
-        Route::resource('nilai', 'Tutor\NilaiController');
-        Route::get('kursus/nilai-kursus', 'Tutor\NilaiController@tutor_kursus')->name('tutor.kursus');
-        Route::patch('nilai/{id}/edit', 'Tutor\NilaiController@edit_nilai_pendaftar');
+        Route::get('/', 'Unit\DashboardController@index')->name('unit.home');
+        Route::put('/profile/{id}/update', 'Unit\DashboardController@update_profile')->name('unit.update-profil');
+        Route::get('/profile', 'Unit\DashboardController@profile')->name('unit.profile');
+        Route::put('/pengaturan/{id}/update', 'Unit\DashboardController@update_pengaturan')->name('unit.update-pengaturan');
+        Route::get('/pengaturan', 'Unit\DashboardController@pengaturan')->name('unit.pengaturan');
+        // Route::put('siswa/nilai/{id}', 'Unit\SiswaController@add_nilai')->name('siswa.add');
+        // Route::get('siswa/nilai/{id}/edit', 'Unit\SiswaController@nilai')->name('siswa.nilai');
+        // Route::get('kursus/{slug}/nilai/', 'Unit\NilaiController@kursus_nilai')->name('kursus.nilai');
+        // Route::resource('siswa', 'Unit\SiswaController');
+        // Route::resource('nilai', 'Unit\NilaiController');
+        // Route::get('kursus/nilai-kursus', 'Unit\NilaiController@unit_kursus')->name('unit.kursus');
+        // Route::patch('nilai/{id}/edit', 'Unit\NilaiController@edit_nilai_pendaftar');
     });
 
 // Route Manager
@@ -70,10 +70,8 @@ Route::prefix('manager')
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
         Route::resources([
-            'kategori'  => 'KategoriController',
             'kursus'    => 'KursusController',
-            'gallery'   => 'GalleryController',
-            'tutor'     => 'TutorController',
+            'unit'     => 'UnitController',
         ]);
     });
 
