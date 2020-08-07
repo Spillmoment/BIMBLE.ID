@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePendaftarTable extends Migration
+class CreateUnitTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,22 @@ class CreatePendaftarTable extends Migration
      */
     public function up()
     {
-        Schema::create('pendaftar', function (Blueprint $table) {
+        Schema::create('unit', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pendaftar', 100);
-            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->string('nama_unit', 100);
+            $table->string('slug')->nullable()->unique();
             $table->text('alamat');
-            $table->string('foto', 100)->nullable();
+            $table->text('deskripsi');
+            $table->string('gambar_unit', 100)->nullable();
+            $table->enum('status', ['1', '0']);
+            $table->string('whatsapp', 100)->nullable();
+            $table->string('telegram', 100)->nullable();
+            $table->string('instagram', 100)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('username', 100)->unique();
+            $table->string('username', 100);
             $table->string('password', 100);
             $table->rememberToken();
-            $table->enum('status', ['1', '0']);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -37,6 +41,6 @@ class CreatePendaftarTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pendaftar');
+        Schema::dropIfExists('unit');
     }
 }

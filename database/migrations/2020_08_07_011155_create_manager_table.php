@@ -16,8 +16,8 @@ class CreateManagerTable extends Migration
         Schema::create('manager', function (Blueprint $table) {
             $table->id();
             $table->string('nama', 100);
-            $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->text('alamat');
+            $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
+            $table->text('alamat')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('username', 100);

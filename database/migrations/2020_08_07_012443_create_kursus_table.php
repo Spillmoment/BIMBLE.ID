@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGalleriesTable extends Migration
+class CreateKursusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateGalleriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('galleries', function (Blueprint $table) {
+        Schema::create('kursus', function (Blueprint $table) {
             $table->id();
-            $table->integer('kursus_id');
-            $table->text('image');
-            $table->softDeletes();
+            $table->string('nama_kursus', 100);
+            $table->string('slug')->nullable()->unique();
+            $table->text('keterangan')->nullable();
+            $table->string('gambar_kursus', 100)->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +31,6 @@ class CreateGalleriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('kursus');
     }
 }
