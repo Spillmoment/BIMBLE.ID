@@ -65,21 +65,15 @@ Route::prefix('tutor')
 Route::prefix('manager')
     ->middleware('auth:manager')
     ->group(function () {
+
         // Route Dashboard
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
-        // Route Kursus
-        Route::get('kursus/{id}/gallery', 'KursusController@gallery')->name('kursus.gallery');
-        // Route Order
-        Route::get('order/{id}/set-status', 'OrderController@setStatus')->name('order.status');
 
         Route::resources([
             'kategori'  => 'KategoriController',
             'kursus'    => 'KursusController',
             'gallery'   => 'GalleryController',
             'tutor'     => 'TutorController',
-            'pendaftar' => 'PendaftarController',
-            'order'     => 'OrderController'
         ]);
     });
 
