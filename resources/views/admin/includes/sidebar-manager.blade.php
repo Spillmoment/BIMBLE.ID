@@ -10,54 +10,23 @@
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Kursus</li>
+
                 <li class="{{ 
-                           (Request::route()->getName() == 'kategori.index') ? 'active' : '' ||
-                           (Request::route()->getName() == 'kategori.create') ? 'active' : '' ||
-                           (Request::route()->getName() == 'kategori.edit') ? 'active' : ''
-                     }}">
-                    <a href="{{ route('kategori.index') }}"> <i class="menu-icon fa fa-list"></i>Kategori Kursus</a>
-                </li>
-                <li class="{{ 
-                          (Request::route()->getName() == 'kursus.index') ? 'active' : '' ||
-                          (Request::route()->getName() == 'kursus.create') ? 'active' : '' ||
-                          (Request::route()->getName() == 'kursus.show') ? 'active' : '' ||
-                          (Request::route()->getName() == 'kursus.edit') ? 'active' : '' ||
-                          (Request::route()->getName() == 'kursus.gallery') ? 'active' : '' 
+                          (Request::route()->getName() == 'kursus.index')  ? 'active'  : '' ||
+                          (Request::route()->getName() == 'kursus.create') ? 'active'  : '' ||
+                          (Request::route()->getName() == 'kursus.edit')   ? 'active'  : '' 
                           }}">
                     <a href="{{ route('kursus.index') }}"> <i class="menu-icon fa fa-database"></i>Data Kursus</a>
                 </li>
 
+                <li class="menu-title text-capitalize">Manage Unit</li>
                 <li class="{{ 
-                          (Request::route()->getName() == 'gallery.index') ? 'active' : '' ||
-                          (Request::route()->getName() == 'gallery.create') ? 'active' : '' ||
-                          (Request::route()->getName() == 'gallery.edit') ? 'active' : '' 
+                              (Request::route()->getName() == 'unit.index') ? 'active' : '' ||
+                              (Request::route()->getName() == 'unit.create') ? 'active' : '' ||
+                              (Request::route()->getName() == 'unit.edit') ? 'active' : '' ||
+                              (Request::route()->getName() == 'unit.show') ? 'active' : ''  
                           }}">
-                    <a href="{{ route('gallery.index') }}"> <i class="menu-icon fa fa-image"></i>Galeri Kursus</a>
-                </li>
-
-                <li class="menu-title text-capitalize">Manage Tutor</li>
-                <li class="{{ 
-                              (Request::route()->getName() == 'tutor.index') ? 'active' : '' ||
-                              (Request::route()->getName() == 'tutor.create') ? 'active' : '' ||
-                              (Request::route()->getName() == 'tutor.edit') ? 'active' : '' ||
-                              (Request::route()->getName() == 'tutor.show') ? 'active' : ''  
-                          }}">
-                    <a href="{{ route('tutor.index') }}"> <i class="menu-icon fa fa-user"></i>Data Tutor</a>
-                </li>
-
-                <li class="menu-title text-capitalize">Manage Pendaftar</li>
-                <li class="
-              {{ 
-                              (Request::route()->getName() == 'pendaftar.index') ? 'active' : '' ||
-                              (Request::route()->getName() == 'pendaftar.show') ? 'active' : ''  
-                          }}">
-                    <a href="{{ route('pendaftar.index') }}"> <i class="menu-icon fa fa-users"></i>Data Pendaftar</a>
-                </li>
-
-
-                <li class="menu-title text-capitalize">Manage Order</li><!-- /.menu-title -->
-                <li class="{{ (Request::route()->getName() == 'order.index') ? 'active' : '' }}">
-                    <a href="{{ route('order.index') }}"> <i class="menu-icon fa fa-dollar"></i>Data Order</a>
+                    <a href="{{ route('unit.index') }}"> <i class="menu-icon fa fa-user"></i>Data Unit</a>
                 </li>
 
 
