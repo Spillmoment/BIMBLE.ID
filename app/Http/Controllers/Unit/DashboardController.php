@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\UserOldPassword;
+use Illuminate\Support\Str;
 
 
 class DashboardController extends Controller
@@ -52,6 +53,8 @@ class DashboardController extends Controller
         ]);
 
         $data = $request->all();
+        $nama_slug = $data['nama_unit'];
+        $data['slug'] = Str::slug($nama_slug, '-');
 
         if ($request->hasFile('gambar_unit')) {
             if ($request->file('gambar_unit')) {
