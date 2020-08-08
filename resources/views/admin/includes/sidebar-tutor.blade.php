@@ -17,6 +17,17 @@
                     <a href="#"> <i class="menu-icon fa fa-user-md"></i>Kursus</a>
                 </li>
 
+                <li class="menu-title text-capitalize">Manage Mentor</li>
+                <li class="">
+                    <a href="#"> <i class="menu-icon fa fa-user-md"></i>Mentor</a>
+                </li>
+
+                <li class="menu-title text-capitalize">Manage Fasilitas</li>
+                <li class="">
+                    <a href="#"> <i class="menu-icon fa fa-user-md"></i>Fasilitas</a>
+                </li>
+
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
