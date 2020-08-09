@@ -32,7 +32,7 @@
 
             <div class="text-block">
                 <h4>Tentang Kelas {{ $kursus->nama_kursus }}</h4>
-                <p class="text-muted font-weight-light">{{ $kursus->keterangan }}</p>
+                <p class="text-muted font-weight-light">{{ $kursus->tentang }}</p>
             </div>
 
             <div class="text-block">
@@ -40,18 +40,18 @@
                 <div class="row mt-4 mb-2">
                     @foreach ($unit as $item)
                     <div class="col-md-4 mb-3">
-                        <div class="card h-100 border-0 shadow">
+                        <div class="card h-100 border-0 shadow hover-animate">
                             <div class="card-img-top overflow-hidden gradient-overlay">
                                 <img src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
                                     alt="{{ $item->nama_unit }}" class="img-fluid" />
-                                <a href="{{ route('front.detail', [$item->slug]) }}" class="tile-link"></a>
+                                <a href="{{ route('unit.detail', [$item->slug]) }}" class="tile-link"></a>
                                 <div class="card-img-overlay-bottom z-index-20">
                                     <div class="media text-white text-sm align-items-center">
                                         <img src="{{ Storage::url('public/'.$item->gambar_unit) }}"
                                             alt="{{ $item->nama_unit }}"
                                             class="avatar-profile avatar-border-white mr-2" />
                                         <div class="media-body"> <a class="text-decoration-none text-white"
-                                                href="{{ route('front.detail', [$item->slug]) }}">
+                                                href="{{ route('unit.detail', [$item->slug]) }}">
                                                 {{ $item->nama_unit }}</a></div>
                                     </div>
                                 </div>
@@ -71,7 +71,6 @@
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         {{$unit->links()}}
-
                     </ul>
                 </nav>
             </div>
