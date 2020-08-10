@@ -23,10 +23,17 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 <script src="{{ asset('assets/js/init/fullcalendar-init.js') }}"></script>
 
-<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
+<script>
+    ClassicEditor.create( document.querySelector( '#deskripsiEditor' ) )
+    .then( editor => {
+            console.log( editor );
+    } )
+    .catch( error => {
+            console.error( error );
+    } );
+</script>
 <script>
     $(document).ready(function () {
         $('#bootstrap-data-table-export').DataTable();
