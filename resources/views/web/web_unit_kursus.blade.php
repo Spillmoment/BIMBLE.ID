@@ -14,7 +14,6 @@
         </ol>
         <h1 class="hero-heading">Selamat Datang Di Unit {{ $unit->nama_unit }}</h1>
         <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" class="avatar avatar-xl img-fluid">
-
     </div>
 </section>
 
@@ -25,15 +24,52 @@
                 <h4>Tentang Kami</h4>
                 <p class="text-muted font-weight-light">{{ $unit->deskripsi }}</p>
             </div>
+
+            <div class="text-block">
+                <h5 class="mb-4">Mentor Team </h5>
+
+                <div class="col">
+                    <div class="row py-3">
+                        <div class="col-sm-3 mb-lg-0 mb-3">
+                            <div class="card border-0 hover-animate ">
+                                <img src="https://vignette.wikia.nocookie.net/naruto/images/2/21/Sasuke_Part_3_V2.png/revision/latest?cb=20170627161720&path-prefix=id"
+                                    alt="" class="card-img-top rounded-circle avatar avatar-xl" height="150px"
+                                    width="150px" />
+                                <h6 class="my-2">Uchiha Sasuke</h6>
+                                <p class="text-muted text-xs text-uppercase">Sharingan Developer </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 mb-lg-0 mb-3">
+                            <div class="card border-0 hover-animate">
+                                <img src="https://vignette.wikia.nocookie.net/naruto/images/0/0c/Madara_img2.png/revision/latest?cb=20170704141235&path-prefix=id"
+                                    alt="" class="card-img-top  rounded-circle avatar avatar-xl" height="150px"
+                                    width="150px" />
+                                <h6 class="my-2">Uchiha Madara</h6>
+                                <p class="text-muted text-xs text-uppercase">Rinnegan Developer </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mb-lg-0 mb-3">
+                            <div class="cardborder-0 hover-animate">
+                                <img src="https://vignette.wikia.nocookie.net/xianb/images/e/e0/Teams.PNG/revision/latest/scale-to-width-down/340?cb=20161015215417"
+                                    alt="" class="card-img-top  rounded-circle avatar avatar-xl" height="150px"
+                                    width="150px" />
+                                <h6 class="my-2">Uchiha Shisui</h6>
+                                <p class="text-muted text-xs text-uppercase">Genjutsu Developer </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="text-block">
                 <h4 class="mb-4">Fasilitas</h4>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <ul class="list-unstyled text-muted">
                             <li class="mb-2"><i class="fa fa-wifi text-secondary w-1rem mr-3 text-center"></i> <span
                                     class="text-sm">Wifi</span></li>
                             <li class="mb-2"><i class="fa fa-tv text-secondary w-1rem mr-3 text-center"></i> <span
-                                    class="text-sm">Cable TV</span></li>
+                                    class="text-sm">TV Kabel</span></li>
                             <li class="mb-2"><i class="fa fa-snowflake text-secondary w-1rem mr-3 text-center"></i>
                                 <span class="text-sm">Air conditioning</span></li>
                             <li class="mb-2"><i
@@ -41,7 +77,7 @@
                                 <span class="text-sm">Heating</span></li>
                         </ul>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <ul class="list-unstyled text-muted">
                             <li class="mb-2"><i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span
                                     class="text-sm">Toiletteries</span></li>
@@ -52,43 +88,6 @@
                             <li class="mb-2"><i class="fa fa-tshirt text-secondary w-1rem mr-3 text-center"></i><span
                                     class="text-sm">Washing machine</span></li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-block">
-                <h5 class="mb-4">Mentor Team </h5>
-
-                <div class="col">
-                    <div class="row py-3">
-                        <div class="col-sm-4 mb-lg-0 mb-3">
-                            <div class="card border-0 hover-animate">
-                                <img src="https://vignette.wikia.nocookie.net/naruto/images/2/21/Sasuke_Part_3_V2.png/revision/latest?cb=20170627161720&path-prefix=id"
-                                    alt="" class="card-img-top team-img rounded-circle avatar avatar-xl" height="150px"
-                                    width="150px" />
-                                <h6 class="my-2">Uchiha Sasuke</h6>
-                                <p class="text-muted text-xs text-uppercase">Sharingan Developer </p>
-
-                            </div>
-                        </div>
-                        <div class="col-sm-4 mb-lg-0 mb-3">
-                            <div class="card border-0 hover-animate">
-                                <img src="https://vignette.wikia.nocookie.net/naruto/images/0/0c/Madara_img2.png/revision/latest?cb=20170704141235&path-prefix=id"
-                                    alt="" class="card-img-top team-img  rounded-circle avatar avatar-xl" height="150px"
-                                    width="150px" />
-                                <h6 class="my-2">Uchiha Madara</h6>
-                                <p class="text-muted text-xs text-uppercase">Rinnegan Developer </p>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 mb-lg-0 mb-3">
-                            <div class="cardborder-0 hover-animate">
-                                <img src="https://vignette.wikia.nocookie.net/xianb/images/e/e0/Teams.PNG/revision/latest/scale-to-width-down/340?cb=20161015215417"
-                                    alt="" class="card-img-top team-img  rounded-circle avatar avatar-xl" height="150px"
-                                    width="150px" />
-                                <h6 class="my-2">Uchiha Shisui</h6>
-                                <p class="text-muted text-xs text-uppercase">Genjutsu Developer </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -115,12 +114,10 @@
                 </div>
             </div>
 
+
         </div>
 
         <div class="col-lg-4">
-
-
-
             <div class="card border-0 shadow">
                 <div class="card-body p-4">
                     <div class="text-block pb-3">
@@ -150,20 +147,18 @@
                             <h6 class="text-primary text-center mb-2">Hubungi Kami</h6>
                             <div class="clearfix my-3">
                                 <button type="submit" class="btn btn-success btn-sm">
-                                    <img src="https://lh3.googleusercontent.com/proxy/709usorEsU1euWlALixutD_KAJ5NsTssAKCRXYit57hz8aYGydSTOlp_KUKd6pWRjiOsDtLzXyZkuBYCBoLOkoCQOEo-n6jSv7a8ySEwAL9U-Vyfe08"
-                                        width="20px">
+                                    <img src="{{ asset('assets/frontend/img/logo/wa.png') }}" width="20px">
                                     <a href="https://api.whatsapp.com/send?phone={{ $unit->whatsapp }}&text=Halo%20Admin%20Saya%20Mau%20Order%20Kursus%20laravel"
                                         target="_blank" class="text-white text-decoration-none"> Whats App </a>
                                 </button>
                                 <button type="submit" class="btn btn-primary btn-sm">
-                                    <img src="https://lh3.googleusercontent.com/proxy/M04vi7GqcBo6zUJFsZBM7XUCEIblHde-SbQCIMDVrKE0ObUGTJjJuKz9d6pI0y0BoOCemAXdw-kjFv_g4SM30T_cqzeUKJH_xoFZnsZWD9USAGS4aKY"
-                                        width="20px">
+                                    <img src="{{ asset('assets/frontend/img/logo/telegram.png') }}" width="20px">
                                     <a href="https://t.me/{{ $unit->telegram }}" target="_blank"
                                         class="text-white text-decoration-none">Telegram</a>
                                 </button>
-                                <button type="submit" class="btn btn-secondary mt-2">
-                                    <img src="https://lh3.googleusercontent.com/proxy/0AKgXfpIEv1dwYO_2vOHP6Uz5gcR3VDW0fWePPPPhjDzoYmb9dw55RlxvfkoZuE98Z67EJ_PLLdaKh_4guzuSORPJeyQWQAfZQVKIyHtpKBZPjwXIqM"
-                                        width="15px">
+                                <button type="submit" class="btn btn-secondary btn-sm mt-1">
+                                    <img src="https://www.freepnglogos.com/uploads/amazing-instagram-logo-png-image-16.png"
+                                        width="20px">
                                     <a href="https://www.instagram.com/{{ $unit->instagram }}" target="_blank"
                                         class="text-white text-decoration-none">Instagram</a>
                                 </button>
@@ -174,29 +169,91 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="pt-4">
+                <button type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false"
+                    aria-controls="leaveReview" class="btn btn-outline-primary">Review Kursus Ini</button>
+                <div id="leaveReview" class="collapse mt-4">
+                    <h5 class="mb-4">Tinggalkan Review</h5>
+                    <form id="contact-form" method="get" action="#" class="form">
+
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" name="name" id="name" placeholder="Masukkan Nama" required="required"
+                                class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Masukkan Email" required="required"
+                                class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="review" class="form-label">Review</label>
+                            <textarea rows="4" name="review" id="review" placeholder="Masukkan Review"
+                                required="required" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-block">
+                <!-- Detail Kursus -->
+                <div class="card border-0 shadow">
+                    <div class="card-header bg-gray-100 pt-3 pb-2 border-0">
+                        <div class="media align-items-center">
+                            <div class="media-body">
+                                <p class="subtitle text-sm text-primary">Kursus Lainya</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
+                                Laravel
+                                <a href="#">
+                                    <span class="badge badge-primary badge-pill">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
+                                React JS
+                                <a href="#">
+                                    <span class="badge badge-primary badge-pill">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
+                                Node JS
+                                <a href="#">
+                                    <span class="badge badge-primary badge-pill">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-
 </div>
-
-
-
-
 @endsection
 
-{{-- @push('style')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-@endpush --}}
+
 
 @push('scripts')
 <script>
     $(document).ready(function () {
-        $('.btn-active').on('click', function () {
+        $('.btn-primary').on('click', function () {
             var $this = $(this);
             $('button').css("opacity", 0.4);
             var loadingText =
-                '<button class="spinner-grow spinner-grow-sm"></button> Sedang Diproses...';
+                '<button class="spinner-grow spinner-grow-sm"></button> Mengirim ...';
             if ($(this).html() !== loadingText) {
                 $this.data('original-text', $(this).html());
                 $this.html(loadingText);
@@ -208,49 +265,4 @@
     })
 
 </script>
-
-{{-- <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-<!-- Available tile layers-->
-<script>
-    var tileLayers = []
-
-    tileLayers[1] = {
-        tiles: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd'
-    }
-    tileLayers[2] = {
-        tiles: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }
-    tileLayers[3] = {
-        tiles: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png',
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }
-    tileLayers[4] = {
-        tiles: 'https://mapserver.mapy.cz/base-m/{z}-{x}-{y}',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>, <a href="https://seznam.cz">Seznam.cz, a.s.</a>'
-    }
-    tileLayers[5] = {
-        tiles: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd'
-    }
-    tileLayers[6] = {
-        tiles: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a>'
-    } // Originally used in the theme, but stopped working. Might be just temporary, though.
-
-</script>
-<script src="{{ asset('assets/frontend/vendor/lib/js/map-detail.ecc97be1.js') }}"></script>
-<script>
-    createDetailMap({
-        mapId: 'detailMap',
-        mapCenter: [40.732346, -74.0014247],
-        markerShow: true,
-        markerPosition: [40.732346, -74.0014247],
-        markerPath: 'img/marker.svg',
-    })
-
-</script> --}}
 @endpush
