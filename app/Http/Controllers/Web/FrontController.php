@@ -32,23 +32,17 @@ class FrontController extends Controller
         return view('web.web_pusat_bantuan');
     }
 
-
     public function kursus(Request $request)
     {
         $kursus = Kursus::orderBy('created_at', 'DESC')->paginate(9);
-
         $keyword = $request->get('keyword');
 
-
         if ($keyword) {
-            $kursus = Kursus::with(['kategori', 'tutor'])
-                ->where('nama_kursus', 'LIKE', "%$keyword%")
-                ->withCount('order_detail')
+            $kursus = Kursus::where('nama_kursus', 'LIKE', "%$keyword%")
+                ->orWhere('keterangan', 'LIKE', "%$keyword%")
                 ->orderBy('created_at', 'DESC')
                 ->paginate(9);
         }
-
-
         return view('web.web_kursus', compact('kursus'));
     }
 
@@ -79,27 +73,5 @@ class FrontController extends Controller
         ]);
     }
 
-    // public function review($slug)
-    // {
-    //     $kursus = Kursus::where('slug', $slug)->firstOrFail();
 
-    //     $komentar = Komentar::with(['pendaftar', 'kursus'])
-    //         ->where('id_kursus', $kursus->id)
-    //         ->orderBy('created_at', 'DESC')
-    //         ->paginate(6);
-
-    //     $no_kursus = Komentar::with('kursus')
-    //         ->first();
-
-    //     $krs_lainya = Kursus::with(['komentar'])
-    //         ->orderBy('created_at', 'DESC')
-    //         ->get();
-
-    //     return view('web.web_review_kursus', [
-    //         'kursus'   => $kursus,
-    //         'komentar' => $komentar,
-    //         'komen'   => $no_kursus,
-    //         'lain'     => $krs_lainya,
-    //     ]);
-    // }
 }
