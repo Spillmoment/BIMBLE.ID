@@ -1,31 +1,19 @@
 @extends('web.layouts.main')
 
-@section('title', 'Detail Kursus - ' . $kursus->nama_kursus )
+@section('title', 'Unit - ' . $unit->nama_unit )
 @section('content')
 
-<section @if ($kursus->galleries->count() != null)
-    style="background-image:
-    url('{{ $kursus->galleries->count() ? Storage::url($kursus->galleries->first()->image) : '' }}');"
-    @else
-    style="background-image: url('{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}');"
-    @endif
-    class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
+<section class="hero py-6 py-lg-7 text-white dark-overlay"><img
+        src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}" alt="Text page"
+        class="bg-image">
     <div class="container overlay-content">
-        <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
-            <div class="text-white mb-4 mb-lg-0">
-                @foreach ($kursus->kategori as $kat)
-                <div class="badge badge-pill badge-transparent px-3 py-2 mb-4">{{ $kat->nama_kategori }}</div>
-                @endforeach
-                <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
-                <p><i class="fa-map-marker-alt fas mr-2"></i> Paiton, Probolinggo</p>
-                <p class="mb-0 d-flex align-items-center"><i class="fa fa-xs fa-star text-primary"></i><i
-                        class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i
-                        class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-gray-200 mr-4"> </i>
-                    <a href="{{ route('front.review', $kursus->slug) }}" class="text-light">{{  $review->count() }}
-                        Reviews</a>
-                </p>
-            </div>
-        </div>
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb text-white justify-content-center no-border mb-0">
+            <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
+            <li class="breadcrumb-item active">Unit Kursus </li>
+        </ol>
+        <h1 class="hero-heading">Selamat Datang Di Unit {{ $unit->nama_unit }}</h1>
+        <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" class="avatar avatar-xl img-fluid">
     </div>
 </section>
 
@@ -33,18 +21,55 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="text-block">
-                <h4>Tentang Kelas {{ $kursus->nama_kursus }}</h4>
-                <p class="text-muted font-weight-light">{{ $kursus->keterangan }}</p>
+                <h4>Tentang Kami</h4>
+                <p class="text-muted font-weight-light">{{ $unit->deskripsi }}</p>
             </div>
+
+            <div class="text-block">
+                <h5 class="mb-4">Mentor Team </h5>
+
+                <div class="col">
+                    <div class="row py-3">
+                        <div class="col-sm-3 mb-lg-0 mb-3">
+                            <div class="card border-0 hover-animate ">
+                                <img src="https://vignette.wikia.nocookie.net/naruto/images/2/21/Sasuke_Part_3_V2.png/revision/latest?cb=20170627161720&path-prefix=id"
+                                    alt="" class="card-img-top rounded-circle avatar avatar-xl" height="150px"
+                                    width="150px" />
+                                <h6 class="my-2">Uchiha Sasuke</h6>
+                                <p class="text-muted text-xs text-uppercase">Sharingan Developer </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 mb-lg-0 mb-3">
+                            <div class="card border-0 hover-animate">
+                                <img src="https://vignette.wikia.nocookie.net/naruto/images/0/0c/Madara_img2.png/revision/latest?cb=20170704141235&path-prefix=id"
+                                    alt="" class="card-img-top  rounded-circle avatar avatar-xl" height="150px"
+                                    width="150px" />
+                                <h6 class="my-2">Uchiha Madara</h6>
+                                <p class="text-muted text-xs text-uppercase">Rinnegan Developer </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mb-lg-0 mb-3">
+                            <div class="cardborder-0 hover-animate">
+                                <img src="https://vignette.wikia.nocookie.net/xianb/images/e/e0/Teams.PNG/revision/latest/scale-to-width-down/340?cb=20161015215417"
+                                    alt="" class="card-img-top  rounded-circle avatar avatar-xl" height="150px"
+                                    width="150px" />
+                                <h6 class="my-2">Uchiha Shisui</h6>
+                                <p class="text-muted text-xs text-uppercase">Genjutsu Developer </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="text-block">
                 <h4 class="mb-4">Fasilitas</h4>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <ul class="list-unstyled text-muted">
                             <li class="mb-2"><i class="fa fa-wifi text-secondary w-1rem mr-3 text-center"></i> <span
                                     class="text-sm">Wifi</span></li>
                             <li class="mb-2"><i class="fa fa-tv text-secondary w-1rem mr-3 text-center"></i> <span
-                                    class="text-sm">Cable TV</span></li>
+                                    class="text-sm">TV Kabel</span></li>
                             <li class="mb-2"><i class="fa fa-snowflake text-secondary w-1rem mr-3 text-center"></i>
                                 <span class="text-sm">Air conditioning</span></li>
                             <li class="mb-2"><i
@@ -52,7 +77,7 @@
                                 <span class="text-sm">Heating</span></li>
                         </ul>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <ul class="list-unstyled text-muted">
                             <li class="mb-2"><i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span
                                     class="text-sm">Toiletteries</span></li>
@@ -67,208 +92,168 @@
                 </div>
             </div>
 
-            {{-- <div class="text-block">
-                <!-- Listing Location-->
-                <h3 class="mb-4">Location</h3>
-                <div class="map-wrapper-300 mb-3">
-                    <div id="detailMap" class="h-100"></div>
-                </div>
-            </div> --}}
 
             <div class="text-block">
-                <div class="media">
-                    @foreach ($kursus->tutor as $tutor)
-                    <img src="{{ Storage::url('public/'.$tutor->foto) }}" alt="{{ $tutor->nama_tutor }}"
-                        class="avatar avatar-lg mr-4">
-                    <div class="media-body">
-                        <p> <span class="text-muted text-uppercase text-sm">Hosted by </span>
-                            <br>
-                            <strong>{{ $tutor->nama_tutor }}</strong>
-                        </p>
-                        <p class="text-muted text-sm mb-2">
-                            {{ $tutor->keahlian }}
-                        </p>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-block">
-                <h5 class="mb-4">Gallery</h5>
+                <h5 class="mb-4">Galeri </h5>
                 <div class="row gallery mb-3 ml-n1 mr-n1">
-                    @forelse ($kursus->galleries as $gallery)
+
                     <div class="col-lg-4 col-6 px-1 mb-2">
-                        <a href="{{ Storage::url($gallery->image) }}" data-fancybox="gallery"
-                            title="{{ $kursus->nama_kursus }}">
-                            <img src="{{ Storage::url($gallery->image) }}" alt="{{ $kursus->nama_kursus }}"
-                                class="img-fluid mt-2"></a>
+                        <a href="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
+                            data-fancybox="gallery" title="">
+                            <img src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
+                                alt="" class="img-fluid mt-2"></a>
                     </div>
-                    @empty
-                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                        <div class="media align-items-center">
-                            <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
-                            </div>
+
+                    {{-- <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                    <div class="media align-items-center">
+                        <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
                         </div>
                     </div>
-                    @endforelse
+                </div> --}}
+
                 </div>
             </div>
 
-            <div class="text-block">
-                <p class="subtitle text-sm text-primary">Reviews Kursus {{  $kursus->nama_kursus  }}</p>
-                @forelse ($review as $komen)
-                @foreach ($komen->pendaftar as $user)
-                <div class="media d-block d-sm-flex review">
-                    <div class="text-md-center mr-4 mr-xl-5"><img
-                            src="{{ Storage::url('uploads/pendaftar/profile/'.$user->foto) }}" alt="{{ $user->foto }}"
-                            class="d-block avatar avatar-lg p-2 mb-2"><span
-                            class="text-uppercase text-muted text-xs">{{ $komen->updated_at->diffForhumans() }}</span>
-                    </div>
-                    <div class="media-body">
-                        <h6 class="mt-2 mb-1">{{ $user->nama_pendaftar }}</h6>
-                        {{-- <div class="mb-2"><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i><i class="fa fa-xs fa-star text-primary"></i>
-                    </div> --}}
-                        <p class="text-muted text-sm">
-                            {{ $komen->isi_komentar }}
-                        </p>
-                    </div>
-                </div>
-                @endforeach
-                @empty
-                <div class="alert alert-warning text-sm mb-3 mt-3">
-                    <div class="media align-items-center">
-                        <div class="media-body text-center ">Belum ada <strong>Review</strong> untuk kursus ini</div>
-                    </div>
-                </div>
-                @endforelse
 
-
-                @if ($review->count() > 0 || $review->count() > 5)
-                <div class="row">
-                    <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
-                        <a href="{{ route('front.review', $kursus->slug) }}" class="text-primary text-sm"> Lihat Semua<i
-                                class="fas fa-angle-double-right ml-2"></i></a>
-                    </div>
-                </div>
-                @endif
-
-
-            </div>
         </div>
 
         <div class="col-lg-4">
-            <div class="pl-xl-4">
-                <!-- Detail Kursus -->
-                <div class="card border-0 shadow mb-5">
-                    <div class="card-header bg-gray-100 py-4 border-0">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <div class="text-block pb-3">
                         <div class="media align-items-center">
                             <div class="media-body">
-                                <p class="subtitle text-sm text-primary">Detail Kursus</p>
-                            </div>
+                                <h6> <a href="detail-rooms.html" class="text-reset">Belajar Bahasa Inggris</a></h6>
+                                <p class="text-muted text-sm mb-0">Kursus terbaik untuk belajar inggris</p>
+
+                            </div><img
+                                src="https://images.squarespace-cdn.com/content/v1/5187cd71e4b0046126ddd7c5/1572397982967-W0KYMTST8W3GQA8Y3MS0/ke17ZwdGBToddI8pDm48kJFFD1DPuPyuJTJuKYnHMqUUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcarqm0CNTWK74Ln61sO77r7mRilwo1Bm_II3kb7M1nc_wILYhviYIDiXtjoEAJEUw/Kriteria+Tempat+Kursus+Inggris+Terbaik+yang+Bisa+Anda+Pilih.jpg"
+                                alt="" width="100" class="ml-3 rounded">
                         </div>
                     </div>
-                    <div class="card-body">
-                        <table class="table text-sm mb-0">
+
+                    <div class="text-block pt-1 pb-0">
+                        <table class="w-100">
                             <tr>
-                                <th class="pl-0 border-0">Nama Kursus</th>
-                                <td class="pr-0 text-right border-0">{{ $kursus->nama_kursus }}</td>
-                            </tr>
-                            <tr>
-                                <th class="pl-0">Kategori</th>
-                                <td class="pr-0 text-right">{{ $kursus->kategori->first()->nama_kategori }}</td>
-                            </tr>
-                            <tr>
-                                <th class="pl-0">Total Harga</th>
-                                <td class="pr-0 text-right text-primary font-weight-bold">
-                                    @currency($kursus->biaya_kursus -
-                                    ($kursus->biaya_kursus * ($kursus->diskon_kursus/100))).00</td>
-                            </tr>
-                            <tr>
-                                <th class="pl-0">Lama Kursus</th>
-                                <td class="pr-0 text-right">{{ $kursus->lama_kursus }} Hari</td>
+                                <th class="pt-3">Harga</th>
+                                <td class="font-weight-bold text-right pt-3">$499.50</td>
                             </tr>
                         </table>
                     </div>
                 </div>
+                <div class="card-footer bg-light py-2 border-top">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h6 class="text-primary text-center mb-2">Hubungi Kami</h6>
+                            <div class="clearfix my-3">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <img src="{{ asset('assets/frontend/img/logo/wa.png') }}" width="20px">
+                                    <a href="https://api.whatsapp.com/send?phone={{ $unit->whatsapp }}&text=Halo%20Admin%20Saya%20Mau%20Order%20Kursus%20laravel"
+                                        target="_blank" class="text-white text-decoration-none"> Whats App </a>
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <img src="{{ asset('assets/frontend/img/logo/telegram.png') }}" width="20px">
+                                    <a href="https://t.me/{{ $unit->telegram }}" target="_blank"
+                                        class="text-white text-decoration-none">Telegram</a>
+                                </button>
+                                <button type="submit" class="btn btn-secondary btn-sm mt-1">
+                                    <img src="https://www.freepnglogos.com/uploads/amazing-instagram-logo-png-image-16.png"
+                                        width="20px">
+                                    <a href="https://www.instagram.com/{{ $unit->instagram }}" target="_blank"
+                                        class="text-white text-decoration-none">Instagram</a>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div style="top: 100px;" class="p-4 shadow ml-lg-4 rounded sticky-top">
-
-                @if ($kursus->diskon_kursus == 0)
-                <p class="text-muted"><span class="text-primary h2">@currency($kursus->biaya_kursus)</span> per bulan
-                </p>
-                @else
-                <p class="text-muted"><span class="text-primary h2">@currency($kursus->biaya_kursus -
-                        ($kursus->biaya_kursus * ($kursus->diskon_kursus/100)) )</span> per bulan</p>
-
-                <span class="text-danger h6 font-weight-bold">
-                    <strike>
-                        @currency($kursus->biaya_kursus)
-                    </strike>
-                </span>
-                @endif
 
 
-                <hr class="my-4">
-                <form id="booking-form" method="post" action="{{ route('order.post', $kursus->slug) }}"
-                    autocomplete="off" class="form">
-                    @csrf
+            <div class="pt-4">
+                <button type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false"
+                    aria-controls="leaveReview" class="btn btn-outline-primary">Review Kursus Ini</button>
+                <div id="leaveReview" class="collapse mt-4">
+                    <h5 class="mb-4">Tinggalkan Review</h5>
+                    <form id="contact-form" method="get" action="#" class="form">
 
-                    {{-- @if (Auth::check())
-                    <input type="hidden" name="id_pendaftar" value="{{ Auth::user()->id }}" contextmenu="">
-                    @endif --}}
-
-                    {{-- <input type="hidden" name="id_kursus" value="{{ $kursus->id }}">
-                    <input type="hidden" name="biaya_kursus" value="{{ $kursus->biaya_kursus }}">
-                    <input type="hidden" name="diskon_kursus"
-                        value="{{ ($kursus->diskon_kursus > 0) ? $kursus->diskon_kursus : 0 }}"> --}}
-                    <div class="form-group">
-                        <label for="diskon" class="form-label">Diskon</label>
-                        <h3>{{ $kursus->diskon_kursus }}%</h3>
-                    </div>
-                    <div class="form-group">
-                        @guest
-                        @if (Route::has('register'))
-                        <button type="submit" id="orderKursusButton"
-                            class="btn btn-block btn-outline-primary">Pesan</button>
-                        @endif
-                        @else
-                        @if ($check_kursus != null)
-                        <div class="alert alert-success" role="alert">
-                            <strong>kursus berhasil diambil!</strong> Silahkan lihat di keranjang
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" name="name" id="name" placeholder="Masukkan Nama" required="required"
+                                class="form-control">
                         </div>
-                        @elseif ($check_kursus_sukses)
-                        <div class="alert alert-success" role="alert">
-                            <a href="{{ route('user.kursus.kelas',$kursus->slug) }}" class="btn btn-success btn-block">Buka</a>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Masukkan Email" required="required"
+                                class="form-control">
                         </div>
-                        @else
-                        <button type="submit" id="orderKursusButton"
-                            class="btn btn-primary btn-block btn-rounded-md btn-active">
-                            Pesan
-                        </button>
-                        @endif
-                        @endguest
+                        <div class="form-group">
+                            <label for="review" class="form-label">Review</label>
+                            <textarea rows="4" name="review" id="review" placeholder="Masukkan Review"
+                                required="required" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-block">
+                <!-- Detail Kursus -->
+                <div class="card border-0 shadow">
+                    <div class="card-header bg-gray-100 pt-3 pb-2 border-0">
+                        <div class="media align-items-center">
+                            <div class="media-body">
+                                <p class="subtitle text-sm text-primary">Kursus Lainya</p>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
+                                Laravel
+                                <a href="#">
+                                    <span class="badge badge-primary badge-pill">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
+                                React JS
+                                <a href="#">
+                                    <span class="badge badge-primary badge-pill">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
+                                Node JS
+                                <a href="#">
+                                    <span class="badge badge-primary badge-pill">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
 @endsection
 
-{{-- @push('style')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
-@endpush --}}
+
 
 @push('scripts')
 <script>
     $(document).ready(function () {
-        $('.btn-active').on('click', function () {
+        $('.btn-primary').on('click', function () {
             var $this = $(this);
             $('button').css("opacity", 0.4);
             var loadingText =
-                '<button class="spinner-grow spinner-grow-sm"></button> Sedang Diproses...';
+                '<button class="spinner-grow spinner-grow-sm"></button> Mengirim ...';
             if ($(this).html() !== loadingText) {
                 $this.data('original-text', $(this).html());
                 $this.html(loadingText);
@@ -280,49 +265,4 @@
     })
 
 </script>
-
-{{-- <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-<!-- Available tile layers-->
-<script>
-    var tileLayers = []
-
-    tileLayers[1] = {
-        tiles: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd'
-    }
-    tileLayers[2] = {
-        tiles: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }
-    tileLayers[3] = {
-        tiles: 'https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png',
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }
-    tileLayers[4] = {
-        tiles: 'https://mapserver.mapy.cz/base-m/{z}-{x}-{y}',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>, <a href="https://seznam.cz">Seznam.cz, a.s.</a>'
-    }
-    tileLayers[5] = {
-        tiles: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd'
-    }
-    tileLayers[6] = {
-        tiles: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a>'
-    } // Originally used in the theme, but stopped working. Might be just temporary, though.
-
-</script>
-<script src="{{ asset('assets/frontend/vendor/lib/js/map-detail.ecc97be1.js') }}"></script>
-<script>
-    createDetailMap({
-        mapId: 'detailMap',
-        mapCenter: [40.732346, -74.0014247],
-        markerShow: true,
-        markerPosition: [40.732346, -74.0014247],
-        markerPath: 'img/marker.svg',
-    })
-
-</script> --}}
 @endpush

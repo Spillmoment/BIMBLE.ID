@@ -54,13 +54,6 @@ Route::prefix('unit')
         Route::get('/profile', 'Unit\DashboardController@profile')->name('unit.profile');
         Route::put('/pengaturan/{id}/update', 'Unit\DashboardController@update_pengaturan')->name('unit.update-pengaturan');
         Route::get('/pengaturan', 'Unit\DashboardController@pengaturan')->name('unit.pengaturan');
-        // Route::put('siswa/nilai/{id}', 'Unit\SiswaController@add_nilai')->name('siswa.add');
-        // Route::get('siswa/nilai/{id}/edit', 'Unit\SiswaController@nilai')->name('siswa.nilai');
-        // Route::get('kursus/{slug}/nilai/', 'Unit\NilaiController@kursus_nilai')->name('kursus.nilai');
-        // Route::resource('siswa', 'Unit\SiswaController');
-        // Route::resource('nilai', 'Unit\NilaiController');
-        // Route::get('kursus/nilai-kursus', 'Unit\NilaiController@unit_kursus')->name('unit.kursus');
-        // Route::patch('nilai/{id}/edit', 'Unit\NilaiController@edit_nilai_pendaftar');
     });
 
 // Route Manager
@@ -83,4 +76,6 @@ Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.p
 Route::get('/kursus', 'Web\FrontController@kursus')->name('front.kursus');
 Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
 Route::get('/kursus/{slug}', 'Web\FrontController@show')->name('front.detail');
-Route::get('/kursus/review/{slug}', 'Web\FrontController@review')->name('front.review');
+Route::get('/kursus/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
+Route::get('/unit/daftar', 'Web\UnitController@index')->name('unit.daftar');
+Route::post('/unit/add', 'Web\UnitController@post')->name('unit.add');

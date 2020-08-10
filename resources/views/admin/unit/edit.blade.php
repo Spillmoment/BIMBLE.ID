@@ -107,7 +107,7 @@
 
                 <div class="form-group ">
                     <label for="telegram">Telegram</label>
-                    <input type="number" class="form-control {{ $errors->first('telegram') ? 'is-invalid' : '' }}"
+                    <input type="text" class="form-control {{ $errors->first('telegram') ? 'is-invalid' : '' }}"
                         name="telegram" id="telegram" value="{{ $unit->telegram }}" placeholder="Telegram">
                     <div class="invalid-feedback">
                         {{$errors->first('telegram')}}
