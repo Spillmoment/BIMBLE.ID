@@ -75,5 +75,5 @@ Route::get('/kursus', 'Web\FrontController@kursus')->name('front.kursus');
 Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
 Route::get('/kursus/{slug}', 'Web\FrontController@show')->name('front.detail');
 Route::get('/kursus/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
-Route::get('/unit', 'Web\UnitController@index')->name('unit.home');
-Route::post('/unit', 'Web\UnitController@post')->name('unit.add');
+Route::get('/unit/daftar', 'Web\UnitController@index')->name('unit.daftar');
+Route::post('/unit/add', 'Web\UnitController@post')->name('unit.add');
