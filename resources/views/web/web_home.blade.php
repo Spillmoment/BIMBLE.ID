@@ -165,9 +165,7 @@
                 <div class="col-md-8">
                     <h4>Rekomendasi Bimble</h4>
 
-                    @if (Request::get('kategori'))
-                    <h6 class="mt-2">Kategori: <i> {{ $nama_kategori }} </i></h6>
-                    @elseif(Request::get('keyword'))
+                    @if(Request::get('keyword'))
                     <h6 class="mt-2">Pencarian: <i> {{ Request::get('keyword')}} </i></h6>
                     @endif
                 </div>
@@ -177,7 +175,6 @@
                 <div class="col-md-12">
 
                     <div class="owl-carousel">
-
                         @forelse ($kursus as $item)
                         <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
                             <div class="card card-kelas h-100 border-0 shadow">
