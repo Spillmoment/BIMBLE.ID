@@ -24,19 +24,17 @@
             <!-- Navbar Collapse -->
             <div id="navbarCollapse" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-
-
                     <li class="nav-item"><a href="{{ route('front.index') }}" class="nav-link 
                 {{ (Request::route()->getName() == 'front.index') ? 'active' : '' }}">Beranda</a></li>
                     <li class="nav-item"><a href="{{ route('front.pusat') }}" class="nav-link 
               {{ (Request::route()->getName() == 'front.pusat') ? 'active' : '' }}">Pusat Bantuan</a></li>
 
-                    <li class="nav-item}"><a href="{{ route('front.kursus') }}"
+                    <li class="nav-item"><a href="{{ route('front.kursus') }}"
                             class="nav-link  {{ (Request::route()->getName() == 'front.kursus') ? 'active' : '' }}">
                             Kursus</a>
                     </li>
-                    <li class="nav-item}"><a href="#"
-                            class="nav-link  {{ (Request::route()->getName() == 'front.kursus') ? 'active' : '' }}">
+                    <li class="nav-item}"><a href="{{ route('unit.home') }}"
+                            class="nav-link  {{ (Request::route()->getName() == 'unit.home') ? 'active' : '' }}">
                             Unit</a>
                     </li>
 
