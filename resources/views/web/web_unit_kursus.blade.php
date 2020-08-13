@@ -3,9 +3,14 @@
 @section('title', 'Unit - ' . $unit->nama_unit )
 @section('content')
 
-<section class="hero py-6 py-lg-7 text-white dark-overlay"><img
-        src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}" alt="Text page"
+<section class="hero py-6 py-lg-7 text-white dark-overlay">
+    @if ($unit->gambar_unit == null)
+    <img src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}" alt="Text page"
         class="bg-image">
+    @else
+    <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" alt="Text page" class="bg-image">
+    @endif
+
     <div class="container overlay-content">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb text-white justify-content-center no-border mb-0">
@@ -13,7 +18,7 @@
             <li class="breadcrumb-item active">Unit Kursus </li>
         </ol>
         <h1 class="hero-heading">Selamat Datang Di Unit {{ $unit->nama_unit }}</h1>
-        <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" class="avatar avatar-xl img-fluid">
+        {{-- <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" class="avatar avatar-xl img-fluid"> --}}
     </div>
 </section>
 
