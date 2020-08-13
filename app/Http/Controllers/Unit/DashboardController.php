@@ -42,20 +42,47 @@ class DashboardController extends Controller
         $user = Unit::findOrFail($id);
         $request->validate([
             'nama_unit'             => 'required|min:3|max:100',
-            'deskripsi'             => 'required|min:10',
+            // 'deskripsi'             => 'required|min:10',
             'alamat'                => 'required|min:3|max:200',
-            'email'                 => 'required|email|unique:unit,email,' . $id,
+            // 'email'                 => 'required|email|unique:unit,email,' . $id,
             'whatsapp'              => 'required',
             'telegram'              => 'required',
             'instagram'             => 'required',
-            'gambar_unit'           => 'sometimes|nullable|image|mimes:jpg,jpeg,png,bmp',
-            'username'              => 'required|min:3|max:100|unique:unit,username,' . $id,
+            // 'username'              => 'required|min:3|max:100|unique:unit,username,' . $id,
         ]);
 
         $data = $request->all();
         $nama_slug = $data['nama_unit'];
         $data['slug'] = Str::slug($nama_slug, '-');
 
+        $user->update($data);
+        return redirect()->back()->with([
+            'status' => 'Profile Berhasil Disimpan'
+        ]);
+    }
+
+    public function update_profile_deskripsi(Request $request, $slug)
+    {
+        $user = Unit::where('slug', $slug)->first();
+        $request->validate([
+            'deskripsi' => 'required|min:10',
+        ]);
+
+        $data = $request->all();
+
+        $user->update($data);
+        return redirect()->back()->with([
+            'status' => 'Deskripsi Unit Berhasil Disimpan'
+        ]);
+    }
+
+    public function update_profile_banner(Request $request, $slug)
+    {
+        $user = Unit::where('slug', $slug)->first();
+        $request->validate([
+            'gambar_unit' => 'nullable|image|mimes:jpg,jpeg,png',
+        ]);
+        
         if ($request->hasFile('gambar_unit')) {
             if ($request->file('gambar_unit')) {
                 if ($user->gambar_unit && file_exists(storage_path('app/public/' . $user->gambar_unit))) {
@@ -66,9 +93,11 @@ class DashboardController extends Controller
             }
         }
 
+        $data = $request->all();
+
         $user->update($data);
         return redirect()->back()->with([
-            'status' => 'Profile Berhasil Disimpan'
+            'status' => 'Deskripsi Unit Berhasil Disimpan'
         ]);
     }
 

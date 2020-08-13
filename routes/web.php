@@ -49,6 +49,8 @@ Route::prefix('unit')
 
         Route::get('/', 'Unit\DashboardController@index')->name('unit.home');
         Route::put('/profile/{id}/update', 'Unit\DashboardController@update_profile')->name('unit.update-profil');
+        Route::put('/profile/{slug}/update-banner', 'Unit\DashboardController@update_profile_banner')->name('unit.update-profil.banner');
+        Route::put('/profile/{slug}/update-deskripsi', 'Unit\DashboardController@update_profile_deskripsi')->name('unit.update-profil.deskripsi');
         Route::get('/profile', 'Unit\DashboardController@profile')->name('unit.profile');
         Route::put('/pengaturan/{id}/update', 'Unit\DashboardController@update_pengaturan')->name('unit.update-pengaturan');
         Route::get('/pengaturan', 'Unit\DashboardController@pengaturan')->name('unit.pengaturan');
