@@ -9,12 +9,13 @@ use App\Kategori;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Unit;
+use App\Banner;
 
 class FrontController extends Controller
 {
     public function index(Request $request)
     {
-        $idPendaftar = Auth::id();
+        $banner = Banner::all();
         $kursus = Kursus::orderBy('created_at', 'DESC')
             ->get();
 
@@ -24,7 +25,7 @@ class FrontController extends Controller
                 ->orderBy('created_at', 'desc')->paginate(4);
         }
 
-        return view('web.web_home', compact('kursus'));
+        return view('web.web_home', compact('kursus', 'banner'));
     }
 
     public function pusat_bantuan()
@@ -72,6 +73,4 @@ class FrontController extends Controller
             'unit'   => $unit
         ]);
     }
-
-
 }
