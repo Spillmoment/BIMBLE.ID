@@ -29,6 +29,13 @@
                     <a href="{{ route('unit.index') }}"> <i class="menu-icon fa fa-user"></i>Data Unit</a>
                 </li>
 
+                <li class="menu-title text-capitalize">Banner Web</li>
+                <li class="{{ 
+                              (Request::route()->getName() == 'banner.index') ? 'active' : ''
+                          }}">
+                    <a href="{{ route('banner.index') }}"> <i class="menu-icon fa fa-image"></i>Data Banner</a>
+                </li>
+
 
 
 
