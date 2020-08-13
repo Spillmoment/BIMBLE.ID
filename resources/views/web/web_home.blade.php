@@ -180,8 +180,8 @@
                             <div class="card card-kelas h-100 border-0 shadow">
                                 <div class="card-img-top overflow-hidden gradient-overlay">
                                     <img src="{{ Storage::url('public/'. $item->gambar_kursus) }}"
-                                        alt="{{ $item->nama_kursus }}" class="img-fluid" /><a href=""
-                                        class="tile-link"></a>
+                                        alt="{{ $item->nama_kursus }}" class="img-fluid" /><a
+                                        href="{{ route('front.detail', $item->slug) }}" class="tile-link"></a>
                                     <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
                                         <div class="badge badge-transparent badge-pill px-3 py-2">Popular</div>
                                     </div>

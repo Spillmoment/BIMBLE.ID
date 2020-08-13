@@ -205,7 +205,7 @@
                     <div class="card-header bg-gray-100 pt-3 pb-2 border-0">
                         <div class="media align-items-center">
                             <div class="media-body">
-                                <p class="subtitle text-sm text-primary">Kursus Lainya</p>
+                                <p class="subtitle text-sm text-primary">Kursus Kami Lainya</p>
                             </div>
                         </div>
                     </div>
