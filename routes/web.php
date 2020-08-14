@@ -54,6 +54,18 @@ Route::prefix('unit')
         Route::get('/profile', 'Unit\DashboardController@profile')->name('unit.profile');
         Route::put('/pengaturan/{id}/update', 'Unit\DashboardController@update_pengaturan')->name('unit.update-pengaturan');
         Route::get('/pengaturan', 'Unit\DashboardController@pengaturan')->name('unit.pengaturan');
+        
+        // Pilih kursus
+        Route::get('/kursus', 'Unit\KursusController@index')->name('unit.kursus.home');
+        Route::post('/tambah_kursus', 'Unit\KursusController@tambah_kursus')->name('unit.kursus.tambah');
+        Route::delete('/hapus_kursus', 'Unit\KursusController@hapus_kursus')->name('unit.kursus.hapus');
+        Route::put('/harga_kursus', 'Unit\KursusController@harga_kursus')->name('unit.kursus.harga');
+
+        // fasilitas
+        Route::get('/fasilitas', 'Unit\FasilitasController@index')->name('unit.fasilitas.home');
+        Route::post('/tambah_fasilitas', 'Unit\FasilitasController@tambah_fasilitas')->name('unit.fasilitas.tambah');
+        Route::delete('/hapus_fasilitas', 'Unit\FasilitasController@hapus_fasilitas')->name('unit.fasilitas.hapus');
+
     });
 
 // Route Manager
