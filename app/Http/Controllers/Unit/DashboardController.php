@@ -82,7 +82,9 @@ class DashboardController extends Controller
         $request->validate([
             'gambar_unit' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
-        
+
+        $data = $request->all();
+
         if ($request->hasFile('gambar_unit')) {
             if ($request->file('gambar_unit')) {
                 if ($user->gambar_unit && file_exists(storage_path('app/public/' . $user->gambar_unit))) {
@@ -93,11 +95,9 @@ class DashboardController extends Controller
             }
         }
 
-        $data = $request->all();
-
         $user->update($data);
         return redirect()->back()->with([
-            'status' => 'Deskripsi Unit Berhasil Disimpan'
+            'status' => 'Banner Unit Berhasil Disimpan'
         ]);
     }
 

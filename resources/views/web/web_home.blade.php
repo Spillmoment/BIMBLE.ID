@@ -43,16 +43,17 @@
         <!-- Additional required wrapper-->
         <div class="swiper-wrapper">
             <!-- Slides-->
-            <div style="background-image: url('{{asset('assets/frontend/img/photo/header.jpg')}}');"
+
+            @foreach ($banner as $item)
+            <div style="background-image: url('{{ Storage::url('public/'. $item->gambar_banner) }}');"
                 class="swiper-slide bg-cover dark-overlay">
                 <div class="container h-100">
                     <div data-swiper-parallax="-500" class="d-flex h-100 text-white overlay-content align-items-center">
                         <div class="w-100">
                             <div class="row -mt-5 text-center mx-auto">
                                 <div class="col-xl-10 mx-auto">
-                                    <h1 class="display-4 font-weight-bold text-shadow">Bimble.id adalah Lorem ipsum
-                                        dolor sit amet.</h1>
-                                    <p class="text-lg text-shadow">Temukan Tempat Bimbel Favoritmu.</p>
+                                    <h1 class="display-4 font-weight-bold text-shadow">{{$item->kata1}}</h1>
+                                    <p class="text-lg text-shadow">{{ $item->kata2 }}</p>
                                     <br>
                                     <a href="{{ route('front.kursus') }}"
                                         class="btn btn-outline-light btn-md d-none d-sm-inline-block">Get
@@ -63,26 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div style="background-image: url('https://www.eu-startups.com/wp-content/uploads/2019/07/Coding-Schools.png');"
-                class="swiper-slide bg-cover dark-overlay">
-                <div class="container h-100">
-                    <div data-swiper-parallax="-500" class="d-flex h-100 text-white overlay-content align-items-center">
-                        <div class="w-100">
-                            <div class="row -mt-5 text-center mx-auto">
-                                <div class="col-xl-10 mx-auto">
-                                    <h1 class="display-4 font-weight-bold text-shadow">Bimble.id adalah Lorem ipsum
-                                        dolor sit amet.</h1>
-                                    <p class="text-lg text-shadow">Temukan Tempat Bimbel Favoritmu.</p>
-                                    <br>
-                                    <a href="{{ route('front.kursus') }}"
-                                        class="btn btn-outline-light btn-md d-none d-sm-inline-block">Get
-                                        Started <i class="fa fa-angle-right ml-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
 
         </div>
         <div class="swiper-pagination swiper-pagination-white"></div>
@@ -180,8 +162,8 @@
                             <div class="card card-kelas h-100 border-0 shadow">
                                 <div class="card-img-top overflow-hidden gradient-overlay">
                                     <img src="{{ Storage::url('public/'. $item->gambar_kursus) }}"
-                                        alt="{{ $item->nama_kursus }}" class="img-fluid" /><a href=""
-                                        class="tile-link"></a>
+                                        alt="{{ $item->nama_kursus }}" class="img-fluid" /><a
+                                        href="{{ route('front.detail', $item->slug) }}" class="tile-link"></a>
                                     <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
                                         <div class="badge badge-transparent badge-pill px-3 py-2">Popular</div>
                                     </div>
