@@ -22,7 +22,7 @@ class CreateKursusUnitTable extends Migration
             $table->foreignId('unit_id');
             $table->foreign('unit_id')->references('id')->on('unit')->onDelete('cascade');
 
-            $table->integer('biaya_kursus');
+            $table->integer('biaya_kursus')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
