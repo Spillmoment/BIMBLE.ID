@@ -44,6 +44,13 @@ class Unit extends Authenticatable
         $this->notify(new TutorResetPasswordNotification($token));
     }
 
-
     protected $dates = ['deleted_at'];
+
+    public function kursus_unit(){
+        return $this->hasMany(KursusUnit::class, 'unit_id', 'id');
+    }
+
+    public function fasilitas(){
+        return $this->hasMany(Fasilitas::class, 'unit_id', 'id');
+    }
 }
