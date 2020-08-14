@@ -11,6 +11,7 @@
     @stack('before-style')
     @include('admin.includes.style')
     @stack('after-style')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head>
 
