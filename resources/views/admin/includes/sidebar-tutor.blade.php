@@ -13,18 +13,24 @@
 
 
                 <li class="menu-title text-capitalize">Manage Kursus</li>
-                <li class="">
-                    <a href="#"> <i class="menu-icon fa fa-user-md"></i>Kursus</a>
+                <li class="{{ 
+                    (Request::route()->getName() == 'unit.kursus.home') ? 'active' : ''
+                    }}">
+                    <a href="{{ route('unit.kursus.home') }}"> <i class="menu-icon fa fa-user-md"></i>Kursus</a>
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Mentor</li>
-                <li class="">
-                    <a href="#"> <i class="menu-icon fa fa-user-md"></i>Mentor</a>
+                <li class="{{ 
+                    (Request::route()->getName() == 'unit.fasilitas.home') ? 'active' : ''
+                    }}">
+                    <a href="{{ route('unit.fasilitas.home') }}"> <i class="menu-icon fa fa-user-md"></i>Mentor</a>
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Fasilitas</li>
-                <li class="">
-                    <a href="#"> <i class="menu-icon fa fa-user-md"></i>Fasilitas</a>
+                <li class="{{ 
+                    (Request::route()->getName() == 'unit.fasilitas.home') ? 'active' : ''
+                    }}">
+                    <a href="{{ route('unit.fasilitas.home') }}"> <i class="menu-icon fa fa-user-md"></i>Fasilitas</a>
                 </li>
 
 
