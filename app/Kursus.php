@@ -15,4 +15,8 @@ class Kursus extends Model
     ];
 
     use SoftDeletes;
+
+    public function kursus_unit(){
+        return $this->hasMany(KursusUnit::class, 'kursus_id', 'id');
+    }
 }
