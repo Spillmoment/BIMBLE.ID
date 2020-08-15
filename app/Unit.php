@@ -53,4 +53,8 @@ class Unit extends Authenticatable
     public function fasilitas(){
         return $this->hasMany(Fasilitas::class, 'unit_id', 'id');
     }
+
+    public function mentor(){
+        return $this->hasMany(Fasilitas::class, 'unit_id', 'id');
+    }
 }
