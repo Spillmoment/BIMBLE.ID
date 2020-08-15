@@ -21,9 +21,9 @@
 
                 <li class="menu-title text-capitalize">Manage Mentor</li>
                 <li class="{{ 
-                    (Request::route()->getName() == 'unit.fasilitas.home') ? 'active' : ''
+                    (Request::route()->getName() == 'mentor.index') ? 'active' : ''
                     }}">
-                    <a href="{{ route('unit.fasilitas.home') }}"> <i class="menu-icon fa fa-user-md"></i>Mentor</a>
+                    <a href="{{ route('mentor.index') }}"> <i class="menu-icon fa fa-user-md"></i>Mentor</a>
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Fasilitas</li>
