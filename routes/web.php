@@ -66,6 +66,9 @@ Route::prefix('unit')
         Route::post('/tambah_fasilitas', 'Unit\FasilitasController@tambah_fasilitas')->name('unit.fasilitas.tambah');
         Route::delete('/hapus_fasilitas', 'Unit\FasilitasController@hapus_fasilitas')->name('unit.fasilitas.hapus');
 
+        // mentor
+        Route::resource('mentor', 'Unit\MentorController');
+
     });
 
 // Route Manager
