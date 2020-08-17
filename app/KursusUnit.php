@@ -18,9 +18,14 @@ class KursusUnit extends Model
     {
         return $this->belongsTo(Kursus::class, 'kursus_id');
     }
-    
+
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id');
+    }
+
+    public function komentar()
+    {
+        return $this->belongsTo(Komentar::class, 'id', 'kursus_unit_id');
     }
 }
