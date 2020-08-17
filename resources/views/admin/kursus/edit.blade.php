@@ -30,8 +30,8 @@
 <div class="content">
     <div class="card">
         <div class="card-header">
-            <strong>Edit Kursus
-                <span class="badge badge-primary badge-pill badge-lg"> {{ $kursus->nama_kursus }}</span>
+            <strong>Form Edit Kursus
+            
             </strong>
         </div>
         <div class="card-body card-block">
@@ -66,9 +66,7 @@
                     </div>
 
                 </div>
-
-
-
+                
                 <div class="form-group ">
                     <label for="keterangan">Keterangan</label>
                     <input type="text" class="form-control {{ $errors->first('keterangan') ? 'is-invalid' : '' }}"
@@ -80,7 +78,7 @@
 
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit">
-                        Edit Kursus
+                        Simpan
                     </button>
                 </div>
             </form>

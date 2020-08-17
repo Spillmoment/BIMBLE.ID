@@ -9,7 +9,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Data Kursus</h1>
+                        <h1>Tambah Data Kursus</h1>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
 <div class="content">
     <div class="card">
         <div class="card-header">
-            <strong>Tambah Kursus</strong>
+            <strong>Form Tambah Kursus</strong>
         </div>
         <div class="card-body card-block">
             <form method="post" enctype="multipart/form-data" action="{{route('kursus.store')}}">
@@ -66,7 +66,7 @@
 
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit">
-                        Tambah Kursus
+                       Simpan
                     </button>
                 </div>
             </form>
