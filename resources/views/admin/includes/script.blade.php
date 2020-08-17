@@ -26,13 +26,14 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-    ClassicEditor.create( document.querySelector( '#deskripsiEditor' ) )
-    .then( editor => {
-            console.log( editor );
-    } )
-    .catch( error => {
-            console.error( error );
-    } );
+    ClassicEditor.create(document.querySelector('#deskripsiEditor'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
 </script>
 <script>
     $(document).ready(function () {
@@ -52,7 +53,7 @@
 
 <script>
     jQuery(document).ready(function ($) {
-       
+
         $('#mymodal').on('show.bs.modal', function (e) {
             var button = $(e.relatedTarget);
             var modal = $(this);
@@ -61,14 +62,14 @@
             modal.find('.modal-title').html(button.data("title"));
         });
 
-       $('#modal-edit').on('show.bs.modal', function (e) {
+        $('#modal-edit').on('show.bs.modal', function (e) {
             var button = $(e.relatedTarget);
             var modal = $(this);
 
             modal.find('.modal-body').load(button.data("remote"));
             modal.find('.modal-title').html(button.data("title"));
         });
-          
+
     });
 
 </script>

@@ -56,7 +56,7 @@
                                         @method('put')
                                         <input type="hidden" name="id" value="{{ $kursus_unit->id }}">
                                         <input type="text" id="biaya_kursus" name="biaya_kursus" class="input-sm form-control-sm form-control" value="{{ $kursus_unit->biaya_kursus }}">
-                                        <button type="submit" class="btn btn-outline-primary btn-sm btn-harga" data-kursus="{{ $kursus->id }}"><i class="fa fa-pencil"></i></button>
+                                        <button type="submit" class="btn btn-outline-primary btn-sm btn-harga" data-kursus="{{ $kursus->id }}"><i class="{{ $kursus_unit->biaya_kursus == 0 ? 'fa fa-plus' : 'fa fa-pencil' }}"></i></button>
                                     
                                 </div>
                             </div> 
