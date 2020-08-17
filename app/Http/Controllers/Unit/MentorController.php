@@ -90,7 +90,7 @@ class MentorController extends Controller
             if ($mentor->foto && file_exists(storage_path('app/public/' . $mentor->foto))) {
                 Storage::delete('public/' . $mentor->foto);
                 $data['foto'] =  $request->file('foto')->store('mentor', 'public');
-            }else{
+            } else {
                 $data['foto'] =  $request->file('foto')->store('mentor', 'public');
             }
         }

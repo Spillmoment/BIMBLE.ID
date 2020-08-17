@@ -19,15 +19,13 @@ class KursusController extends Controller
     public function index()
     {
         $id_unit = Auth::id();
-        $list_kursus = Kursus::with(['kursus_unit' => function($q) {
-                $q->where('unit_id', '=', Auth::id()); 
-            }])->get();
-        $kursus_unit = KursusUnit::with('kursus')->where('unit_id',$id_unit)->get();
+        $list_kursus = Kursus::with(['kursus_unit' => function ($q) {
+            $q->where('unit_id', Auth::id());
+        }])->get();
         // dd($list_kursus);
 
         return view('unit.kursus.index', [
             'list_kursus' => $list_kursus,
-            'kursus_unit' => $kursus_unit,
         ]);
     }
 
@@ -43,23 +41,23 @@ class KursusController extends Controller
         $kursus = Kursus::find($request->kursus_id);
 
         return response()->json([
-            'message' => 'Bimbel '.$kursus->nama_kursus.' berhasil ditambahkan.'
+            'message' => 'Bimbel ' . $kursus->nama_kursus . ' berhasil ditambahkan.'
         ]);
     }
-    
+
     public function hapus_kursus(Request $request)
     {
         $id_unit = Auth::id();
-        $kursus_unit = KursusUnit::where('kursus_id',$request->kursus_id)->where('unit_id',$id_unit)->first();
+        $kursus_unit = KursusUnit::where('kursus_id', $request->kursus_id)->where('unit_id', $id_unit)->first();
         $kursus_unit->forceDelete();
 
         $kursus = Kursus::find($request->kursus_id);
 
         return response()->json([
-            'message' => 'Bimbel '.$kursus->nama_kursus.' berhasil dihapus.'
+            'message' => 'Bimbel ' . $kursus->nama_kursus . ' berhasil dihapus.'
         ]);
     }
-    
+
     public function harga_kursus(Request $request)
     {
         $request->validate([

@@ -36,18 +36,18 @@ class FasilitasController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Item '.$request->item.' berhasil ditambahkan.'
+            'message' => 'Item ' . $request->item . ' berhasil ditambahkan.'
         ]);
     }
-    
+
     public function hapus_fasilitas(Request $request)
     {
         $id_unit = Auth::id();
-        $fasilitas_unit = Fasilitas::where('unit_id',$id_unit)->where('item',$request->item)->first();
+        $fasilitas_unit = Fasilitas::where('unit_id', $id_unit)->where('item', $request->item)->first();
         $fasilitas_unit->forceDelete();
 
         return response()->json([
-            'message' => 'Item '.$request->item.' berhasil dihapus.'
+            'message' => 'Item ' . $request->item . ' berhasil dihapus.'
         ]);
     }
 
