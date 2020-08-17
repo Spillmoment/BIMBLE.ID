@@ -35,33 +35,27 @@
 
                 <div class="col">
                     <div class="row py-3">
+
+                        @forelse ($unit->mentor as $m)
                         <div class="col-sm-3 mb-lg-0 mb-3">
                             <div class="card border-0 hover-animate ">
-                                <img src="https://vignette.wikia.nocookie.net/naruto/images/2/21/Sasuke_Part_3_V2.png/revision/latest?cb=20170627161720&path-prefix=id"
-                                    alt="" class="card-img-top rounded-circle avatar avatar-xl" height="150px"
-                                    width="150px" />
-                                <h6 class="my-2">Uchiha Sasuke</h6>
-                                <p class="text-muted text-xs text-uppercase">Sharingan Developer </p>
+                                <img src="{{ Storage::url('public/'.$m->foto) }}"
+                                alt="" class="card-img-top rounded-circle avatar avatar-xl"
+                            />
+                                <h6 class="my-2">{{ $m->nama_mentor }}</h6>
+                                <p class="text-muted text-xs text-uppercase">{{ $m->kompetensi }} </p>
                             </div>
                         </div>
-                        <div class="col-sm-3 mb-lg-0 mb-3">
-                            <div class="card border-0 hover-animate">
-                                <img src="https://vignette.wikia.nocookie.net/naruto/images/0/0c/Madara_img2.png/revision/latest?cb=20170704141235&path-prefix=id"
-                                    alt="" class="card-img-top  rounded-circle avatar avatar-xl" height="150px"
-                                    width="150px" />
-                                <h6 class="my-2">Uchiha Madara</h6>
-                                <p class="text-muted text-xs text-uppercase">Rinnegan Developer </p>
+                        @empty
+                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                            <div class="media align-items-center">
+                                <div class="media-body text-center ">Belum ada <strong>Mentor</strong> untuk unit ini
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-4 mb-lg-0 mb-3">
-                            <div class="cardborder-0 hover-animate">
-                                <img src="https://vignette.wikia.nocookie.net/xianb/images/e/e0/Teams.PNG/revision/latest/scale-to-width-down/340?cb=20161015215417"
-                                    alt="" class="card-img-top  rounded-circle avatar avatar-xl" height="150px"
-                                    width="150px" />
-                                <h6 class="my-2">Uchiha Shisui</h6>
-                                <p class="text-muted text-xs text-uppercase">Genjutsu Developer </p>
-                            </div>
-                        </div>
+                        @endforelse
+                   
+                       
                     </div>
                 </div>
             </div>
@@ -69,31 +63,31 @@
             <div class="text-block">
                 <h4 class="mb-4">Fasilitas</h4>
                 <div class="row">
+
+                    @forelse ($unit->fasilitas as $f)
                     <div class="col-md-4">
                         <ul class="list-unstyled text-muted">
-                            <li class="mb-2"><i class="fa fa-wifi text-secondary w-1rem mr-3 text-center"></i> <span
-                                    class="text-sm">Wifi</span></li>
-                            <li class="mb-2"><i class="fa fa-tv text-secondary w-1rem mr-3 text-center"></i> <span
-                                    class="text-sm">TV Kabel</span></li>
-                            <li class="mb-2"><i class="fa fa-snowflake text-secondary w-1rem mr-3 text-center"></i>
-                                <span class="text-sm">Air conditioning</span></li>
-                            <li class="mb-2"><i
-                                    class="fa fa-thermometer-three-quarters text-secondary w-1rem mr-3 text-center"></i>
-                                <span class="text-sm">Heating</span></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <ul class="list-unstyled text-muted">
-                            <li class="mb-2"><i class="fa fa-bath text-secondary w-1rem mr-3 text-center"></i><span
-                                    class="text-sm">Toiletteries</span></li>
-                            <li class="mb-2"><i class="fa fa-utensils text-secondary w-1rem mr-3 text-center"></i><span
-                                    class="text-sm">Equipped Kitchen</span></li>
-                            <li class="mb-2"><i class="fa fa-laptop text-secondary w-1rem mr-3 text-center"></i><span
-                                    class="text-sm">Desk for work</span></li>
-                            <li class="mb-2"><i class="fa fa-tshirt text-secondary w-1rem mr-3 text-center"></i><span
-                                    class="text-sm">Washing machine</span></li>
-                        </ul>
-                    </div>
+                                <li class="mb-2">
+                                <i class="
+                                   {{ $f->item != '' ? 'fa fa-check' : '' }}
+                                   {{ $f->item == 'wifi' ? 'fa fa-wifi' : '' }}
+                                   {{ $f->item == 'tv' ? 'fa fa-tv' : '' }}
+                                   {{ $f->item == 'toilet' ? 'fa fa-shower' : '' }}
+                                   {{ $f->item == 'komputer' ? 'fa fa-laptop' : '' }}
+                                    text-secondary w-1rem mr-3 text-center"></i> 
+                                    <span
+                                    class="text-sm">{{ $f->item }}</span></li>
+                            </ul>
+                        </div>
+                        @empty
+                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                            <div class="media align-items-center">
+                                <div class="media-body text-center ">Belum ada <strong>Fasilitas</strong> untuk unit ini
+                                </div>
+                            </div>
+                        </div>
+                        @endforelse
+                 
                 </div>
             </div>
 
@@ -128,11 +122,14 @@
                     <div class="text-block pb-3">
                         <div class="media align-items-center">
                             <div class="media-body">
-                                <h6> <a href="detail-rooms.html" class="text-reset">Belajar Bahasa Inggris</a></h6>
-                                <p class="text-muted text-sm mb-0">Kursus terbaik untuk belajar inggris</p>
+                                <h6> <a href="{{ route('front.detail', $unit->slug) }}" class="text-reset"></a>
+                                {{ $kursus_unit->kursus->nama_kursus }}
+                                </h6>
+                                <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
 
-                            </div><img
-                                src="https://images.squarespace-cdn.com/content/v1/5187cd71e4b0046126ddd7c5/1572397982967-W0KYMTST8W3GQA8Y3MS0/ke17ZwdGBToddI8pDm48kJFFD1DPuPyuJTJuKYnHMqUUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcarqm0CNTWK74Ln61sO77r7mRilwo1Bm_II3kb7M1nc_wILYhviYIDiXtjoEAJEUw/Kriteria+Tempat+Kursus+Inggris+Terbaik+yang+Bisa+Anda+Pilih.jpg"
+                            </div>
+                            <img
+                                src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}"
                                 alt="" width="100" class="ml-3 rounded">
                         </div>
                     </div>
@@ -141,7 +138,7 @@
                         <table class="w-100">
                             <tr>
                                 <th class="pt-3">Harga</th>
-                                <td class="font-weight-bold text-right pt-3">$499.50</td>
+                                <td class="font-weight-bold text-right pt-3">@currency($unit->kursus_unit->first()->biaya_kursus).00</td>
                             </tr>
                         </table>
                     </div>
@@ -177,15 +174,25 @@
 
 
             <div class="pt-4">
+                @if (session('message'))
+               <div class="alert alert-success alert-dismissible fade show" role="alert">
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                   </button>
+                   <strong>{{ session('message') }}</strong>
+               </div>
+                @endif
+
                 <button type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false"
                     aria-controls="leaveReview" class="btn btn-outline-primary">Review Kursus Ini</button>
                 <div id="leaveReview" class="collapse mt-4">
                     <h5 class="mb-4">Tinggalkan Review</h5>
-                    <form id="contact-form" method="get" action="#" class="form">
-
+                    <form id="contact-form" method="post" action="{{ route('komentar.post', $kursus_unit->id) }}" class="form">
+                        @csrf
                         <div class="form-group">
                             <label for="name" class="form-label">Nama Lengkap</label>
-                            <input type="text" name="name" id="name" placeholder="Masukkan Nama" required="required"
+                            <input type="text" name="nama" id="name" placeholder="Masukkan Nama" required="required"
                                 class="form-control">
                         </div>
 
@@ -196,7 +203,7 @@
                         </div>
                         <div class="form-group">
                             <label for="review" class="form-label">Review</label>
-                            <textarea rows="4" name="review" id="review" placeholder="Masukkan Review"
+                            <textarea rows="4" name="komentar" id="review" placeholder="Masukkan Review"
                                 required="required" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Kirim</button>
@@ -216,30 +223,27 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
+                           
+                            @forelse ($kursus_lainya as $item)
+                            @if ($item->kursus->slug != $kursus_unit->kursus->slug)
                             <li class="list-group-item d-flex justify-content-between aligns-items-center">
-                                Laravel
-                                <a href="#">
+                                {{ $item->kursus->nama_kursus }}
+                                <a href="{{ route('unit.detail', [$unit->slug]) }}">
                                     <span class="badge badge-primary badge-pill">
                                         <i class="fas fa-eye"></i>
                                     </span>
                                 </a>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
-                                React JS
-                                <a href="#">
-                                    <span class="badge badge-primary badge-pill">
-                                        <i class="fas fa-eye"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
-                                Node JS
-                                <a href="#">
-                                    <span class="badge badge-primary badge-pill">
-                                        <i class="fas fa-eye"></i>
-                                    </span>
-                                </a>
-                            </li>
+                            @endif
+                            @empty
+                            <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                                <div class="media align-items-center">
+                                    <div class="media-body text-center ">Belum ada <strong>Kursus</strong> lainya
+                                    </div>
+                                </div>
+                            </div>
+                            @endforelse
+                            
                         </ul>
                     </div>
                 </div>
@@ -267,7 +271,7 @@
                 $this.html($this.data('original-text'));
             }, 3000);
         });
-    })
+    });
 
 </script>
 @endpush
