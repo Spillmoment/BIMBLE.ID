@@ -54,7 +54,7 @@ Route::prefix('unit')
         Route::get('/profile', 'Unit\DashboardController@profile')->name('unit.profile');
         Route::put('/pengaturan/{id}/update', 'Unit\DashboardController@update_pengaturan')->name('unit.update-pengaturan');
         Route::get('/pengaturan', 'Unit\DashboardController@pengaturan')->name('unit.pengaturan');
-        
+
         // Pilih kursus
         Route::get('/kursus', 'Unit\KursusController@index')->name('unit.kursus.home');
         Route::post('/tambah_kursus', 'Unit\KursusController@tambah_kursus')->name('unit.kursus.tambah');
@@ -68,7 +68,6 @@ Route::prefix('unit')
 
         // mentor
         Route::resource('mentor', 'Unit\MentorController');
-
     });
 
 // Route Manager
@@ -93,5 +92,6 @@ Route::get('/kursus', 'Web\FrontController@kursus')->name('front.kursus');
 Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
 Route::get('/kursus/{slug}', 'Web\FrontController@show')->name('front.detail');
 Route::get('/kursus/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
+Route::post('komentar/{id}/post', 'Web\KomentarController@post')->name('komentar.post');
 Route::get('/unit/daftar', 'Web\UnitController@index')->name('unit.daftar');
 Route::post('/unit/add', 'Web\UnitController@post')->name('unit.add');
