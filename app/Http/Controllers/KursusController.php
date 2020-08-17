@@ -92,6 +92,8 @@ class KursusController extends Controller
             if ($kursus->gambar_kursus && file_exists(storage_path('app/public/' . $kursus->gambar_kursus))) {
                 Storage::delete('public/' . $kursus->gambar_kursus);
                 $data['gambar_kursus'] =  $request->file('gambar_kursus')->store('kursus', 'public');
+            } else {
+                $data['gambar_kursus'] =  $request->file('gambar_kursus')->store('kursus', 'public');
             }
         }
 
