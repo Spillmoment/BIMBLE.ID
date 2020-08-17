@@ -33,7 +33,6 @@ class UnitController extends Controller
             'deskripsi'             => 'required|min:10',
             'alamat'                => 'required|min:3|max:200',
             'email'                 => 'required|email|unique:unit',
-            'gambar_unit'           => 'required|image|mimes:jpg,jpeg,png,bmp',
             'whatsapp'              => 'required',
             'telegram'              => 'required',
             'instagram'             => 'required',
@@ -46,7 +45,6 @@ class UnitController extends Controller
         $nama_slug = $data['nama_unit'];
         $data['slug'] = Str::slug($nama_slug, '-');
         $data['password'] = Hash::make($data['password']);
-        $data['gambar_unit'] = $request->file('gambar_unit')->store('unit', 'public');
 
         Unit::create($data);
         return redirect()->route('unit.index')
@@ -89,13 +87,6 @@ class UnitController extends Controller
             $data['password'] = Hash::make($data['password']);
         } else {
             $data = Arr::except($data, ['password']);
-        }
-
-        if ($request->hasFile('gambar_unit')) {
-            if ($unit->gambar_unit && file_exists(storage_path('app/public/' . $unit->gambar_unit))) {
-                Storage::delete('public/' . $unit->gambar_unit);
-                $data['gambar_unit'] =  $request->file('gambar_unit')->store('unit', 'public');
-            }
         }
 
         $unit->update($data);
