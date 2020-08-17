@@ -17,8 +17,15 @@
             <div class="user-area dropdown float-right">
                 <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                    <img class="user-avatar rounded-circle img-thumbnail img-fluid"
-                        src="{{ Storage::url('public/'.Auth::user()->gambar_unit ) }}" alt="User Avatar" width="70px">
+                         @if (Auth::user()->gambar_unit != null)
+                           <img class="user-avatar rounded-circle img-thumbnail img-fluid"
+                            src="{{ Storage::url('public/'.Auth::user()->gambar_unit ) }}"
+                            width="70px">
+                         @else
+                            <img class="user-avatar rounded-circle img-thumbnail img-fluid"
+                            src="https://ui-avatars.com/api/?name={{ Auth::user()->nama_unit }}"
+                            width="70px">
+                         @endif
                 </a>
 
                 <div class="user-menu dropdown-menu">
