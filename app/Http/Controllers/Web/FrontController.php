@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Unit;
 use App\Banner;
+use App\KursusUnit;
 
 class FrontController extends Controller
 {
@@ -67,10 +68,13 @@ class FrontController extends Controller
     public function show($slug)
     {
         $kursus = Kursus::where('slug', $slug)->firstOrFail();
-        $unit = Unit::latest()->paginate(6);
+        $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(6);
+        // dd($kursus_unit);
         return view('web.web_detail_kursus', [
             'kursus' => $kursus,
-            'unit'   => $unit
+            'kursus_unit' => $kursus_unit
         ]);
     }
 }
