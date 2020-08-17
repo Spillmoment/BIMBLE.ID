@@ -85,6 +85,13 @@
             </div> --}}
 
         </div>
+
+        <div class="jumbotron bg-info text-white">
+            <h1 class="display-5">Selamat Datang Manager Di 
+                <br>Web Admin Bimble.id</h1>
+            {{-- <p class="lead">SIlahkan </p> --}}
+        </div>
+
         <!-- /Widgets -->
         <!--  /Traffic -->
         <div class="clearfix"></div>
