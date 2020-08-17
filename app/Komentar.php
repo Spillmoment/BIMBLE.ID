@@ -7,17 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Komentar extends Model
 {
-    protected $table = 'detail_komentar';
+    protected $table = 'komentar';
+
+    protected $fillable = ['kursus_unit_id', 'nama', 'email', 'komentar'];
 
     use SoftDeletes;
 
-    public function kursus()
+    public function kursus_unit()
     {
-        return $this->hasMany(Kursus::class, 'id', 'id_kursus');
-    }
-    
-    public function pendaftar()
-    {
-        return $this->hasMany(Pendaftar::class, 'id', 'id_pendaftar');
+        return $this->hasMany(KursusUnit::class, 'id', 'kursus_unit_id');
     }
 }
