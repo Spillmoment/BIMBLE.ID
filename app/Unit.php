@@ -46,15 +46,18 @@ class Unit extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    public function kursus_unit(){
+    public function kursus_unit()
+    {
         return $this->hasMany(KursusUnit::class, 'unit_id', 'id');
     }
 
-    public function fasilitas(){
+    public function fasilitas()
+    {
         return $this->hasMany(Fasilitas::class, 'unit_id', 'id');
     }
 
-    public function mentor(){
-        return $this->hasMany(Fasilitas::class, 'unit_id', 'id');
+    public function mentor()
+    {
+        return $this->hasMany(Mentor::class, 'unit_id', 'id');
     }
 }
