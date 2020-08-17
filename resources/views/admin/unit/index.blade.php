@@ -60,7 +60,7 @@
                                     <th>No</th>
                                     <th width="100">Nama Unit</th>
                                     <th>Alamat</th>
-                                    <th>Gambar Unit</th>
+                                    <th>Deksripsi</th>
                                     <th>Status</th>
                                     <th width="100">Option</th>
                                 </tr>
@@ -73,8 +73,7 @@
                                     <td>{{ $u->nama_unit }}</td>
                                     <td> {{ $u->alamat }} </td>
 
-                                    <td> <img class="img-thumbnail" src="{{ Storage::url('public/'. $u->gambar_unit) }}"
-                                            width="100px"> </td>
+                                    <td> {{ $u->deskripsi }}</td>
 
                                     @if ($u->status == 1)
                                     <td><span class="badge badge-pill badge-success">Aktif</span></td>
@@ -121,7 +120,7 @@
         e.preventDefault();
         swal({
                 title: "Yakin!",
-                text: "menghapus Unit  " + name + "?",
+                text: "Menghapus Unit  " + name + "?",
                 icon: "warning",
                 dangerMode: true,
                 buttons: {

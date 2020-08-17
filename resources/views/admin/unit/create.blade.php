@@ -9,7 +9,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Tambah Unit </h1>
+                        <h1>Tambah Data Unit </h1>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
 
     <div class="card">
         <div class="card-header">
-            <strong>Tambah unit</strong>
+            <strong>Form Tambah Unit</strong>
         </div>
         <div class="card-body card-block">
             <form method="post" enctype="multipart/form-data" action="{{route('unit.store')}}">
@@ -74,16 +74,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="foto">Foto</label>
-                    <input type="file" class="form-control-file {{ $errors->first('gambar_unit') ? 'is-invalid' : '' }}"
-                        name="gambar_unit" id="foto">
-                </div>
-                <div class="invalid-feedback">
-                    {{$errors->first('gambar_unit')}}
-                </div>
-
-
+              
                 <div class="form-group ">
                     <label for="whatsapp">Whats App</label>
                     <input type="number" class="form-control {{ $errors->first('whatsapp') ? 'is-invalid' : '' }}"
@@ -143,7 +134,7 @@
 
 
                 <button type="submit" class="btn btn-block btn-primary">
-                    <big>Tambah unit</big></button>
+                   Simpan </button>
         </div>
 
 

@@ -9,7 +9,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Edit Unit</h1>
+                        <h1>Edit Data Unit</h1>
                     </div>
                 </div>
             </div>
@@ -31,8 +31,8 @@
 
     <div class="card">
         <div class="card-header">
-            <strong>Edit Unit
-                <span class="badge badge-pill badge-primary"> {{ $unit->nama_unit }} </span>
+            <strong>Form Edit Unit
+              
             </strong>
         </div>
         <div class="card-body card-block">
@@ -76,25 +76,6 @@
                         {{$errors->first('email')}}
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="foto">Foto</label>
-                            <input type="file"
-                                class="form-control-file {{ $errors->first('foto') ? 'is-invalid' : '' }}"
-                                name="gambar_unit" id="foto">
-                            <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                                foto</small>
-                            <div class="invalid-feedback">
-                                {{$errors->first('foto')}}
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
 
                 <div class="form-group ">
                     <label for="whatsapp">Whats App</label>
@@ -170,7 +151,7 @@
                     </div>
                     <br>
                     <button type="submit" class="btn btn-block btn-primary">
-                        <big> Edit unit</big></button>
+                       Simpan</button>
                 </div>
 
 
