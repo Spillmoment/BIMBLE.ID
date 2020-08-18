@@ -72,7 +72,7 @@ Route::prefix('unit')
         // galeri
         Route::get('/galeri', 'Unit\GaleriController@index')->name('unit.galeri.home');
         Route::post('/tambah_galeri_foto', 'Unit\GaleriController@store')->name('unit.galeri.tambah');
-        // Route::delete('/hapus_fasilitas', 'Unit\FasilitasController@hapus_fasilitas')->name('unit.fasilitas.hapus');
+        Route::delete('/galeri/{id}', 'Unit\GaleriController@destroy')->name('unit.galeri.hapus');
     });
 
 // Route Manager
