@@ -33,8 +33,8 @@
                             class="nav-link  {{ (Request::route()->getName() == 'front.kursus') ? 'active' : '' }}">
                             Kursus</a>
                     </li>
-                    <li class="nav-item}"><a href="{{ route('unit.home') }}"
-                            class="nav-link  {{ (Request::route()->getName() == 'unit.home') ? 'active' : '' }}">
+                    <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
+                            class="nav-link  {{ (Request::route()->getName() == 'unit.daftar') ? 'active' : '' }}">
                             Unit</a>
                     </li>
 
