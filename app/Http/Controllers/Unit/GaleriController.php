@@ -7,6 +7,7 @@ use App\Galeri;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class GaleriController extends Controller
 {
@@ -18,23 +19,24 @@ class GaleriController extends Controller
 
     public function index()
     {
-        $galeri_unit = Galeri::where('unit_id', Auth::id())->get();
+        $galeri_unit = Galeri::where('unit_id', Auth::id())
+            ->latest()->get();
         // dd($galeri_unit);
         return view('unit.galeri.index', [
             'galeri_unit' => $galeri_unit
         ]);
     }
 
-    public function hapus_fasilitas(Request $request)
-    {
-        $id_unit = Auth::id();
-        $fasilitas_unit = Fasilitas::where('unit_id', $id_unit)->where('item', $request->item)->first();
-        $fasilitas_unit->forceDelete();
+    // public function hapus_fasilitas(Request $request)
+    // {
+    //     $id_unit = Auth::id();
+    //     $fasilitas_unit = Fasilitas::where('unit_id', $id_unit)->where('item', $request->item)->first();
+    //     $fasilitas_unit->forceDelete();
 
-        return response()->json([
-            'message' => 'Item ' . $request->item . ' berhasil dihapus.'
-        ]);
-    }
+    //     return response()->json([
+    //         'message' => 'Item ' . $request->item . ' berhasil dihapus.'
+    //     ]);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -54,30 +56,17 @@ class GaleriController extends Controller
      */
     public function store(Request $request)
     {
-        //validasi multiple file
         $request->validate([
-            'foto.*' => 'required|image|mimes:jpeg,png,gif,webp|max:2048'
+            'gambar' => 'required|image|mimes:jpg,jpeg,png,bmp'
         ]);
-        
-        //tampung file yang diupload
-        $files = $request->file('foto');
-        //define variable folder sebagai array
-        $folder = [];
-// dd($folder);
-        //looping files
-        foreach($files as $file) {
-            //custom name masing2 file
-            // $filename = 'bimbleid-' . \Carbon\Carbon::now()->format('Y-m-dH:i:s') . '.' . $file->getClientOriginalExtension();
-            //upload file 
-            $folder[] = $file->store('galeri', 'public');
-            Galeri::create([
-                'unit_id' => Auth::id(),
-                'gambar'  => $folder[],
-            ]);            
-        }
-        
-        return redirect()->route('mentor.index')
-        ->with(['status' => 'File Berhasil Disimpan']);
+
+        Galeri::create([
+            'unit_id' => Auth::id(),
+            'gambar' => $request->file('gambar')->store('galeri', 'public')
+        ]);
+
+        return redirect()->route('unit.galeri.home')
+            ->with(['status' => 'File Berhasil Disimpan']);
     }
 
     /**
@@ -120,6 +109,9 @@ class GaleriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $galeri = Galeri::findOrFail($id);
+        Storage::delete('public/' . $galeri->foto);
+        $galeri->delete();
+        return redirect()->route('unit.galeri.home')->with('status', 'Data Galeri Berhasil Dihapus');
     }
 }
