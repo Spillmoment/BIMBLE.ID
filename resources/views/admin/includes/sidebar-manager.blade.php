@@ -29,12 +29,29 @@
                     <a href="{{ route('unit.index') }}"> <i class="menu-icon fa fa-user"></i>Data Unit</a>
                 </li>
 
+                <li class="menu-title text-capitalize">Manage Pendaftar </li>
+                <li class="{{ 
+                              (Request::route()->getName() == 'pendaftar.index') ? 'active' : ''
+                          }}">
+                    <a href="{{ route('pendaftar.index') }}"> <i class="menu-icon fa fa-users"></i>Data Pendaftar Unit</a>
+                </li>
+
+                <li class="menu-title text-capitalize">Manage Review </li>
+                <li class="{{ 
+                              (Request::route()->getName() == 'komentar.index') ? 'active' : ''
+                          }}">
+                    <a href="{{ route('komentar.index') }}"> <i class="menu-icon fa fa-comments"></i>Data Review Kursus</a>
+                </li>
+
+
                 <li class="menu-title text-capitalize">Banner Web</li>
                 <li class="{{ 
                               (Request::route()->getName() == 'banner.index') ? 'active' : ''
                           }}">
                     <a href="{{ route('banner.index') }}"> <i class="menu-icon fa fa-image"></i>Data Banner</a>
                 </li>
+
+           
 
 
 
