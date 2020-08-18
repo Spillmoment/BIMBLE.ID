@@ -9,7 +9,7 @@
         <!-- Widgets  -->
         <div class="row">
 
-            <div class="col-lg-4 col-md-3">
+            <div class="col-lg-3 col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-five">
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-3">
+            <div class="col-lg-3 col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-five">
@@ -46,23 +46,23 @@
             </div>
 
 
-            {{-- <div class="col-lg-3 col-md-3">
+            <div class="col-lg-3 col-md-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-2">
-                                <i class="pe-7s-cart"></i>
+                                <i class="pe-7s-user"></i>
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">{{ $order }}</span></div>
-                                    <div class="stat-heading">Order</div>
+                                    <div class="stat-text"><span class="count">{{ $pendaftar }}</span></div>
+                                    <div class="stat-heading">Pendaftar </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
 
 
             <div class="col-lg-3 col-md-4">
@@ -70,23 +70,23 @@
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-1">
-                                <i class="pe-7s-cash"></i>
+                                <i class="pe-7s-comment"></i>
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span style="font-size: 16px">@currency($total).00</span>
+                                    <div class="stat-text"><span style="font-size: 16px">{{ $komentar }}</span>
                                     </div>
-                                    <div class="stat-heading mt-2">Total Order</div>
+                                    <div class="stat-heading mt-2">Review </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div> 
 
         </div>
 
-        <div class="jumbotron bg-info text-white">
+        <div class="jumbotron bg-secondary text-white">
             <h1 class="display-5">Selamat Datang Manager Di 
                 <br>Web Admin Bimble.id</h1>
             {{-- <p class="lead">SIlahkan </p> --}}
