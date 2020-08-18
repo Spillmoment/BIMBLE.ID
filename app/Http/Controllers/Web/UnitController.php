@@ -9,6 +9,8 @@ use App\Unit;
 use App\Kursus;
 use App\KursusUnit;
 use Illuminate\Support\Facades\Storage;
+use App\Galeri;
+
 
 class UnitController extends Controller
 {
@@ -33,9 +35,16 @@ class UnitController extends Controller
 
     public function show($slug)
     {
+
+
         $unit = Unit::with(['kursus_unit', 'mentor', 'fasilitas'])
             ->where('slug', $slug)
             ->firstOrFail();
+
+        $galeri = Galeri::with('unit')
+            ->where('unit_id', $unit->id)
+            ->latest()
+            ->get();
 
         $nama_kursus = KursusUnit::with(['kursus', 'unit'])
             ->where('unit_id', $unit->id)
@@ -50,7 +59,8 @@ class UnitController extends Controller
         return view('web.web_unit_kursus', [
             'unit' => $unit,
             'kursus_unit' => $nama_kursus,
-            'kursus_lainya' => $kursus_lainya
+            'kursus_lainya' => $kursus_lainya,
+            'galeri' => $galeri
         ]);
     }
 

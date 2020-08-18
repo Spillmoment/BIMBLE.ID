@@ -48,7 +48,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <span class="card-title">Table Galeri</span>
+                        <span class="card-title">Upload Galeri</span>
                     </div>
                     <div class="card-body card-block">
                         <form method="post" enctype="multipart/form-data" action="{{route('unit.galeri.tambah')}}">
@@ -57,7 +57,7 @@
                             <div class="form-group">
                                 <label for="foto">File</label>
                                 <input type="file" class="form-control-file {{ $errors->first('foto') ? 'is-invalid' : '' }}" 
-                                name="foto[]" id="foto" multiple>
+                                name="gambar" id="foto" required>
                             </div>
                             <div class="invalid-feedback">
                                 {{$errors->first('foto')}}
@@ -78,36 +78,34 @@
                     <div class="card-header">
                         <strong class="card-title">Table Galeri</strong>
 
-                        <a class="btn btn-primary btn-sm float-right" href="{{ route('mentor.create') }}"> Tambah
-                            Galeri</a>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th width="300">Foto</th>
-                                    <th width="210">Option</th>
+                                    <th>Foto</th>
+                                    <th>Option</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($galeri_unit as $galeri_unit)
                                 <tr>
                                     <td scope="row"> {{$loop->iteration}} </td>
-                                    <td>{{ $galeri_unit->gambar }}</td>
+                                    <td><img src="{{ Storage::url('public/'. $galeri_unit->gambar) }}" width="200px"></td>
                                     <td>
                                         {{-- <a class="btn btn-warning btn-sm text-light" href="{{route('mentor.edit',
                                        [$mentor->id])}}"> <i class="fa fa-pencil"></i></a> --}}
 
-                                        {{-- <form class="d-inline" action="{{route('mentor.destroy', [$mentor->id])}}"
+                                        <form class="d-inline" action="{{route('unit.galeri.hapus', [$galeri_unit->id])}}"
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" id="deleteButton" data-name="{{ $mentor->nama_mentor }}"
+                                            <button type="submit" id="deleteButton" data-name="{{ $galeri_unit->gambar }}"
                                                 class="btn btn-danger btn-sm delete">
                                                 <i class="fa fa-trash"></i>
                                             </button>
-                                        </form> --}}
+                                        </form>
                                     </td>
 
                                 </tr>

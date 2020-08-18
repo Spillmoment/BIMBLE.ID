@@ -96,19 +96,23 @@
                 <h5 class="mb-4">Galeri </h5>
                 <div class="row gallery mb-3 ml-n1 mr-n1">
 
+                    @forelse ($galeri as $item)
                     <div class="col-lg-4 col-6 px-1 mb-2">
-                        <a href="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
-                            data-fancybox="gallery" title="">
-                            <img src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
-                                alt="" class="img-fluid mt-2"></a>
+                    <a href="{{ Storage::url('public/'.$item->gambar) }}"
+                        data-fancybox="gallery" title="">
+                        <img src="{{ Storage::url('public/'.$item->gambar) }}"
+                        alt="" class="img-fluid mt-2"></a>
                     </div>
-
-                    {{-- <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                    
+                @empty
+                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
                     <div class="media align-items-center">
                         <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
                         </div>
                     </div>
-                </div> --}}
+                </div>
+                @endforelse
+                    
 
                 </div>
             </div>
@@ -263,8 +267,6 @@
     </div>
 </div>
 @endsection
-
-
 
 @push('scripts')
 <script>
