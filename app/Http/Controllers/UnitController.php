@@ -15,10 +15,10 @@ class UnitController extends Controller
     public function index(Request $request)
     {
         return view('admin.unit.index', [
-            'unit' => Unit::latest()->get()
+            'unit' => Unit::where('status', '1')
+                ->latest()->get()
         ]);
     }
-
 
     public function create()
     {
