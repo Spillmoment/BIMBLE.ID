@@ -143,6 +143,7 @@
                         </table>
                     </div>
                 </div>
+                
                 <div class="card-footer bg-light py-2 border-top">
                     <div class="media align-items-center">
                         <div class="media-body">
@@ -193,18 +194,28 @@
                         <div class="form-group">
                             <label for="name" class="form-label">Nama Lengkap</label>
                             <input type="text" name="nama" id="name" placeholder="Masukkan Nama" required="required"
-                                class="form-control">
+                                class="form-control {{ $errors->first('nama') ? 'is-invalid' : '' }}" value="{{ old('nama') }}">
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('nama') }}
+                                </div>
                         </div>
 
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" name="email" id="email" placeholder="Masukkan Email" required="required"
-                                class="form-control">
+                                class="form-control {{ $errors->first('email') }}" value="{{ old('email') }}">
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
                         </div>
+
                         <div class="form-group">
                             <label for="review" class="form-label">Review</label>
                             <textarea rows="4" name="komentar" id="review" placeholder="Masukkan Review"
-                                required="required" class="form-control"></textarea>
+                                required="required" class="form-control {{ $errors->first('komentar') }}">{{ old('komentar') }}</textarea>
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('komentar') }}
+                                </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </form>
@@ -228,7 +239,7 @@
                             @if ($item->kursus->slug != $kursus_unit->kursus->slug)
                             <li class="list-group-item d-flex justify-content-between aligns-items-center">
                                 {{ $item->kursus->nama_kursus }}
-                                <a href="{{ route('unit.detail', [$unit->slug]) }}">
+                                <a href="{{ route('unit.detail', [$item->unit->slug]) }}">
                                     <span class="badge badge-primary badge-pill">
                                         <i class="fas fa-eye"></i>
                                     </span>
