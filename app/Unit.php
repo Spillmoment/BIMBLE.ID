@@ -60,4 +60,9 @@ class Unit extends Authenticatable
     {
         return $this->hasMany(Mentor::class, 'unit_id', 'id');
     }
+    
+    public function galeri()
+    {
+        return $this->hasMany(Galeri::class, 'unit_id', 'id');
+    }
 }
