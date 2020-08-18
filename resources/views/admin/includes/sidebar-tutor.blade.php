@@ -32,6 +32,13 @@
                     }}">
                     <a href="{{ route('unit.fasilitas.home') }}"> <i class="menu-icon fa fa-user-md"></i>Fasilitas</a>
                 </li>
+                
+                <li class="menu-title text-capitalize">Manage Galeri</li>
+                <li class="{{ 
+                    (Request::route()->getName() == 'unit.galeri.home') ? 'active' : ''
+                    }}">
+                    <a href="{{ route('unit.galeri.home') }}"> <i class="menu-icon fa fa-user-md"></i>Galeri</a>
+                </li>
 
 
             </ul>
