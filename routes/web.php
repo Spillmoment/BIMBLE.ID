@@ -68,6 +68,11 @@ Route::prefix('unit')
 
         // mentor
         Route::resource('mentor', 'Unit\MentorController');
+
+        // galeri
+        Route::get('/galeri', 'Unit\GaleriController@index')->name('unit.galeri.home');
+        Route::post('/tambah_galeri_foto', 'Unit\GaleriController@store')->name('unit.galeri.tambah');
+        // Route::delete('/hapus_fasilitas', 'Unit\FasilitasController@hapus_fasilitas')->name('unit.fasilitas.hapus');
     });
 
 // Route Manager
