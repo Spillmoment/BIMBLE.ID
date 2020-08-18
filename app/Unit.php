@@ -18,7 +18,7 @@ class Unit extends Authenticatable
 
     protected $fillable = [
         'nama_unit', 'slug', 'alamat', 'deskripsi', 'gambar_unit', 'password',
-        'status', 'whatsapp', 'telegram', 'instagram', 'email', 'username'
+        'status', 'whatsapp', 'telegram', 'instagram', 'email', 'username', 'bukti_alumni'
     ];
 
     /**
