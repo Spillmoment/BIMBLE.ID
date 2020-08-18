@@ -56,7 +56,7 @@
 
                 <tr>
                     <th>Username</th>
-                    <td>{{ $unit->username }}</td>
+                    <td>{{ $unit->username != null ? $unit->username : 'Belum ada username' }}</td>
                 </tr>
 
                 <tr>
@@ -72,15 +72,15 @@
 
                 <tr>
                     <th>Whats App</th>
-                    <td>{{ $unit->whatsapp }}</td>
+                    <td>{{ $unit->whatsapp != null ? $unit->whatsapp : 'Belum ada whatsapp' }}</td>
                 </tr>
                 <tr>
                     <th>Telegram</th>
-                    <td>{{ $unit->telegram }}</td>
+                    <td>{{ $unit->telegram != null ? $unit->telegram : 'Belum ada telegram' }}</td>
                 </tr>
                 <tr>
                     <th>Instagram</th>
-                    <td>{{ $unit->instagram }}</td>
+                    <td>{{ $unit->instagram != null ? $unit->instagram : 'Belum ada instagram' }}</td>
                 </tr>
 
                 <tr>
