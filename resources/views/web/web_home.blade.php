@@ -55,8 +55,8 @@
                                     <h1 class="display-4 font-weight-bold text-shadow">{{$item->kata1}}</h1>
                                     <p class="text-lg text-shadow">{{ $item->kata2 }}</p>
                                     <br>
-                                    <a href="#"
-                                        class="btn btn-outline-light btn-sm d-none d-sm-inline-block scroll">Mulai Kursus <i class="fa fa-angle-right ml-2"></i></a>
+                                    <a href="#mulai"
+                                        class="btn btn-outline-light btn-md d-none d-sm-inline-block scroll">Mulai Kursus <i class="fa fa-angle-right ml-2"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
     </section>
 
 
-    <section class="pt-5 pb-6">
+    <section class="pt-5 pb-6" id="mulai">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-8">
@@ -207,6 +207,23 @@
 
     @include('web.layouts.footer')
     @include('web.layouts.script')
+    <script>
+        $(document).ready(function(){
+        let scroll_link = $('.scroll');
+
+  //smooth scrolling -----------------------
+     scroll_link.click(function(e){
+      e.preventDefault();
+      let url = $('body').find($(this).attr('href')).offset().top;
+      $('html, body').animate({
+        scrollTop : url
+      },1000);
+      $(this).parent().addClass('active');
+      $(this).parent().siblings().removeClass('active');
+      return false;	
+   });
+});
+    </script>
     <script src="{{ asset('assets/frontend/vendor/Swiper/4.4.1/js/swiper.min.js') }}"></script>
 
 </body>

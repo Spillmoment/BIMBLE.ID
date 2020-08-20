@@ -40,6 +40,16 @@
                     <a href="{{ route('unit.fasilitas.home') }}"> <i class="menu-icon fa fa-building"></i>Fasilitas</a>
                 </li>
                 
+                
+                <li class="menu-title text-capitalize">Manage Nilai</li>
+                <li class="menu-item-has-children active dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Nilai</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-user"></i><a href="#">Siswa</a></li>
+                        <li><i class="menu-icon fa fa-image"></i><a href="charts-flot.html">Sertifikat</a></li>
+                    </ul>
+                </li>
+
          
 
 
