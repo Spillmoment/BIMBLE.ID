@@ -55,9 +55,8 @@
                                     <h1 class="display-4 font-weight-bold text-shadow">{{$item->kata1}}</h1>
                                     <p class="text-lg text-shadow">{{ $item->kata2 }}</p>
                                     <br>
-                                    <a href="{{ route('front.kursus') }}"
-                                        class="btn btn-outline-light btn-md d-none d-sm-inline-block">Get
-                                        Started <i class="fa fa-angle-right ml-2"></i></a>
+                                    <a href="#"
+                                        class="btn btn-outline-light btn-sm d-none d-sm-inline-block scroll">Mulai Kursus <i class="fa fa-angle-right ml-2"></i></a>
                                 </div>
                             </div>
                         </div>

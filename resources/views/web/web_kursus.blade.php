@@ -16,9 +16,9 @@
                             class="form-control pr-4" value="{{ Request::get('keyword') }}">
                     </div>
                 </div>
-                <div class="float-right">
+                
                     <button type="submit" class="btn btn-primary"> <i class="fas fa-search mr-1"></i>
-                </div>
+               
                 </button>
             </form>
 

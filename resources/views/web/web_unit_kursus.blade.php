@@ -112,11 +112,8 @@
                     </div>
                 </div>
                 @endforelse
-                    
-
                 </div>
             </div>
-
 
         </div>
 
@@ -155,7 +152,7 @@
                             <div class="clearfix my-3">
                                 <button type="submit" class="btn btn-success btn-sm">
                                     <img src="{{ asset('assets/frontend/img/logo/wa.png') }}" width="20px">
-                                    <a href="https://api.whatsapp.com/send?phone={{ $unit->whatsapp }}&text=Halo%20Admin%20Saya%20Mau%20Order%20Kursus%20laravel"
+                                    <a href="https://api.whatsapp.com/send?phone={{ $unit->whatsapp }}&text=Halo%20Admin%20Saya%20Mau%20Order%20Kursus%20{{ $kursus_unit->kursus->nama_kursus  }}"
                                         target="_blank" class="text-white text-decoration-none"> Whats App </a>
                                 </button>
                                 <button type="submit" class="btn btn-primary btn-sm">
@@ -201,6 +198,15 @@
                                 class="form-control {{ $errors->first('nama') ? 'is-invalid' : '' }}" value="{{ old('nama') }}">
                                 <div class="invalid-feedback">
                                     {{ $errors->first('nama') }}
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="no_telp" class="form-label">No Telepon</label>
+                            <input type="text" name="no_telp" id="no_telp" placeholder="Masukkan no_telp" required="required"
+                                class="form-control {{ $errors->first('no_telp') }}" value="{{ old('no_telp') }}">
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('no_telp') }}
                                 </div>
                         </div>
 
@@ -288,3 +294,4 @@
 
 </script>
 @endpush
+

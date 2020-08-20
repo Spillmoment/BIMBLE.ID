@@ -35,8 +35,6 @@ class UnitController extends Controller
 
     public function show($slug)
     {
-
-
         $unit = Unit::with(['kursus_unit', 'mentor', 'fasilitas'])
             ->where('slug', $slug)
             ->firstOrFail();
