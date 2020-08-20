@@ -43,7 +43,6 @@ class DashboardController extends Controller
         $request->validate([
             'nama_unit'             => 'required|min:3|max:100',
             // 'deskripsi'             => 'required|min:10',
-            'alamat'                => 'required|min:3|max:200',
             // 'email'                 => 'required|email|unique:unit,email,' . $id,
             'whatsapp'              => 'required',
             'telegram'              => 'required',
@@ -76,6 +75,23 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function update_profile_lokasi(Request $request, $slug)
+    {
+        $user = Unit::where('slug', $slug)->first();
+        $request->validate([
+            'alamat'    => 'required|min:3|max:200',
+            'latitude'  => 'nullable|required_with:longitude|max:15',
+            'longitude' => 'nullable|required_with:latitude|max:15',
+        ]);
+
+        $data = $request->all();
+
+        $user->update($data);
+        return redirect()->back()->with([
+            'status' => 'Lokasi diupdate'
+        ]);
+    }
+    
     public function update_profile_banner(Request $request, $slug)
     {
         $user = Unit::where('slug', $slug)->first();
@@ -89,6 +105,9 @@ class DashboardController extends Controller
             if ($request->file('gambar_unit')) {
                 if ($user->gambar_unit && file_exists(storage_path('app/public/' . $user->gambar_unit))) {
                     Storage::delete('public/' . $user->gambar_unit);
+                    $file = $request->file('gambar_unit')->store('unit', 'public');
+                    $data['gambar_unit'] = $file;
+                }else{
                     $file = $request->file('gambar_unit')->store('unit', 'public');
                     $data['gambar_unit'] = $file;
                 }
