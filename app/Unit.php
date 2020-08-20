@@ -17,7 +17,7 @@ class Unit extends Authenticatable
     protected $guard = 'unit';
 
     protected $fillable = [
-        'nama_unit', 'slug', 'alamat', 'deskripsi', 'gambar_unit', 'password',
+        'nama_unit', 'slug', 'alamat', 'latitude', 'longitude', 'deskripsi', 'gambar_unit', 'password',
         'status', 'whatsapp', 'telegram', 'instagram', 'email', 'username', 'bukti_alumni'
     ];
 
