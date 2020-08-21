@@ -228,3 +228,54 @@
     background-color: #ff5f1f;
     color: #ffffff;
 }
+
+h2.testi {
+    position: relative;
+}
+
+h2.testi::after {
+    content: "";
+    width: 130px;
+    position: absolute;
+    margin: 0 auto;
+    height: 3px;
+    background: #FFC107;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+}
+
+.carousel-inner .carousel-item .img-box {
+    width: 135px;
+    height: 135px;
+}
+
+.carousel-control-prev {
+    left: -100px;
+}
+
+.carousel-control-next {
+    right: -100px;
+}
+
+.carousel-indicators {
+    top: 320px;
+}
+
+@media (min-width: 320px) and (max-width: 640px) {
+    .carousel-inner .carousel-item p {
+        font-size: 14px;
+    }
+
+    .carousel-control-prev {
+        left: -40px;
+    }
+
+    .carousel-control-next {
+        right: -40px;
+    }
+
+    .carousel-indicators {
+        top: 400px;
+    }
+}
