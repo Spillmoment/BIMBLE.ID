@@ -66,6 +66,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th width="100">Nama Unit</th>
+                                    <th width="100">No Telp</th>
                                     <th width="100">Email</th>
                                     <th>Alamat</th>
                                     <th>File ALumni</th>
@@ -77,6 +78,7 @@
                                 <tr>
                                     <td scope="row"> {{$loop->iteration}} </td>
                                     <td>{{ $u->nama_unit }}</td>
+                                    <td>{{ $u->no_telp }}</td>
                                     <td> {{ $u->alamat }} </td>
                                     <td>{{ $u->email }}</td>
                                     <td>

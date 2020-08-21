@@ -6,14 +6,14 @@
                 <a href="{{ URL::to('/') }}" class="navbar-brand py-1">
                     <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="Directory logo"
                         style="width: 150px;"></a>
-                <form action="#" id="search" class="form-inline d-none d-sm-flex scroll">
+                <form action="" method="POST" id="search" class="form-inline d-none d-sm-flex scroll" >
                     <div
                         class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
                         <label for="search_search" class="label-absolute"><i class="fa fa-search"></i><span
                                 class="sr-only">What
                                 are you looking for?</span></label>
-                        <input id="search_search" placeholder="Search" aria-label="Search"
-                            class="form-control form-control-sm border-0 shadow-0 bg-gray-200">
+                        <input id="search_search" name="keyword" placeholder="Search" aria-label="Search"
+                            class="form-control form-control-sm border-0 shadow-0 bg-gray-200" value="{{ Request::get('keyword') }}">
                         <button type="reset" class="btn btn-reset btn-sm"><i class="fa-times fas"></i></button>
                     </div>
                 </form>
@@ -30,12 +30,13 @@
               {{ (Request::route()->getName() == 'front.pusat') ? 'active' : '' }}">Pusat Bantuan</a></li>
 
                     <li class="nav-item"><a href="{{ route('front.kursus') }}"
-                            class="nav-link  {{ (Request::route()->getName() == 'front.kursus') ? 'active' : '' }}">
+                            class="nav-link  {{ (Request::route()->getName() == 'front.kursus') ? 'active' : ''  ||
+                                                (Request::route()->getName() == 'kursus.unit') ? 'active' : ''  }}">
                             Kursus</a>
                     </li>
                     <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
                             class="nav-link  {{ (Request::route()->getName() == 'unit.daftar') ? 'active' : '' }}">
-                            Unit</a>
+                            Daftar Unit</a>
                     </li>
 
                 </ul>

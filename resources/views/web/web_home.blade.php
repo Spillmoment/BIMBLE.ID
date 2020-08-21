@@ -34,6 +34,7 @@
 
 </head>
 
+
 <body style="padding-top: 0;">
 
     @include('web.layouts.header')
@@ -118,15 +119,15 @@
             class="bg-cover"></div>
         <div class="container pb-lg-3">
             <div class="search-bar rounded p-3 p-lg-4 position-relative mt-n4 z-index-20">
-                <form action="#">
+                <form action="{{ route('front.index') }}">
                     <div class="row">
 
                         <div class="col-lg-3">
                             {{--  --}}
                         </div>
                         <div class="col-lg-4 d-flex align-items-center form-group">
-                            <input type="search" name="keyword" placeholder="Kursus apa yang ingin anda cari?"
-                                class="form-control border-0 shadow-0" value="{{ Request::get('keyword') }}">
+                            <input type="search" name="unit" placeholder="Unit apa yang ingin anda cari?"
+                                class="form-control border-0 shadow-0" value="{{ Request::get('unit') }}">
                         </div>
 
                         <div class=" col-lg-2 form-group mb-0">
@@ -140,15 +141,15 @@
     </section>
 
 
-    <section class="pt-5 pb-6" id="mulai">
+    <section class="pt-5 pb-5" id="mulai">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-8">
-                    <h4>Rekomendasi Bimble</h4>
+                    <h4>Rekomendasi Unit</h4>
 
-                    @if(Request::get('keyword'))
-                    <h6 class="mt-2">Pencarian: <i> {{ Request::get('keyword')}} </i></h6>
-                    @endif
+                    {{-- @if(Request::get('keyword'))
+                    <h6 class="mt-2">Unit: <i> {{ Request::get('keyword')}} </i></h6>
+                    @endif --}}
                 </div>
             </div>
 
@@ -156,30 +157,26 @@
                 <div class="col-md-12">
 
                     <div class="owl-carousel">
-                        @forelse ($kursus as $item)
+                        @forelse ($unit as $item)
                         <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
                             <div class="card card-kelas h-100 border-0 shadow">
                                 <div class="card-img-top overflow-hidden gradient-overlay">
-                                    <img src="{{ Storage::url('public/'. $item->gambar_kursus) }}"
-                                        alt="{{ $item->nama_kursus }}" class="img-fluid" /><a
-                                        href="{{ route('front.detail', $item->slug) }}" class="tile-link"></a>
-                                    <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
-                                        <div class="badge badge-transparent badge-pill px-3 py-2">Popular</div>
-                                    </div>
+                                    <img src="{{ Storage::url('public/'. $item->gambar_unit) }}"
+                                        alt="{{ $item->nama_unit }}" class="img-fluid" /><a
+                                        href="{{ route('unit.detail', $item->slug)  }}" class="tile-link"></a>
+                                    
                                 </div>
                                 <div class="card-body d-flex align-items-center">
                                     <div class="w-100">
-                                        <h6 class="card-title"><a href="{{ route('front.detail', $item->slug) }}"
-                                                class="text-decoration-none text-dark">{{ $item->nama_kursus }}</a></h6>
+                                        <h6 class="card-title"><a href="{{ route('unit.detail', $item->slug)  }}"
+                                                class="text-decoration-none text-dark">{{ $item->nama_unit }}</a></h6>
                                         <div class="d-flex card-subtitle mb-3">
-                                            <p class="flex-grow-1 mb-0 text-muted text-sm">{{ $item->keterangan }}</p>
-                                            <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i
-                                                    class="fa fa-star text-warning"></i><i
-                                                    class="fa fa-star text-warning"></i><i
-                                                    class="fa fa-star text-warning"></i><i
-                                                    class="fa fa-star text-warning"></i><i
-                                                    class="fa fa-star text-gray-300">
-                                                </i>
+                                            <p class="flex-grow-1 mb-0 text-muted text-sm">
+
+                                                @foreach ($item->kursus_unit as $item)
+                                                   <span class="badge badge-success"> {{ $item->kursus->nama_kursus }}</span>
+                                                @endforeach
+
                                             </p>
                                         </div>
 
@@ -188,7 +185,12 @@
                             </div>
                         </div>
                         @empty
-
+                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                            <div class="media align-items-center">
+                                <div class="media-body text-center ">Belum ada <strong>Mentor</strong> untuk unit ini
+                                </div>
+                            </div>
+                        </div>
                         @endforelse
                     </div>
 
@@ -205,6 +207,49 @@
     </section>
 
 
+ <section class="py-5" style="background: #4E66F8">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 col-10 offset-1">
+                <h2 class="text-center mt-3 pb-2 mb-3 text-uppercase text-white testi"><strong>Testimonial</strong></h2>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                  </ol>
+                  <div class="carousel-inner mt-4">
+                    <div class="carousel-item text-center active">
+                        <div class="img-box p-1 border rounded-circle m-auto">
+                            <img class="d-block w-100 rounded-circle" src="http://nicesnippets.com/demo/profile-1.jpg" alt="First slide">
+                        </div>
+                        <h5 class="mt-4 mb-0"><strong class="text-white text-capitalize">Paul Mitchel</strong></h5>
+                        <h6 class="text-warning m-2 ">Web Developer</h6>
+                        <p class="m-0 pt-3 text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
+                    </div>
+                
+                  </div>
+
+                  <div class="mb-5">  
+                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only  text-dark">Next</span>
+                        </a>
+                    </div>
+                  
+
+                </div>
+            </div>            
+        </div>
+    </div>
+    
+ </section>
+
+    
     @include('web.layouts.footer')
     @include('web.layouts.script')
     <script>

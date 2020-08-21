@@ -4,20 +4,21 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/Swiper/4.4.1/css/swiper.min.css')}}"
     id="theme-stylesheet">
-
-<section style="background-image: url('{{ Storage::url('public/'. $kursus->gambar_kursus) }}');"
-    class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
-    <div class="container overlay-content">
-        <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
-            <div class="text-white mb-4 mb-lg-0">
+    <section style="background-image: url('{{ Storage::url('public/'. $kursus->gambar_kursus) }}');"
+  
+        class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
+        <div class="container overlay-content">
+            <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
+                <div class="text-white mb-4 mb-lg-0">
+                 
+                <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
+                <p><i class="fa-map-marker-alt fas mr-2"></i> Paiton, Probolinggo</p>
              
-            <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
-            <p><i class="fa-map-marker-alt fas mr-2"></i> Paiton, Probolinggo</p>
-         
+            </div>
         </div>
-    </div>
-    </div>
-</section>
+        </div>
+    </section>
+    
 
 <div class="container pt-5 pb-6">
     <div class="row">

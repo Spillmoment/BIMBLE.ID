@@ -68,6 +68,15 @@
                 </div>
                 
                 <div class="form-group ">
+                    <label for="tentang">Tentang Kursus</label>
+                    <input type="text" class="form-control {{ $errors->first('tentang') ? 'is-invalid' : '' }}"
+                        name="tentang" id="tentang" value="{{$kursus->tentang}}" placeholder="Tentang Kursus">
+                    <div class="invalid-feedback">
+                        {{$errors->first('tentang')}}
+                    </div>
+                </div>
+
+                <div class="form-group ">
                     <label for="keterangan">Keterangan</label>
                     <input type="text" class="form-control {{ $errors->first('keterangan') ? 'is-invalid' : '' }}"
                         name="keterangan" id="keterangan" value="{{$kursus->keterangan}}" placeholder="Keterangan">

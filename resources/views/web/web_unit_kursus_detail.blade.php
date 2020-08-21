@@ -3,137 +3,53 @@
 @section('title', 'Unit - ' . $unit->nama_unit )
 @section('content')
 
-<section class="hero py-6 py-lg-7 text-white dark-overlay">
-    @if ($unit->gambar_unit == null)
-    <img src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}" alt="Text page"
-        class="bg-image">
-    @else
-    <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" alt="Text page" class="bg-image">
-    @endif
-
+<section style="background-image: url('{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}');"
+    class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb text-white justify-content-center no-border mb-0">
+         <!-- Breadcrumbs -->
+         <ol class="breadcrumb text-white justify-content-center no-border mb-0">
             <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="breadcrumb-item active">Unit Kursus </li>
+            <li class="breadcrumb-item"><a href="{{ route('unit.detail', $kursus_unit->unit->slug) }}">Unit {{ $kursus_unit->unit->nama_unit }}</a></li>
+            <li class="breadcrumb-item active">Detail Kursus </li>
         </ol>
-        <h1 class="hero-heading">Selamat Datang Di Unit {{ $unit->nama_unit }}</h1>
-        {{-- <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" class="avatar avatar-xl img-fluid"> --}}
+        <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
+            <div class="text-white mb-4 mb-lg-0">
+             
+            <h1 class="text-shadow verified">{{ $kursus_unit->kursus->nama_kursus  }}</h1>
+            <p><i class="fas fa-home mr-2"></i>{{  $kursus_unit->unit->nama_unit }}</p>
+         
+        </div>
+    </div>
     </div>
 </section>
+
 
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-8">
             <div class="text-block">
-                <h4>Tentang Kami</h4>
-                <p class="text-muted font-weight-light">{!! $unit->deskripsi !!}</p>
+                <h4>Tentang Kursus Ini</h4>
+                <p class="text-muted font-weight-light">{{ $kursus_unit->kursus->tentang }}</p>
             </div>
 
-            <div class="text-block">
-                <h5 class="mb-4">Mentor Team </h5>
-
-                <div class="col">
-                    <div class="row py-3">
-
-                        @forelse ($unit->mentor as $m)
-                        <div class="col-sm-3 mb-lg-0 mb-3">
-                            <div class="card border-0 hover-animate ">
-                                <img src="{{ Storage::url('public/'.$m->foto) }}"
-                                alt="" class="card-img-top rounded-circle avatar avatar-xl"
-                            />
-                                <h6 class="my-2">{{ $m->nama_mentor }}</h6>
-                                <p class="text-muted text-xs text-uppercase">{{ $m->kompetensi }} </p>
-                            </div>
-                        </div>
-                        @empty
-                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                            <div class="media align-items-center">
-                                <div class="media-body text-center ">Belum ada <strong>Mentor</strong> untuk unit ini
-                                </div>
-                            </div>
-                        </div>
-                        @endforelse
-                   
-                       
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-block">
-                <h4 class="mb-4">Fasilitas</h4>
-                <div class="row">
-
-                    @forelse ($unit->fasilitas as $f)
-                    <div class="col-md-4">
-                        <ul class="list-unstyled text-muted">
-                                <li class="mb-2">
-                                <i class="
-                                   {{ $f->item != '' ? 'fa fa-check' : '' }}
-                                   {{ $f->item == 'wifi' ? 'fa fa-wifi' : '' }}
-                                   {{ $f->item == 'tv' ? 'fa fa-tv' : '' }}
-                                   {{ $f->item == 'toilet' ? 'fa fa-shower' : '' }}
-                                   {{ $f->item == 'komputer' ? 'fa fa-laptop' : '' }}
-                                    text-secondary w-1rem mr-3 text-center"></i> 
-                                    <span
-                                    class="text-sm">{{ $f->item }}</span></li>
-                            </ul>
-                        </div>
-                        @empty
-                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                            <div class="media align-items-center">
-                                <div class="media-body text-center ">Belum ada <strong>Fasilitas</strong> untuk unit ini
-                                </div>
-                            </div>
-                        </div>
-                        @endforelse
-                 
-                </div>
-            </div>
-
-
-            <div class="text-block">
-                <h5 class="mb-4">Galeri </h5>
-                <div class="row gallery mb-3 ml-n1 mr-n1">
-
-                    <div class="col-lg-4 col-6 px-1 mb-2">
-                        <a href="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
-                            data-fancybox="gallery" title="">
-                            <img src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
-                                alt="" class="img-fluid mt-2"></a>
-                    </div>
-
-                    {{-- <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                    <div class="media align-items-center">
-                        <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
-                        </div>
-                    </div>
-                </div> --}}
-
-                </div>
-            </div>
-
-
-        </div>
-
-        <div class="col-lg-4">
+          
             <div class="card border-0 shadow">
                 <div class="card-body p-4">
                     <div class="text-block pb-3">
                         <div class="media align-items-center">
                             <div class="media-body">
-                                <h6> <a href="{{ route('front.detail', $unit->slug) }}" class="text-reset"></a>
+                                <h6> <a href="#" class="text-reset"></a>
                                 {{ $kursus_unit->kursus->nama_kursus }}
                                 </h6>
                                 <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
-
+    
                             </div>
                             <img
                                 src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}"
                                 alt="" width="100" class="ml-3 rounded">
                         </div>
                     </div>
-
+    
                     <div class="text-block pt-1 pb-0">
                         <table class="w-100">
                             <tr>
@@ -147,7 +63,7 @@
                 <div class="card-footer bg-light py-2 border-top">
                     <div class="media align-items-center">
                         <div class="media-body">
-                            <h6 class="text-primary text-center mb-2">Hubungi Kami</h6>
+                            <h6 class="text-primary text-center mb-2">Hubungi Kami </h6>
                             <div class="clearfix my-3">
                                 <button type="submit" class="btn btn-success btn-sm">
                                     <img src="{{ asset('assets/frontend/img/logo/wa.png') }}" width="20px">
@@ -159,21 +75,21 @@
                                     <a href="https://t.me/{{ $unit->telegram }}" target="_blank"
                                         class="text-white text-decoration-none">Telegram</a>
                                 </button>
-                                <button type="submit" class="btn btn-secondary btn-sm mt-1">
+                                <button type="submit" class="btn btn-secondary btn-sm">
                                     <img src="https://www.freepnglogos.com/uploads/amazing-instagram-logo-png-image-16.png"
                                         width="20px">
                                     <a href="https://www.instagram.com/{{ $unit->instagram }}" target="_blank"
                                         class="text-white text-decoration-none">Instagram</a>
                                 </button>
                             </div>
-
+    
                         </div>
-
+    
                     </div>
                 </div>
             </div>
-
-
+    
+    
             <div class="pt-4">
                 @if (session('message'))
                <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -184,7 +100,7 @@
                    <strong>{{ session('message') }}</strong>
                </div>
                 @endif
-
+    
                 <button type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false"
                     aria-controls="leaveReview" class="btn btn-outline-primary">Review Kursus Ini</button>
                 <div id="leaveReview" class="collapse mt-4">
@@ -199,7 +115,7 @@
                                     {{ $errors->first('nama') }}
                                 </div>
                         </div>
-
+    
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" name="email" id="email" placeholder="Masukkan Email" required="required"
@@ -208,7 +124,7 @@
                                     {{ $errors->first('email') }}
                                 </div>
                         </div>
-
+    
                         <div class="form-group">
                             <label for="review" class="form-label">Review</label>
                             <textarea rows="4" name="komentar" id="review" placeholder="Masukkan Review"
@@ -222,7 +138,11 @@
                 </div>
             </div>
 
-            <div class="text-block">
+        </div>
+
+        <div class="col-lg-4">
+
+            {{-- <div class="text-block">
                 <!-- Detail Kursus -->
                 <div class="card border-0 shadow">
                     <div class="card-header bg-gray-100 pt-3 pb-2 border-0">
@@ -258,7 +178,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

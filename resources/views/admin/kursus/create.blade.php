@@ -55,6 +55,16 @@
 
 
                 <div class="form-group">
+                    <label for="tentang">Tentang Kursus</label>
+                    <textarea name="tentang"
+                        class="form-control {{ $errors->first('tentang') ? 'is-invalid' : '' }}" id="tentang"
+                        rows="3" placeholder="Tentang Kursus">{{old('tentang')}}</textarea>
+                    <div class="invalid-feedback">
+                        {{$errors->first('tentang')}}
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="keterangan">Keterangan</label>
                     <textarea name="keterangan"
                         class="form-control {{ $errors->first('keterangan') ? 'is-invalid' : '' }}" id="keterangan"
