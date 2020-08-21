@@ -17,17 +17,19 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         $banner = Banner::all();
-        $kursus = Kursus::orderBy('created_at', 'DESC')
-            ->get();
 
-        $keyword = $request->get('keyword');
+        $unit = Unit::where('status', '1')
+            ->latest()->get();
+
+        $keyword = $request->get('unit');
         if ($keyword) {
-            $kursus = Kursus::where('nama_kursus', 'like', "%$keyword%")
+            $unit = Unit::where('nama_unit', 'like', "%$keyword%")
                 ->orderBy('created_at', 'desc')->paginate(4);
         }
 
-        return view('web.web_home', compact('kursus', 'banner'));
+        return view('web.web_home', compact('unit', 'banner'));
     }
+
 
     public function pusat_bantuan()
     {
@@ -36,8 +38,10 @@ class FrontController extends Controller
 
     public function kursus(Request $request)
     {
-        $kursus = Kursus::orderBy('created_at', 'DESC')->paginate(9);
+        $kursus = Kursus::orderBy('created_at', 'DESC')->paginate(10);
         $keyword = $request->get('keyword');
+
+        $kursus_unit = KursusUnit::with('kursus')->latest()->first();
 
         if ($keyword) {
             $kursus = Kursus::where('nama_kursus', 'LIKE', "%$keyword%")
@@ -45,7 +49,19 @@ class FrontController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->paginate(9);
         }
-        return view('web.web_kursus', compact('kursus'));
+
+        return view('web.web_kursus', compact('kursus', 'kursus_unit'));
+    }
+
+    public function kursus_unit($id)
+    {
+
+        $kursus = Kursus::orderBy('created_at', 'DESC')->paginate(10);
+        $active = KursusUnit::where('kursus_id', $id)->first();
+        $kursus_unit = KursusUnit::with('kursus', 'unit')
+            ->where('kursus_id', $id)->paginate(9);
+
+        return view('web.web_kursus_unit', compact('kursus_unit', 'kursus', 'active'));
     }
 
     public function kursusSort(Request $request)

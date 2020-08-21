@@ -18,7 +18,7 @@ class Unit extends Authenticatable
 
     protected $fillable = [
         'nama_unit', 'slug', 'alamat', 'latitude', 'longitude', 'deskripsi', 'gambar_unit', 'password',
-        'status', 'whatsapp', 'telegram', 'instagram', 'email', 'username', 'bukti_alumni'
+        'status', 'whatsapp', 'telegram', 'instagram', 'email', 'username', 'bukti_alumni', 'no_telp', 'gambar_unit'
     ];
 
     /**
@@ -60,7 +60,7 @@ class Unit extends Authenticatable
     {
         return $this->hasMany(Mentor::class, 'unit_id', 'id');
     }
-    
+
     public function galeri()
     {
         return $this->hasMany(Galeri::class, 'unit_id', 'id');

@@ -10,13 +10,14 @@ use App\Kursus;
 use App\KursusUnit;
 use Illuminate\Support\Facades\Storage;
 use App\Galeri;
-
+use Illuminate\Support\Str;
 
 class UnitController extends Controller
 {
     public function index()
     {
-        return view('web.web_unit');
+
+        return view('web.web_unit', ['kursus' => Kursus::all()]);
     }
 
     public function post(UnitDaftarReq $request)
@@ -26,6 +27,7 @@ class UnitController extends Controller
         // $file = $data['bukti_alumni'];
         // $file_name = 'Pendaftar Unit-' . $data['nama_unit'] . '.' . $file->getClientOriginalExtension();
         // $data['bukti_alumni'] =  $file->storeAs('public/uploads/bukti', $file_name);
+        $data['slug'] = Str::slug($data['nama_unit'], '-');
         $data['bukti_alumni'] =  $request->file('bukti_alumni')->store('bukti', 'public');
         $data['status'] = '0';
 
@@ -44,11 +46,8 @@ class UnitController extends Controller
             ->latest()
             ->get();
 
-        $nama_kursus = KursusUnit::with(['kursus', 'unit'])
-            ->where('unit_id', $unit->id)
-            ->first();
 
-        $kursus_lainya = KursusUnit::with(['kursus', 'unit'])
+        $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('unit_id', $unit->id)
             ->get();
 
@@ -56,8 +55,7 @@ class UnitController extends Controller
 
         return view('web.web_unit_kursus', [
             'unit' => $unit,
-            'kursus_unit' => $nama_kursus,
-            'kursus_lainya' => $kursus_lainya,
+            'kursus_unit' => $kursus_unit,
             'galeri' => $galeri
         ]);
     }
