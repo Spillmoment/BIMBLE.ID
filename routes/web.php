@@ -98,10 +98,11 @@ Route::prefix('manager')
 Route::get('/', 'Web\FrontController@index')->name('front.index');
 Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.pusat');
 Route::get('/kursus', 'Web\FrontController@kursus')->name('front.kursus');
-Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
-Route::get('/kursus/{slug}', 'Web\FrontController@show')->name('front.detail');
-Route::get('/kursus/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
-Route::get('/kursus/unit/{slug}/{slug_kursus}', 'Web\UnitController@show_kursus')->name('unit.detail.kursus');
+Route::get('/kursus/unit/{id}', 'Web\FrontController@kursus_unit')->name('kursus.unit');
+// Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
+// Route::get('/kursus/{slug}', 'Web\FrontController@show')->name('front.detail');
+Route::get('/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
+Route::get('/unit/{slug}/kursus/{slug_kursus}', 'Web\UnitController@show_kursus')->name('unit.detail.kursus');
 Route::post('komentar/{id}/post', 'Web\KomentarController@post')->name('komentar.post');
-Route::get('/unit/daftar', 'Web\UnitController@index')->name('unit.daftar');
+Route::get('/daftar-unit', 'Web\UnitController@index')->name('unit.daftar');
 Route::post('/unit/add', 'Web\UnitController@post')->name('unit.add');
