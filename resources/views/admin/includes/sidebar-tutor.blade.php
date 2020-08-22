@@ -45,7 +45,7 @@
                 <li class="{{ 
                     (Request::route()->getName() == 'unit.siswa.home') ? 'active' : ''
                     }}">
-                    <a href="{{ route('unit.siswa.home') }}"> <i class="menu-icon fa fa-building"></i>Nilai Siswa</a>
+                    <a href="{{ route('unit.siswa.home') }}"> <i class="menu-icon fa fa-pencil-square-o"></i>Nilai Siswa</a>
                 </li>
 
          
