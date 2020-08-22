@@ -50,14 +50,15 @@
                             </a>
                             <div class="media-body">
                                 <h4 class="text-light display-6">{{ $kursus->nama_kursus }}</h4>
-                                <p>Project Manager</p>
+                                <p>BimbleID </p>
                             </div>
                         </div>
                     </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="{{ route('unit.siswa.kursus', $kursus->slug) }}"> <i class="fa fa-bell-o"></i> Siswa <span class="badge badge-success pull-right">11</span></a>
+                            {{-- <a href="{{ route('unit.siswa.kursus', $kursus->slug) }}"> <i class="fa fa-bell-o"></i> Siswa <span class="badge badge-success pull-right">11</span></a> --}}
+                            <a href="{{ route('unit.siswa.kursus', $kursus->slug) }}"> <i class="fa fa-user"></i> Siswa</a>
                         </li>
                     </ul>
 
@@ -67,38 +68,6 @@
         @endforeach
         @endforeach
 
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Harga kursus</strong>
-                </div>
-                <div class="card-body card-block">
-                    <div class="invalid-feedback">
-                        {{$errors->first('biaya_kursus')}}
-                    </div>
-                    @foreach ($list_kursus as $kursus)
-                    @foreach ($kursus->kursus_unit as $kursus_unit)
-                    <form class="form-group" action="{{ route('unit.kursus.harga') }}" method="post">
-                        <div class="form-group" id="price">
-                            <label for="company" class=" form-control-label">{{ $kursus->nama_kursus }}</label>
-                            <div class="col col-md-12">
-                                <div class="input-group">
-                                    
-                                        @csrf
-                                        @method('put')
-                                        <input type="hidden" name="id" value="{{ $kursus_unit->id }}">
-                                        <input type="text" id="biaya_kursus" name="biaya_kursus" class="input-sm form-control-sm form-control" value="{{ $kursus_unit->biaya_kursus }}">
-                                        <button type="submit" class="btn btn-outline-primary btn-sm btn-harga" data-kursus="{{ $kursus->id }}"><i class="{{ $kursus_unit->biaya_kursus == 0 ? 'fa fa-plus' : 'fa fa-pencil' }}"></i></button>
-                                    
-                                </div>
-                            </div> 
-                        </div>
-                    </form>
-                    @endforeach
-                    @endforeach
-                </div>
-            </div>
-        </div>
         <div class="col-lg-12">
             <div class="card">
             </div>
