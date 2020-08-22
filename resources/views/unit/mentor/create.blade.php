@@ -35,7 +35,7 @@
             <form method="post" enctype="multipart/form-data" action="{{route('mentor.store')}}">
                 @csrf
                 <div class="form-group ">
-                    <label for="nama_mentor">Nama Mentro</label>
+                    <label for="nama_mentor">Nama Mentor</label>
                     <input type="text" class="form-control {{ $errors->first('nama_mentor') ? 'is-invalid' : '' }}"
                         name="nama_mentor" id="nama_mentor" value="{{old('nama_mentor')}}" placeholder="Nama Mentor">
                     <div class="invalid-feedback">

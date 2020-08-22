@@ -25,6 +25,7 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-7">
+
             <div class="text-block">
                 <h4>Tentang Kami</h4>
                 <p class="text-muted font-weight-light">{!! $unit->deskripsi !!}</p>
@@ -37,7 +38,7 @@
                     <div class="row py-3">
 
                         @forelse ($unit->mentor as $m)
-                        <div class="col-sm-3 mb-lg-0 mb-3">
+                        <div class="col-sm-4 mb-lg-0 mb-3">
                             <div class="card border-0 hover-animate ">
                                 <img src="{{ Storage::url('public/'.$m->foto) }}"
                                 alt="" class="card-img-top rounded-circle avatar avatar-xl"

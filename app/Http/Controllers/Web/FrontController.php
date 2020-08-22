@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\DB;
 use App\Unit;
 use App\Banner;
 use App\KursusUnit;
+use App\Mentor;
 
 class FrontController extends Controller
 {
     public function index(Request $request)
     {
         $banner = Banner::all();
-
         $unit = Unit::where('status', '1')
             ->latest()->get();
 
@@ -27,7 +27,7 @@ class FrontController extends Controller
                 ->orderBy('created_at', 'desc')->paginate(4);
         }
 
-        return view('web.web_home', compact('unit', 'banner'));
+        return view('web.web_home', compact('unit', 'banner', 'null'));
     }
 
 
@@ -38,7 +38,7 @@ class FrontController extends Controller
 
     public function kursus(Request $request)
     {
-        $kursus = Kursus::orderBy('created_at', 'DESC')->paginate(10);
+        $kursus = Kursus::with('kursus_unit')->orderBy('created_at', 'DESC')->paginate(10);
         $keyword = $request->get('keyword');
 
         $kursus_unit = KursusUnit::with('kursus')->latest()->first();
@@ -55,11 +55,10 @@ class FrontController extends Controller
 
     public function kursus_unit($id)
     {
-
-        $kursus = Kursus::orderBy('created_at', 'DESC')->paginate(10);
+        $kursus = Kursus::with('kursus_unit')->latest()->paginate(10);
         $active = KursusUnit::where('kursus_id', $id)->first();
         $kursus_unit = KursusUnit::with('kursus', 'unit')
-            ->where('kursus_id', $id)->paginate(9);
+            ->where('kursus_id', $id)->latest()->paginate(9);
 
         return view('web.web_kursus_unit', compact('kursus_unit', 'kursus', 'active'));
     }

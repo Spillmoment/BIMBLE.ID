@@ -31,12 +31,14 @@
 
                     <li class="nav-item"><a href="{{ route('front.kursus') }}"
                             class="nav-link  {{ (Request::route()->getName() == 'front.kursus') ? 'active' : ''  ||
-                                                (Request::route()->getName() == 'kursus.unit') ? 'active' : ''  }}">
+                                                (Request::route()->getName() == 'kursus.unit') ? 'active' : '' ||
+                                                (Request::route()->getName() == 'unit.detail.kursus') ? 'active' : ''
+                                                }}">
                             Kursus</a>
                     </li>
                     <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
                             class="nav-link  {{ (Request::route()->getName() == 'unit.daftar') ? 'active' : '' }}">
-                            Daftar Unit</a>
+                            Daftar</a>
                     </li>
 
                 </ul>

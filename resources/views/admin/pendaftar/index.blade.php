@@ -83,7 +83,7 @@
                                     <td>{{ $u->email }}</td>
                                     <td>
                                         <a class="text-info" href="{{ Storage::url('public/'. $u->bukti_alumni)}}">
-                                        <i class="fa fa-download"></i> Download File
+                                        <i class="fa fa-download"></i> Download 
                                         </a>
                                     </td>
       

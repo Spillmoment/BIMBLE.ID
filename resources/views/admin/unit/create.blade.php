@@ -79,15 +79,17 @@
                     <label for="whatsapp">Whats App</label>
                     <input type="number" class="form-control {{ $errors->first('whatsapp') ? 'is-invalid' : '' }}"
                         name="whatsapp" id="whatsapp" value="{{old('whatsapp')}}" placeholder="Whats App">
+                        <small id="fileHelpId" class="form-text text-muted">Contoh penulisan: +6282338823724</small>
                     <div class="invalid-feedback">
                         {{$errors->first('whatsapp')}}
                     </div>
                 </div>
 
+             
                 <div class="form-group ">
                     <label for="telegram">Telegram</label>
                     <input type="text" class="form-control {{ $errors->first('telegram') ? 'is-invalid' : '' }}"
-                        name="telegram" id="telegram" value="{{old('telegram')}}" placeholder="Telegram">
+                        name="telegram" id="telegram" value="{{old('telegram')}}" placeholder="Username Telegram">
                     <div class="invalid-feedback">
                         {{$errors->first('telegram')}}
                     </div>
@@ -131,7 +133,6 @@
                         {{$errors->first('konfirmasi_password')}}
                     </div>
                 </div>
-
 
                 <button type="submit" class="btn btn-block btn-primary">
                    Simpan </button>

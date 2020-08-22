@@ -62,11 +62,15 @@
                 <tr>
                     <th>Foto</th>
                     <td>
+                        @if ($unit->gambar_unit)
                         <img src="{{ Storage::url('public/'. $unit->gambar_unit) }}" alt="" class="img-thumbnail mb-2"
-                            width="150px">
+                        width="150px">
                         <br>
                         <button type="submit" class="badge badge-primary" data-toggle="modal" data-target="#modelId">
                             <i class="fa fa-eye    "></i> Lihat</button>
+                        @else
+                        belum ada foto unit
+                        @endif
                     </td>
                 </tr>
 

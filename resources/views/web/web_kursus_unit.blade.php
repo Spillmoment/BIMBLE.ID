@@ -23,9 +23,10 @@
             </form> --}}
             <h4 class="mb-4 mt-2">Daftar Kursus </h4>
             <div class="list-group">
+           
                 @foreach ($kursus as $item)
                 <a href="{{ route('kursus.unit', $item->id) }}" class="list-group-item list-group-item-action 
-                  {{ $item->nama_kursus == $active->kursus->nama_kursus ? 'active' : '' }}">
+                    {{ $item->nama_kursus == $active->kursus->nama_kursus ? 'active' : '' }}">
                     {{ $item->nama_kursus }}
                 </a>
                 @endforeach
@@ -65,15 +66,27 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>          
                 @endforeach
 
             </div>
-            <!-- Pagination -->
-            <nav aria-label="Page navigation example">
+        
+            <nav class="mb-4">
+                @if($kursus_unit->lastPage() > 1)
                 <ul class="pagination pagination-template d-flex justify-content-center">
-                    {{ $kursus_unit->appends(Request::all())->links() }}
+                    @if($kursus_unit->currentPage() != $kursus_unit->onFirstPage())
+                    <li class="page-item"><a class="page-link" href="{{ $kursus_unit->previousPageUrl() }}">Previous</a></li>
+                    @endif
+                    @for($i = 1; $i <= $kursus_unit->lastPage(); $i++)
+                        <li class="page-item active"><a
+                                class="page-link {{ $i == $kursus_unit->currentPage() ? 'current' : '' }}"
+                                href="{{ $kursus_unit->url($i) }}">{{ $i }}</a></li>
+                        @endfor
+                        @if($kursus_unit->currentPage() != $kursus_unit->lastPage())
+                        <li class="page-item"><a class="page-link" href="{{ $kursus_unit->nextPageUrl()  }}">Next</a></li>
+                        @endif
                 </ul>
+                @endif
             </nav>
         </div>
     </div>

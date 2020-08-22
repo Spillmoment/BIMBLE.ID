@@ -132,7 +132,7 @@
         e.preventDefault();
         swal({
                 title: "Yakin!",
-                text: "menghapus mentor  " + name + "?",
+                text: "menghapus Galeri Ini ?",
                 icon: "warning",
                 dangerMode: true,
                 buttons: {

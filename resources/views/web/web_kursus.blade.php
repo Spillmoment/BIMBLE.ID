@@ -21,7 +21,7 @@
                
                 </button>
             </form> --}}
-            <h4 class="mb-3">Daftar Kursus </h4>
+            <h4 class="mb-4 mt-2">Daftar Kursus </h4>
             <div class="list-group">
                 @foreach ($kursus as $item)
                 <a href="{{ route('kursus.unit', $item->id) }}" class="list-group-item list-group-item-action 
@@ -40,7 +40,7 @@
             </nav>
         </div>
         <div class="col-lg-9">
-
+            <h4 class="mb-4  mt-2 text-center"> Unit Kursus </h4>
             <div class="row">
                 <!-- venue item-->
               

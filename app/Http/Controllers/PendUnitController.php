@@ -61,10 +61,11 @@ class PendUnitController extends Controller
         ]);
     }
 
-    public function destroy(Unit $unit)
+    public function destroy($id)
     {
-        Storage::delete('public/' . $unit->bukti_alumni);
+        $unit = Unit::findOrFail($id);
         $unit->forceDelete();
+        Storage::delete('public/' . $unit->bukti_alumni);
         return redirect()->route('pendaftar.index')
             ->with(['status' => 'Data Pendaftar Unit Berhasil Dihapus']);
     }
