@@ -74,6 +74,15 @@ Route::prefix('unit')
         Route::get('/galeri', 'Unit\GaleriController@index')->name('unit.galeri.home');
         Route::post('/tambah_galeri_foto', 'Unit\GaleriController@store')->name('unit.galeri.tambah');
         Route::delete('/galeri/{id}', 'Unit\GaleriController@destroy')->name('unit.galeri.hapus');
+
+        // nilai
+        Route::get('/siswa', 'Unit\SiswaController@index')->name('unit.siswa.home');
+        Route::get('/siswa/{slug}', 'Unit\SiswaController@kursus_siswa')->name('unit.siswa.kursus');
+        Route::get('/siswa/{slug}/create', 'Unit\SiswaController@create_siswa')->name('unit.siswa.create');
+        Route::post('/siswa/{slug}/create', 'Unit\SiswaController@store_siswa')->name('unit.siswa.store');
+        Route::get('/siswa/{slug}/siswa/{id}', 'Unit\SiswaController@edit')->name('unit.siswa.edit');
+        Route::put('/siswa/{slug}/siswa/{id}', 'Unit\SiswaController@update')->name('unit.siswa.update');
+        Route::delete('/siswa/{id}', 'Unit\SiswaController@destroy')->name('unit.siswa.delete');
     });
 
 // Route Manager

@@ -20,4 +20,9 @@ class Kursus extends Model
     {
         return $this->hasMany(KursusUnit::class, 'kursus_id', 'id');
     }
+    
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'kursus_id', 'id');
+    }
 }

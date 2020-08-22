@@ -120,6 +120,11 @@
                 </div>
             </div>
 
+            <div class="text-block">
+                <h5 class="mb-4">Lokasi kami </h5>
+                    <div class="card-body" id="mapid"></div>
+            </div>
+
         </div>
 
       
@@ -170,24 +175,46 @@
 </div>
 @endsection
 
-@push('scripts')
-<script>
-    $(document).ready(function () {
-        $('.btn-primary').on('click', function () {
-            var $this = $(this);
-            $('button').css("opacity", 0.4);
-            var loadingText =
-                '<button class="spinner-grow spinner-grow-sm"></button> Mengirim ...';
-            if ($(this).html() !== loadingText) {
-                $this.data('original-text', $(this).html());
-                $this.html(loadingText);
-            }
-            setTimeout(function () {
-                $this.html($this.data('original-text'));
-            }, 3000);
-        });
-    });
-
-</script>
+@push('style')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+    <style>
+    #mapid { height: 300px; }
+    </style>
 @endpush
 
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.btn-primary').on('click', function () {
+                var $this = $(this);
+                $('button').css("opacity", 0.4);
+                var loadingText =
+                    '<button class="spinner-grow spinner-grow-sm"></button> Mengirim ...';
+                if ($(this).html() !== loadingText) {
+                    $this.data('original-text', $(this).html());
+                    $this.html(loadingText);
+                }
+                setTimeout(function () {
+                    $this.html($this.data('original-text'));
+                }, 3000);
+            });
+        });
+
+    </script>
+
+    <script>
+        var map = L.map('mapid').setView([{{ $unit->latitude }}, {{ $unit->longitude }}], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([{{ $unit->latitude }}, {{ $unit->longitude }}]).addTo(map)
+            .bindPopup('Posisi kami');
+    </script>
+@endpush
