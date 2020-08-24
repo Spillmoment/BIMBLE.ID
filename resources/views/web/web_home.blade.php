@@ -34,7 +34,6 @@
 
 </head>
 
-
 <body style="padding-top: 0;">
 
     @include('web.layouts.header')
@@ -55,9 +54,28 @@
                                 <div class="col-xl-10 mx-auto">
                                     <h1 class="display-4 font-weight-bold text-shadow">{{$item->kata1}}</h1>
                                     <p class="text-lg text-shadow">{{ $item->kata2 }}</p>
-                                    <br>
-                                    <a href="#mulai"
-                                        class="btn btn-outline-light btn-md d-none d-sm-inline-block scroll">Mulai Kursus <i class="fa fa-angle-right ml-2"></i></a>
+                               
+                                    {{-- Search Bar --}}
+                                    <div class="search-bar mt-5 p-6 p-lg-1 pl-lg-6">
+                                        <form action="{{ route('front.kursus') }}">
+                                          <div class="row">
+                                            <div class="col-lg-6 d-flex align-items-center form-group">
+                                              <input type="text" name="keyword" placeholder="Kursus apa yang anda cari?" class="form-control border-0 shadow">
+                                            </div>
+                                            <div class="col-lg-3 d-flex align-items-center form-group no-divider">
+                                              <select title="Pilih Type" name="type" data-style="btn-form-control" class="selectpicker">
+                                               @foreach ($type as $item)
+                                               <option value="{{ $item->id }}">{{ $item->nama_type }}</option>
+                                               @endforeach
+                                              </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                              <button type="submit" class="btn btn-primary btn-block rounded-xl h-100">Cari </button>
+                                            </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                      
                                 </div>
                             </div>
                         </div>
@@ -73,6 +91,8 @@
             <div id="homeNext" class="swiper-button-next"></div>
         </div>
     </div>
+
+
 
     <section class="py-6 ">
         <div class="container">
@@ -115,24 +135,19 @@
     </section>
 
     <section class="">
-        @foreach ($banner as $item)
-        <div  @if ($item->id == '2') 
-            style="height: 250px; background-image: url('{{ Storage::url('public/'. $item->gambar_banner) }}');"
+        <div style="height: 250px; background-image: url('{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}');"
             class="bg-cover"></div>
-            @endif
-        @endforeach
-        
-            <div class="container pb-lg-3">
+        <div class="container pb-lg-3">
             <div class="search-bar rounded p-3 p-lg-4 position-relative mt-n4 z-index-20">
-                <form action="{{ route('front.index') }}">
+                <form action="#">
                     <div class="row">
 
                         <div class="col-lg-3">
                             {{--  --}}
                         </div>
                         <div class="col-lg-4 d-flex align-items-center form-group">
-                            <input type="search" name="unit" placeholder="Unit apa yang ingin anda cari?"
-                                class="form-control border-0 shadow-0" value="{{ Request::get('unit') }}">
+                            <input type="search" name="keyword" placeholder="Kursus apa yang ingin anda cari?"
+                                class="form-control border-0 shadow-0" value="{{ Request::get('keyword') }}">
                         </div>
 
                         <div class=" col-lg-2 form-group mb-0">
@@ -146,41 +161,46 @@
     </section>
 
 
-    <section class="pt-5 pb-5" id="mulai">
+    <section class="pt-5 pb-6" id="mulai">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-8">
-                    <h4>Rekomendasi Unit</h4>
+                    <h4>Rekomendasi Bimble</h4>
 
-                    {{-- @if(Request::get('keyword'))
-                    <h6 class="mt-2">Unit: <i> {{ Request::get('keyword')}} </i></h6>
-                    @endif --}}
+                    @if(Request::get('keyword'))
+                    <h6 class="mt-2">Pencarian: <i> {{ Request::get('keyword')}} </i></h6>
+                    @endif
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    
+
                     <div class="owl-carousel">
-                        @forelse ($unit as $item)
+                        @forelse ($kursus as $item)
                         <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
                             <div class="card card-kelas h-100 border-0 shadow">
                                 <div class="card-img-top overflow-hidden gradient-overlay">
-                                    <img src="{{ Storage::url('public/'. $item->gambar_unit) }}"
-                                        alt="{{ $item->nama_unit }}" class="img-fluid" /><a
-                                        href="{{ route('unit.detail', $item->slug)  }}" class="tile-link"></a>
-                                    
+                                    <img src="{{ Storage::url('public/'. $item->gambar_kursus) }}"
+                                        alt="{{ $item->nama_kursus }}" class="img-fluid" /><a
+                                        href="{{ route('front.detail', $item->slug) }}" class="tile-link"></a>
+                                    <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                        <div class="badge badge-transparent badge-pill px-3 py-2">Popular</div>
+                                    </div>
                                 </div>
                                 <div class="card-body d-flex align-items-center">
                                     <div class="w-100">
-                                        <h6 class="card-title"><a href="{{ route('unit.detail', $item->slug)  }}"
-                                                class="text-decoration-none text-dark">{{ $item->nama_unit }}</a></h6>
+                                        <h6 class="card-title"><a href="{{ route('front.detail', $item->slug) }}"
+                                                class="text-decoration-none text-dark">{{ $item->nama_kursus }}</a></h6>
                                         <div class="d-flex card-subtitle mb-3">
-                                            <p class="flex-grow-1 mb-0 text-muted text-sm">
-
-                                                @foreach ($item->kursus_unit as $data)
-                                              <span class="badge badge-primary"> {{ $data->kursus->nama_kursus }}</span>
-                                             @endforeach
+                                            <p class="flex-grow-1 mb-0 text-muted text-sm">{{ $item->keterangan }}</p>
+                                            <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i
+                                                    class="fa fa-star text-warning"></i><i
+                                                    class="fa fa-star text-warning"></i><i
+                                                    class="fa fa-star text-warning"></i><i
+                                                    class="fa fa-star text-warning"></i><i
+                                                    class="fa fa-star text-gray-300">
+                                                </i>
                                             </p>
                                         </div>
 
@@ -189,17 +209,13 @@
                             </div>
                         </div>
                         @empty
-                        
-                        <div class="alert alert-warning col-lg-12 col-sm-12 col-md-12 text-center">
-                            Pencarian Tidak Ditemukan <a href="{{url::to('/')}}" class="btn btn-warning">Kembali ke Beranda</a>
-                        </div>
+
                         @endforelse
-                    </div>            
-                </div>
+                    </div>
 
                 </div>
 
-               
+
                 <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
                     <a href="{{ route('front.kursus') }}" class="text-primary text-sm"> Lihat Semua<i
                             class="fas fa-angle-double-right ml-2"></i></a>
@@ -209,67 +225,68 @@
         </div>
     </section>
 
-
- <section class="py-5" style="background: #bdc3c7">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2 col-10 offset-1">
-                <h2 class="text-center mt-3 pb-2 mb-3 text-uppercase text-dark testi"><strong>Testimonial</strong></h2>
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                  </ol>
-                  <div class="carousel-inner mt-4">
-                    <div class="carousel-item text-center active">
-                        <div class="img-box p-1 border rounded-circle m-auto">
-                            <img class="d-block w-100 rounded-circle" src="https://st2.depositphotos.com/2703645/5669/v/950/depositphotos_56695985-stock-illustration-male-avatar.jpg" alt="First slide">
+    <section class="py-5" style="background: #bdc3c7">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 col-10 offset-1">
+                    <h2 class="text-center mt-3 pb-2 mb-3 text-uppercase text-dark testi"><strong>Testimonial</strong></h2>
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                      </ol>
+                      <div class="carousel-inner mt-4">
+                        <div class="carousel-item text-center active">
+                            <div class="img-box p-1 border rounded-circle m-auto">
+                                <img class="d-block w-100 rounded-circle" src="https://st2.depositphotos.com/2703645/5669/v/950/depositphotos_56695985-stock-illustration-male-avatar.jpg" alt="First slide">
+                            </div>
+                            <h5 class="mt-4 mb-0"><strong class="text-dark text-capitalize">Hafidz</strong></h5>
+                            <h6 class="text-primary m-2 ">Web Developer</h6>
+                            <p class="m-0 pt-3 text-dark">
+                              <sup><i class="fas fa-quote-left"></i></sup>
+                               Belajar Di Bimble.id sangat seru dan menyenangkan
+                              <sup><i class="fas fa-quote-right"></i></sup> 
+                            </p>
                         </div>
-                        <h5 class="mt-4 mb-0"><strong class="text-dark text-capitalize">Hafidz</strong></h5>
-                        <h6 class="text-primary m-2 ">Web Developer</h6>
-                        <p class="m-0 pt-3 text-dark">
-                          <sup><i class="fas fa-quote-left"></i></sup>
-                           Belajar Di Bimble.id sangat seru dan menyenangkan
-                          <sup><i class="fas fa-quote-right"></i></sup> 
-                        </p>
-                    </div>
-                    <div class="carousel-item text-center ">
-                        <div class="img-box p-1 border rounded-circle m-auto">
-                            <img class="d-block w-100 rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR7S9pKMslch4WjEcuH1FTueBDvu3nL4NTsNg&usqp=CAU" alt="First slide">
+                        <div class="carousel-item text-center ">
+                            <div class="img-box p-1 border rounded-circle m-auto">
+                                <img class="d-block w-100 rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR7S9pKMslch4WjEcuH1FTueBDvu3nL4NTsNg&usqp=CAU" alt="First slide">
+                            </div>
+                            <h5 class="mt-4 mb-0"><strong class="text-dark text-capitalize">Deddy</strong></h5>
+                            <h6 class="text-primary m-2 ">Web Developer</h6>
+                            <p class="m-0 pt-3 text-dark">
+                                <sup><i class="fas fa-quote-left"></i></sup>
+                                Belajar Di Bimble.id sangat recomended
+                               <sup><i class="fas fa-quote-right"></i></sup> 
+                            </p>
                         </div>
-                        <h5 class="mt-4 mb-0"><strong class="text-dark text-capitalize">Deddy</strong></h5>
-                        <h6 class="text-primary m-2 ">Web Developer</h6>
-                        <p class="m-0 pt-3 text-dark">
-                            <sup><i class="fas fa-quote-left"></i></sup>
-                            Belajar Di Bimble.id sangat recomended
-                           <sup><i class="fas fa-quote-right"></i></sup> 
-                        </p>
+                    
+                      </div>
+    
+                      <div class="mb-5">  
+                          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only  text-dark">Next</span>
+                            </a>
+                        </div>
+                      
+    
                     </div>
-                
-                  </div>
-
-                  <div class="mb-5">  
-                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only  text-dark">Next</span>
-                        </a>
-                    </div>
-                  
-
-                </div>
-            </div>            
+                </div>            
+            </div>
         </div>
-    </div>
+        
+     </section>
     
- </section>
 
-    
-    @include('web.layouts.footer')
+
+   
+     @include('web.layouts.footer')
     @include('web.layouts.script')
     <script>
         $(document).ready(function(){
@@ -293,3 +310,5 @@
 </body>
 
 </html>
+
+
