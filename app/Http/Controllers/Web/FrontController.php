@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Kursus;
-use App\Kategori;
-use Illuminate\Support\Facades\Auth;
+use App\Type;
 use Illuminate\Support\Facades\DB;
 use App\Unit;
 use App\Banner;
@@ -18,16 +17,16 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         $banner = Banner::all();
-        $unit = Unit::where('status', '1')
-            ->latest()->get();
+        $kursus = Kursus::with('type')->where('status', 'aktif')->latest()->get();
+        $type = Type::all();
 
-        $keyword = $request->get('unit');
-        if ($keyword) {
-            $unit = Unit::where('nama_unit', 'like', "%$keyword%")
-                ->orderBy('created_at', 'desc')->paginate(4);
+        if ($request->keyword) {
+            $kursus = Kursus::where('nama_kursus', 'like', "%" . $request->keyword . "%")
+                ->where('status', 'aktif')
+                ->latest()->paginate(4);
         }
 
-        return view('web.web_home', compact('unit', 'banner', 'null'));
+        return view('web.web_home', compact('kursus', 'banner', 'type'));
     }
 
 
@@ -36,22 +35,34 @@ class FrontController extends Controller
         return view('web.web_pusat_bantuan');
     }
 
+
     public function kursus(Request $request)
     {
-        $kursus = Kursus::with('kursus_unit')->orderBy('created_at', 'DESC')->paginate(10);
-        $keyword = $request->get('keyword');
-
-        $kursus_unit = KursusUnit::with('kursus')->latest()->first();
+        $kursus = Kursus::where('status', 'aktif')->latest()->paginate(9);
+        $keyword = $request->query('keyword');
+        $type = $request->query('type');
+        $nama_type = '';
 
         if ($keyword) {
-            $kursus = Kursus::where('nama_kursus', 'LIKE', "%$keyword%")
-                ->orWhere('keterangan', 'LIKE', "%$keyword%")
-                ->orderBy('created_at', 'DESC')
-                ->paginate(9);
+            $kursus = Kursus::where('nama_kursus', 'like', "%$keyword%")
+                ->where('status', 'aktif')
+                ->latest()->paginate(9);
         }
 
-        return view('web.web_kursus', compact('kursus', 'kursus_unit'));
+        if ($type) {
+            $kursus = Kursus::with('type')
+                ->where('id_type', $type)
+                ->where('nama_kursus', 'like', "$keyword%")
+                ->latest()
+                ->paginate(4);
+
+            $type = Type::findOrFail($type);
+            $nama_type = $type->nama_type;
+        }
+
+        return view('web.web_kursus', compact('kursus', 'nama_type'));
     }
+
 
     public function kursus_unit($id)
     {
