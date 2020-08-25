@@ -52,7 +52,7 @@ class FrontController extends Controller
         if ($type) {
             $kursus = Kursus::with('type')
                 ->where('id_type', $type)
-                ->where('nama_kursus', 'like', "$keyword%")
+                ->where('nama_kursus', 'like', "%$keyword%")
                 ->latest()
                 ->paginate(4);
 
@@ -69,7 +69,8 @@ class FrontController extends Controller
         $kursus = Kursus::with('kursus_unit')->latest()->paginate(10);
         $active = KursusUnit::where('kursus_id', $id)->first();
         $kursus_unit = KursusUnit::with('kursus', 'unit')
-            ->where('kursus_id', $id)->latest()->paginate(9);
+            ->where('kursus_id', $id)
+            ->latest()->paginate(9);
 
         return view('web.web_kursus_unit', compact('kursus_unit', 'kursus', 'active'));
     }
