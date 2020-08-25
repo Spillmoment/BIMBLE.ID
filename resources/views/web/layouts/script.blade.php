@@ -17,3 +17,6 @@
 <script src="{{ asset('assets/frontend/vendor/owl-carousel/dist/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/vendor/lib/owlcarousel/owlcarousel-costume.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- bootstrapValidator -->
+<script src="{{ asset('assets/frontend/js/bootstrapvalidator.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/frontend/js/bootstrapvalidatorID.js') }}" type="text/javascript"></script>
