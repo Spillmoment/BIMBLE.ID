@@ -123,5 +123,73 @@
     </div>
 </section>
 
-
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#registerForm').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    nama_lengkap: {
+                        validators: {
+                            notEmpty: {
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 30,
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z ]+$/,
+                            }
+                        }
+                    },
+                    username: {
+                        validators: {
+                            notEmpty: {
+                            },
+                            stringLength: {
+                                min: 5,
+                                max: 30,
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_]+$/,
+                                message: ' username hanya dapat terdiri dari abjad, angka, dan garis bawah'
+                            }
+                        }
+                    },
+                    nomor_hp: {
+                        validators: {
+                            notEmpty: {
+                            },
+                            stringLength: {
+                                min: 11,
+                                max: 13,
+                            },
+                            regexp: {
+                                regexp: /^[0-9+]+$/,
+                                message: " Silahkan isi dengan hanya angka"
+                            }
+                        }
+                    },
+                    email: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The email is required and cannot be empty'
+                            },
+                            emailAddress: {
+                                message: 'The input is not a valid email address'
+                            }
+                        }
+                    },
+                  
+                }
+            });
+        });
+    </script>
+@endpush
