@@ -63,6 +63,11 @@ Route::prefix('unit')
         Route::delete('/hapus_kursus', 'Unit\KursusController@hapus_kursus')->name('unit.kursus.hapus');
         Route::put('/harga_kursus', 'Unit\KursusController@harga_kursus')->name('unit.kursus.harga');
 
+        // Detail Kursus
+        Route::get('/kursus/{slug}', 'Unit\KursusController@detail')->name('unit.kursus.detail');
+        Route::get('/kursus/create/{slug}', 'Unit\KursusController@tambah_detail')->name('unit.kursus.add');
+        Route::put('/kursus/update/{id}', 'Unit\KursusController@detail_store')->name('unit.kursus.update');
+
         // fasilitas
         Route::get('/fasilitas', 'Unit\FasilitasController@index')->name('unit.fasilitas.home');
         Route::post('/tambah_fasilitas', 'Unit\FasilitasController@tambah_fasilitas')->name('unit.fasilitas.tambah');
