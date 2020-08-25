@@ -18,14 +18,18 @@ class KursusController extends Controller
 
     public function index()
     {
-        $id_unit = Auth::id();
         $list_kursus = Kursus::with(['kursus_unit' => function ($q) {
             $q->where('unit_id', Auth::id());
         }])->get();
-        // dd($list_kursus);
+
+        $kursus_unit = KursusUnit::with(['kursus', 'unit'])
+            ->where('unit_id', Auth::id())
+            ->latest()->get();
+        // dd($kursus_unit);
 
         return view('unit.kursus.index', [
             'list_kursus' => $list_kursus,
+            'kursus_unit' => $kursus_unit
         ]);
     }
 
@@ -48,7 +52,8 @@ class KursusController extends Controller
     public function hapus_kursus(Request $request)
     {
         $id_unit = Auth::id();
-        $kursus_unit = KursusUnit::where('kursus_id', $request->kursus_id)->where('unit_id', $id_unit)->first();
+        $kursus_unit = KursusUnit::where('kursus_id', $request->kursus_id)
+            ->where('unit_id', $id_unit)->first();
         $kursus_unit->forceDelete();
 
         $kursus = Kursus::find($request->kursus_id);
@@ -58,80 +63,46 @@ class KursusController extends Controller
         ]);
     }
 
-    public function harga_kursus(Request $request)
+    public function detail($slug)
+    {
+        $kursus = Kursus::where('slug', $slug)->first();
+        $kursus_unit = KursusUnit::with(['kursus', 'unit'])
+            ->where('kursus_id', $kursus->id)
+            ->where('unit_id', Auth::id())
+            ->first();
+
+        return view('unit.kursus.detail', [
+            'kursus' => $kursus,
+            'kursus_unit' => $kursus_unit
+        ]);
+    }
+
+
+    public function tambah_detail(Request $request, $slug)
+    {
+        $kursus = Kursus::where('slug', $slug)->first();
+        $kursus_unit = KursusUnit::with(['kursus', 'unit'])
+            ->where('kursus_id', $kursus->id)
+            ->where('unit_id', Auth::id())
+            ->first();
+
+        return view('unit.kursus.tambah', [
+            'kursus' => $kursus,
+            'kursus_unit' => $kursus_unit
+        ]);
+    }
+
+    public function detail_store(Request $request, $id)
     {
         $request->validate([
             'biaya_kursus' => 'required|numeric|min:0'
         ]);
 
-        KursusUnit::where('id', $request->id)
-            ->update([
-                'biaya_kursus' => $request->biaya_kursus,
-            ]);
+        $kursus = KursusUnit::findOrFail($id);
+        $kursus->update([
+            'biaya_kursus' => $request->biaya_kursus,
+        ]);
 
-        return redirect()->back()->with(['success' => 'Ok, harga berhasil diubah.']);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('tutor.nilai.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->back()->with(['status' => 'Detail Kursus Berhasil Diupdate']);
     }
 }
