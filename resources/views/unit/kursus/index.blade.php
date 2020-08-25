@@ -12,7 +12,7 @@
 <div class="content">
     
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     Pilihan kursus
@@ -35,43 +35,42 @@
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">
-                    <strong>Harga kursus</strong>
-                </div>
-                <div class="card-body card-block">
-                    <div class="invalid-feedback">
-                        {{$errors->first('biaya_kursus')}}
-                    </div>
-                    @foreach ($list_kursus as $kursus)
-                    @foreach ($kursus->kursus_unit as $kursus_unit)
-                    <form class="form-group" action="{{ route('unit.kursus.harga') }}" method="post">
-                        <div class="form-group" id="price">
-                            <label for="company" class=" form-control-label">{{ $kursus->nama_kursus }}</label>
-                            <div class="col col-md-12">
-                                <div class="input-group">
-                                    
-                                        @csrf
-                                        @method('put')
-                                        <input type="hidden" name="id" value="{{ $kursus_unit->id }}">
-                                        <input type="text" id="biaya_kursus" name="biaya_kursus" class="input-sm form-control-sm form-control" value="{{ $kursus_unit->biaya_kursus }}">
-                                        <button type="submit" class="btn btn-outline-primary btn-sm btn-harga" data-kursus="{{ $kursus->id }}"><i class="{{ $kursus_unit->biaya_kursus == 0 ? 'fa fa-plus' : 'fa fa-pencil' }}"></i></button>
-                                    
+       
+        </div>
+
+          <div class="row">
+          
+            @foreach ($kursus_unit as $item)
+            <div class="col-md-4">
+                <aside class="profile-nav alt">
+                    <section class="card">
+                        <div class="card-header  bg-primary">
+                            <div class="media">
+                                <a href="#">
+                                    <img class="align-self-center mr-3" style="width:100px; height:80px;" alt="" src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="text-white display-6 mb-2">{{ $item->kursus->nama_kursus }}</h4>
+                                    <p class="text-dark font-weight-bold">{{ auth()->user()->nama_unit }} </p>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                    </form>
-                    @endforeach
-                    @endforeach
-                </div>
+    
+                        <ul class="list-group list-group-flush ">
+                            <li class="list-group-item">
+                                <div class="float-right">
+                                    <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.detail', $item->kursus->slug) }}"> <i class="fa fa-eye"></i> Detail </a>
+                                    <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.add',$item->kursus->slug) }}"> <i class="fa fa-plus"></i> Tambah </a>
+                                </div>
+                                </li>
+                        </ul>
+    
+                    </section>
+                </aside>
             </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="card">
-            </div>
-        </div>
-    </div>
+            @endforeach
+
+          </div>
 
 </div>
 
