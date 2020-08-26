@@ -93,6 +93,8 @@ class BannerController extends Controller
             if ($banner->gambar_banner && file_exists(storage_path('app/public/' . $banner->gambar_banner))) {
                 Storage::delete('public/' . $banner->gambar_banner);
                 $data['gambar_banner'] =  $request->file('gambar_banner')->store('banner', 'public');
+            } else {
+                $data['gambar_banner'] =  $request->file('gambar_banner')->store('banner', 'public');
             }
         }
 
