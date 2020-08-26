@@ -7,6 +7,7 @@ use App\Kursus;
 use App\Http\Requests\KursusRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\GaleriKursus;
 
 class KursusController extends Controller
 {
@@ -113,5 +114,21 @@ class KursusController extends Controller
         $kursus->forceDelete();
         return redirect()->route('kursus.index')
             ->with(['status' => 'Data Kursus Berhasil Dihapus']);
+    }
+
+    public function gallery($id)
+    {
+        $kursus = Kursus::with('galleries')
+            ->findorFail($id);
+
+        $gallery = GaleriKursus::with('kursus')
+            ->where('kursus_id', $id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(9);
+
+        return view('admin.kursus.gallery')->with([
+            'kursus' => $kursus,
+            'items' => $gallery
+        ]);
     }
 }

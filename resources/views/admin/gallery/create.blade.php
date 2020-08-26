@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label for="kursus_id">Kursus</label>
                     <select class="form-control" name="kursus_id" id="kursus_id">
-                        <option value=""> --- Pilih Paket Kursus ---</option>
+                        <option value=""> --- Pilih Kursus ---</option>
 
                         @foreach ($kursus as $kursus)
                         <option value="{{ $kursus->id }}">{{ $kursus->nama_kursus }}</option>
@@ -49,15 +49,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="image">Image</label>
-                    <input type="file" class="form-control-file" name="image" id="imahe" placeholder=""
-                        aria-describedby="fileHelpId">
+                    <label for="gambar">Gambar</label>
+                    <input type="file" class="form-control-file" name="gambar[]" id="gambar" multiple="true">
+                    <small class="text-muted">Upload Gambar Lebih Dari Satu</small>
                 </div>
-
 
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit">
-                        Tambah Kursus
+                       Simpan
                     </button>
                 </div>
             </form>

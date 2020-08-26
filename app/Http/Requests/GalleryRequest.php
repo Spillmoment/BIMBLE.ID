@@ -25,7 +25,7 @@ class GalleryRequest extends FormRequest
     {
         return [
             'kursus_id' => 'required|integer|exists:kursus,id',
-            'image'     => 'sometimes|nullable|image|mimes:jpeg,jpg,png,bmp'
+            'gambar.*'     => 'sometimes|nullable|image|mimes:jpeg,jpg,png,bmp'
         ];
     }
 }

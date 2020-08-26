@@ -56,16 +56,14 @@
 
                 
             <div class="form-group">
-                <label for="image">Image</label>
-                <small class="text-muted">Current image</small>
-                <img src="{{ Storage::url($gallery->image) }}" width="96px" />
-                <input type="file" class="form-control-file {{ $errors->first('image') ? 'is-invalid' : '' }}"
-                    name="image" id="image">
+                <label for="gambar">Gambar</label>
+                <input type="file" class="form-control-file {{ $errors->first('gambar') ? 'is-invalid' : '' }}"
+                    name="gambar" id="gambar">
                 <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                    image</small>
+                    gambar</small>
             </div>
             <div class="invalid-feedback">
-                {{$errors->first('image')}}
+                {{$errors->first('gambar')}}
             </div
 
 

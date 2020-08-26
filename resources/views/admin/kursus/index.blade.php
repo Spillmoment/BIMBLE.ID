@@ -79,6 +79,8 @@
                                         {{ $krs->keterangan }}
                                     </td>
                                     <td>
+                                        <a class="btn btn-success btn-sm text-light" href="{{route('kursus.gallery',
+                                       [$krs->id])}}"> <i class="fa fa-image"></i></a>
                                         <a class="btn btn-warning btn-sm text-light" href="{{route('kursus.edit',
                                        [$krs->id])}}"> <i class="fa fa-pencil"></i></a>
 

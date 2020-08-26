@@ -52,7 +52,7 @@
                         <strong class="card-title">Table Gallery</strong>
 
                         <a class="btn btn-primary btn-sm float-right" href="{{ route('gallery.create') }}"> <i
-                                class="fa fa-plus" aria-hidden="true"></i> Add Gallery</a>
+                                class="fa fa-plus" aria-hidden="true"></i>Tambah Gallery</a>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -73,13 +73,14 @@
                                     <td> {{$loop->iteration}} </td>
                                     <td> {{ $gallery->kursus->nama_kursus }} </td>
                                     <td>
-                                        <img src="{{ Storage::url($gallery->image) }}" alt="" srcset="" width="150px"
-                                            class="img-thumbnail">
+                                        @foreach (explode('|', $gallery->gambar) as $image)
+                                        <img width="130px" height="80px" src="/storage/image/{{$image}}">
+                                        @endforeach
                                     </td>
 
                                     <td>
                                         <a class="btn btn-warning text-white btn-sm" href="{{route('gallery.edit',
-       [$gallery->id])}}"> <i class="fa fa-pencil"></i></a>
+                                        [$gallery->id])}}"> <i class="fa fa-pencil"></i></a>
                                         <form  
                                             class="d-inline" action="{{route('gallery.destroy', [$gallery->id])}}"
                                             method="POST">
