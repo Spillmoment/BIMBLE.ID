@@ -11,15 +11,12 @@ class Kursus extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id_type', 'nama_kursus', 'slug', 'gambar_kursus', 'keterangan', 'tentang', 'status'
+        'nama_kursus', 'slug', 'gambar_kursus', 'keterangan', 'tentang', 'status'
     ];
 
     use SoftDeletes;
 
-    public function type()
-    {
-        return $this->hasMany(Type::class, 'id', 'id_type');
-    }
+
 
     public function kursus_unit()
     {

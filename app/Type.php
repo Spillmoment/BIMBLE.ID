@@ -9,8 +9,8 @@ class Type extends Model
     protected $table = 'type';
     protected $fillable = ['nama_type', 'slug'];
 
-    public function kursus()
+    public function kursus_unut()
     {
-        return $this->belongsTo(Kursus::class, 'id', 'id_type');
+        return $this->hasMany(Type::class, 'type_id', 'id');
     }
 }
