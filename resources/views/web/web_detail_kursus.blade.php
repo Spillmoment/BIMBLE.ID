@@ -22,11 +22,36 @@
 
 <div class="container pt-5 pb-6">
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-8">
 
             <div class="text-block">
                 <h4>Tentang Kelas {{ $kursus->nama_kursus }}</h4>
                 <p class="text-muted font-weight-light">{{ $kursus->keterangan }}</p>
+            </div>
+
+            <div class="text-block">
+                <h5 class="mb-4">Galeri Kursus</h5>
+                <div class="row gallery mb-3 ml-n1 mr-n1">
+                  
+                    @forelse ($gallery as $item)
+                    @foreach (explode('|', $item->gambar) as $image)
+                    <div class="col-lg-4 col-6 px-1 mb-2">
+                    <a href="/storage/image/{{$image}}"
+                        data-fancybox="gallery" title="{{ $kursus->nama_kursus }}">
+                        <img src="/storage/image/{{$image}}"
+                        alt="" class="img-fluid mt-2"></a>
+                    </div>
+                    @endforeach
+                    
+                @empty
+                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                    <div class="media align-items-center">
+                        <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
+                        </div>
+                    </div>
+                </div>
+                @endforelse
+                </div>
             </div>
 
             <div class="text-block">
@@ -70,9 +95,12 @@
 
         </div>
 
+            
+            
+        </div>
     </div>
 </div>
-</div>
+
 
 </div>
 </div>
