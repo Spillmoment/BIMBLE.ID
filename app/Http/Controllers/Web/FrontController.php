@@ -11,22 +11,18 @@ use App\Unit;
 use App\Banner;
 use App\KursusUnit;
 use App\Mentor;
+use App\GaleriKursus;
 
 class FrontController extends Controller
 {
     public function index(Request $request)
     {
         $banner = Banner::all();
-        $kursus = Kursus::with('type')->where('status', 'aktif')->latest()->get();
+        $kursus_unit = KursusUnit::with('kursus', 'unit')
+            ->latest()->paginate(9);
         $type = Type::all();
 
-        if ($request->keyword) {
-            $kursus = Kursus::where('nama_kursus', 'like', "%" . $request->keyword . "%")
-                ->where('status', 'aktif')
-                ->latest()->paginate(4);
-        }
-
-        return view('web.web_home', compact('kursus', 'banner', 'type'));
+        return view('web.web_home', compact('kursus_unit', 'banner', 'type'));
     }
 
 
@@ -38,29 +34,38 @@ class FrontController extends Controller
 
     public function kursus(Request $request)
     {
-        $kursus = Kursus::where('status', 'aktif')->latest()->paginate(9);
+        $kursus = Kursus::latest()->paginate(9);
+        $kursus_unit = KursusUnit::with('kursus')
+            ->latest()->paginate(9);
+        $typeKursus = Type::all();
+
         $keyword = $request->query('keyword');
         $type = $request->query('type');
         $nama_type = '';
 
         if ($keyword) {
-            $kursus = Kursus::where('nama_kursus', 'like', "%$keyword%")
-                ->where('status', 'aktif')
-                ->latest()->paginate(9);
+            $kursus_unit = KursusUnit::with('kursus', 'unit')
+                ->whereHas('kursus', function ($query) use ($keyword) {
+                    $query->where('nama_kursus', 'LIKE', "%$keyword%");
+                })
+                ->latest()
+                ->paginate(9);
         }
 
         if ($type) {
-            $kursus = Kursus::with('type')
-                ->where('id_type', $type)
-                ->where('nama_kursus', 'like', "%$keyword%")
+            $kursus_unit = KursusUnit::with('type', 'kursus')
+                ->where('type_id', $type)
+                ->whereHas('kursus', function ($query) use ($keyword) {
+                    $query->where('nama_kursus', 'LIKE', "%$keyword%");
+                })
                 ->latest()
-                ->paginate(4);
+                ->paginate(9);
 
             $type = Type::findOrFail($type);
             $nama_type = $type->nama_type;
         }
 
-        return view('web.web_kursus', compact('kursus', 'nama_type'));
+        return view('web.web_kursus', compact('kursus_unit', 'typeKursus', 'nama_type'));
     }
 
 
@@ -98,10 +103,17 @@ class FrontController extends Controller
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
             ->orderBy('created_at', 'desc')
             ->paginate(6);
+
+        $gallery = GaleriKursus::with('kursus')
+            ->where('kursus_id', $kursus->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(9);
+
         // dd($kursus_unit);
         return view('web.web_detail_kursus', [
             'kursus' => $kursus,
-            'kursus_unit' => $kursus_unit
+            'kursus_unit' => $kursus_unit,
+            'gallery' => $gallery
         ]);
     }
 }

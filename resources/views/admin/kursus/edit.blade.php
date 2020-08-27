@@ -85,11 +85,30 @@
                     </div>
                 </div>
 
+
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">
-                        Simpan
-                    </button>
+                    <label for="my-input">Status</label>
+
+                    <div class="form-check" style="font-size: 17px">
+                        <label class="form-check-label" for="active">Aktif </label>
+                        <span class="ml-4">
+                            <input {{ $kursus->status == 'aktif' ? "checked" : ""}} value="1" name="status" type="radio"
+                                class="form-check-input mt-2" id="active">
+                        </span>
+
+                        <label class="form-check-label" for="inactive">Nonaktif </label>
+                        <span class="ml-4">
+                            <input {{$kursus->status == 'nonaktif' ? "checked" : ""}} value="0" name="status" type="radio"
+                                class="form-check-input mt-2" id="inactive">
+                        </span>
+
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-block btn-primary">
+                       Simpan</button>
                 </div>
+
+                
             </form>
         </div>
     </div>

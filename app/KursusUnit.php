@@ -14,6 +14,11 @@ class KursusUnit extends Model
     ];
     use SoftDeletes;
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+    }
+
     public function kursus()
     {
         return $this->belongsTo(Kursus::class, 'kursus_id');

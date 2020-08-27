@@ -16,9 +16,19 @@
                             class="cari form-control pr-4" value="{{ Request::get('keyword') }}">
                     </div>
                 </div>
-                
-                    <button type="submit" class="btn btn-primary"> <i class="fas fa-search mr-1"></i>
-               
+
+                <div class="mb-4">
+                    <label for="form_category" class="form-label">Type Kursus</label>
+                    <select name="type" id="form_category" multiple data-style="btn-selectpicker"
+                        data-selected-text-format="count &gt; 1" title="" class="selectpicker form-control">
+                        @foreach ($typeKursus as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama_type }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary"> <i class="fas fa-search mr-1"></i>
+
                 </button>
             </form>
 
@@ -29,33 +39,34 @@
                 <div class="mr-3" style="color: #322F56">
 
                     @if (Request::get('type') != null)
-                    <span class="text-item text-capitalize"><strong> Kursus {{ $nama_type }}</strong></span> 
+                    <span class="text-item text-capitalize"><strong> Kursus {{ $nama_type }}</strong></span>
                     @else
                     <strong>Semua Kursus</strong>
                     @endif
                 </div>
-              
+
             </div>
 
             <div class="row">
                 <!-- venue item-->
-                @forelse ($kursus as $item)
+                @forelse ($kursus_unit as $item)
                 <div data-marker-id="59c0c8e322f3375db4d89128" class="col-sm-6 col-xl-4 mb-5 hover-animate">
                     <div class="card card-kelas h-100 border-0 shadow">
                         <div class="card-img-top overflow-hidden gradient-overlay">
-                            <img src="{{ Storage::url('public/'. $item->gambar_kursus) }}"
-                                alt="{{ $item->nama_kursus }}" class="img-fluid"/>
-                                <a href="{{ route('front.detail', $item->slug) }}" class="tile-link"></a>
+                            <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
+                                alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" />
+                            <a href="{{ route('front.detail', $item->kursus->slug) }}" class="tile-link"></a>
                             <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
-                                <div class="badge badge-transparent badge-pill px-3 py-2">Popular</div>
+                                <div class="badge badge-transparent badge-pill px-3 py-2">{{ $item->type->nama_type }}
+                                </div>
                             </div>
                         </div>
                         <div class="card-body d-flex align-items-center">
                             <div class="w-100">
-                                <h6 class="card-title"><a href="{{ route('front.detail', $item->slug) }}"
-                                        class="text-decoration-none text-dark">{{ $item->nama_kursus }}</a></h6>
+                                <h6 class="card-title"><a href="{{ route('front.detail', $item->kursus->slug) }}"
+                                        class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
                                 <div class="d-flex card-subtitle mb-3">
-                                    <p class="flex-grow-1 mb-0 text-muted text-sm">{{ $item->keterangan }}</p>
+                                    <p class="flex-grow-1 mb-0 text-muted text-sm"></p>
                                 </div>
 
                             </div>
@@ -65,7 +76,7 @@
                 @empty
                 <div class="mt-5 col alert alert-warning text-center" role="alert">
                     <strong>Pencarian tidak ditemukan </strong>
-                   <a href="{{ route('front.kursus') }}" class="btn btn-warning">Kembali</a>
+                    <a href="{{ route('front.kursus') }}" class="btn btn-warning">Kembali</a>
                 </div>
                 @endforelse
 
@@ -73,7 +84,7 @@
             <!-- Pagination -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-template d-flex justify-content-center">
-                    {{ $kursus->appends(Request::all())->links() }}
+                    {{ $kursus_unit->appends(Request::all())->links() }}
                 </ul>
             </nav>
         </div>

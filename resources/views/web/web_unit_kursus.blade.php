@@ -24,7 +24,7 @@
 
 <div class="container py-5">
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-8">
 
             <div class="text-block">
                 <h4>Tentang Kami</h4>
@@ -38,7 +38,7 @@
                     <div class="row py-3">
 
                         @forelse ($unit->mentor as $m)
-                        <div class="col-sm-4 mb-lg-0 mb-3">
+                        <div class="col-sm-3 mb-lg-0 mb-3">
                             <div class="card border-0 hover-animate ">
                                 <img src="{{ Storage::url('public/'.$m->foto) }}"
                                 alt="" class="card-img-top rounded-circle avatar avatar-xl"
@@ -61,16 +61,37 @@
                 </div>
             </div>
 
-           
+            <div class="text-block">
+                <h5 class="mb-4">Galeri </h5>
+                <div class="row gallery mb-3 ml-n1 mr-n1">
+
+                    @forelse ($galeri as $item)
+                    <div class="col-lg-4 col-6 px-1 mb-2">
+                    <a href="{{ Storage::url('public/'.$item->gambar) }}"
+                        data-fancybox="gallery" title="{{ $unit->nama_unit }}">
+                        <img src="{{ Storage::url('public/'.$item->gambar) }}"
+                        alt="" class="img-fluid mt-2"></a>
+                    </div>
+                    
+                @empty
+                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                    <div class="media align-items-center">
+                        <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
+                        </div>
+                    </div>
+                </div>
+                @endforelse
+                </div>
+            </div>
         </div>
 
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <div class="text-block">
                 <h4 class="mb-4">Fasilitas</h4>
                 <div class="row">
 
                     @forelse ($unit->fasilitas as $f)
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <ul class="list-unstyled text-muted">
                                 <li class="mb-2">
                                 <i class="
@@ -98,47 +119,18 @@
 
 
             <div class="text-block">
-                <h5 class="mb-4">Galeri </h5>
-                <div class="row gallery mb-3 ml-n1 mr-n1">
-
-                    @forelse ($galeri as $item)
-                    <div class="col-lg-4 col-6 px-1 mb-2">
-                    <a href="{{ Storage::url('public/'.$item->gambar) }}"
-                        data-fancybox="gallery" title="{{ $unit->nama_unit }}">
-                        <img src="{{ Storage::url('public/'.$item->gambar) }}"
-                        alt="" class="img-fluid mt-2"></a>
-                    </div>
-                    
-                @empty
-                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                    <div class="media align-items-center">
-                        <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
-                        </div>
-                    </div>
-                </div>
-                @endforelse
-                </div>
-            </div>
-
-            <div class="text-block">
                 <h5 class="mb-4">Lokasi kami </h5>
                     <div class="card-body" id="mapid"></div>
             </div>
 
-        </div>
-
-      
+        </div>      
     </div>
 
-    <div class="row mb-5">
-        <div class="col-md-10">
-            <hr>
-            <h4>Kursus Kami</h4>
-        </div>
-    </div>
+
     <div class="row">
-        <div class="col-md-10">
-
+        <div class="col-md-12">
+            <hr>
+            <h4 class="mb-5">Kursus Kami</h4>
             <div class="owl-carousel">
                 @forelse ($kursus_unit as $item)
                 <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
@@ -164,14 +156,12 @@
                 </div>
                 @empty
 
-                @endforelse
+                @endforelse  
             </div>
-
         </div>
-
-
-       
     </div>
+   
+
 </div>
 @endsection
 
