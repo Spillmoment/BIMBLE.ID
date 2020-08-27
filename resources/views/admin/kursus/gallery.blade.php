@@ -44,14 +44,17 @@
 
                         <div class="row">
                             @forelse ($items as $gallery)
-                            <div class="col-sm-4">
+                            @foreach (explode('|', $gallery->gambar) as $image)
+                            <div class="col-sm-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <img class="card-img-top img-fluid img-thumbail"
-                                            src="{{  Storage::url($gallery->image)  }}" alt="Card image cap">
+                                        <img class="card-img-top img-fluid"
+                                        src="/storage/image/{{$image}}" alt="Card image cap">
                                     </div>
                                 </div>
+                                
                             </div>
+                            @endforeach
                             @empty
 
                             <div class="col">

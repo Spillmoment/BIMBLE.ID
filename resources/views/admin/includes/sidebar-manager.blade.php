@@ -19,6 +19,16 @@
                     <a href="{{ route('kursus.index') }}"> <i class="menu-icon fa fa-database"></i>Data Kursus</a>
                 </li>
 
+                <li class="menu-title text-capitalize">Manage Galeri Kursus</li>
+
+                <li class="{{ 
+                          (Request::route()->getName() == 'gallery.index')  ? 'active'  : '' ||
+                          (Request::route()->getName() == 'gallery.create') ? 'active'  : '' ||
+                          (Request::route()->getName() == 'gallery.edit')   ? 'active'  : '' 
+                          }}">
+                    <a href="{{ route('gallery.index') }}"> <i class="menu-icon fa fa-camera"></i>Data Galeri Kursus</a>
+                </li>
+
                 <li class="menu-title text-capitalize">Manage Unit</li>
                 <li class="{{ 
                               (Request::route()->getName() == 'unit.index') ? 'active' : '' ||
