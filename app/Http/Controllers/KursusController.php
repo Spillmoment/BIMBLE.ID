@@ -46,6 +46,7 @@ class KursusController extends Controller
 
         $kursus['slug'] = Str::slug($nama_kursus, '-');
         $kursus['gambar_kursus'] = $request->file('gambar_kursus')->store('kursus', 'public');
+        $kursus['status'] = 'aktif';
 
         Kursus::create($kursus);
         return redirect()->route('kursus.index')

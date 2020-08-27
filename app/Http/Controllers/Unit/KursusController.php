@@ -36,7 +36,7 @@ class KursusController extends Controller
     public function tambah_kursus(Request $request)
     {
         $id_unit = Auth::id();
-        $tambah = KursusUnit::create([
+        KursusUnit::create([
             'kursus_id' => $request->kursus_id,
             'unit_id'  => $id_unit,
             'biaya_kursus' => 0
