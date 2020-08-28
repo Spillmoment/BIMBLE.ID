@@ -6,20 +6,21 @@
 <section style="background-image: url('{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
-         <!-- Breadcrumbs -->
-         <ol class="breadcrumb text-white justify-content-center no-border mb-0">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb text-white justify-content-center no-border mb-0">
             <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('unit.detail', $kursus_unit->unit->slug) }}">Unit {{ $kursus_unit->unit->nama_unit }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('unit.detail', $kursus_unit->unit->slug) }}">Unit
+                    {{ $kursus_unit->unit->nama_unit }}</a></li>
             <li class="breadcrumb-item active">Detail Kursus </li>
         </ol>
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
             <div class="text-white mb-4 mb-lg-0">
-             
-            <h1 class="text-shadow verified">{{ $kursus_unit->kursus->nama_kursus  }}</h1>
-            <p><i class="fas fa-home mr-2"></i>{{  $kursus_unit->unit->nama_unit }}</p>
-         
+
+                <h1 class="text-shadow verified">{{ $kursus_unit->kursus->nama_kursus  }}</h1>
+                <p><i class="fas fa-home mr-2"></i>{{  $kursus_unit->unit->nama_unit }}</p>
+
+            </div>
         </div>
-    </div>
     </div>
 </section>
 
@@ -27,39 +28,65 @@
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-8">
-            <div class="text-block">
-                <h4>Tentang Kursus Ini</h4>
-                <p class="text-muted font-weight-light">{{ $kursus_unit->kursus->tentang }}</p>
+
+            <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                        aria-controls="pills-home" aria-selected="true">Deskripsi</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                        aria-controls="pills-profile" aria-selected="false">Materi</a>
+                </li>
+
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active py-2" id="pills-home" role="tabpanel"
+                    aria-labelledby="pills-home-tab">
+                    <div class="text-block">
+                        {!! $kursus_unit->kursus->tentang !!}
+                    </div>
+                </div>
+                <div class="tab-pane fade py-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <div class="card border-0 shadow">
+                        <div class="card-body">
+                            {!! $kursus_unit->kursus->materi !!}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-          
+
+        </div>
+
+        <div class="col-lg-4">
             <div class="card border-0 shadow">
                 <div class="card-body p-4">
                     <div class="text-block pb-3">
                         <div class="media align-items-center">
                             <div class="media-body">
                                 <h6> <a href="#" class="text-reset"></a>
-                                {{ $kursus_unit->kursus->nama_kursus }}
+                                    {{ $kursus_unit->kursus->nama_kursus }}
                                 </h6>
                                 <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
-    
+
                             </div>
-                            <img
-                                src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}"
-                                alt="" width="100" class="ml-3 rounded">
+                            <img src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}" alt=""
+                                width="100" class="ml-3 rounded">
                         </div>
                     </div>
-    
+
                     <div class="text-block pt-1 pb-0">
                         <table class="w-100">
                             <tr>
                                 <th class="pt-3">Harga</th>
-                                <td class="font-weight-bold text-right pt-3">@currency($unit->kursus_unit->first()->biaya_kursus).00</td>
+                                <td class="font-weight-bold text-right pt-3">
+                                    @currency($unit->kursus_unit->first()->biaya_kursus).00</td>
                             </tr>
                         </table>
                     </div>
                 </div>
-                
+
                 <div class="card-footer bg-light py-2 border-top">
                     <div class="media align-items-center">
                         <div class="media-body">
@@ -75,110 +102,70 @@
                                     <a href="https://t.me/{{ $unit->telegram }}" target="_blank"
                                         class="text-white text-decoration-none">Telegram</a>
                                 </button>
-                                <button type="submit" class="btn btn-secondary btn-sm">
+                                <button type="submit" class="btn btn-secondary btn-sm mt-1">
                                     <img src="https://www.freepnglogos.com/uploads/amazing-instagram-logo-png-image-16.png"
                                         width="20px">
                                     <a href="https://www.instagram.com/{{ $unit->instagram }}" target="_blank"
                                         class="text-white text-decoration-none">Instagram</a>
                                 </button>
                             </div>
-    
+
                         </div>
-    
+
                     </div>
                 </div>
             </div>
-    
-    
             <div class="pt-4">
                 @if (session('message'))
-               <div class="alert alert-success alert-dismissible fade show" role="alert">
-                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                       <span class="sr-only">Close</span>
-                   </button>
-                   <strong>{{ session('message') }}</strong>
-               </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>{{ session('message') }}</strong>
+                </div>
                 @endif
-    
+
                 <button type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false"
                     aria-controls="leaveReview" class="btn btn-outline-primary">Review Kursus Ini</button>
                 <div id="leaveReview" class="collapse mt-4">
                     <h5 class="mb-4">Tinggalkan Review</h5>
-                    <form id="contact-form" method="post" action="{{ route('komentar.post', $kursus_unit->id) }}" class="form">
+                    <form id="contact-form" method="post" action="{{ route('komentar.post', $kursus_unit->id) }}"
+                        class="form">
                         @csrf
                         <div class="form-group">
                             <label for="name" class="form-label">Nama Lengkap</label>
                             <input type="text" name="nama" id="name" placeholder="Masukkan Nama" required="required"
-                                class="form-control {{ $errors->first('nama') ? 'is-invalid' : '' }}" value="{{ old('nama') }}">
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('nama') }}
-                                </div>
+                                class="form-control {{ $errors->first('nama') ? 'is-invalid' : '' }}"
+                                value="{{ old('nama') }}">
+                            <div class="invalid-feedback">
+                                {{ $errors->first('nama') }}
+                            </div>
                         </div>
-    
+
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" name="email" id="email" placeholder="Masukkan Email" required="required"
                                 class="form-control {{ $errors->first('email') }}" value="{{ old('email') }}">
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('email') }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('email') }}
+                            </div>
                         </div>
-    
+
                         <div class="form-group">
                             <label for="review" class="form-label">Review</label>
                             <textarea rows="4" name="komentar" id="review" placeholder="Masukkan Review"
-                                required="required" class="form-control {{ $errors->first('komentar') }}">{{ old('komentar') }}</textarea>
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('komentar') }}
-                                </div>
+                                required="required"
+                                class="form-control {{ $errors->first('komentar') }}">{{ old('komentar') }}</textarea>
+                            <div class="invalid-feedback">
+                                {{ $errors->first('komentar') }}
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </form>
                 </div>
             </div>
 
-        </div>
-
-        <div class="col-lg-4">
-
-            {{-- <div class="text-block">
-                <!-- Detail Kursus -->
-                <div class="card border-0 shadow">
-                    <div class="card-header bg-gray-100 pt-3 pb-2 border-0">
-                        <div class="media align-items-center">
-                            <div class="media-body">
-                                <p class="subtitle text-sm text-primary">Kursus Kami Lainya</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group">
-                           
-                            @forelse ($kursus_lainya as $item)
-                            @if ($item->kursus->slug != $kursus_unit->kursus->slug)
-                            <li class="list-group-item d-flex justify-content-between aligns-items-center">
-                                {{ $item->kursus->nama_kursus }}
-                                <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug]) }}">
-                                    <span class="badge badge-primary badge-pill">
-                                        <i class="fas fa-eye"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            @endif
-                            @empty
-                            <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                                <div class="media align-items-center">
-                                    <div class="media-body text-center ">Belum ada <strong>Kursus</strong> lainya
-                                    </div>
-                                </div>
-                            </div>
-                            @endforelse
-                            
-                        </ul>
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
 </div>
