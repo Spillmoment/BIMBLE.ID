@@ -93,7 +93,8 @@
                             <label for="whatsapp">Whats App</label>
                             <input type="text" class="form-control {{ $errors->first('whatsapp') ? 'is-invalid' : '' }}"
                                 name="whatsapp" id="whatsapp"
-                                value="{{ old('whatsapp',Auth::guard('unit')->user()->whatsapp) }}" placeholder="Whats App">
+                                value="{{ old('whatsapp',Auth::guard('unit')->user()->whatsapp) }}"
+                                placeholder="Whats App">
                             <div class="invalid-feedback">
                                 {{$errors->first('whatsapp')}}
                             </div>
@@ -112,7 +113,8 @@
 
                         <div class="form-group ">
                             <label for="instagram">Instagram</label>
-                            <input type="text" class="form-control {{ $errors->first('instagram') ? 'is-invalid' : '' }}"
+                            <input type="text"
+                                class="form-control {{ $errors->first('instagram') ? 'is-invalid' : '' }}"
                                 name="instagram" id="instagram"
                                 value="{{ old('instagram',Auth::guard('unit')->user()->instagram) }}"
                                 placeholder="Username Instagram">
@@ -123,8 +125,8 @@
 
                         <button type="submit" class="btn btn-block btn-sm btn-primary">
                             <big>Update Informasi</big></button>
-                        </form>
-                    </div>
+                    </form>
+                </div>
             </div>
 
         </div>
@@ -135,15 +137,16 @@
                     <strong>Banner</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form action="{{route('unit.update-profil.banner', Auth::guard('unit')->user()->slug )}}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{route('unit.update-profil.banner', Auth::guard('unit')->user()->slug )}}"
+                        method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <input type="file" name="gambar_unit" class="{{ $errors->first('gambar_unit') ? 'is-invalid' : '' }}">
-                                    <div class="invalid-feedback"> 
+                                    <input type="file" name="gambar_unit"
+                                        class="{{ $errors->first('gambar_unit') ? 'is-invalid' : '' }}">
+                                    <div class="invalid-feedback">
                                         {{$errors->first('gambar_unit')}}
                                     </div>
                                 </div>
@@ -153,7 +156,7 @@
                             </div>
                         </div>
 
-                        
+
                         <div>
                             <input class="btn btn-success btn-sm" type="submit" value="Ubah">
                         </div>
@@ -166,14 +169,17 @@
                     <strong>Lokasi</strong>
                 </div>
                 <div class="card-body card-block">
-                    <form method="POST" action="{{ route('unit.update-profil.lokasi', Auth::guard('unit')->user()->slug) }}" accept-charset="UTF-8">
+                    <form method="POST"
+                        action="{{ route('unit.update-profil.lokasi', Auth::guard('unit')->user()->slug) }}"
+                        accept-charset="UTF-8">
                         @csrf
                         @method('put')
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <textarea name="alamat" class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}"
-                                    id="alamat" rows="4"
+                                <textarea name="alamat"
+                                    class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}" id="alamat"
+                                    rows="4"
                                     placeholder="Alamat">{{ old('alamat',Auth::guard('unit')->user()->alamat) }}</textarea>
                                 <div class="invalid-feedback">
                                     {{$errors->first('alamat')}}
@@ -184,7 +190,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="latitude" class="control-label">latitude</label>
-                                        <input id="latitude" type="text" class="form-control {{ $errors->has('latitude') ? ' is-invalid' : '' }}" name="latitude" value="{{ old('latitude', Auth::guard('unit')->user()->latitude) }}" required>
+                                        <input id="latitude" type="text"
+                                            class="form-control {{ $errors->has('latitude') ? ' is-invalid' : '' }}"
+                                            name="latitude"
+                                            value="{{ old('latitude', Auth::guard('unit')->user()->latitude) }}"
+                                            required>
                                         <div class="invalid-feedback">
                                             {{$errors->first('latitude')}}
                                         </div>
@@ -193,7 +203,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="longitude" class="control-label">longitude</label>
-                                        <input id="longitude" type="text" class="form-control {{ $errors->has('longitude') ? ' is-invalid' : '' }}" name="longitude" value="{{ old('longitude', Auth::guard('unit')->user()->longitude) }}" required>
+                                        <input id="longitude" type="text"
+                                            class="form-control {{ $errors->has('longitude') ? ' is-invalid' : '' }}"
+                                            name="longitude"
+                                            value="{{ old('longitude', Auth::guard('unit')->user()->longitude) }}"
+                                            required>
                                         <div class="invalid-feedback">
                                             {{$errors->first('longitude')}}
                                         </div>
@@ -212,7 +226,8 @@
 
         <div class="col-lg-12">
             <div class="card">
-                <form method="post" action="{{route('unit.update-profil.deskripsi', Auth::guard('unit')->user()->slug)}}">
+                <form method="post"
+                    action="{{route('unit.update-profil.deskripsi', Auth::guard('unit')->user()->slug)}}">
                     @csrf
                     @method('put')
                     <div class="card-header">
@@ -237,38 +252,92 @@
 @endsection
 
 @push('after-style')
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
+    crossorigin="" />
 
-    <style>
-    #mapid { height: 300px; }
-    </style>
+<style>
+    #mapid {
+        height: 300px;
+    }
+
+</style>
 @endpush
 
 @push('after-script')
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
     integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
     crossorigin=""></script>
-    <script>
-    @if (Auth::guard('unit')->user()->latitude !== null)
-        let mapCenter = [{{ Auth::guard('unit')->user()->latitude }}, {{ Auth::guard('unit')->user()->longitude }}];
-        var map = L.map('mapid').setView(mapCenter, {{ config('leaflet.zoom_level') }});
+<script>
+    @if(Auth::guard('unit') - > user() - > latitude !== null)
+    let mapCenter = [{
+        {
+            Auth::guard('unit') - > user() - > latitude
+        }
+    }, {
+        {
+            Auth::guard('unit') - > user() - > longitude
+        }
+    }];
+    var map = L.map('mapid').setView(mapCenter, {
+        {
+            config('leaflet.zoom_level')
+        }
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var marker = L.marker(mapCenter).addTo(map);
+
+    function updateMarker(lat, lng) {
+        marker
+            .setLatLng([lat, lng])
+            .bindPopup("Your location :  " + marker.getLatLng().toString())
+            .openPopup();
+        return false;
+    };
+
+    map.on('click', function (e) {
+        let latitude = e.latlng.lat.toString().substring(0, 15);
+        let longitude = e.latlng.lng.toString().substring(0, 15);
+        $('#latitude').val(latitude);
+        $('#longitude').val(longitude);
+        updateMarker(latitude, longitude);
+    });
+
+    var updateMarkerByInputs = function () {
+        return updateMarker($('#latitude').val(), $('#longitude').val());
+    }
+    $('#latitude').on('input', updateMarkerByInputs);
+    $('#longitude').on('input', updateMarkerByInputs);
+
+    @else
+
+    navigator.geolocation.getCurrentPosition(function (location) {
+        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+        var map = L.map('mapid').setView(latlng, {
+            {
+                config('leaflet.zoom_level')
+            }
+        });
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        var marker = L.marker(mapCenter).addTo(map);
+        var marker = L.marker(latlng).addTo(map);
+
         function updateMarker(lat, lng) {
             marker
-            .setLatLng([lat, lng])
-            .bindPopup("Your location :  " + marker.getLatLng().toString())
-            .openPopup();
+                .setLatLng([lat, lng])
+                .bindPopup("Your location :  " + marker.getLatLng().toString())
+                .openPopup();
             return false;
         };
 
-        map.on('click', function(e) {
+        map.on('click', function (e) {
             let latitude = e.latlng.lat.toString().substring(0, 15);
             let longitude = e.latlng.lng.toString().substring(0, 15);
             $('#latitude').val(latitude);
@@ -276,47 +345,13 @@
             updateMarker(latitude, longitude);
         });
 
-        var updateMarkerByInputs = function() {
-            return updateMarker( $('#latitude').val() , $('#longitude').val());
+        var updateMarkerByInputs = function () {
+            return updateMarker($('#latitude').val(), $('#longitude').val());
         }
         $('#latitude').on('input', updateMarkerByInputs);
         $('#longitude').on('input', updateMarkerByInputs);
-
-    @else
-
-        navigator.geolocation.getCurrentPosition(function(location) {
-            var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-            var map = L.map('mapid').setView(latlng, {{ config('leaflet.zoom_level') }});
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            var marker = L.marker(latlng).addTo(map);
-            function updateMarker(lat, lng) {
-                marker
-                .setLatLng([lat, lng])
-                .bindPopup("Your location :  " + marker.getLatLng().toString())
-                .openPopup();
-                return false;
-            };
-
-            map.on('click', function(e) {
-                let latitude = e.latlng.lat.toString().substring(0, 15);
-                let longitude = e.latlng.lng.toString().substring(0, 15);
-                $('#latitude').val(latitude);
-                $('#longitude').val(longitude);
-                updateMarker(latitude, longitude);
-            });
-
-            var updateMarkerByInputs = function() {
-                return updateMarker( $('#latitude').val() , $('#longitude').val());
-            }
-            $('#latitude').on('input', updateMarkerByInputs);
-            $('#longitude').on('input', updateMarkerByInputs);
-        });
+    });
     @endif
-    
-    
-    </script>
+
+</script>
 @endpush
