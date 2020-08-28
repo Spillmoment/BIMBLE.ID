@@ -55,12 +55,20 @@
 
 
                 <div class="form-group">
-                    <label for="tentang">Tentang Kursus</label>
-                    <textarea name="tentang"
-                        class="form-control {{ $errors->first('tentang') ? 'is-invalid' : '' }}" id="tentang"
-                        rows="3" placeholder="Tentang Kursus">{{old('tentang')}}</textarea>
+                    <label for="keterangan">Deksripsi Kursus</label>
+                    <textarea name="tentang" class="form-control {{ $errors->first('tentang') ? 'is-invalid' : '' }}"
+                        id="editor" rows=" 3" placeholder="Tentang Kursus">{{old('tentang')}}</textarea>
                     <div class="invalid-feedback">
                         {{$errors->first('tentang')}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="deskripsiEditor">Materi Kursus</label>
+                    <textarea name="materi" class="form-control {{ $errors->first('materi') ? 'is-invalid' : '' }}"
+                        id="deskripsiEditor" rows="3" placeholder="Materi Kursus">{{old('materi')}}</textarea>
+                    <div class="invalid-feedback">
+                        {{$errors->first('materi')}}
                     </div>
                 </div>
 
@@ -76,7 +84,7 @@
 
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit">
-                       Simpan
+                        Simpan
                     </button>
                 </div>
             </form>
@@ -84,3 +92,19 @@
     </div>
 </div>
 @endsection
+
+
+@push('after-script')
+<script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+</script>
+@endpush
