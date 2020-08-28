@@ -31,7 +31,7 @@
     <div class="card">
         <div class="card-header">
             <strong>Form Edit Kursus
-            
+
             </strong>
         </div>
         <div class="card-body card-block">
@@ -66,13 +66,25 @@
                     </div>
 
                 </div>
-                
-                <div class="form-group ">
-                    <label for="tentang">Tentang Kursus</label>
-                    <input type="text" class="form-control {{ $errors->first('tentang') ? 'is-invalid' : '' }}"
-                        name="tentang" id="tentang" value="{{$kursus->tentang}}" placeholder="Tentang Kursus">
+
+
+                <div class="form-group">
+                    <label for="keterangan">Deksripsi Kursus</label>
+                    <textarea name="tentang" class="form-control {{ $errors->first('tentang') ? 'is-invalid' : '' }}"
+                        id="editor" rows=" 3"
+                        placeholder="Tentang Kursus">{{old('tentang', $kursus->tentang)}}</textarea>
                     <div class="invalid-feedback">
                         {{$errors->first('tentang')}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="deskripsiEditor">Materi Kursus</label>
+                    <textarea name="materi" class="form-control {{ $errors->first('materi') ? 'is-invalid' : '' }}"
+                        id="deskripsiEditor" rows="3"
+                        placeholder="Materi Kursus">{{old('materi', $kursus->materi)}}</textarea>
+                    <div class="invalid-feedback">
+                        {{$errors->first('materi')}}
                     </div>
                 </div>
 
@@ -98,19 +110,34 @@
 
                         <label class="form-check-label" for="inactive">Nonaktif </label>
                         <span class="ml-4">
-                            <input {{$kursus->status == 'nonaktif' ? "checked" : ""}} value="0" name="status" type="radio"
-                                class="form-check-input mt-2" id="inactive">
+                            <input {{$kursus->status == 'nonaktif' ? "checked" : ""}} value="0" name="status"
+                                type="radio" class="form-check-input mt-2" id="inactive">
                         </span>
 
                     </div>
                     <br>
                     <button type="submit" class="btn btn-block btn-primary">
-                       Simpan</button>
+                        Simpan</button>
                 </div>
 
-                
+
             </form>
         </div>
     </div>
 </div>
 @endsection
+
+@push('after-script')
+<script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+</script>
+@endpush
