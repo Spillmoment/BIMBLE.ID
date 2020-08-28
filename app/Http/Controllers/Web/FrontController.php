@@ -37,7 +37,8 @@ class FrontController extends Controller
         $kursus = Kursus::latest()->paginate(9);
         // $kursus_unit = KursusUnit::with('kursus')
         //     ->latest()->paginate(9);
-        $kursus_unit = KursusUnit::with('kursus')->groupBy('kursus_id')->paginate(9);
+        // $kursus_unit = KursusUnit::with('kursus')->groupBy('kursus_id')->paginate(9);
+        $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->orderBy('kursus_id', 'DESC')->paginate(9);
         $typeKursus = Type::all();
         // dd($kursus_unit);
 
