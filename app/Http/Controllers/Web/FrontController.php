@@ -35,9 +35,11 @@ class FrontController extends Controller
     public function kursus(Request $request)
     {
         $kursus = Kursus::latest()->paginate(9);
-        $kursus_unit = KursusUnit::with('kursus')
-            ->latest()->paginate(9);
+        // $kursus_unit = KursusUnit::with('kursus')
+        //     ->latest()->paginate(9);
+        $kursus_unit = KursusUnit::with('kursus')->groupBy('kursus_id')->paginate(9);
         $typeKursus = Type::all();
+        // dd($kursus_unit);
 
         $keyword = $request->query('keyword');
         $type = $request->query('type');
