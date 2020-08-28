@@ -18,8 +18,9 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         $banner = Banner::all();
-        $kursus_unit = KursusUnit::with('kursus', 'unit')
-            ->latest()->paginate(9);
+        // $kursus_unit = KursusUnit::with('kursus', 'unit')
+        //     ->latest()->paginate(9);
+        $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->orderBy('kursus_id', 'DESC')->paginate(9);
         $type = Type::all();
 
         return view('web.web_home', compact('kursus_unit', 'banner', 'type'));
@@ -47,11 +48,11 @@ class FrontController extends Controller
         $nama_type = '';
 
         if ($keyword) {
-            $kursus_unit = KursusUnit::with('kursus', 'unit')
+            $kursus_unit = KursusUnit::with('kursus')
                 ->whereHas('kursus', function ($query) use ($keyword) {
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
-                ->latest()
+                ->groupBy('kursus_id')
                 ->paginate(9);
         }
 
@@ -61,7 +62,7 @@ class FrontController extends Controller
                 ->whereHas('kursus', function ($query) use ($keyword) {
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
-                ->latest()
+                ->groupBy('kursus_id')
                 ->paginate(9);
 
             $type = Type::findOrFail($type);
@@ -107,16 +108,16 @@ class FrontController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(6);
 
-        $gallery = GaleriKursus::with('kursus')
-            ->where('kursus_id', $kursus->id)
-            ->orderBy('created_at', 'DESC')
-            ->paginate(9);
+        // $gallery = GaleriKursus::with('kursus')
+        //     ->where('kursus_id', $kursus->id)
+        //     ->orderBy('created_at', 'DESC')
+        //     ->paginate(9);
 
         // dd($kursus_unit);
         return view('web.web_detail_kursus', [
             'kursus' => $kursus,
             'kursus_unit' => $kursus_unit,
-            'gallery' => $gallery
+            // 'gallery' => $gallery
         ]);
     }
 }
