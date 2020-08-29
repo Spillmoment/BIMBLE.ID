@@ -187,10 +187,10 @@
                                     <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
                                         alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" /><a
                                         href="{{ route('front.detail', $item->kursus->slug) }}" class="tile-link"></a>
-                                    <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                    {{-- <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
                                         <div class="badge badge-transparent badge-pill px-3 py-2">
                                             {{ $item->type->nama_type }}</div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="card-body d-flex align-items-center">
                                     <div class="w-100">
@@ -198,18 +198,18 @@
                                                 href="{{ route('front.detail', $item->kursus->slug) }}"
                                                 class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
                                         </h6>
-                                        <div class="d-flex card-subtitle mb-3">
+                                        {{-- <div class="d-flex card-subtitle mb-3">
                                             <p class="flex-grow-1 mb-0 text-muted text-sm">{{ $item->unit->nama_unit }}
                                             </p>
-                                            {{-- <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i
+                                            <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i
                                                     class="fa fa-star text-warning"></i><i
                                                     class="fa fa-star text-warning"></i><i
                                                     class="fa fa-star text-warning"></i><i
                                                     class="fa fa-star text-warning"></i><i
                                                     class="fa fa-star text-gray-300">
                                                 </i>
-                                            </p> --}}
-                                        </div>
+                                            </p>
+                                        </div> --}}
 
                                     </div>
                                 </div>

@@ -56,39 +56,44 @@
                             <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
                                 alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" />
                             <a href="{{ route('front.detail', $item->kursus->slug) }}" class="tile-link"></a>
-                            {{-- <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
-                                <div class="badge badge-transparent badge-pill px-3 py-2">{{ $item->type->nama_type }}
-                                </div>
-                            </div> --}}
-                        </div>
-                        <div class="card-body d-flex align-items-center">
-                            <div class="w-100">
-                                <h6 class="card-title"><a href="{{ route('front.detail', $item->kursus->slug) }}"
-                                        class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
-                                <div class="d-flex card-subtitle mb-3">
-                                    <p class="flex-grow-1 mb-0 text-muted text-sm"></p>
-                                </div>
 
-                            </div>
+                            {{-- @if (Request::get('keyword'))
+                                <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                    <div class="badge badge-transparent badge-pill px-3 py-2">
+                                        {{ $item->type->nama_type }}
                         </div>
                     </div>
-                </div>
-                @empty
-                <div class="mt-5 col alert alert-warning text-center" role="alert">
-                    <strong>Pencarian tidak ditemukan </strong>
-                    <a href="{{ route('front.kursus') }}" class="btn btn-warning">Kembali</a>
-                </div>
-                @endforelse
+                    @endif --}}
 
+                </div>
+                <div class="card-body d-flex align-items-center">
+                    <div class="w-100">
+                        <h6 class="card-title"><a href="{{ route('front.detail', $item->kursus->slug) }}"
+                                class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
+                        <div class="d-flex card-subtitle mb-3">
+                            <p class="flex-grow-1 mb-0 text-muted text-sm"></p>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <!-- Pagination -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-template d-flex justify-content-center">
-                    {{ $kursus_unit->appends(Request::all())->links() }}
-                </ul>
-            </nav>
         </div>
+        @empty
+        <div class="mt-5 col alert alert-warning text-center" role="alert">
+            <strong>Pencarian tidak ditemukan </strong>
+            <a href="{{ route('front.kursus') }}" class="btn btn-warning">Kembali</a>
+        </div>
+        @endforelse
+
     </div>
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-template d-flex justify-content-center">
+            {{ $kursus_unit->appends(Request::all())->links() }}
+        </ul>
+    </nav>
+</div>
+</div>
 </div>
 
 @endsection
