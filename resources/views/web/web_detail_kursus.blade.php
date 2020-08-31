@@ -15,9 +15,18 @@
 <section style="background-image: url('{{ Storage::url('public/'. $kursus->gambar_kursus) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
+        <!-- Breadcrumbs -->
+        <ol class="breadcrumb text-white justify-content-center no-border mb-0">
+            <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('front.kursus') }}">
+                    Daftar Kursus</a></li>
+            <li class="breadcrumb-item"><a href="#">
+                    {{ $kursus->nama_kursus }}</a></li>
+           
+        </ol>
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
             <div class="text-white mb-4 mb-lg-0">
-
+                
                 <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
                 <p><i class="fa-map-marker-alt fas mr-2"></i> Paiton, Probolinggo</p>
 
@@ -100,9 +109,11 @@
                                 alt="{{ $item->unit->nama_unit }}" class="img-fluid" height="200px"/>
                                 <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug]) }}"
                                     class="tile-link"></a>
-                                <div class="card-img-overlay-bottom z-index-20">
-
-                                </div>
+                                    <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                    <div class="badge badge-transparent badge-pill px-3 py-2">
+                                   
+                        </div>
+                    </div>
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
