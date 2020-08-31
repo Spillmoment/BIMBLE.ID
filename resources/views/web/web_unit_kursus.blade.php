@@ -32,7 +32,7 @@
             </div>
 
             <div class="text-block">
-                <h5 class="mb-4">Mentor Team </h5>
+                <h4 class="mb-4">Mentor Team </h4>
 
                 <div class="col">
                     <div class="row py-3">
@@ -62,7 +62,7 @@
             </div>
 
             <div class="text-block">
-                <h5 class="mb-4">Galeri </h5>
+                <h4 class="mb-4">Galeri </h4>
                 <div class="row gallery mb-3 ml-n1 mr-n1">
 
                     @forelse ($galeri as $item)
@@ -119,7 +119,7 @@
 
 
             <div class="text-block">
-                <h5 class="mb-4">Lokasi kami </h5>
+                <h4 class="mb-4">Lokasi kami </h4>
                     <div class="card-body" id="mapid"></div>
             </div>
 
