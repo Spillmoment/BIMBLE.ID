@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use App\Kursus;
 use App\Type;
 use Illuminate\Support\Facades\DB;
-use App\Unit;
 use App\Banner;
 use App\KursusUnit;
-use App\Mentor;
 use App\GaleriKursus;
+use App\Unit;
 
 class FrontController extends Controller
 {
@@ -20,7 +19,7 @@ class FrontController extends Controller
         $banner = Banner::all();
         // $kursus_unit = KursusUnit::with('kursus', 'unit')
         //     ->latest()->paginate(9);
-        $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->orderBy('kursus_id', 'DESC')->paginate(9);
+        $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->latest()->paginate(9);
         $type = Type::all();
 
         return view('web.web_home', compact('kursus_unit', 'banner', 'type'));
@@ -36,13 +35,10 @@ class FrontController extends Controller
     public function kursus(Request $request)
     {
         $kursus = Kursus::latest()->paginate(9);
-        // $kursus_unit = KursusUnit::with('kursus')
-        //     ->latest()->paginate(9);
-        // $kursus_unit = KursusUnit::with('kursus')->groupBy('kursus_id')->paginate(9);
 
         $kursus_unit = KursusUnit::selectRaw('kursus_id')
             ->with('kursus')->groupBy('kursus_id')
-            ->orderBy('kursus_id', 'DESC')->paginate(9);
+            ->latest()->paginate(9);
 
         $typeKursus = Type::all();
         // dd($kursus_unit);
@@ -57,6 +53,7 @@ class FrontController extends Controller
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
                 ->groupBy('kursus_id')
+                ->latest()
                 ->paginate(9);
         }
 
@@ -67,6 +64,7 @@ class FrontController extends Controller
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
                 ->groupBy('kursus_id')
+                ->latest()
                 ->paginate(9);
 
             $type = Type::findOrFail($type);
@@ -108,20 +106,21 @@ class FrontController extends Controller
     public function show($slug)
     {
         $kursus = Kursus::where('slug', $slug)->firstOrFail();
+
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->paginate(6);
 
-        // $gallery = GaleriKursus::with('kursus')
-        //     ->where('kursus_id', $kursus->id)
-        //     ->orderBy('created_at', 'DESC')
-        //     ->paginate(9);
+        $gallery = GaleriKursus::with('kursus')
+            ->where('kursus_id', $kursus->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(9);
 
         // dd($kursus_unit);
         return view('web.web_detail_kursus', [
             'kursus' => $kursus,
             'kursus_unit' => $kursus_unit,
-            // 'gallery' => $gallery
+            'gallery' => $gallery
         ]);
     }
 }
