@@ -19,7 +19,9 @@ class FrontController extends Controller
         $banner = Banner::all();
         // $kursus_unit = KursusUnit::with('kursus', 'unit')
         //     ->latest()->paginate(9);
-        $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->latest()->paginate(9);
+        $kursus_unit = KursusUnit::selectRaw('kursus_id')
+        ->with('kursus')->groupBy('kursus_id')
+        ->latest()->paginate(9);
         $type = Type::all();
 
         return view('web.web_home', compact('kursus_unit', 'banner', 'type'));
