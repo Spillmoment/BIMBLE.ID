@@ -10,18 +10,16 @@ use Illuminate\Support\Facades\DB;
 use App\Banner;
 use App\KursusUnit;
 use App\GaleriKursus;
-use App\Unit;
+
 
 class FrontController extends Controller
 {
     public function index(Request $request)
     {
         $banner = Banner::all();
-        // $kursus_unit = KursusUnit::with('kursus', 'unit')
-        //     ->latest()->paginate(9);
         $kursus_unit = KursusUnit::selectRaw('kursus_id')
-        ->with('kursus')->groupBy('kursus_id')
-        ->latest()->paginate(9);
+            ->with('kursus')->groupBy('kursus_id')
+            ->latest()->paginate(9);
         $type = Type::all();
 
         return view('web.web_home', compact('kursus_unit', 'banner', 'type'));
@@ -83,7 +81,8 @@ class FrontController extends Controller
         $active = KursusUnit::where('kursus_id', $id)->first();
         $kursus_unit = KursusUnit::with('kursus', 'unit')
             ->where('kursus_id', $id)
-            ->latest()->paginate(9);
+            ->latest()
+            ->paginate(9);
 
         return view('web.web_kursus_unit', compact('kursus_unit', 'kursus', 'active'));
     }
@@ -107,7 +106,8 @@ class FrontController extends Controller
 
     public function show($slug)
     {
-        $kursus = Kursus::where('slug', $slug)->firstOrFail();
+        $kursus = Kursus::where('slug', $slug)
+            ->firstOrFail();
 
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
             ->latest()
@@ -115,7 +115,7 @@ class FrontController extends Controller
 
         $gallery = GaleriKursus::with('kursus')
             ->where('kursus_id', $kursus->id)
-            ->orderBy('created_at', 'DESC')
+            ->latest()
             ->paginate(9);
 
         // dd($kursus_unit);
