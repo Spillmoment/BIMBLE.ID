@@ -15,6 +15,12 @@ use Illuminate\Support\Str;
 
 class UnitController extends Controller
 {
+
+    public function list()
+    {
+        return '<h1>halaman list unit</h1>';
+    }
+
     public function index()
     {
         return view('web.web_unit', ['kursus' => Kursus::all()]);
