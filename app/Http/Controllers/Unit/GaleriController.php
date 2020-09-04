@@ -57,12 +57,22 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'gambar' => 'required|image|mimes:jpg,jpeg,png,bmp'
+            'gambar.*' => 'required|image|mimes:jpg,jpeg,png,bmp'
         ]);
 
-        Galeri::create([
+        $images = array();
+
+        if ($files = $request->file('gambar')) {
+            foreach ($files as $file) {
+                $name = $file->getClientOriginalName();
+                $file->move('storage/galeri', $name);
+                $images[] = $name;
+            }
+        }
+
+        Galeri::insert([
             'unit_id' => Auth::id(),
-            'gambar' => $request->file('gambar')->store('galeri', 'public')
+            'gambar' => implode("|", $images)
         ]);
 
         return redirect()->route('unit.galeri.home')

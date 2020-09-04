@@ -3,29 +3,32 @@
 @section('title', 'Unit - ' . $unit->nama_unit )
 @section('content')
 
-<section style="background-image: url('{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}');"
+<section style="background-image: url('{{ Storage::url('public/'. $kursus_unit->unit->gambar_unit) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
         <!-- Breadcrumbs -->
         <ol class="breadcrumb text-white justify-content-center no-border mb-0">
             <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('unit.detail', $kursus_unit->unit->slug) }}">Unit
+            <li class="breadcrumb-item"><a href="{{ route('front.detail', $kursus_unit->kursus->slug) }}">
+                    {{ $kursus_unit->kursus->nama_kursus }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('unit.detail', $kursus_unit->unit->slug) }}">
                     {{ $kursus_unit->unit->nama_unit }}</a></li>
             <li class="breadcrumb-item active">Detail Kursus </li>
         </ol>
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
             <div class="text-white mb-4 mb-lg-0">
-
+                <div class="badge badge-pill badge-transparent px-3 py-2 mb-4 text-capitalize">Kursus {{ $kursus_unit->type->nama_type }}</div>
                 <h1 class="text-shadow verified">{{ $kursus_unit->kursus->nama_kursus  }}</h1>
-                <p><i class="fas fa-home mr-2"></i>{{  $kursus_unit->unit->nama_unit }}</p>
-
+                <p><i class="fas fa-home mr-2"></i>
+                <a class="text-white" href="{{ route('unit.detail', $kursus_unit->unit->slug) }}"> Lihat Profil Kami  
+                </a></p>
             </div>
         </div>
     </div>
 </section>
 
 
-<div class="container py-5">
+<div class="container pt-5 pb-6">
     <div class="row">
         <div class="col-lg-8">
 
@@ -41,13 +44,13 @@
 
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active py-2" id="pills-home" role="tabpanel"
+                <div class="tab-pane fade show active py-1" id="pills-home" role="tabpanel"
                     aria-labelledby="pills-home-tab">
                     <div class="text-block">
-                        {!! $kursus_unit->kursus->tentang !!}
+                      <p class="text-muted font-weight-light"> {!! $kursus_unit->kursus->tentang !!}</p> 
                     </div>
                 </div>
-                <div class="tab-pane fade py-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="tab-pane fade py-2" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="card border-0 shadow">
                         <div class="card-body">
                             {!! $kursus_unit->kursus->materi !!}
@@ -56,11 +59,68 @@
                 </div>
             </div>
 
+            <div class="text-block ">
+                <h4 class="mb-4">Fasilitas </h4>
+                <div class="row mt-3">
+                    @forelse ($unit->fasilitas as $f)
+                    <div class="col-md-6">
+                        <ul class="list-unstyled text-muted">
+                                <li class="mb-2">
+                                <i class="
+                                   {{ $f->item != '' ? 'fa fa-check' : '' }}
+                                   {{ $f->item == 'wifi' ? 'fa fa-wifi' : '' }}
+                                   {{ $f->item == 'tv' ? 'fa fa-tv' : '' }}
+                                   {{ $f->item == 'toilet' ? 'fa fa-shower' : '' }}
+                                   {{ $f->item == 'komputer' ? 'fa fa-laptop' : '' }}
+                                    text-secondary w-1rem mr-3 text-center"></i> 
+                                    <span
+                                    class="text-sm">{{ $f->item }}</span></li>
+                            </ul>
+                        </div>
+                        @empty
+                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                            <div class="media align-items-center">
+                                <div class="media-body text-center ">Belum ada <strong>Fasilitas</strong> untuk unit ini
+                                </div>
+                            </div>
+                        </div>
+                        @endforelse
+                 
+                </div>
+            </div>
+
+            <div class="text-block mb-2">
+                <h4 class="mb-3">Galeri </h4>
+                <div class="row gallery ml-n1 mr-n1">
+                    @forelse ($gallery as $item)
+                    @foreach (explode('|', $item->gambar) as $image)
+                    <div class="col-lg-4 col-6 px-1 mb-2">
+                        <a href="/storage/image/{{$image}}" data-fancybox="gallery" title="{{ $kursus_unit->kursus->nama_kursus }}">
+                            <img src="/storage/image/{{$image}}" alt="" class="img-fluid mt-2"></a>
+                    </div>
+                    @endforeach
+
+                    @empty
+                    <div class="alert alert-primary text-sm mb-3 mt-3 col">
+                        <div class="media align-items-center">
+                            <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
+                            </div>
+                        </div>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+
+           
 
         </div>
 
         <div class="col-lg-4">
+
             <div class="card border-0 shadow">
+                <div class="card-header text-primary text-center">
+                    <h6 class="text-primary text-center">Detail Kursus </h6>
+                </div>
                 <div class="card-body p-4">
                     <div class="text-block pb-3">
                         <div class="media align-items-center">
@@ -69,7 +129,6 @@
                                     {{ $kursus_unit->kursus->nama_kursus }}
                                 </h6>
                                 <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
-
                             </div>
                             <img src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}" alt=""
                                 width="100" class="ml-3 rounded">
@@ -79,9 +138,19 @@
                     <div class="text-block pt-1 pb-0">
                         <table class="w-100">
                             <tr>
+                                <th class="pt-3">Type Kursus</th>
+                                <td class="font-weight-bold text-right pt-3 text-capitalize"> {{ $kursus_unit->type->nama_type }} </td>
+                            </tr>
+                            <tr>
+                               
                                 <th class="pt-3">Harga</th>
                                 <td class="font-weight-bold text-right pt-3">
-                                    @currency($unit->kursus_unit->first()->biaya_kursus).00</td>
+                                    @if ($kursus_unit->biaya_kursus != null)
+                                    @currency($kursus_unit->biaya_kursus).00
+                                    @else
+                                    0
+                                    @endif
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -115,6 +184,8 @@
                     </div>
                 </div>
             </div>
+
+            
             <div class="pt-4">
                 @if (session('message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -56,7 +56,7 @@
 
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit">
-                       Simpan
+                        Simpan
                     </button>
                 </div>
             </form>

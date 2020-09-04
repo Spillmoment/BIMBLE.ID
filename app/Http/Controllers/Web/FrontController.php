@@ -7,20 +7,19 @@ use Illuminate\Http\Request;
 use App\Kursus;
 use App\Type;
 use Illuminate\Support\Facades\DB;
-use App\Unit;
 use App\Banner;
 use App\KursusUnit;
-use App\Mentor;
 use App\GaleriKursus;
+
 
 class FrontController extends Controller
 {
     public function index(Request $request)
     {
         $banner = Banner::all();
-        // $kursus_unit = KursusUnit::with('kursus', 'unit')
-        //     ->latest()->paginate(9);
-        $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->orderBy('kursus_id', 'DESC')->paginate(9);
+        $kursus_unit = KursusUnit::selectRaw('kursus_id')
+            ->with('kursus')->groupBy('kursus_id')
+            ->latest()->paginate(9);
         $type = Type::all();
 
         return view('web.web_home', compact('kursus_unit', 'banner', 'type'));
@@ -53,6 +52,7 @@ class FrontController extends Controller
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
                 ->groupBy('kursus_id')
+                ->latest()
                 ->paginate(9);
         }
 
@@ -63,6 +63,7 @@ class FrontController extends Controller
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
                 ->groupBy('kursus_id')
+                ->latest()
                 ->paginate(9);
 
             $type = Type::findOrFail($type);
@@ -79,7 +80,8 @@ class FrontController extends Controller
         $active = KursusUnit::where('kursus_id', $id)->first();
         $kursus_unit = KursusUnit::with('kursus', 'unit')
             ->where('kursus_id', $id)
-            ->latest()->paginate(9);
+            ->latest()
+            ->paginate(9);
 
         return view('web.web_kursus_unit', compact('kursus_unit', 'kursus', 'active'));
     }
@@ -103,7 +105,9 @@ class FrontController extends Controller
 
     public function show_kelompok($slug, Request $request)
     {
-        $kursus = Kursus::where('slug', $slug)->firstOrFail();
+        $kursus = Kursus::where('slug', $slug)
+            ->firstOrFail();
+
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
             ->where('type_id', 1)
             ->orderBy('created_at', 'desc')

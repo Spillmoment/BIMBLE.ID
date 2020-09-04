@@ -10,13 +10,28 @@ use App\Kursus;
 use App\KursusUnit;
 use Illuminate\Support\Facades\Storage;
 use App\Galeri;
+use App\GaleriKursus;
 use Illuminate\Support\Str;
 
 class UnitController extends Controller
 {
+
+    public function list(Request $request)
+    {
+        $unit = Unit::latest()->paginate(9);
+
+        if ($request->keyword) {
+            $unit = Unit::where('nama_unit', 'like', '%' . $request->keyword . '%')
+                ->latest()->paginate(9);
+        }
+
+        return view('web.web_daftar_unit', [
+            'unit' => $unit
+        ]);
+    }
+
     public function index()
     {
-
         return view('web.web_unit', ['kursus' => Kursus::all()]);
     }
 
@@ -46,7 +61,6 @@ class UnitController extends Controller
             ->latest()
             ->get();
 
-
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('unit_id', $unit->id)
             ->get();
@@ -68,7 +82,7 @@ class UnitController extends Controller
 
         $kursus = Kursus::where('slug', $slug_kursus)->firstOrFail();
 
-        $nama_kursus = KursusUnit::with(['kursus', 'unit'])
+        $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('kursus_id', $kursus->id)
             ->where('unit_id', $unit->id)
             ->first();
@@ -77,12 +91,18 @@ class UnitController extends Controller
             ->where('unit_id', $unit->id)
             ->get();
 
-        // dd($nama_kursus);
+        $gallery = GaleriKursus::with('kursus')
+            ->where('kursus_id', $kursus->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(9);
+
+        // dd($kursus_unit);
 
         return view('web.web_unit_kursus_detail', [
             'unit' => $unit,
-            'kursus_unit' => $nama_kursus,
-            'kursus_lainya' => $kursus_lainya
+            'kursus_unit' => $kursus_unit,
+            'kursus_lainya' => $kursus_lainya,
+            'gallery' => $gallery
         ]);
     }
 }

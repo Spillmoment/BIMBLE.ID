@@ -1,6 +1,6 @@
 @extends('admin.layouts.tutor')
 
-@section('title','Bimble - Dashboard Tutor')
+@section('title','Bimble - Dashboard Unit')
 
 @section('content')
 

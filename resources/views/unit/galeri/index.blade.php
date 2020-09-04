@@ -53,16 +53,17 @@
                     <div class="card-body card-block">
                         <form method="post" enctype="multipart/form-data" action="{{route('unit.galeri.tambah')}}">
                             @csrf
-            
+
                             <div class="form-group">
-                                <label for="foto">File</label>
-                                <input type="file" class="form-control-file {{ $errors->first('foto') ? 'is-invalid' : '' }}" 
-                                name="gambar" id="foto" required>
+                                <label for="gambar">File</label>
+                                <input type="file"
+                                    class="form-control-file {{ $errors->first('gambar') ? 'is-invalid' : '' }}"
+                                    name="gambar[]" id="gambar" required multiple="trues">
                             </div>
                             <div class="invalid-feedback">
-                                {{$errors->first('foto')}}
+                                {{$errors->first('gambar')}}
                             </div>
-            
+
                             <div class="form-group">
                                 <button class="btn btn-primary btn-sm" type="submit">
                                     Tambah
@@ -92,16 +93,20 @@
                                 @foreach ($galeri_unit as $galeri_unit)
                                 <tr>
                                     <td scope="row"> {{$loop->iteration}} </td>
-                                    <td><img src="{{ Storage::url('public/'. $galeri_unit->gambar) }}" width="200px"></td>
+                                    <td>
+                                        @foreach (explode('|', $galeri_unit->gambar) as $image)
+                                        <img width="130px" height="80px" src="/storage/galeri/{{$image}}">
+                                        @endforeach
                                     <td>
                                         {{-- <a class="btn btn-warning btn-sm text-light" href="{{route('mentor.edit',
                                        [$mentor->id])}}"> <i class="fa fa-pencil"></i></a> --}}
 
-                                        <form class="d-inline" action="{{route('unit.galeri.hapus', [$galeri_unit->id])}}"
-                                            method="POST">
+                                        <form class="d-inline"
+                                            action="{{route('unit.galeri.hapus', [$galeri_unit->id])}}" method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" id="deleteButton" data-name="{{ $galeri_unit->gambar }}"
+                                            <button type="submit" id="deleteButton"
+                                                data-name="{{ $galeri_unit->gambar }}"
                                                 class="btn btn-danger btn-sm delete">
                                                 <i class="fa fa-trash"></i>
                                             </button>

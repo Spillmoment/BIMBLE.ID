@@ -36,6 +36,10 @@
                                                 }}">
                             Kursus</a>
                     </li>
+                    <li class="nav-item}"><a href="{{ route('unit.list') }}"
+                            class="nav-link  {{ (Request::route()->getName() == 'unit.list') ? 'active' : '' }}">
+                            Unit</a>
+                    </li>
                     <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
                             class="nav-link  {{ (Request::route()->getName() == 'unit.daftar') ? 'active' : '' }}">
                             Daftar</a>

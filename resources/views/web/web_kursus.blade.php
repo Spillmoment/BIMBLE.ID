@@ -74,6 +74,8 @@
                             </div>
                         </div>
                     </div>
+                    @endif --}}
+
                 </div>
                 @empty
                 <div class="col-md-6 offset-md-3 text-center">
@@ -89,15 +91,26 @@
                 </div>
                 @endforelse
 
+                    </div>
+                </div>
             </div>
-            <!-- Pagination -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-template d-flex justify-content-center">
-                    {{ $kursus_unit->appends(Request::all())->links() }}
-                </ul>
-            </nav>
         </div>
+        @empty
+        <div class="mt-5 col alert alert-warning text-center" role="alert">
+            <strong>Pencarian tidak ditemukan </strong>
+            <a href="{{ route('front.kursus') }}" class="btn btn-warning">Kembali</a>
+        </div>
+        @endforelse
+
     </div>
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-template d-flex justify-content-center">
+            {{ $kursus_unit->appends(Request::all())->links() }}
+        </ul>
+    </nav>
+</div>
+</div>
 </div>
 
 @endsection
