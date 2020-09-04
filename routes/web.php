@@ -120,7 +120,8 @@ route::get('/kursus/search/', 'Web\FrontController@liveSearch')->name('search');
 
 
 Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
-Route::get('/kursus/{slug}', 'Web\FrontController@show')->name('front.detail');
+Route::get('/kursus/{slug}/kelompok', 'Web\FrontController@show_kelompok')->name('front.detail.kelompok');
+Route::get('/kursus/{slug}/private', 'Web\FrontController@show_private')->name('front.detail.private');
 Route::get('/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
 Route::get('/unit/{slug}/kursus/{slug_kursus}', 'Web\UnitController@show_kursus')->name('unit.detail.kursus');
 Route::post('komentar/{id}/post', 'Web\KomentarController@post')->name('komentar.post');
