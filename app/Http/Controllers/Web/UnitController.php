@@ -16,9 +16,18 @@ use Illuminate\Support\Str;
 class UnitController extends Controller
 {
 
-    public function list()
+    public function list(Request $request)
     {
-        return '<h1>halaman list unit</h1>';
+        $unit = Unit::latest()->paginate(9);
+
+        if ($request->keyword) {
+            $unit = Unit::where('nama_unit', 'like', '%' . $request->keyword . '%')
+                ->latest()->paginate(9);
+        }
+
+        return view('web.web_daftar_unit', [
+            'unit' => $unit
+        ]);
     }
 
     public function index()
