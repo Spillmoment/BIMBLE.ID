@@ -38,8 +38,8 @@ class FrontController extends Controller
         $kursus = Kursus::latest()->paginate(9);
         // $kursus_unit = KursusUnit::with('kursus')
         //     ->latest()->paginate(9);
-        // $kursus_unit = KursusUnit::with('kursus')->groupBy('kursus_id')->paginate(9);
-        $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->orderBy('kursus_id', 'DESC')->paginate(9);
+        $kursus_unit = KursusUnit::with('kursus', 'type')->groupBy('kursus_id')->paginate(9);
+        // $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->orderBy('kursus_id', 'DESC')->paginate(9);
         $typeKursus = Type::all();
         // dd($kursus_unit);
 
@@ -101,23 +101,89 @@ class FrontController extends Controller
         return view('web.ajax.web_kursus_card_sorted', ['kursus' => $data]);
     }
 
-    public function show($slug)
+    public function show_kelompok($slug, Request $request)
     {
         $kursus = Kursus::where('slug', $slug)->firstOrFail();
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
+            ->where('type_id', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(6);
+            // ->groupBy('unit_id')
+
+        $gallery = GaleriKursus::with('kursus')
+            ->where('kursus_id', $kursus->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(9);
+
+        $startday = $request->query('startday');
+        $endday = $request->query('endday');
+        $clock = $request->query('jam');
+        $day_array = array($startday, $endday);
+        $max_number_day = max($day_array);
+        $min_number_day = min($day_array);
+
+        if($startday || $endday){
+            $kursus_unit = KursusUnit::with('jadwal')
+                        ->whereHas('jadwal', function ($query) use ($min_number_day, $max_number_day, $clock) {
+                            if (empty($clock)) {
+                                $query->whereBetween('hari', [$min_number_day, $max_number_day]);
+                            } else {
+                                $query->whereBetween('hari', [$min_number_day, $max_number_day])->whereTime('waktu_mulai', '=', $clock);
+                            }
+                        })
+                        ->where('kursus_id', $kursus->id)
+                        ->where('type_id', 1)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(6);
+        }
+        // dd($kursus_unit);
+
+        return view('web.web_detail_kursus_kelompok', [
+            'kursus' => $kursus,
+            'kursus_unit' => $kursus_unit,
+            'gallery' => $gallery
+        ]);
+    }
+    
+    public function show_private($slug, Request $request)
+    {
+        $kursus = Kursus::where('slug', $slug)->firstOrFail();
+        $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
+            ->where('type_id', 2)
             ->orderBy('created_at', 'desc')
             ->paginate(6);
 
-        // $gallery = GaleriKursus::with('kursus')
-        //     ->where('kursus_id', $kursus->id)
-        //     ->orderBy('created_at', 'DESC')
-        //     ->paginate(9);
+        $gallery = GaleriKursus::with('kursus')
+            ->where('kursus_id', $kursus->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(9);
 
-        // dd($kursus_unit);
-        return view('web.web_detail_kursus', [
+        $startday = $request->query('startday');
+        $endday = $request->query('endday');
+        $clock = $request->query('jam');
+        $day_array = array($startday, $endday);
+        $max_number_day = max($day_array);
+        $min_number_day = min($day_array);
+
+        if($startday || $endday){
+            $kursus_unit = KursusUnit::with('jadwal')
+                        ->whereHas('jadwal', function ($query) use ($min_number_day, $max_number_day, $clock) {
+                            if (empty($clock)) {
+                                $query->whereBetween('hari', [$min_number_day, $max_number_day]);
+                            } else {
+                                $query->whereBetween('hari', [$min_number_day, $max_number_day])->whereTime('waktu_mulai', '=', $clock);
+                            }
+                        })
+                        ->where('kursus_id', $kursus->id)
+                        ->where('type_id', 2)
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(6);
+        }
+
+        return view('web.web_detail_kursus_private', [
             'kursus' => $kursus,
             'kursus_unit' => $kursus_unit,
-            // 'gallery' => $gallery
+            'gallery' => $gallery
         ]);
     }
 }
