@@ -10,7 +10,7 @@ class KursusUnit extends Model
     protected $table = 'kursus_unit';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'kursus_id', 'unit_id', 'biaya_kursus'
+        'kursus_id', 'unit_id', 'type_id', 'biaya_kursus', 'status'
     ];
     use SoftDeletes;
 
@@ -32,5 +32,10 @@ class KursusUnit extends Model
     public function komentar()
     {
         return $this->belongsTo(Komentar::class, 'id', 'kursus_unit_id');
+    }
+
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'kursus_unit_id', 'id');
     }
 }
