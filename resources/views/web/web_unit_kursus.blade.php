@@ -40,9 +40,8 @@
                         @forelse ($unit->mentor as $m)
                         <div class="col-sm-3 mb-lg-0 mb-3">
                             <div class="card border-0 hover-animate ">
-                                <img src="{{ Storage::url('public/'.$m->foto) }}"
-                                alt="" class="card-img-top rounded-circle avatar avatar-xl"
-                            />
+                                <img src="{{ Storage::url('public/'.$m->foto) }}" alt=""
+                                    class="card-img-top rounded-circle avatar avatar-xl" />
                                 <h6 class="my-2">{{ $m->nama_mentor }}</h6>
                                 <p class="text-muted text-xs text-uppercase">{{ $m->kompetensi }} </p>
                             </div>
@@ -55,8 +54,8 @@
                             </div>
                         </div>
                         @endforelse
-                   
-                       
+
+
                     </div>
                 </div>
             </div>
@@ -66,21 +65,21 @@
                 <div class="row gallery mb-3 ml-n1 mr-n1">
 
                     @forelse ($galeri as $item)
+                    @foreach (explode('|', $item->gambar) as $image)
                     <div class="col-lg-4 col-6 px-1 mb-2">
-                    <a href="{{ Storage::url('public/'.$item->gambar) }}"
-                        data-fancybox="gallery" title="{{ $unit->nama_unit }}">
-                        <img src="{{ Storage::url('public/'.$item->gambar) }}"
-                        alt="" class="img-fluid mt-2"></a>
+                        <a href="/storage/galeri/{{$image}}" data-fancybox="gallery" title="{{ $unit->nama_unit }}">
+                            <img src="/storage/galeri/{{$image}}" alt="" class="img-fluid mt-2"></a>
                     </div>
-                    
-                @empty
+                    @endforeach
+
+                    @empty
                     <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                    <div class="media align-items-center">
-                        <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
+                        <div class="media align-items-center">
+                            <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
+                            </div>
                         </div>
                     </div>
-                </div>
-                @endforelse
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -93,37 +92,36 @@
                     @forelse ($unit->fasilitas as $f)
                     <div class="col-md-6">
                         <ul class="list-unstyled text-muted">
-                                <li class="mb-2">
+                            <li class="mb-2">
                                 <i class="
                                    {{ $f->item != '' ? 'fa fa-check' : '' }}
                                    {{ $f->item == 'wifi' ? 'fa fa-wifi' : '' }}
                                    {{ $f->item == 'tv' ? 'fa fa-tv' : '' }}
                                    {{ $f->item == 'toilet' ? 'fa fa-shower' : '' }}
                                    {{ $f->item == 'komputer' ? 'fa fa-laptop' : '' }}
-                                    text-secondary w-1rem mr-3 text-center"></i> 
-                                    <span
-                                    class="text-sm">{{ $f->item }}</span></li>
-                            </ul>
-                        </div>
-                        @empty
-                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                            <div class="media align-items-center">
-                                <div class="media-body text-center ">Belum ada <strong>Fasilitas</strong> untuk unit ini
-                                </div>
+                                    text-secondary w-1rem mr-3 text-center"></i>
+                                <span class="text-sm">{{ $f->item }}</span></li>
+                        </ul>
+                    </div>
+                    @empty
+                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
+                        <div class="media align-items-center">
+                            <div class="media-body text-center ">Belum ada <strong>Fasilitas</strong> untuk unit ini
                             </div>
                         </div>
-                        @endforelse
-                 
+                    </div>
+                    @endforelse
+
                 </div>
             </div>
 
 
             <div class="text-block">
                 <h4 class="mb-4">Lokasi kami </h4>
-                    <div class="card-body" id="mapid"></div>
+                <div class="card-body" id="mapid"></div>
             </div>
 
-        </div>      
+        </div>
     </div>
 
 
@@ -137,13 +135,15 @@
                     <div class="card card-kelas h-100 border-0 shadow">
                         <div class="card-img-top overflow-hidden gradient-overlay">
                             <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
-                                alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px"/><a
-                                href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug]) }}" class="tile-link"></a>
-                            
+                                alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
+                                href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug]) }}"
+                                class="tile-link"></a>
+
                         </div>
                         <div class="card-body d-flex align-items-center">
                             <div class="w-100">
-                                <h6 class="card-title"><a href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug])  }}"
+                                <h6 class="card-title"><a
+                                        href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug])  }}"
                                         class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
                                 <div class="d-flex card-subtitle mb-3">
                                     <p class="flex-grow-1 mb-0 text-muted text-sm">
@@ -156,55 +156,56 @@
                 </div>
                 @empty
 
-                @endforelse  
+                @endforelse
             </div>
         </div>
     </div>
-   
+
 
 </div>
 @endsection
 
 @push('style')
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
-    <style>
-    #mapid { height: 300px; }
-    </style>
+<style>
+    #mapid {
+        height: 300px;
+    }
+
+</style>
 @endpush
 
 @push('scripts')
-    <script>
-        $(document).ready(function () {
-            $('.btn-primary').on('click', function () {
-                var $this = $(this);
-                $('button').css("opacity", 0.4);
-                var loadingText =
-                    '<button class="spinner-grow spinner-grow-sm"></button> Mengirim ...';
-                if ($(this).html() !== loadingText) {
-                    $this.data('original-text', $(this).html());
-                    $this.html(loadingText);
-                }
-                setTimeout(function () {
-                    $this.html($this.data('original-text'));
-                }, 3000);
-            });
+<script>
+    $(document).ready(function () {
+        $('.btn-primary').on('click', function () {
+            var $this = $(this);
+            $('button').css("opacity", 0.4);
+            var loadingText =
+                '<button class="spinner-grow spinner-grow-sm"></button> Mengirim ...';
+            if ($(this).html() !== loadingText) {
+                $this.data('original-text', $(this).html());
+                $this.html(loadingText);
+            }
+            setTimeout(function () {
+                $this.html($this.data('original-text'));
+            }, 3000);
         });
+    });
 
-    </script>
+</script>
 
-    <script>
-        var map = L.map('mapid').setView([{{ $unit->latitude }}, {{ $unit->longitude }}], 13);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        L.marker([{{ $unit->latitude }}, {{ $unit->longitude }}]).addTo(map)
-            .bindPopup('Posisi kami');
-    </script>
+<script>
+    var map = L.map('mapid').setView([{{ $unit->latitude }}, {{ $unit->longitude }}], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    L.marker([{{ $unit->latitude }}, {{ $unit->longitude }}]).addTo(map)
+        .bindPopup('Posisi kami');
+</script>
 @endpush
