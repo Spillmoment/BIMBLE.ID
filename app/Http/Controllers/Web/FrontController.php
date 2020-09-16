@@ -112,7 +112,7 @@ class FrontController extends Controller
             ->where('type_id', 1)
             ->orderBy('created_at', 'desc')
             ->paginate(6);
-            // ->groupBy('unit_id')
+        // ->groupBy('unit_id')
 
         $gallery = GaleriKursus::with('kursus')
             ->where('kursus_id', $kursus->id)
@@ -126,19 +126,19 @@ class FrontController extends Controller
         $max_number_day = max($day_array);
         $min_number_day = min($day_array);
 
-        if($startday || $endday){
+        if ($startday || $endday) {
             $kursus_unit = KursusUnit::with('jadwal')
-                        ->whereHas('jadwal', function ($query) use ($min_number_day, $max_number_day, $clock) {
-                            if (empty($clock)) {
-                                $query->whereBetween('hari', [$min_number_day, $max_number_day]);
-                            } else {
-                                $query->whereBetween('hari', [$min_number_day, $max_number_day])->whereTime('waktu_mulai', '=', $clock);
-                            }
-                        })
-                        ->where('kursus_id', $kursus->id)
-                        ->where('type_id', 1)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(6);
+                ->whereHas('jadwal', function ($query) use ($min_number_day, $max_number_day, $clock) {
+                    if (empty($clock)) {
+                        $query->whereBetween('hari', [$min_number_day, $max_number_day]);
+                    } else {
+                        $query->whereBetween('hari', [$min_number_day, $max_number_day])->whereTime('waktu_mulai', '=', $clock);
+                    }
+                })
+                ->where('kursus_id', $kursus->id)
+                ->where('type_id', 1)
+                ->orderBy('created_at', 'desc')
+                ->paginate(6);
         }
         // dd($kursus_unit);
 
@@ -148,7 +148,7 @@ class FrontController extends Controller
             'gallery' => $gallery
         ]);
     }
-    
+
     public function show_private($slug, Request $request)
     {
         $kursus = Kursus::where('slug', $slug)->firstOrFail();
@@ -165,23 +165,25 @@ class FrontController extends Controller
         $startday = $request->query('startday');
         $endday = $request->query('endday');
         $clock = $request->query('jam');
+
         $day_array = array($startday, $endday);
         $max_number_day = max($day_array);
         $min_number_day = min($day_array);
 
-        if($startday || $endday){
+        if ($startday || $endday) {
             $kursus_unit = KursusUnit::with('jadwal')
-                        ->whereHas('jadwal', function ($query) use ($min_number_day, $max_number_day, $clock) {
-                            if (empty($clock)) {
-                                $query->whereBetween('hari', [$min_number_day, $max_number_day]);
-                            } else {
-                                $query->whereBetween('hari', [$min_number_day, $max_number_day])->whereTime('waktu_mulai', '=', $clock);
-                            }
-                        })
-                        ->where('kursus_id', $kursus->id)
-                        ->where('type_id', 2)
-                        ->orderBy('created_at', 'desc')
-                        ->paginate(6);
+                ->whereHas('jadwal', function ($query) use ($min_number_day, $max_number_day, $clock) {
+                    if (empty($clock)) {
+                        $query->whereBetween('hari', [$min_number_day, $max_number_day]);
+                    } else {
+                        $query->whereBetween('hari', [$min_number_day, $max_number_day])
+                            ->whereTime('waktu_mulai', '=', $clock);
+                    }
+                })
+                ->where('kursus_id', $kursus->id)
+                ->where('type_id', 2)
+                ->orderBy('created_at', 'desc')
+                ->paginate(6);
         }
 
         return view('web.web_detail_kursus_private', [

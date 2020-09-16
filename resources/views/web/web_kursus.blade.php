@@ -4,7 +4,6 @@
 @section('content')
 
 <div class="container-fluid py-5 px-lg-5">
-
     <div class="row">
         <div class="col-lg-3 pt-3">
             <form action="#" class="pr-xl-3">
@@ -74,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    @endif --}}
+                    {{-- @endif --}} 
 
                 </div>
                 @empty
@@ -95,12 +94,12 @@
                 </div>
             </div>
         </div>
-        @empty
+        {{-- @empty
         <div class="mt-5 col alert alert-warning text-center" role="alert">
             <strong>Pencarian tidak ditemukan </strong>
             <a href="{{ route('front.kursus') }}" class="btn btn-warning">Kembali</a>
         </div>
-        @endforelse
+        @endforelse --}}
 
     </div>
     <!-- Pagination -->

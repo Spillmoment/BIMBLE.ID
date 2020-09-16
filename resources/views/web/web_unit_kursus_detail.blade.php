@@ -9,7 +9,7 @@
         <!-- Breadcrumbs -->
         <ol class="breadcrumb text-white justify-content-center no-border mb-0">
             <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('front.detail', $kursus_unit->kursus->slug) }}">
+            <li class="breadcrumb-item"><a href="#"
                     {{ $kursus_unit->kursus->nama_kursus }}</a></li>
             <li class="breadcrumb-item"><a href="{{ route('unit.detail', $kursus_unit->unit->slug) }}">
                     {{ $kursus_unit->unit->nama_unit }}</a></li>

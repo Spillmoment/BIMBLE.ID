@@ -5,9 +5,9 @@
             <ul class="nav navbar-nav">
 
                 <li class="{{ 
-                    (Request::route()->getName() == 'unit.home') ? 'active' : '' ||
-                    (Request::route()->getName() == 'unit.profile') ? 'active' : ''
-                    }}">
+                    (Request::route()->getName() == 'unit.home') ? 'active' : '' }}
+                   {{  }} (Request::route()->getName() == 'unit.profile') ? 'active' : ''
+                    ">
                     <a href="{{ route('unit.home') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
 
@@ -47,9 +47,6 @@
                     }}">
                     <a href="{{ route('unit.siswa.home') }}"> <i class="menu-icon fa fa-pencil-square-o"></i>Nilai Siswa</a>
                 </li>
-
-         
-
 
             </ul>
         </div><!-- /.navbar-collapse -->

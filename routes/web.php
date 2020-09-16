@@ -118,7 +118,6 @@ Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.p
 Route::get('/kursus', 'Web\FrontController@kursus')->name('front.kursus');
 route::get('/kursus/search/', 'Web\FrontController@liveSearch')->name('search');
 
-
 Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
 Route::get('/kursus/{slug}/kelompok', 'Web\FrontController@show_kelompok')->name('front.detail.kelompok');
 Route::get('/kursus/{slug}/private', 'Web\FrontController@show_private')->name('front.detail.private');
