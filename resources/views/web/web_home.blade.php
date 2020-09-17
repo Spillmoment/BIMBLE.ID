@@ -255,7 +255,7 @@
                                 <h6 class="text-light m-2 ">Web Developer</h6>
                                 <p class="m-0 pt-3 text-light">
                                     <sup><i class="fas fa-quote-left"></i></sup>
-                                    Belajar Di Bimble.id sangat seru dan menyenangkan
+                                   Kursus Di Bimble.id sangat seru dan menyenangkan
                                     <sup><i class="fas fa-quote-right"></i></sup>
                                 </p>
                             </div>
@@ -266,10 +266,10 @@
                                         alt="First slide">
                                 </div>
                                 <h5 class="mt-4 mb-0"><strong class="text-dark text-capitalize">Deddy</strong></h5>
-                                <h6 class="text-primary m-2 ">Web Developer</h6>
+                                <h6 class="text-primary m-2 ">Mobile Developer</h6>
                                 <p class="m-0 pt-3 text-dark">
                                     <sup><i class="fas fa-quote-left"></i></sup>
-                                    Belajar Di Bimble.id sangat recomended
+                                    Belajar Di Bimble.id sangat recomended buat pemula
                                     <sup><i class="fas fa-quote-right"></i></sup>
                                 </p>
                             </div>
