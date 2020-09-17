@@ -39,11 +39,14 @@ class UnitController extends Controller
     {
         $data = $request->all();
 
-        // $file = $data['bukti_alumni'];
-        // $file_name = 'Pendaftar Unit-' . $data['nama_unit'] . '.' . $file->getClientOriginalExtension();
-        // $data['bukti_alumni'] =  $file->storeAs('public/uploads/bukti', $file_name);
         $data['slug'] = Str::slug($data['nama_unit'], '-');
-        $data['bukti_alumni'] =  $request->file('bukti_alumni')->store('bukti', 'public');
+
+        if ($file = $request->file('bukti_alumni')) {
+            $name = $file->getClientOriginalName();
+            $file->move('storage/file', $name);
+        }
+
+        $data['bukti_alumni'] = $name;
         $data['status'] = '0';
 
         Unit::create($data);
