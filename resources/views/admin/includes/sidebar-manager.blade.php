@@ -11,9 +11,9 @@
                 <li class="menu-title text-capitalize">Manage Kursus</li>
 
                 <li class="{{ 
-                          (Request::route()->getName() == 'kursus.index')  ? 'active'  : '' }}
-                         {{  (Request::route()->getName() == 'kursus.create') ? 'active'  : ''  }}
-                          {{ (Request::route()->getName() == 'kursus.edit')   ? 'active'  : ''  }}
+                          (Request::route()->getName() == 'kursus.index')  ? 'active'  : '' ||
+                           (Request::route()->getName() == 'kursus.create') ? 'active'  : ''  ||
+                           (Request::route()->getName() == 'kursus.edit')   ? 'active'  : ''  }}
                           ">
                     <a href="{{ route('kursus.index') }}"> <i class="menu-icon fa fa-database"></i>Data Kursus</a>
                 </li>
@@ -21,18 +21,18 @@
                 <li class="menu-title text-capitalize">Manage Galeri Kursus</li>
 
                 <li class="{{ 
-                          (Request::route()->getName() == 'gallery.index')  ? 'active'  : '' }}
-                          {{ (Request::route()->getName() == 'gallery.create') ? 'active'  : '' }}
-                          {{ (Request::route()->getName() == 'gallery.edit')   ? 'active'  : ''  }}
+                          (Request::route()->getName() == 'gallery.index')  ? 'active'  : '' ||
+                          (Request::route()->getName() == 'gallery.create') ? 'active'  : '' ||
+                          (Request::route()->getName() == 'gallery.edit')   ? 'active'  : ''  }}
                           ">
                     <a href="{{ route('gallery.index') }}"> <i class="menu-icon fa fa-camera"></i>Data Galeri Kursus</a>
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Unit</li>
                 <li class=" 
-                                {{ (Request::route()->getName() == 'unit.index') ? 'active' : '' }}
-                             {{  (Request::route()->getName() == 'unit.create') ? 'active' : '' }}
-                              {{ (Request::route()->getName() == 'unit.edit') ? 'active' : ''  }}
+                            {{ (Request::route()->getName() == 'unit.index') ? 'active' : '' }}
+                               (Request::route()->getName() == 'unit.create') ? 'active' : '' ||
+                               (Request::route()->getName() == 'unit.edit') ? 'active' : ''  ||
                               {{ (Request::route()->getName() == 'unit.show') ? 'active' : ''   }}
                           ">
                     <a href="{{ route('unit.index') }}"> <i class="menu-icon fa fa-user"></i>Data Unit</a>
@@ -42,14 +42,16 @@
                 <li class="{{ 
                               (Request::route()->getName() == 'pendaftar.index') ? 'active' : ''
                           }}">
-                    <a href="{{ route('pendaftar.index') }}"> <i class="menu-icon fa fa-users"></i>Data Pendaftar Unit</a>
+                    <a href="{{ route('pendaftar.index') }}"> <i class="menu-icon fa fa-users"></i>Data Pendaftar
+                        Unit</a>
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Review </li>
                 <li class="{{ 
                               (Request::route()->getName() == 'komentar.index') ? 'active' : ''
                           }}">
-                    <a href="{{ route('komentar.index') }}"> <i class="menu-icon fa fa-comments"></i>Data Review Kursus</a>
+                    <a href="{{ route('komentar.index') }}"> <i class="menu-icon fa fa-comments"></i>Data Review
+                        Kursus</a>
                 </li>
 
                 <li class="menu-title text-capitalize">Banner Web</li>
@@ -59,7 +61,7 @@
                     <a href="{{ route('banner.index') }}"> <i class="menu-icon fa fa-image"></i>Data Banner</a>
                 </li>
 
-                       </ul>
+            </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
 </aside>
