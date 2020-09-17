@@ -82,7 +82,7 @@
                                     <td> {{ $u->alamat }} </td>
                                     <td>{{ $u->email }}</td>
                                     <td>
-                                        <a class="text-info" href="{{ Storage::url('public/'. $u->bukti_alumni)}}">
+                                        <a class="text-info" href="/storage/file/{{ $u->bukti_alumni }}">
                                         <i class="fa fa-download"></i> Download 
                                         </a>
                                     </td>
