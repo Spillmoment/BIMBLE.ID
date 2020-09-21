@@ -186,48 +186,47 @@
                                 <div class="card-img-top overflow-hidden gradient-overlay">
                                     <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
                                         alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" /><a
-                                        href="{{ route('front.detail.kelompok', $item->kursus->slug) }}" class="tile-link"></a>
+                                        href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
+                                        class="tile-link"></a>
                                     {{-- <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
                                         <div class="badge badge-transparent badge-pill px-3 py-2">
                                             {{ $item->type->nama_type }}</div>
-                                    </div> --}}
-                                </div>
-                                <div class="card-body d-flex align-items-center">
-                                    <div class="w-100">
-                                        <h6 class="card-title"><a
-                                                href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
-                                                class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
-                                        </h6>
-                                        {{-- <div class="d-flex card-subtitle mb-3">
-                                            <p class="flex-grow-1 mb-0 text-muted text-sm">{{ $item->unit->nama_unit }}
-                                            </p>
-                                            <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i
-                                                    class="fa fa-star text-warning"></i><i
-                                                    class="fa fa-star text-warning"></i><i
-                                                    class="fa fa-star text-warning"></i><i
-                                                    class="fa fa-star text-warning"></i><i
-                                                    class="fa fa-star text-gray-300">
-                                                </i>
-                                            </p>
-                                        </div> --}}
-
-                                    </div>
-                                </div>
-                            </div>
+                            </div> --}}
                         </div>
-                        @empty
+                        <div class="card-body d-flex align-items-center">
+                            <div class="w-100">
+                                <h6 class="card-title"><a
+                                        href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
+                                        class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
+                                </h6>
+                                {{-- <div class="d-flex card-subtitle mb-3">
+                                            <p class="flex-grow-1 mb-0 text-muted text-sm">{{ $item->unit->nama_unit }}
+                                </p>
+                                <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i
+                                        class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
+                                        class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
+                                        class="fa fa-star text-gray-300">
+                                    </i>
+                                </p>
+                            </div> --}}
 
-                        @endforelse
+                        </div>
                     </div>
-
-                </div>
-
-
-                <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
-                    <a href="{{ route('front.kursus') }}" class="text-primary text-sm"> Lihat Semua<i
-                            class="fas fa-angle-double-right ml-2"></i></a>
                 </div>
             </div>
+            @empty
+
+            @endforelse
+        </div>
+
+        </div>
+
+
+        <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
+            <a href="{{ route('front.kursus') }}" class="text-primary text-sm"> Lihat Semua<i
+                    class="fas fa-angle-double-right ml-2"></i></a>
+        </div>
+        </div>
 
         </div>
     </section>
@@ -255,7 +254,7 @@
                                 <h6 class="text-light m-2 ">Web Developer</h6>
                                 <p class="m-0 pt-3 text-light">
                                     <sup><i class="fas fa-quote-left"></i></sup>
-                                   Kursus Di Bimble.id sangat seru dan menyenangkan
+                                    Kursus Di Bimble.id sangat seru dan menyenangkan
                                     <sup><i class="fas fa-quote-right"></i></sup>
                                 </p>
                             </div>
@@ -266,8 +265,8 @@
                                         alt="First slide">
                                 </div>
                                 <h5 class="mt-4 mb-0"><strong class="text-dark text-capitalize">Deddy</strong></h5>
-                                <h6 class="text-primary m-2 ">Mobile Developer</h6>
-                                <p class="m-0 pt-3 text-dark">
+                                <h6 class="text-light m-2 ">Mobile Developer</h6>
+                                <p class="m-0 pt-3 text-light">
                                     <sup><i class="fas fa-quote-left"></i></sup>
                                     Belajar Di Bimble.id sangat recomended buat pemula
                                     <sup><i class="fas fa-quote-right"></i></sup>
