@@ -20,7 +20,7 @@
                     <label for="form_category" class="form-label">Type Kursus</label>
                     <select name="type" id="form_category" data-style="btn-selectpicker" title="" class="selectpicker form-control">
                         @foreach ($typeKursus as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama_type }}</option>
+                        <option value="{{ $item->id }}" {{ ( $item->id == Request::get('type')) ? 'selected' : '' }}>{{ $item->nama_type }}</option>
                         @endforeach
                     </select>
                 </div>

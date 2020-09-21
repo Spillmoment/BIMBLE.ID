@@ -148,28 +148,26 @@
                     <div class="text-block">
                         <div>
                             <label for="form_sort" class="form-label ">Hari Kursus</label>
-                            <select name="startday" id="form_sort" data-style="btn-selectpicker" title=""
-                                class="selectpicker form-control">
+                            <select name="startday" id="startday" data-style="btn-selectpicker" class="selectpicker form-control">
+                                <option value="1">Minggu</option>
                                 <option value="2">Senin</option>
                                 <option value="3">Selasa</option>
                                 <option value="4">Rabu</option>
                                 <option value="5">Kamis</option>
                                 <option value="6">Jum'at</option>
                                 <option value="7">Sabtu</option>
-                                <option value="1">Minggu</option>
                             </select>
                         </div>
                         <div class="form-group text-center">
                                 <label for="rang" class="form-label text-gray-500">sampai dengan</label>
-                                <select name="endday" id="form_sort" data-style="btn-selectpicker" title=""
-                                    class="selectpicker form-control">
+                                <select name="endday" id="endday" data-style="btn-selectpicker" class="selectpicker form-control">
+                                    <option value="1">Minggu</option>
                                     <option value="2">Senin</option>
                                     <option value="3">Selasa</option>
                                     <option value="4">Rabu</option>
                                     <option value="5">Kamis</option>
                                     <option value="6">Jum'at</option>
                                     <option value="7">Sabtu</option>
-                                    <option value="1">Minggu</option>
                                 </select>
                             </div>
 
@@ -207,34 +205,48 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="{{ asset('assets/js/picker/mdtimepicker.js') }}"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ asset('assets/js/picker/mdtimepicker.js') }}"></script> --}}
 <script>
-    $(document).ready(function () {
+    // function startDayEvent(val) {
+    //     let select = document.getElementById("endday");
+    //     let pilihan = ['1', '2', '3', '4', '5', '6', '7'];
+    //     for (let index = val; index <= 7; index++) {
+    //         const content = pilihan[index];
+    //         const element = document.createElement("option");
+    //         element.textContent = content;
+    //         element.value = content;
+    //         select.attr(element);
+    //         // console.log(content);
+            
+    //     }
+    // }
+    // $(document).ready(function () {
 
-        $('#timepicker1').mdtimepicker({
 
-            // format of the time value (data-time attribute)
-            timeFormat: 'hh:mm:ss.000',
+        // $('#timepicker1').mdtimepicker({
 
-            // format of the input value
-            format: 'hh:mm:ss',
+        //     // format of the time value (data-time attribute)
+        //     timeFormat: 'hh:mm:ss.000',
 
-            // theme of the timepicker
-            // 'red', 'purple', 'indigo', 'teal', 'green', 'dark'
-            theme: 'blue',
+        //     // format of the input value
+        //     format: 'hh:mm:ss',
 
-            // determines if input is readonly
-            readOnly: true,
+        //     // theme of the timepicker
+        //     // 'red', 'purple', 'indigo', 'teal', 'green', 'dark'
+        //     theme: 'blue',
 
-            // determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
-            hourPadding: false,
+        //     // determines if input is readonly
+        //     readOnly: true,
 
-            // determines if clear button is visible  
-            clearBtn: false
+        //     // determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
+        //     hourPadding: false,
 
-        });
-    });
+        //     // determines if clear button is visible  
+        //     clearBtn: false
+
+        // });
+    // });
 
 </script>    
 @endpush
