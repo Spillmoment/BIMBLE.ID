@@ -147,14 +147,34 @@
             <!-- Additional required wrapper-->
             <div class="swiper-wrapper">
                 <!-- Slides-->
-                @foreach ($banner as $item)
+                {{-- @foreach ($banner as $item)
                 @if ($item->id == '2')
                 <div class="swiper-slide"><a href="{{ Storage::url('public/' . $item->gambar_banner) }}"
                         data-toggle="gallery-top" title="Galeri Bimble.id"><img
                             src="{{ Storage::url('public/' . $item->gambar_banner) }}" alt="Galeri Bimble.id"
                             class="img-fluid" height="200px"></a></div>
                 @endif
-                @endforeach
+                @endforeach --}}
+                <div class="swiper-slide">
+                    <a href="{{ asset('assets/frontend/img/photo/gal1.jpg') }}" data-toggle="gallery-top" title="Galeri Bimble.id">
+                        <img src="{{ asset('assets/frontend/img/photo/gal1.jpg') }}" alt="Galeri Bimble.id" class="img-fluid" height="200px">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="{{ asset('assets/frontend/img/photo/gal2.jpg') }}" data-toggle="gallery-top" title="Galeri Bimble.id">
+                        <img src="{{ asset('assets/frontend/img/photo/gal2.jpg') }}" alt="Galeri Bimble.id" class="img-fluid" height="200px">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="{{ asset('assets/frontend/img/photo/gal3.jpg') }}" data-toggle="gallery-top" title="Galeri Bimble.id">
+                        <img src="{{ asset('assets/frontend/img/photo/gal3.jpg') }}" alt="Galeri Bimble.id" class="img-fluid" height="200px">
+                    </a>
+                </div>
+                <div class="swiper-slide">
+                    <a href="{{ asset('assets/frontend/img/photo/gal4.jpg') }}" data-toggle="gallery-top" title="Galeri Bimble.id">
+                        <img src="{{ asset('assets/frontend/img/photo/gal4.jpg') }}" alt="Galeri Bimble.id" class="img-fluid" height="200px">
+                    </a>
+                </div>
 
             </div>
             <div class="swiper-pagination swiper-pagination-white"></div>

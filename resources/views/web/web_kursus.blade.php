@@ -25,7 +25,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary"> <i class="fas fa-search mr-1"></i>
+                <button type="submit" class="btn btn-outline-primary btn-sm btn-block"> <i class="fas fa-search mr-1"></i> Cari
 
                 </button>
             </form>

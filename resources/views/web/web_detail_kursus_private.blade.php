@@ -33,7 +33,7 @@
             <div class="text-white mb-4 mb-lg-0">
                 
                 <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
-                <p><i class="fa-map-marker-alt fas mr-2"></i> Paiton, Probolinggo</p>
+                {{-- <p><i class="fa-map-marker-alt fas mr-2"></i> Paiton, Probolinggo</p> --}}
 
             </div>
         </div>
