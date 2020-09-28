@@ -30,13 +30,11 @@
               {{ (Request::route()->getName() == 'front.pusat') ? 'active' : '' }}">Pusat Bantuan</a></li>
 
                     <li class="nav-item"><a href="{{ route('front.kursus') }}"
-                            class="nav-link  {{ (Request::route()->getName() == 'front.kursus') ? 'active' : '' ||
-                                              (Request::route()->getName() == 'unit.kursus.detail') ? 'active' : ''  }}
-                                                ">
+                            class="nav-link  {{ (request()->is('kursus*')) ? 'active' : '' }}">
                             Kursus</a>
                     </li>
                     <li class="nav-item}"><a href="{{ route('unit.list') }}"
-                            class="nav-link  {{ (Request::route()->getName() == 'unit.list') ? 'active' : '' }}">
+                            class="nav-link  {{ (request()->is('unit*')) || (request()->is('daftar-unit*')) ? 'active' : '' }}">
                             Unit</a>
                     </li>
                     <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
