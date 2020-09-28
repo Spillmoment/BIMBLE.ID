@@ -18,7 +18,7 @@ class UnitController extends Controller
 
     public function list(Request $request)
     {
-        $unit = Unit::latest()->paginate(9);
+        $unit = Unit::where('status', '1')->latest()->paginate(9);
 
         if ($request->keyword) {
             $unit = Unit::where('nama_unit', 'like', '%' . $request->keyword . '%')
@@ -47,7 +47,7 @@ class UnitController extends Controller
         }
 
         $data['bukti_alumni'] = $name;
-        $data['status'] = '0';
+        $data['status'] = '2';
 
         Unit::create($data);
         return redirect()->back()->with(['message' => 'Pendaftaran Unit Berhasil Dikirim']);
