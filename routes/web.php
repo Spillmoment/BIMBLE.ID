@@ -59,26 +59,26 @@ Route::prefix('unit')
 
         // Pilih kursus
         Route::get('/kursus', 'Unit\KursusController@index')->name('unit.kursus.home');
-        Route::post('/tambah_kursus', 'Unit\KursusController@tambah_kursus')->name('unit.kursus.tambah');
-        Route::delete('/hapus_kursus', 'Unit\KursusController@hapus_kursus')->name('unit.kursus.hapus');
-        Route::put('/harga_kursus', 'Unit\KursusController@harga_kursus')->name('unit.kursus.harga');
+        Route::post('/kursus/tambah', 'Unit\KursusController@tambah_kursus')->name('unit.kursus.tambah');
+        Route::delete('/kursus/hapus', 'Unit\KursusController@hapus_kursus')->name('unit.kursus.hapus');
+        Route::put('/kursus/harga', 'Unit\KursusController@harga_kursus')->name('unit.kursus.harga');
 
         // Detail Kursus
-        Route::get('/kursus/{slug}', 'Unit\KursusController@detail')->name('unit.kursus.detail');
+        Route::get('/kursus/detail/{slug}', 'Unit\KursusController@detail')->name('unit.kursus.detail');
         Route::get('/kursus/create/{slug}', 'Unit\KursusController@tambah_detail')->name('unit.kursus.add');
         Route::put('/kursus/update/{id}', 'Unit\KursusController@detail_store')->name('unit.kursus.update');
 
         // fasilitas
         Route::get('/fasilitas', 'Unit\FasilitasController@index')->name('unit.fasilitas.home');
-        Route::post('/tambah_fasilitas', 'Unit\FasilitasController@tambah_fasilitas')->name('unit.fasilitas.tambah');
-        Route::delete('/hapus_fasilitas', 'Unit\FasilitasController@hapus_fasilitas')->name('unit.fasilitas.hapus');
+        Route::post('/fasilitas/tambah', 'Unit\FasilitasController@tambah_fasilitas')->name('unit.fasilitas.tambah');
+        Route::delete('/fasilitas/hapus', 'Unit\FasilitasController@hapus_fasilitas')->name('unit.fasilitas.hapus');
 
         // mentor
         Route::resource('mentor', 'Unit\MentorController');
 
         // galeri
         Route::get('/galeri', 'Unit\GaleriController@index')->name('unit.galeri.home');
-        Route::post('/tambah_galeri_foto', 'Unit\GaleriController@store')->name('unit.galeri.tambah');
+        Route::post('/galeri/tambah', 'Unit\GaleriController@store')->name('unit.galeri.tambah');
         Route::delete('/galeri/{id}', 'Unit\GaleriController@destroy')->name('unit.galeri.hapus');
 
         // nilai
