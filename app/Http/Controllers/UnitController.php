@@ -16,6 +16,7 @@ class UnitController extends Controller
     {
         return view('admin.unit.index', [
             'unit' => Unit::where('status', '1')
+                ->orWhere('status', '0')
                 ->latest()->get()
         ]);
     }
