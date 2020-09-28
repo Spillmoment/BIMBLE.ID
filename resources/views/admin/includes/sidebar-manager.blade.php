@@ -10,31 +10,18 @@
 
                 <li class="menu-title text-capitalize">Manage Kursus</li>
 
-                <li class="{{ 
-                          (Request::route()->getName() == 'kursus.index')  ? 'active'  : '' ||
-                           (Request::route()->getName() == 'kursus.create') ? 'active'  : ''  ||
-                           (Request::route()->getName() == 'kursus.edit')   ? 'active'  : ''  }}
-                          ">
+                <li class="{{ (request()->is('manager/kursus*')) ? 'active' : '' }}">
                     <a href="{{ route('kursus.index') }}"> <i class="menu-icon fa fa-database"></i>Data Kursus</a>
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Galeri Kursus</li>
 
-                <li class="{{ 
-                          (Request::route()->getName() == 'gallery.index')  ? 'active'  : '' ||
-                          (Request::route()->getName() == 'gallery.create') ? 'active'  : '' ||
-                          (Request::route()->getName() == 'gallery.edit')   ? 'active'  : ''  }}
-                          ">
+                <li class="{{ (request()->is('manager/gallery*')) ? 'active' : '' }}">
                     <a href="{{ route('gallery.index') }}"> <i class="menu-icon fa fa-camera"></i>Data Galeri Kursus</a>
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Unit</li>
-                <li class=" 
-                            {{ (Request::route()->getName() == 'unit.index') ? 'active' : '' }}
-                               (Request::route()->getName() == 'unit.create') ? 'active' : '' ||
-                               (Request::route()->getName() == 'unit.edit') ? 'active' : ''  ||
-                              {{ (Request::route()->getName() == 'unit.show') ? 'active' : ''   }}
-                          ">
+                <li class="{{ (request()->is('manager/unit*')) ? 'active' : '' }}">
                     <a href="{{ route('unit.index') }}"> <i class="menu-icon fa fa-user"></i>Data Unit</a>
                 </li>
 
