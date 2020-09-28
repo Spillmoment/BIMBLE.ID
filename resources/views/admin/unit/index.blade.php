@@ -75,7 +75,13 @@
 
                                     <td> {{ $u->deskripsi != null ? $u->deskripsi : 'Belum ada deskripsi' }}</td>
 
-                                    <td><span class="badge badge-pill badge-success">Aktif</span></td>
+                                    <td>
+                                        @if ($u->status === '1')
+                                        <span class="badge badge-pill badge-success">Aktif</span>
+                                        @else
+                                        <span class="badge badge-pill badge-danger">Tidak Aktif</span>
+                                        @endif
+                                    </td>
                                    
                                     <td>
                                         <a class="btn btn-info text-white btn-sm" href="{{route('unit.show',
