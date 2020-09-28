@@ -15,7 +15,7 @@ class PendUnitController extends Controller
     public function index(Request $request)
     {
         return view('admin.pendaftar.index', [
-            'unit' => Unit::where('status', '0')
+            'unit' => Unit::where('status', '2')
                 ->latest()->get()
         ]);
     }
@@ -57,7 +57,7 @@ class PendUnitController extends Controller
 
         $item->save();
         return redirect()->route('pendaftar.index')->with([
-            'success' => 'Data Pendaftar Unit telah disetujui, Silahkan update data di manage unit'
+            'success' => 'Data Pendaftar Unit telah disetujui, Silahkan update data di Unit'
         ]);
     }
 
