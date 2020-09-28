@@ -122,13 +122,14 @@
                     <div class="col-md-6 offset-md-3 text-center">
                         <img width="300px" src="{{ asset('assets/frontend/img/schedule.gif') }}" alt="" srcset="">
                         <h3 class="text-warning">Whoops!</h1>
-                        <p> Unit dengan jadwal tersebut segera hadir.
-                            <br>
-                            Silahkan cari pada waktu yang lain.
-                        </p>
-                        <a href="{{ route('front.detail.private', $kursus->slug) }}" class="btn btn-outline-primary btn-sm mt-3 px-5">
-                            Muat ulang
-                        </a>
+                            <p> Unit dengan jadwal tersebut segera hadir.
+                                <br>
+                                Silahkan cari pada waktu yang lain.
+                            </p>
+                            <a href="{{ route('front.detail.private', $kursus->slug) }}"
+                                class="btn btn-outline-primary btn-sm mt-3 px-5">
+                                Muat ulang
+                            </a>
                     </div>
                     @endforelse
 
@@ -145,22 +146,24 @@
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-4">
                     <form action="#">
-                    <div class="text-block">
-                        <div>
-                            <label for="form_sort" class="form-label ">Hari Kursus</label>
-                            <select name="startday" id="startday" data-style="btn-selectpicker" class="selectpicker form-control">
-                                <option value="1">Minggu</option>
-                                <option value="2">Senin</option>
-                                <option value="3">Selasa</option>
-                                <option value="4">Rabu</option>
-                                <option value="5">Kamis</option>
-                                <option value="6">Jum'at</option>
-                                <option value="7">Sabtu</option>
-                            </select>
-                        </div>
-                        <div class="form-group text-center">
+                        <div class="text-block">
+                            <div>
+                                <label for="form_sort" class="form-label ">Hari Kursus</label>
+                                <select name="startday" id="startday" data-style="btn-selectpicker"
+                                    class="selectpicker form-control">
+                                    <option value="1">Minggu</option>
+                                    <option value="2">Senin</option>
+                                    <option value="3">Selasa</option>
+                                    <option value="4">Rabu</option>
+                                    <option value="5">Kamis</option>
+                                    <option value="6">Jum'at</option>
+                                    <option value="7">Sabtu</option>
+                                </select>
+                            </div>
+                            <div class="form-group text-center">
                                 <label for="rang" class="form-label text-gray-500">sampai dengan</label>
-                                <select name="endday" id="endday" data-style="btn-selectpicker" class="selectpicker form-control">
+                                <select name="endday" id="endday" data-style="btn-selectpicker"
+                                    class="selectpicker form-control">
                                     <option value="1">Minggu</option>
                                     <option value="2">Senin</option>
                                     <option value="3">Selasa</option>
@@ -171,9 +174,9 @@
                                 </select>
                             </div>
 
-                        <div class="form-group">
-                            <label for="jam" class="form-label">Jam Kursus</label>
-                            {{-- <select name="sort" id="form_sort" data-style="btn-selectpicker" title=""
+                            <div class="form-group">
+                                <label for="jam" class="form-label">Jam Kursus</label>
+                                {{-- <select name="sort" id="form_sort" data-style="btn-selectpicker" title=""
                                 class="selectpicker form-control">
                                 <option value="sortBy_0">09.00 - 12.00</option>
                                 <option value="sortBy_1">13.00 - 15.00 </option>
@@ -181,14 +184,15 @@
                                 <option value="sortBy_3">08.00 - 10.00 </option>
                                 <option value="sortBy_4">14.00 - 16.00 </option>
                             </select> --}}
-                            <input type="text" name="jam" id="timepicker1" class="selectpicker form-control" placeholder="" aria-describedby="helpId">
+                                <input type="text" name="jam" id="timepicker1" class="selectpicker form-control"
+                                    placeholder="" aria-describedby="helpId">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Cari</button>
-                    </div>
-                </form>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Cari</button>
+                        </div>
+                    </form>
                 </div>
 
 
@@ -218,35 +222,35 @@
     //         element.value = content;
     //         select.attr(element);
     //         // console.log(content);
-            
+
     //     }
     // }
     // $(document).ready(function () {
 
 
-        // $('#timepicker1').mdtimepicker({
+    // $('#timepicker1').mdtimepicker({
 
-        //     // format of the time value (data-time attribute)
-        //     timeFormat: 'hh:mm:ss.000',
+    //     // format of the time value (data-time attribute)
+    //     timeFormat: 'hh:mm:ss.000',
 
-        //     // format of the input value
-        //     format: 'hh:mm:ss',
+    //     // format of the input value
+    //     format: 'hh:mm:ss',
 
-        //     // theme of the timepicker
-        //     // 'red', 'purple', 'indigo', 'teal', 'green', 'dark'
-        //     theme: 'blue',
+    //     // theme of the timepicker
+    //     // 'red', 'purple', 'indigo', 'teal', 'green', 'dark'
+    //     theme: 'blue',
 
-        //     // determines if input is readonly
-        //     readOnly: true,
+    //     // determines if input is readonly
+    //     readOnly: true,
 
-        //     // determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
-        //     hourPadding: false,
+    //     // determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
+    //     hourPadding: false,
 
-        //     // determines if clear button is visible  
-        //     clearBtn: false
+    //     // determines if clear button is visible  
+    //     clearBtn: false
 
-        // });
+    // });
     // });
 
-</script>    
+</script>
 @endpush
