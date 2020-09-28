@@ -45,7 +45,7 @@
         title: "Success",
         text: "{{session('success')}}",
         icon: "success",
-        timer: 2000
+        // timer: 2000
     });
 </script>
 @endif
@@ -83,15 +83,25 @@
                                     <td>{{ $u->email }}</td>
                                     <td>
                                         <a class="text-info" href="/storage/file/{{ $u->bukti_alumni }}">
-                                        <i class="fa fa-download"></i> Download 
+                                        Download 
                                         </a>
                                     </td>
       
                                     <td>
-                                        <a href="{{ route('pendaftar.status', $u->id) }}?status=1"
+
+                                        {{-- <a href="{{ route('pendaftar.status', $u->id) }}?status=1"
                                             class="btn btn-success btn-sm">
                                             <i class="fa fa-check"></i>
-                                        </a>
+                                        </a> --}}
+                                        <form class="d-inline" action="{{ route('pendaftar.status', $u->id) }}?status=1"
+                                            method="POST">
+                                            @csrf
+                                            @method('HEAD')
+                                            <button type="submit" id="aktifButton" data-name="{{ $u->nama_unit }}"
+                                                class="btn btn-success btn-sm">
+                                                <i class="fa fa-check"></i>
+                                            </button>
+                                        </form>
                                         <form class="d-inline" action="{{route('pendaftar.destroy', [$u->id])}}"
                                             method="POST">
                                             @method('DELETE')
@@ -140,6 +150,27 @@
                 }
             });
     });
+
+    $('button#aktifButton').on('click', function (e) {
+        var name = $(this).data('name');
+        e.preventDefault();
+        swal({
+                title: "Yakin!",
+                text: "Menyetujui Unit " + name + "?",
+                icon: "warning",
+                dangerMode: true,
+                buttons: {
+                    cancel: "Cancel",
+                    confirm: "OK",
+                },
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $(this).closest("form").submit();
+                }
+            });
+    });
+
 
 </script>
 @endpush
