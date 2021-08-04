@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Banner;
 use App\KursusUnit;
 use App\GaleriKursus;
-
+use phpDocumentor\Reflection\Types\Null_;
 
 class FrontController extends Controller
 {
@@ -121,26 +121,35 @@ class FrontController extends Controller
 
         $startday = $request->query('startday');
         $endday = $request->query('endday');
-        $clock = $request->query('jam');
-        $day_array = array($startday, $endday);
-        $max_number_day = max($day_array);
-        $min_number_day = min($day_array);
+        $get_time = $request->query('clock');        
+        $clock = date('H:00:00',strtotime($get_time));        
 
-        if ($startday || $endday) {
+        if ($startday || $endday || $get_time) {
             $kursus_unit = KursusUnit::with('jadwal')
-                ->whereHas('jadwal', function ($query) use ($min_number_day, $max_number_day, $clock) {
-                    if (empty($clock)) {
-                        $query->whereBetween('hari', [$min_number_day, $max_number_day]);
+                ->whereHas('jadwal', function ($query) use ($startday, $endday, $clock, $get_time) {
+                    if ($startday == 0 || $endday == 0) { 
+                        $query->whereTime('waktu_mulai', '=', $clock);
+                    } elseif (empty($get_time)) {
+                        if ($startday <= $endday) {
+                            $query->whereBetween('hari', [$startday, $endday]);
+                        } else {
+                            $query->whereNotBetween('hari', [$endday+1, $startday-1]);
+                        }     
                     } else {
-                        $query->whereBetween('hari', [$min_number_day, $max_number_day])->whereTime('waktu_mulai', '=', $clock);
+                        if ($startday <= $endday) {
+                            $query->whereBetween('hari', [$startday, $endday])->whereTime('waktu_mulai', '=', $clock);
+                        } else {
+                            $query->whereNotBetween('hari', [$endday+1, $startday-1])->whereTime('waktu_mulai', '=', $clock);
+                        }
+                        
                     }
                 })
                 ->where('kursus_id', $kursus->id)
                 ->where('type_id', 1)
                 ->orderBy('created_at', 'desc')
                 ->paginate(6);
+            // dd('hello');
         }
-        // dd($kursus_unit);
 
         return view('web.web_detail_kursus_kelompok', [
             'kursus' => $kursus,
