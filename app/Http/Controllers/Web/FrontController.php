@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 use App\Banner;
 use App\KursusUnit;
 use App\GaleriKursus;
-use phpDocumentor\Reflection\Types\Null_;
 
 class FrontController extends Controller
 {
