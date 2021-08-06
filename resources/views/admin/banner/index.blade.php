@@ -46,25 +46,34 @@
     <div class="animated fadeIn">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        Form Banner
-                    </div>
-                    <div class="card-body">
+                <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">Banner 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Banner 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                            aria-controls="contact" aria-selected="false">Banner 3</a>
+                    </li>
+                </ul>
 
-                        <div class="row">
-                            <div class="col-md-4">
-                                <h4 class="mb-2 font-weight-bold">
-                                    Banner 1
-                                </h4>
-                                <hr>
+                <div class="tab-content" id="myTabContent">
+
+                    {{-- Banner 1 --}}
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="card mt-1">
+                            <div class="card-body">
                                 <form action="{{ route('banner.update', $banner1->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
 
                                     <div class="form-group ">
-                                        <label for="kata1">Kata 1</label>
+                                        <label for="kata1">Text 1</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata1') ? 'is-invalid' : '' }}"
                                             name="kata1" id="kata1" value="{{$banner1->kata1}}"
@@ -75,7 +84,7 @@
                                     </div>
 
                                     <div class="form-group ">
-                                        <label for="kata2">Kata 2</label>
+                                        <label for="kata2">Text 2</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata2') ? 'is-invalid' : '' }}"
                                             name="kata2" id="kata2" value="{{$banner1->kata2}}"
@@ -86,12 +95,12 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="gambar_banner">Foto Banner</label>
+                                        <label for="gambar_banner">Gambar Banner</label>
                                         <input type="file"
                                             class="form-control-file {{ $errors->first('gambar_banner') ? 'is-invalid' : '' }}"
                                             name="gambar_banner" id="gambar_banner">
                                         <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                                            Foto</small>
+                                            Gambar</small>
                                         <div class="mt-3">
                                             <img id="img" class="img-target" width="200px">
                                         </div>
@@ -108,20 +117,22 @@
                                     </div>
 
                                 </form>
-                            </div>
 
-                            <div class="col-md-4">
-                                <h4 class="mb-2 font-weight-bold">
-                                    Banner 2
-                                </h4>
-                                <hr>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Banner 2 --}}
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="card mt-1">
+                            <div class="card-body">
                                 <form action="{{ route('banner.update', $banner2->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
 
                                     <div class="form-group ">
-                                        <label for="kata1">Kata 1</label>
+                                        <label for="kata1">Text 1</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata1') ? 'is-invalid' : '' }}"
                                             name="kata1" id="kata1" value="{{$banner2->kata1}}"
@@ -132,7 +143,7 @@
                                     </div>
 
                                     <div class="form-group ">
-                                        <label for="kata2">Kata 2</label>
+                                        <label for="kata2">Text 2</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata2') ? 'is-invalid' : '' }}"
                                             name="kata2" id="kata2" value="{{$banner2->kata2}}"
@@ -143,12 +154,12 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="gambar_banner">Foto Banner</label>
+                                        <label for="gambar_banner">Gambar Banner</label>
                                         <input type="file"
                                             class="form-control-file {{ $errors->first('gambar_banner') ? 'is-invalid' : '' }}"
                                             name="gambar_banner" id="gambar_banner">
                                         <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                                            Foto</small>
+                                            Gambar</small>
                                         <div class="mt-3">
                                             <img id="img" class="img-target2" width="200px">
                                         </div>
@@ -165,19 +176,20 @@
 
                                 </form>
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="col-md-4">
-                                <h4 class="mb-2 font-weight-bold">
-                                    Banner 3
-                                </h4>
-                                <hr>
+                    {{-- Banner 3 --}}
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="card mt-1">
+                            <div class="card-body">
                                 <form action="{{ route('banner.update', $banner3->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
 
                                     <div class="form-group ">
-                                        <label for="kata1">Kata 1</label>
+                                        <label for="kata1">Text 1</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata1') ? 'is-invalid' : '' }}"
                                             name="kata1" id="kata1" value="{{$banner3->kata1}}"
@@ -188,7 +200,7 @@
                                     </div>
 
                                     <div class="form-group ">
-                                        <label for="kata2">Kata 2</label>
+                                        <label for="kata2">Text 2</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata2') ? 'is-invalid' : '' }}"
                                             name="kata2" id="kata2" value="{{$banner3->kata2}}"
@@ -199,12 +211,12 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="gambar_banner">Foto Banner</label>
+                                        <label for="gambar_banner">Gambar Banner</label>
                                         <input type="file"
                                             class="form-control-file {{ $errors->first('gambar_banner') ? 'is-invalid' : '' }}"
                                             name="gambar_banner" id="gambar_banner">
                                         <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                                            Foto</small>
+                                            Gambar</small>
                                         <div class="mt-3">
                                             <img id="img" class="img-target" width="200px">
                                         </div>
@@ -223,10 +235,8 @@
                                 </form>
                             </div>
                         </div>
-
-
-
                     </div>
+
                 </div>
             </div>
 
@@ -236,28 +246,3 @@
 </div>
 
 @endsection
-
-@push('after-script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-
-        var readURL = function (input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('.img-target').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        $(".form-control-file").on('change', function () {
-            readURl(this);
-        });
-
-    });
-
-</script>
-@endpush
