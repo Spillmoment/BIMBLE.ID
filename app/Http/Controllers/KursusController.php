@@ -12,33 +12,18 @@ use App\GaleriKursus;
 class KursusController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function index()
     {
         return view('admin.kursus.index', ['kursus' => Kursus::latest()->get()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('admin.kursus.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(KursusRequest $request)
     {
         $kursus = $request->all();
@@ -53,36 +38,19 @@ class KursusController extends Controller
             ->with(['status' => 'Data Kursus Berhasil Ditambahkan']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function show(Kursus $kursus)
     {
         return view('admin.kursus.show', compact('kursus'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Kursus $kursus)
     {
         return view('admin.kursus.edit', compact('kursus'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function update(KursusRequest $request, Kursus $kursus)
     {
@@ -103,12 +71,7 @@ class KursusController extends Controller
         return redirect()->route('kursus.index')->with(['status' => 'Data Kursus Berhasil Di Update']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Kursus $kursus)
     {
         Storage::delete('public/' . $kursus->gambar_kursus);
