@@ -11,16 +11,14 @@ class BannerController extends Controller
 
     public function index()
     {
-        $banner1 = Banner::find(1);
-        $banner2 = Banner::find(2);
-        $banner3 = Banner::find(3);
-
-        // dd($banner1);
-        return view('admin.banner.index', [
-            'banner1' => $banner1,
-            'banner2' => $banner2,
-            'banner3' => $banner3
-        ]);
+        return view(
+            'admin.banner.index',
+            [
+                'banner1' => Banner::find(1),
+                'banner2' => Banner::find(2),
+                'banner3' => Banner::find(3)
+            ]
+        );
     }
 
     public function update(Request $request, $id)
@@ -44,6 +42,7 @@ class BannerController extends Controller
         }
 
         $banner->update($data);
-        return redirect()->route('banner.index')->with(['status' => 'Data Banner Berhasil Di Update']);
+        return redirect()->route('banner.index')
+            ->with(['status' => 'Data Banner ' . $banner->id . ' Berhasil Di Update']);
     }
 }
