@@ -11,11 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class GaleriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function index()
     {
@@ -27,33 +23,13 @@ class GaleriController extends Controller
         ]);
     }
 
-    // public function hapus_fasilitas(Request $request)
-    // {
-    //     $id_unit = Auth::id();
-    //     $fasilitas_unit = Fasilitas::where('unit_id', $id_unit)->where('item', $request->item)->first();
-    //     $fasilitas_unit->forceDelete();
 
-    //     return response()->json([
-    //         'message' => 'Item ' . $request->item . ' berhasil dihapus.'
-    //     ]);
-    // }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         // 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -79,44 +55,23 @@ class GaleriController extends Controller
             ->with(['status' => 'File Berhasil Disimpan']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $galeri = Galeri::findOrFail($id);
