@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Banner;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class BannerController extends Controller
 {
@@ -32,13 +34,13 @@ class BannerController extends Controller
         $banner = Banner::findOrFail($id);
         $data = $request->all();
 
-        if ($request->hasFile('gambar_banner')) {
-            if ($banner->gambar_banner && file_exists(storage_path('app/public/' . $banner->gambar_banner))) {
-                Storage::delete('public/' . $banner->gambar_banner);
-                $data['gambar_banner'] =  $request->file('gambar_banner')->store('banner', 'public');
-            } else {
-                $data['gambar_banner'] =  $request->file('gambar_banner')->store('banner', 'public');
-            }
+        if (!empty($data['gambar_banner'])) {
+            File::delete(public_path('images/banner/' . $banner->gambar_banner));
+            $nama_foto = $data['gambar_banner']->getClientOriginalName();
+            $data['gambar_banner'] = Image::make($data['gambar_banner']->getRealPath());
+            $data['gambar_banner']->resize(700, 500);
+            $data['gambar_banner']->save(public_path('images/banner/' . $nama_foto));
+            $data['gambar_banner'] = $nama_foto;
         }
 
         $banner->update($data);
