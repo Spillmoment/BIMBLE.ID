@@ -97,8 +97,7 @@ Route::prefix('manager')
         // Route Dashboard
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
         Route::get('pendaftar/{id}/set-status', 'PendUnitController@setStatus')->name('pendaftar.status');
-        Route::get('kursus/{id}/gallery', 'KursusController@gallery')->name('kursus.gallery');
-
+        Route::get('kursus-gallery/{id}', 'KursusController@gallery')->name('kursus.gallery');
         Route::resources([
             'kursus' => 'KursusController',
             'unit'   => 'UnitController',
