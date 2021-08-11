@@ -45,7 +45,7 @@
             <!-- Slides-->
 
             @foreach ($banner as $item)
-            <div style="background-image: url('{{ Storage::url('public/'. $item->gambar_banner) }}');"
+            <div style="background-image: url('{{ url('assets/images/banner/'. $item->gambar_banner) }}');"
                 class="swiper-slide bg-cover dark-overlay">
                 <div class="container h-100">
                     <div data-swiper-parallax="-500" class="d-flex h-100 text-white overlay-content align-items-center">
@@ -148,12 +148,12 @@
             <div class="swiper-wrapper">
                 <!-- Slides-->
                 @foreach ($banner as $item)
-                @if ($item->id == '2')
-                <div class="swiper-slide"><a href="{{ Storage::url('public/' . $item->gambar_banner) }}"
+                {{-- @if ($item->id == '2') --}}
+                <div class="swiper-slide"><a href="{{ url('assets/images/banner/'. $item->gambar_banner) }}"
                         data-toggle="gallery-top" title="Galeri Bimble.id"><img
-                            src="{{ Storage::url('public/' . $item->gambar_banner) }}" alt="Galeri Bimble.id"
+                            src="{{ url('assets/images/banner/'. $item->gambar_banner) }}" alt="Galeri Bimble.id"
                             class="img-fluid" height="200px"></a></div>
-                @endif
+                {{-- @endif --}}
                 @endforeach
 
             </div>
@@ -184,49 +184,37 @@
                         <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
                             <div class="card card-kelas h-100 border-0 shadow">
                                 <div class="card-img-top overflow-hidden gradient-overlay">
-                                    <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
+                                    <img src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                         alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" /><a
                                         href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
                                         class="tile-link"></a>
-                                    {{-- <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
-                                        <div class="badge badge-transparent badge-pill px-3 py-2">
-                                            {{ $item->type->nama_type }}</div>
-                            </div> --}}
-                        </div>
-                        <div class="card-body d-flex align-items-center">
-                            <div class="w-100">
-                                <h6 class="card-title"><a
-                                        href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
-                                        class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
-                                </h6>
-                                {{-- <div class="d-flex card-subtitle mb-3">
-                                            <p class="flex-grow-1 mb-0 text-muted text-sm">{{ $item->unit->nama_unit }}
-                                </p>
-                                <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i
-                                        class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
-                                        class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
-                                        class="fa fa-star text-gray-300">
-                                    </i>
-                                </p>
-                            </div> --}}
 
+                                </div>
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="w-100">
+                                        <h6 class="card-title"><a
+                                                href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
+                                                class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
+                                        </h6>
+
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        @empty
+
+                        @endforelse
                     </div>
+
+                </div>
+
+
+                <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
+                    <a href="{{ route('front.kursus') }}" class="text-primary text-sm"> Lihat Semua<i
+                            class="fas fa-angle-double-right ml-2"></i></a>
                 </div>
             </div>
-            @empty
-
-            @endforelse
-        </div>
-
-        </div>
-
-
-        <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
-            <a href="{{ route('front.kursus') }}" class="text-primary text-sm"> Lihat Semua<i
-                    class="fas fa-angle-double-right ml-2"></i></a>
-        </div>
-        </div>
 
         </div>
     </section>
@@ -298,25 +286,6 @@
 
     @include('web.layouts.footer')
     @include('web.layouts.script')
-
-    <script>
-        $(document).ready(function () {
-            let scroll_link = $('.scroll');
-
-            //smooth scrolling -----------------------
-            scroll_link.click(function (e) {
-                e.preventDefault();
-                let url = $('body').find($(this).attr('href')).offset().top;
-                $('html, body').animate({
-                    scrollTop: url
-                }, 1000);
-                $(this).parent().addClass('active');
-                $(this).parent().siblings().removeClass('active');
-                return false;
-            });
-        });
-
-    </script>
     <script src="{{ asset('assets/frontend/vendor/Swiper/4.4.1/js/swiper.min.js') }}"></script>
 
 </body>
