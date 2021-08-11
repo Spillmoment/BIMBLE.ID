@@ -17,7 +17,7 @@
 
 </style>
 
-<section style="background-image: url('{{ Storage::url('public/'. $kursus->gambar_kursus) }}');"
+<section style="background-image: url('{{url('assets/images/kursus/'. $kursus->gambar_kursus) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
         <!-- Breadcrumbs -->
@@ -27,11 +27,11 @@
                     Daftar Kursus</a></li>
             <li class="breadcrumb-item"><a href="#">
                     {{ $kursus->nama_kursus }}</a></li>
-           
+
         </ol>
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
             <div class="text-white mb-4 mb-lg-0">
-                
+
                 <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
                 <p><i class="fa-map-marker-alt fas mr-2"></i> Paiton, Probolinggo</p>
 
@@ -114,11 +114,11 @@
                                 alt="{{ $item->unit->nama_unit }}" class="img-fluid" height="200px"/>
                                 <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug]) }}"
                                     class="tile-link"></a>
-                                    <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
                                     <div class="badge badge-transparent badge-pill px-3 py-2">
-                                   
-                        </div>
-                    </div>
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
@@ -133,13 +133,14 @@
                     <div class="col-md-6 offset-md-3 text-center">
                         <img width="300px" src="{{ asset('assets/frontend/img/schedule.gif') }}" alt="" srcset="">
                         <h3 class="text-warning">Whoops!</h1>
-                        <p> Unit dengan jadwal tersebut segera hadir.
-                            <br>
-                            Silahkan cari pada waktu yang lain.
-                        </p>
-                        <a href="{{ route('front.detail.private', $kursus->slug) }}" class="btn btn-outline-primary btn-sm mt-3 px-5">
-                            Muat ulang
-                        </a>
+                            <p> Unit dengan jadwal tersebut segera hadir.
+                                <br>
+                                Silahkan cari pada waktu yang lain.
+                            </p>
+                            <a href="{{ route('front.detail.private', $kursus->slug) }}"
+                                class="btn btn-outline-primary btn-sm mt-3 px-5">
+                                Muat ulang
+                            </a>
                     </div>
                     @endforelse
 
@@ -156,21 +157,21 @@
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-4">
                     <form>
-                    <div class="text-block">
-                        <div>
-                            <label for="form_sort" class="form-label ">Hari Kursus</label>
-                            <select name="startday" id="form_sort" data-style="btn-selectpicker" title=""
-                                class="selectpicker form-control">
-                                <option value="2">Senin</option>
-                                <option value="3">Selasa</option>
-                                <option value="4">Rabu</option>
-                                <option value="5">Kamis</option>
-                                <option value="6">Jum'at</option>
-                                <option value="7">Sabtu</option>
-                                <option value="1">Minggu</option>
-                            </select>
-                        </div>
-                        <div class="form-group text-center">
+                        <div class="text-block">
+                            <div>
+                                <label for="form_sort" class="form-label ">Hari Kursus</label>
+                                <select name="startday" id="form_sort" data-style="btn-selectpicker" title=""
+                                    class="selectpicker form-control">
+                                    <option value="2">Senin</option>
+                                    <option value="3">Selasa</option>
+                                    <option value="4">Rabu</option>
+                                    <option value="5">Kamis</option>
+                                    <option value="6">Jum'at</option>
+                                    <option value="7">Sabtu</option>
+                                    <option value="1">Minggu</option>
+                                </select>
+                            </div>
+                            <div class="form-group text-center">
                                 <label for="rang" class="form-label text-gray-500">sampai dengan</label>
                                 <select name="endday" id="form_sort" data-style="btn-selectpicker" title=""
                                     class="selectpicker form-control">
@@ -184,24 +185,17 @@
                                 </select>
                             </div>
 
-                        <div class="form-group">
-                            <label for="jam" class="form-label">Jam Kursus</label>
-                            {{-- <select name="sort" id="form_sort" data-style="btn-selectpicker" title=""
-                                class="selectpicker form-control">
-                                <option value="sortBy_0">09.00 - 12.00</option>
-                                <option value="sortBy_1">13.00 - 15.00 </option>
-                                <option value="sortBy_2"> 19.00 - 22.00 </option>
-                                <option value="sortBy_3">08.00 - 10.00 </option>
-                                <option value="sortBy_4">14.00 - 16.00 </option>
-                            </select> --}}
-                            <input type="text" name="jam" id="timepicker1" class="selectpicker form-control" placeholder="" aria-describedby="helpId">
+                            <div class="form-group">
+                                <label for="jam" class="form-label">Jam Kursus</label>
+                                <input type="text" name="jam" id="timepicker1" class="selectpicker form-control"
+                                    placeholder="" aria-describedby="helpId">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Cari</button>
-                    </div>
-                </form>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Cari</button>
+                        </div>
+                    </form>
                 </div>
 
 
@@ -247,5 +241,5 @@
         });
     });
 
-</script>    
+</script>
 @endpush
