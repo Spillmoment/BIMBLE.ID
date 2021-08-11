@@ -11,7 +11,7 @@
                     <label for="form_search" class="form-label">Pencarian</label>
                     <div class="input-label-absolute input-label-absolute-right">
                         <div class="label-absolute"><i class="fa fa-search"></i></div>
-                        <input type="search" id="search" name="keyword" placeholder="Cari Kursus?" id="form_search"
+                        <input type="search" id="search" name="keyword" placeholder="Cari kursus ..." id="form_search"
                             class="cari form-control pr-4" value="{{ Request::get('keyword') }}">
                     </div>
                 </div>
@@ -27,8 +27,8 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary"> <i class="fas fa-search mr-1"></i>
-
+                <button type="submit" class="btn btn-outline-primary"> <i class="fas fa-search mr-1"></i>
+                    Cari Kursus
                 </button>
             </form>
 
@@ -53,7 +53,7 @@
                 <div data-marker-id="59c0c8e322f3375db4d89128" class="col-sm-6 col-xl-4 mb-5 hover-animate">
                     <div class="card card-kelas h-100 border-0 shadow">
                         <div class="card-img-top overflow-hidden gradient-overlay">
-                            <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
+                            <img src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                 alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" />
                             <a href="{{ Request::get('type') == 2 ? route('front.detail.private', $item->kursus->slug) : route('front.detail.kelompok', $item->kursus->slug) }}"
                                 class="tile-link"></a>
@@ -77,7 +77,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- @endif --}}
 
                 </div>
                 @empty
@@ -111,7 +110,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-
-@endpush
