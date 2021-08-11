@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Kursus;
 use App\Http\Requests\KursusRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\GaleriKursus;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\File;
 
 class KursusController extends Controller
 {
@@ -17,54 +18,55 @@ class KursusController extends Controller
         return view('admin.kursus.index', ['kursus' => Kursus::latest()->get()]);
     }
 
-
     public function create()
     {
         return view('admin.kursus.create');
     }
 
-
     public function store(KursusRequest $request)
     {
-        $kursus = $request->all();
-        $nama_kursus = $kursus['nama_kursus'];
+        $data = $request->all();
+        $nama_kursus = $data['nama_kursus'];
 
-        $kursus['slug'] = Str::slug($nama_kursus, '-');
-        $kursus['gambar_kursus'] = $request->file('gambar_kursus')->store('kursus', 'public');
-        $kursus['status'] = 'aktif';
+        $data['slug'] = Str::slug($nama_kursus, '-');
+        $data['gambar_kursus'] = $request->file('gambar_kursus');
+        $nama_gambar = rand(1, 999) . "-" . $data['gambar_kursus']->getClientOriginalName();
+        $data['gambar_kursus'] = Image::make($data['gambar_kursus']->getRealPath());
+        $data['gambar_kursus']->resize(500, 300)->save(public_path('assets/images/kursus/' . $nama_gambar));;
+        $data['gambar_kursus'] = $nama_gambar;
+        $data['status'] = 'aktif';
 
-        Kursus::create($kursus);
+        Kursus::create($data);
         return redirect()->route('kursus.index')
             ->with(['status' => 'Data Kursus Berhasil Ditambahkan']);
     }
 
-
-    public function show(Kursus $kursus)
+    public function show()
     {
-        return view('admin.kursus.show', compact('kursus'));
+    }
+
+    public function edit($id)
+    {
+        return view('admin.kursus.edit', [
+            'kursus' => Kursus::findOrFail($id)
+        ]);
     }
 
 
-    public function edit(Kursus $kursus)
+    public function update(KursusRequest $request, $id)
     {
-        return view('admin.kursus.edit', compact('kursus'));
-    }
-
-
-
-    public function update(KursusRequest $request, Kursus $kursus)
-    {
+        $kursus = Kursus::findOrFail($id);
         $data = $request->all();
         $nama_kursus = $data['nama_kursus'];
         $data['slug'] = Str::slug($nama_kursus, '-');
 
-        if ($request->hasFile('gambar_kursus')) {
-            if ($kursus->gambar_kursus && file_exists(storage_path('app/public/' . $kursus->gambar_kursus))) {
-                Storage::delete('public/' . $kursus->gambar_kursus);
-                $data['gambar_kursus'] =  $request->file('gambar_kursus')->store('kursus', 'public');
-            } else {
-                $data['gambar_kursus'] =  $request->file('gambar_kursus')->store('kursus', 'public');
-            }
+        if (!empty($data['gambar_kursus'])) {
+            File::delete(public_path('assets/images/kursus/' . $kursus->gambar_kursus));
+            $nama_foto = rand(1, 999) . "-" . $data['gambar_kursus']->getClientOriginalName();
+            $data['gambar_kursus'] = Image::make($data['gambar_kursus']->getRealPath());
+            $data['gambar_kursus']->resize(500, 300);
+            $data['gambar_kursus']->save(public_path('assets/images/kursus/' . $nama_foto));
+            $data['gambar_kursus'] = $nama_foto;
         }
 
         $kursus->update($data);
@@ -72,9 +74,10 @@ class KursusController extends Controller
     }
 
 
-    public function destroy(Kursus $kursus)
+    public function destroy($id)
     {
-        Storage::delete('public/' . $kursus->gambar_kursus);
+        $kursus = Kursus::findOrFail($id);
+        File::delete(public_path('assets/images/kursus/' . $kursus->gambar_kursus));
         $kursus->forceDelete();
         return redirect()->route('kursus.index')
             ->with(['status' => 'Data Kursus Berhasil Dihapus']);
