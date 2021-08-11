@@ -143,28 +143,7 @@
             }
         });
 
-        // $('.btn-harga').click(function () {
-        //     let kursus_id = $(this).data('kursus');
-        //     let biaya_kursus = $('#biaya_kursus').val();
-        //     $.ajax({
-        //         type: 'put',
-        //         url: '{{ route('unit.kursus.harga') }}',
-        //         data: {
-        //             kursus_id: kursus_id,
-        //             biaya_kursus: biaya_kursus
-        //         },
-        //         success: function (data) {
-        //             toastr.options.closeButton = true;
-        //             toastr.options.closeMethod = 'fadeOut';
-        //             toastr.options.closeDuration = 100;
-        //             toastr.success(data.message);
-
-        //             setTimeout(function () {
-        //                 location.reload();
-        //             }, 200);
-        //         }
-        //     });
-        // });
+       
     });   
 </script>
 @endpush
