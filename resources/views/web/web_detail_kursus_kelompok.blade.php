@@ -17,7 +17,7 @@
 
 </style>
 
-<section style="background-image: url('{{ Storage::url('public/'. $kursus->gambar_kursus) }}');"
+<section style="background-image: url('{{ url('assets/images/kursus/'. $kursus->gambar_kursus) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
