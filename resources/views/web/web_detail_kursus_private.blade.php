@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-
+{{-- 
             <div class="text-block">
                 <h5 class="mb-4 mt-4">Galeri Kursus</h5>
                 <div class="row gallery mb-3 ml-n1 mr-n1">
@@ -93,7 +93,9 @@
                     </div>
                     @endforelse
                 </div>
-            </div>
+            </div> --}}
+
+
         </div>
     </div>
 
