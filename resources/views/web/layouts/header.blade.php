@@ -26,9 +26,6 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="{{ route('front.index') }}" class="nav-link 
                 {{ (Request::route()->getName() == 'front.index') ? 'active' : '' }}">Beranda</a></li>
-                    <li class="nav-item"><a href="{{ route('front.pusat') }}" class="nav-link 
-              {{ (Request::route()->getName() == 'front.pusat') ? 'active' : '' }}">Pusat Bantuan</a></li>
-
                     <li class="nav-item"><a href="{{ route('front.kursus') }}"
                             class="nav-link  {{ (request()->is('kursus*')) ? 'active' : '' }}">
                             Kursus</a>
@@ -39,7 +36,7 @@
                     </li>
                     <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
                             class="nav-link  {{ (Request::route()->getName() == 'unit.daftar') ? 'active' : '' }}">
-                            Daftar</a>
+                            Pendaftaran Unit</a>
                     </li>
 
                 </ul>
