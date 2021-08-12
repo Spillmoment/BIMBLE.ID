@@ -47,7 +47,7 @@
                         <div class="card-header  bg-primary">
                             <div class="media">
                                 <a href="#">
-                                    <img class="align-self-center mr-3" style="width:100px; height:80px;" alt="" src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}">
+                                    <img class="align-self-center mr-3" style="width:100px; height:80px;" alt="" src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}">
                                 </a>
                                 <div class="media-body">
                                     <h4 class="text-white display-6 mb-2">{{ $item->kursus->nama_kursus }}</h4>
