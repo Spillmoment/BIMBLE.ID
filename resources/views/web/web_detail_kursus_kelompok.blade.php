@@ -92,7 +92,7 @@
         <div class="col-lg-8">
             <div class="text-block">
                 <h4>Pilih Unit Kursus </h4>
-                <div class="row mt-4 mb-2">
+                <div class="row mt-4 mb-2" id="card-kursus">
                     @forelse ($kursus_unit as $item)
                     <div class="col-md-4 mb-3">
                         <div class="card h-100 border-0 shadow hover-animate">
@@ -145,7 +145,7 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-4">
-                    <form action="{{ route('front.detail.kelompok', Request::route('slug')) }}" method="GET">
+                    <form action="" method="GET">
                         <div class="text-block">
                             <div>
                                 <label for="form_sort" class="form-label ">Hari Kursus</label>
@@ -184,7 +184,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Cari</button>
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase" id="action-cari">Cari</button>
                         </div>
                     </form>
                 </div>
@@ -208,29 +208,49 @@
 <script>
     $(document).ready(function () {
 
+        $('#timepicker1').mdtimepicker({
 
-    $('#timepicker1').mdtimepicker({
+            // format of the time value (data-time attribute)
+            timeFormat: 'hh:mm:ss.000',
 
-        // format of the time value (data-time attribute)
-        timeFormat: 'hh:mm:ss.000',
+            // format of the input value
+            format: 'hh:mm:ss',
 
-        // format of the input value
-        format: 'hh:mm:ss',
+            // theme of the timepicker
+            // 'red', 'purple', 'indigo', 'teal', 'green', 'dark'
+            theme: 'blue',
 
-        // theme of the timepicker
-        // 'red', 'purple', 'indigo', 'teal', 'green', 'dark'
-        theme: 'blue',
+            // determines if input is readonly
+            readOnly: true,
 
-        // determines if input is readonly
-        readOnly: true,
+            // determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
+            hourPadding: false,
 
-        // determines if display value has zero padding for hour value less than 10 (i.e. 05:30 PM); 24-hour format has padding by default
-        hourPadding: false,
+            // determines if clear button is visible  
+            clearBtn: false
 
-        // determines if clear button is visible  
-        clearBtn: false
+        });
 
-    });
+        $('#action-cari').click(function (event) {
+            event.preventDefault();
+            let startday = $('#startday').val();
+            let endday = $('#endday').val();
+            let clock = $('#timepicker1').val();
+            
+            $.ajax({
+                type: 'get',
+                // dataType: "json",
+                url: '{{ route('front.detail.kelompok', Request::route('slug')) }}',
+                data: {
+                    startday: startday,
+                    endday: endday,
+                    clock: clock
+                },
+                success: function (data) {
+                    $('#card-kursus').html(data);
+                }
+            })
+        });
     });
 
 </script>

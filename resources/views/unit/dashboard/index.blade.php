@@ -216,9 +216,7 @@
                             </div>
                             <div id="mapid"></div>
                         </div>
-                        <div class="card-footer">
-                            <input type="submit" value="Simpan lokasi" class="btn btn-success btn-sm">
-                        </div>
+                        <input type="submit" value="Simpan lokasi" class="btn btn-success btn-sm">
                     </form>
                 </div>
             </div>
@@ -231,16 +229,14 @@
                     @csrf
                     @method('put')
                     <div class="card-header">
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i>&nbsp;
-                            Simpan</button>
                         <strong>Deskripsikan Unit Anda</strong>
                         <div class="invalid-feedback">
                             {{$errors->first('deskripsi')}}
                         </div>
                     </div>
                     <div class="card-body card-block">
-                        <textarea id="deskripsiEditor"
-                            name="deskripsi">{{ old('deskripsi',Auth::guard('unit')->user()->deskripsi) }}</textarea>
+                        <textarea id="deskripsiEditor" name="deskripsi">{{ old('deskripsi',Auth::guard('unit')->user()->deskripsi) }}</textarea>
+                        <button type="submit" class="btn btn-primary btn-sm mt-3"><i class="fa fa-save"></i>&nbsp; Simpan</button>
                     </div>
                 </form>
             </div>
@@ -252,9 +248,13 @@
 @endsection
 
 @push('after-style')
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin="" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
 
 <style>
     #mapid {
@@ -265,92 +265,61 @@
 @endpush
 
 @push('after-script')
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
-    integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
-    crossorigin=""></script>
 <script>
-    @if(Auth::guard('unit')->user()->latitude !== null)
-    let mapCenter = [{
-        {
-            Auth::guard('unit')->user()->latitude
-        }
-    }, {
-        {
-            Auth::guard('unit')->user()->longitude
-        }
-    }];
-    var map = L.map('mapid').setView(mapCenter, {
-        {
-            config('leaflet.zoom_level')
-        }
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    var marker = L.marker(mapCenter).addTo(map);
-
-    function updateMarker(lat, lng) {
-        marker
-            .setLatLng([lat, lng])
-            .bindPopup("Your location :  " + marker.getLatLng().toString())
-            .openPopup();
-        return false;
-    };
-
-    map.on('click', function (e) {
-        let latitude = e.latlng.lat.toString().substring(0, 15);
-        let longitude = e.latlng.lng.toString().substring(0, 15);
-        $('#latitude').val(latitude);
-        $('#longitude').val(longitude);
-        updateMarker(latitude, longitude);
-    });
-
-    var updateMarkerByInputs = function () {
-        return updateMarker($('#latitude').val(), $('#longitude').val());
-    }
-    $('#latitude').on('input', updateMarkerByInputs);
-    $('#longitude').on('input', updateMarkerByInputs);
-
-    @else
-
-    navigator.geolocation.getCurrentPosition(function (location) {
-        var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-        var map = L.map('mapid').setView(latlng, {
-            {
-                config('leaflet.zoom_level')
-            }
-        });
-
+    @if (Auth::guard('unit')->user()->latitude !== null)
+        let mapCenter = [{{ Auth::guard('unit')->user()->latitude }}, {{ Auth::guard('unit')->user()->longitude }}];
+        var map = L.map('mapid').setView(mapCenter, {{ config('leaflet.zoom_level') }});
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
-        var marker = L.marker(latlng).addTo(map);
-
+        var marker = L.marker(mapCenter).addTo(map);
         function updateMarker(lat, lng) {
             marker
-                .setLatLng([lat, lng])
-                .bindPopup("Your location :  " + marker.getLatLng().toString())
-                .openPopup();
+            .setLatLng([lat, lng])
+            .bindPopup("Your location :  " + marker.getLatLng().toString())
+            .openPopup();
             return false;
         };
-
-        map.on('click', function (e) {
+        map.on('click', function(e) {
             let latitude = e.latlng.lat.toString().substring(0, 15);
             let longitude = e.latlng.lng.toString().substring(0, 15);
             $('#latitude').val(latitude);
             $('#longitude').val(longitude);
             updateMarker(latitude, longitude);
         });
-
-        var updateMarkerByInputs = function () {
-            return updateMarker($('#latitude').val(), $('#longitude').val());
+        var updateMarkerByInputs = function() {
+            return updateMarker( $('#latitude').val() , $('#longitude').val());
         }
         $('#latitude').on('input', updateMarkerByInputs);
         $('#longitude').on('input', updateMarkerByInputs);
-    });
+    @else
+        navigator.geolocation.getCurrentPosition(function(location) {
+            var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+            var map = L.map('mapid').setView(latlng, {{ config('leaflet.zoom_level') }});
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            var marker = L.marker(latlng).addTo(map);
+            function updateMarker(lat, lng) {
+                marker
+                .setLatLng([lat, lng])
+                .bindPopup("Your location :  " + marker.getLatLng().toString())
+                .openPopup();
+                return false;
+            };
+            map.on('click', function(e) {
+                let latitude = e.latlng.lat.toString().substring(0, 15);
+                let longitude = e.latlng.lng.toString().substring(0, 15);
+                $('#latitude').val(latitude);
+                $('#longitude').val(longitude);
+                updateMarker(latitude, longitude);
+            });
+            var updateMarkerByInputs = function() {
+                return updateMarker( $('#latitude').val() , $('#longitude').val());
+            }
+            $('#latitude').on('input', updateMarkerByInputs);
+            $('#longitude').on('input', updateMarkerByInputs);
+        });
     @endif
 
 </script>

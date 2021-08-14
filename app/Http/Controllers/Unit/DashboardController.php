@@ -91,7 +91,7 @@ class DashboardController extends Controller
             'status' => 'Lokasi diupdate'
         ]);
     }
-    
+
     public function update_profile_banner(Request $request, $slug)
     {
         $user = Unit::where('slug', $slug)->first();
@@ -107,7 +107,7 @@ class DashboardController extends Controller
                     Storage::delete('public/' . $user->gambar_unit);
                     $file = $request->file('gambar_unit')->store('unit', 'public');
                     $data['gambar_unit'] = $file;
-                }else{
+                } else {
                     $file = $request->file('gambar_unit')->store('unit', 'public');
                     $data['gambar_unit'] = $file;
                 }
@@ -134,7 +134,7 @@ class DashboardController extends Controller
         ]);
 
         $user = Unit::findOrFail($id);
-        $user->update(['password' => Hash::make($request->password)]);;
+        $user->update(['password' => Hash::make($request->password)]);
         return redirect()->back()->with(['success' => 'Password berhasil diupdate!']);
     }
 }

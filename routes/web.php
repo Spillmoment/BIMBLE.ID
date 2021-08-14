@@ -25,7 +25,7 @@ Route::group(['prefix' => 'manager'], function () {
     Route::get('/login', 'AuthManager\LoginController@showLoginForm')->name('manager.login');
     Route::post('/login', 'AuthManager\LoginController@login')->name('manager.login.submit');
     Route::get('/logout', 'AuthManager\LoginController@logoutManager')->name('manager.logout');
-    Route::get('/user/logout', 'Auth\LoginController@logoutUser')->name('user.logout');
+    Route::get('/user/logout', 'AuthManager\LoginController@logoutUser')->name('user.logout');
     Route::get('/password/reset', 'AuthManager\ForgotPasswordController@showLinkRequestForm')->name('manager.password.request');
     Route::post('/password/email', 'AuthManager\ForgotPasswordController@sendResetLinkEmail')->name('manager.password.email');
     Route::get('/password/reset/{token}', 'AuthManager\ResetPasswordController@showResetForm')->name('manager.password.reset');

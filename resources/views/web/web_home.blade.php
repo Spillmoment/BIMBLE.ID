@@ -14,7 +14,6 @@
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/Swiper/4.4.1/css/swiper.min.css')}}"
         id="theme-stylesheet">
-
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/magnific-popup/magnific-popup.css') }}">
     <!-- theme stylesheet-->

@@ -32,7 +32,7 @@
     <div class="card">
         <div class="card-header">
             <strong>Form Edit Unit
-              
+
             </strong>
         </div>
         <div class="card-body card-block">
@@ -151,7 +151,7 @@
                     </div>
                     <br>
                     <button type="submit" class="btn btn-block btn-primary">
-                       Simpan</button>
+                        Simpan</button>
                 </div>
 
 

@@ -18,7 +18,7 @@
                 <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                          @if (Auth::user()->gambar_unit != null)
-                           <img class="user-avatar rounded-circle img-thumbnail img-fluid"
+                           <img class="user-avatar rounded-circle"
                             src="{{ Storage::url('public/'.Auth::user()->gambar_unit ) }}"
                             width="70px">
                          @else

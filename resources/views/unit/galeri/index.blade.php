@@ -58,7 +58,7 @@
                                 <label for="gambar">File</label>
                                 <input type="file"
                                     class="form-control-file {{ $errors->first('gambar') ? 'is-invalid' : '' }}"
-                                    name="gambar[]" id="gambar" required multiple="trues">
+                                    name="gambar[]" id="gambar" required multiple="true">
                             </div>
                             <div class="invalid-feedback">
                                 {{$errors->first('gambar')}}
