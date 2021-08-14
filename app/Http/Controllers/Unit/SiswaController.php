@@ -10,11 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 
     public function index()
     {
@@ -40,11 +36,7 @@ class SiswaController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create_siswa($slug)
     {
         $kursus = Kursus::where('slug', $slug)->first();
@@ -54,12 +46,7 @@ class SiswaController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store_siswa(Request $request, $slug)
     {
         $kursus = Kursus::where('slug', $slug)->first();
@@ -79,27 +66,16 @@ class SiswaController extends Controller
             ->with(['status' => 'Data Siswa Berhasil Ditambahkan']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($slug, $id)
     {
         // dd($slug);
         $siswa = Siswa::findOrFail($id);
         $kursus = Kursus::where('slug', $slug)->first();
-        return view('unit.siswa.siswa_edit', compact('siswa','kursus'));
+        return view('unit.siswa.siswa_edit', compact('siswa', 'kursus'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $slug, $id)
     {
         $request->validate([
@@ -118,12 +94,7 @@ class SiswaController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $siswa = Siswa::findOrFail($id);

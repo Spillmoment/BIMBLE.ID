@@ -44,7 +44,7 @@
             <!-- Slides-->
 
             @foreach ($banner as $item)
-            <div style="background-image: url('{{ Storage::url('public/'. $item->gambar_banner) }}');"
+            <div style="background-image: url('{{ url('assets/images/banner/'. $item->gambar_banner) }}');"
                 class="swiper-slide bg-cover dark-overlay">
                 <div class="container h-100">
                     <div data-swiper-parallax="-500" class="d-flex h-100 text-white overlay-content align-items-center">
@@ -140,28 +140,6 @@
         </div>
     </section>
 
-    <section>
-        <!-- Slider main container-->
-        <div class="swiper-container detail-slider slider-gallery">
-            <!-- Additional required wrapper-->
-            <div class="swiper-wrapper">
-                <!-- Slides-->
-                @foreach ($banner as $item)
-                @if ($item->id == '2')
-                <div class="swiper-slide"><a href="{{ Storage::url('public/' . $item->gambar_banner) }}"
-                        data-toggle="gallery-top" title="Galeri Bimble.id"><img
-                            src="{{ Storage::url('public/' . $item->gambar_banner) }}" alt="Galeri Bimble.id"
-                            class="img-fluid" height="200px"></a></div>
-                @endif
-                @endforeach
-
-            </div>
-            <div class="swiper-pagination swiper-pagination-white"></div>
-            <div class="swiper-button-prev swiper-button-white"></div>
-            <div class="swiper-button-next swiper-button-white"></div>
-        </div>
-    </section>
-
 
     <section class="pt-5 pb-6" id="mulai">
         <div class="container">
@@ -183,139 +161,88 @@
                         <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
                             <div class="card card-kelas h-100 border-0 shadow">
                                 <div class="card-img-top overflow-hidden gradient-overlay">
-                                    <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
+                                    <img src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                         alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" /><a
                                         href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
                                         class="tile-link"></a>
-                                    {{-- <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
-                                        <div class="badge badge-transparent badge-pill px-3 py-2">
-                                            {{ $item->type->nama_type }}</div>
-                            </div> --}}
-                        </div>
-                        <div class="card-body d-flex align-items-center">
-                            <div class="w-100">
-                                <h6 class="card-title"><a
-                                        href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
-                                        class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
-                                </h6>
-                                {{-- <div class="d-flex card-subtitle mb-3">
-                                            <p class="flex-grow-1 mb-0 text-muted text-sm">{{ $item->unit->nama_unit }}
-                                </p>
-                                <p class="flex-shrink-1 mb-0 card-stars text-xs text-right"><i
-                                        class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
-                                        class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i
-                                        class="fa fa-star text-gray-300">
-                                    </i>
-                                </p>
-                            </div> --}}
 
+                                </div>
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="w-100">
+                                        <h6 class="card-title"><a
+                                                href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
+                                                class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
+                                        </h6>
+
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        @empty
+
+                        @endforelse
                     </div>
+
+                </div>
+
+
+                <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
+                    <a href="{{ route('front.kursus') }}" class="text-primary text-sm"> Lihat Semua<i
+                            class="fas fa-angle-double-right ml-2"></i></a>
                 </div>
             </div>
-            @empty
-
-            @endforelse
-        </div>
-
-        </div>
-
-
-        <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
-            <a href="{{ route('front.kursus') }}" class="text-primary text-sm"> Lihat Semua<i
-                    class="fas fa-angle-double-right ml-2"></i></a>
-        </div>
-        </div>
 
         </div>
     </section>
 
-    <section class="py-5" style="background: #4E66F8">
+    <!-- Section Testimonial -->
+    <section class="pt-5 section-header" style="background-color: #4E66F8">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8 offset-md-2 col-10 offset-1">
-                    <h2 class="text-center mt-3 pb-2 mb-3 text-uppercase text-light testi"><strong>Testimonial</strong>
-                    </h2>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner mt-4">
-                            <div class="carousel-item text-center active">
-                                <div class="img-box p-1 border rounded-circle m-auto">
-                                    <img class="d-block w-100 rounded-circle"
-                                        src="https://st2.depositphotos.com/2703645/5669/v/950/depositphotos_56695985-stock-illustration-male-avatar.jpg"
-                                        alt="First slide">
-                                </div>
-                                <h5 class="mt-4 mb-0"><strong class="text-light text-capitalize">Hafidz</strong></h5>
-                                <h6 class="text-light m-2 ">Web Developer</h6>
-                                <p class="m-0 pt-3 text-light">
-                                    <sup><i class="fas fa-quote-left"></i></sup>
-                                    Kursus Di Bimble.id sangat seru dan menyenangkan
-                                    <sup><i class="fas fa-quote-right"></i></sup>
-                                </p>
-                            </div>
-                            <div class="carousel-item text-center ">
-                                <div class="img-box p-1 border rounded-circle m-auto">
-                                    <img class="d-block w-100 rounded-circle"
-                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR7S9pKMslch4WjEcuH1FTueBDvu3nL4NTsNg&usqp=CAU"
-                                        alt="First slide">
-                                </div>
-                                <h5 class="mt-4 mb-0"><strong class="text-dark text-capitalize">Deddy</strong></h5>
-                                <h6 class="text-light m-2 ">Mobile Developer</h6>
-                                <p class="m-0 pt-3 text-light">
-                                    <sup><i class="fas fa-quote-left"></i></sup>
-                                    Belajar Di Bimble.id sangat recomended buat pemula
-                                    <sup><i class="fas fa-quote-right"></i></sup>
-                                </p>
-                            </div>
-
-                        </div>
-
-                        <div class="mb-5">
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                                data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                                data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only  text-dark">Next</span>
-                            </a>
-                        </div>
-
-
-                    </div>
+          <br>
+          <h3 class="text-white text-center my-3">Testimonial</h3>
+          <!-- Slider main container-->
+          <div class="swiper-container testimonials-slider testimonials">
+            <!-- Additional required wrapper-->
+            <div class="swiper-wrapper pt-2 pb-5">
+              <!-- Slides-->
+              <div class="swiper-slide px-3">
+                <div class="testimonial card rounded-lg shadow border-0">
+                  <div class="testimonial-avatar"><img
+                      src="https://media-exp3.licdn.com/dms/image/C4E03AQECXvDjaLa55w/profile-displayphoto-shrink_200_200/0/1618435117023?e=1631750400&v=beta&t=455hxUgwBH7X89-G6kS6en2P2Xo9HfTpeCb1Zwh9zjE"
+                      alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                    <p class="testimonial-text">
+                        Belajar di bimble.id sangat rekomendasi bagi pemula seperti saya
+                    </p><strong>M Hafid Masruri</strong>
+                  </div>
                 </div>
+              </div>
+              <div class="swiper-slide px-3">
+                <div class="testimonial card rounded-lg shadow border-0">
+                  <div class="testimonial-avatar"><img
+                      src="https://0.academia-photos.com/26655222/7421713/8341901/s200_deddy_sujarwadi.candra_gunawan.jpg" alt="..."
+                      class="img-fluid"></div>
+                  <div class="text">
+                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                    <p class="testimonial-text">
+                        Belajar di bimble.id sangat menyenangkan dan mempunyai mentor yang kompeten di bidang nya
+                    </p><strong>Deddy Sujarwadi C.G</strong>
+                  </div>
+                </div>
+              </div>
+    
             </div>
+            <div class="swiper-pagination"> </div>
+          </div>
         </div>
-
-    </section>
+    
+      </section>
+      <!-- End Section Testimonial -->
 
     @include('web.layouts.footer')
     @include('web.layouts.script')
-
-    <script>
-        $(document).ready(function () {
-            let scroll_link = $('.scroll');
-
-            //smooth scrolling -----------------------
-            scroll_link.click(function (e) {
-                e.preventDefault();
-                let url = $('body').find($(this).attr('href')).offset().top;
-                $('html, body').animate({
-                    scrollTop: url
-                }, 1000);
-                $(this).parent().addClass('active');
-                $(this).parent().siblings().removeClass('active');
-                return false;
-            });
-        });
-
-    </script>
     <script src="{{ asset('assets/frontend/vendor/Swiper/4.4.1/js/swiper.min.js') }}"></script>
 
 </body>

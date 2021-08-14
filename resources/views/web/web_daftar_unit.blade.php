@@ -12,13 +12,13 @@
                     <label for="form_search" class="form-label">Pencarian</label>
                     <div class="input-label-absolute input-label-absolute-right">
                         <div class="label-absolute"><i class="fa fa-search"></i></div>
-                        <input type="search" id="search" name="keyword" placeholder="Cari Unit?" id="form_search"
+                        <input type="search" id="search" name="keyword" placeholder="Cari Unit ..." id="form_search"
                             class="cari form-control pr-4" value="{{ Request::get('keyword') }}">
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary"> <i class="fas fa-search mr-1"></i>
-
+                <button type="submit" class="btn btn-outline-primary"> <i class="fas fa-search mr-1"></i>
+                    Cari Unit
                 </button>
             </form>
 
@@ -28,11 +28,6 @@
             <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
                 <div class="mr-3" style="color: #322F56">
 
-                    {{-- @if (Request::get('type') != null)
-                    <span class="text-item text-capitalize"><strong> Kursus {{ $nama_type }}</strong></span>
-                    @else
-                    <strong>Semua Kursus</strong>
-                    @endif --}}
                 </div>
 
             </div>

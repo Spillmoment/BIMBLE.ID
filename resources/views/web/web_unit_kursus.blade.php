@@ -18,7 +18,6 @@
             <li class="breadcrumb-item active">Unit Kursus </li>
         </ol>
         <h1 class="hero-heading">Selamat Datang Di Unit {{ $unit->nama_unit }}</h1>
-        {{-- <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" class="avatar avatar-xl img-fluid"> --}}
     </div>
 </section>
 
@@ -134,7 +133,7 @@
                 <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
                     <div class="card card-kelas h-100 border-0 shadow">
                         <div class="card-img-top overflow-hidden gradient-overlay">
-                            <img src="{{ Storage::url('public/'. $item->kursus->gambar_kursus) }}"
+                            <img src="{{url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                 alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
                                 href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug]) }}"
                                 class="tile-link"></a>

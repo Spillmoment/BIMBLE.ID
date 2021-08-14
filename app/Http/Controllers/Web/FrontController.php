@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 use App\Banner;
 use App\KursusUnit;
 use App\GaleriKursus;
-use phpDocumentor\Reflection\Types\Null_;
 
 class FrontController extends Controller
 {
@@ -34,13 +33,11 @@ class FrontController extends Controller
 
     public function kursus(Request $request)
     {
-        $kursus = Kursus::latest()->paginate(9);
-        // $kursus_unit = KursusUnit::with('kursus')
-        //     ->latest()->paginate(9);
-        $kursus_unit = KursusUnit::with('kursus', 'type')->groupBy('kursus_id')->paginate(9);
-        // $kursus_unit = KursusUnit::selectRaw('kursus_id')->with('kursus')->groupBy('kursus_id')->orderBy('kursus_id', 'DESC')->paginate(9);
+        $kursus = Kursus::latest()
+            ->paginate(9);
+        $kursus_unit = KursusUnit::with('kursus', 'type')
+            ->groupBy('kursus_id')->paginate(9);
         $typeKursus = Type::all();
-        // dd($kursus_unit);
 
         $keyword = $request->query('keyword');
         $type = $request->query('type');
@@ -121,27 +118,26 @@ class FrontController extends Controller
 
         $startday = $request->query('startday');
         $endday = $request->query('endday');
-        $get_time = $request->query('clock');        
-        $clock = date('H:00:00',strtotime($get_time));        
+        $get_time = $request->query('clock');
+        $clock = date('H:00:00', strtotime($get_time));
 
         if ($startday || $endday || $get_time) {
             $kursus_unit = KursusUnit::with('jadwal')
                 ->whereHas('jadwal', function ($query) use ($startday, $endday, $clock, $get_time) {
-                    if ($startday == 0 || $endday == 0) { 
+                    if ($startday == 0 || $endday == 0) {
                         $query->whereTime('waktu_mulai', '=', $clock);
                     } elseif (empty($get_time)) {
                         if ($startday <= $endday) {
                             $query->whereBetween('hari', [$startday, $endday]);
                         } else {
-                            $query->whereNotBetween('hari', [$endday+1, $startday-1]);
-                        }     
+                            $query->whereNotBetween('hari', [$endday + 1, $startday - 1]);
+                        }
                     } else {
                         if ($startday <= $endday) {
                             $query->whereBetween('hari', [$startday, $endday])->whereTime('waktu_mulai', '=', $clock);
                         } else {
-                            $query->whereNotBetween('hari', [$endday+1, $startday-1])->whereTime('waktu_mulai', '=', $clock);
+                            $query->whereNotBetween('hari', [$endday + 1, $startday - 1])->whereTime('waktu_mulai', '=', $clock);
                         }
-                        
                     }
                 })
                 ->where('kursus_id', $kursus->id)

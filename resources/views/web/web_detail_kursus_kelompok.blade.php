@@ -17,7 +17,7 @@
 
 </style>
 
-<section style="background-image: url('{{ Storage::url('public/'. $kursus->gambar_kursus) }}');"
+<section style="background-image: url('{{ url('assets/images/kursus/'. $kursus->gambar_kursus) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="text-block">
+            {{-- <div class="text-block">
                 <h5 class="mb-4 mt-4">Galeri Kursus</h5>
                 <div class="row gallery mb-3 ml-n1 mr-n1">
 
@@ -84,7 +84,9 @@
                     </div>
                     @endforelse
                 </div>
-            </div>
+            </div> --}}
+
+
         </div>
     </div>
 

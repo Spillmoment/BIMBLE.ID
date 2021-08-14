@@ -12,18 +12,13 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $kursus = Kursus::all()->count();
-        $unit = Unit::where('status', '1')->count();
-        $pendaftar = Unit::where('status', '0')->count();
-        $komentar = Komentar::all()->count();
-
         return view(
             'admin.dashboard.index',
             [
-                'kursus' => $kursus,
-                'unit' => $unit,
-                'pendaftar' => $pendaftar,
-                'komentar' => $komentar,
+                'kursus' => Kursus::all()->count(),
+                'unit' => Unit::where('status', '1')->count(),
+                'pendaftar' => Unit::where('status', '0')->count(),
+                'komentar' => Komentar::all()->count(),
             ]
         );
     }
