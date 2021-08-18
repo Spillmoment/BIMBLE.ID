@@ -82,17 +82,13 @@
                                     <td> {{ $u->alamat }} </td>
                                     <td>{{ $u->email }}</td>
                                     <td>
-                                        <a class="text-info" href="/storage/file/{{ $u->bukti_alumni }}">
+                                        <a class="btn btn-primary btn-sm" href="/storage/file/{{ $u->bukti_alumni }}">
                                         Download 
                                         </a>
                                     </td>
       
                                     <td>
 
-                                        {{-- <a href="{{ route('pendaftar.status', $u->id) }}?status=1"
-                                            class="btn btn-success btn-sm">
-                                            <i class="fa fa-check"></i>
-                                        </a> --}}
                                         <form class="d-inline" action="{{ route('pendaftar.status', $u->id) }}?status=1"
                                             method="POST">
                                             @csrf
@@ -100,8 +96,10 @@
                                             <button type="submit" id="aktifButton" data-name="{{ $u->nama_unit }}"
                                                 class="btn btn-success btn-sm">
                                                 <i class="fa fa-check"></i>
+                                                Konfirmasi
                                             </button>
                                         </form>
+                                        <div class="mt-2"></div>
                                         <form class="d-inline" action="{{route('pendaftar.destroy', [$u->id])}}"
                                             method="POST">
                                             @method('DELETE')
@@ -109,6 +107,7 @@
                                             <button type="submit" id="deleteButton" data-name="{{ $u->nama_unit }}"
                                                 class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i>
+                                                Delete
                                             </button>
                                         </form>
                                     </td>

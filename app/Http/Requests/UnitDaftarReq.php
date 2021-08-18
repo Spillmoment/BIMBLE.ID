@@ -28,7 +28,7 @@ class UnitDaftarReq extends FormRequest
             'email'     => 'required|unique:unit',
             'no_telp'     => 'required|unique:unit',
             'alamat'     => 'required',
-            'bukti_alumni'  => 'required|file|mimes:doc,csv,xlsx,xls,docx,ppt',
+            'bukti_alumni'  => 'required|file|mimes:doc,csv,xlsx,xls,docx,ppt,pdf',
         ];
     }
 }
