@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                     <th>Deskripsi</th>
-                    <td>{{ $unit->deskripsi }}</td>
+                    <td>{{ $unit->deskripsi ? $unit->deskripsi : 'Belum ada deskripsi' }}</td>
                 </tr>
                 <tr>
                     <th>Alamat </th>
@@ -104,29 +104,5 @@
     </div>
 </div>
 
-
-<!-- Modal -->
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><span class="badge badge-light badge-pill badge-lg" style="font-size: 15px;">
-                        Foto unit {{ $unit->nama_unit }}
-                    </span></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img src="{{ Storage::url('public/'. $unit->gambar_unit) }}" alt="" class="img-thumbnail"
-                    height="200px">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
