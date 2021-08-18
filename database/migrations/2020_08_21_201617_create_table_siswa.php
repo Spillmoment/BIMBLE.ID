@@ -16,11 +16,8 @@ class CreateTableSiswa extends Migration
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('kursus_id');
-            $table->foreign('kursus_id')->references('id')->on('kursus')->onDelete('cascade');
-
-            $table->foreignId('unit_id');
-            $table->foreign('unit_id')->references('id')->on('unit')->onDelete('cascade');
+            $table->foreignId('kursus_unit_id');
+            $table->foreign('kursus_unit_id')->references('id')->on('kursus_unit')->onDelete('cascade');
 
             $table->string('nama_siswa', 100);
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();

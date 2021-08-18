@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Unit;
 
 use App\Http\Controllers\Controller;
 use App\Kursus;
+use App\KursusUnit;
 use App\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,32 +15,35 @@ class SiswaController extends Controller
 
     public function index()
     {
-        $list_kursus = Kursus::with(['kursus_unit' => function ($q) {
-            $q->where('unit_id', Auth::id());
-        }])->get();
+        // $list_kursus = Kursus::with(['kursus_unit' => function ($q) {
+        //     $q->where('unit_id', Auth::id());
+        // }], 'kursus_unit')->get();
         // dd($list_kursus);
+        $list_kursus = KursusUnit::with((['kursus']))->where('unit_id', Auth::id())->get();
 
         return view('unit.siswa.index', [
             'list_kursus' => $list_kursus,
         ]);
     }
 
-    public function kursus_siswa(Request $request, $slug)
+    public function kursus_siswa(Request $request, $id)
     {
         $id_unit = Auth::id();
-        $kursus = Kursus::where('slug', $slug)->first();
-        $siswa = Siswa::where('kursus_id', $kursus->id)->where('unit_id', $id_unit)->get();
+        // $kursus = Kursus::where('slug', $slug)->first();
+        $siswa = Siswa::where('kursus_unit_id', $id)->get();
 
         return view('unit.siswa.siswa', [
-            'kursus' => $kursus,
+            'kursus_unit_id' => $id,
             'siswa' => $siswa,
         ]);
     }
 
 
-    public function create_siswa($slug)
+    public function create_siswa($id)
     {
-        $kursus = Kursus::where('slug', $slug)->first();
+        // $kursus = Kursus::where('slug', $slug)->first();
+        $kursus = KursusUnit::with(['kursus'])->where('id', $id)->first();
+
         return view('unit.siswa.siswa_create', [
             'kursus' => $kursus,
             // 'siswa' => $siswa,

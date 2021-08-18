@@ -39,7 +39,7 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        return view('AuthUnit.passwords.email');
+        return view('authUnit.passwords.email');
     }
 
     /**

@@ -147,7 +147,7 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-4">
-                    <form action="" method="GET">
+                    <form action="{{ route('front.detail.kelompok', Request::route('slug')) }}" method="GET">
                         <div class="text-block">
                             <div>
                                 <label for="form_sort" class="form-label ">Hari Kursus</label>
@@ -233,26 +233,26 @@
 
         });
 
-        $('#action-cari').click(function (event) {
-            event.preventDefault();
-            let startday = $('#startday').val();
-            let endday = $('#endday').val();
-            let clock = $('#timepicker1').val();
+        // $('#action-cari').click(function (event) {
+        //     event.preventDefault();
+        //     let startday = $('#startday').val();
+        //     let endday = $('#endday').val();
+        //     let clock = $('#timepicker1').val();
             
-            $.ajax({
-                type: 'get',
-                // dataType: "json",
-                url: '{{ route('front.detail.kelompok', Request::route('slug')) }}',
-                data: {
-                    startday: startday,
-                    endday: endday,
-                    clock: clock
-                },
-                success: function (data) {
-                    $('#card-kursus').html(data);
-                }
-            })
-        });
+        //     $.ajax({
+        //         type: 'get',
+        //         // dataType: "json",
+        //         url: '{{ route('front.detail.kelompok', Request::route('slug')) }}',
+        //         data: {
+        //             startday: startday,
+        //             endday: endday,
+        //             clock: clock
+        //         },
+        //         success: function (data) {
+        //             $('#card-kursus').html(data);
+        //         }
+        //     })
+        // });
     });
 
 </script>

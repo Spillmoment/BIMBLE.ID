@@ -38,4 +38,9 @@ class KursusUnit extends Model
     {
         return $this->hasMany(Jadwal::class, 'kursus_unit_id', 'id');
     }
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'kursus_unit_id', 'id');
+    }
 }

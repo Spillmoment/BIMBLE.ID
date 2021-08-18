@@ -4,6 +4,7 @@
 @section('content')
 
 @push('after-style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
 <link href="{{ asset('assets/js/picker/mdtimepicker.css') }}" rel="stylesheet">
 @endpush
 
@@ -22,7 +23,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="{{ route('unit.kursus.home') }}">Kursus</a></li>
-                            <li class="active">Tambah Detail {{ $kursus->nama_kursus }}</li>
+                            <li class="active">Pengaturan kursus {{ $kursus_unit->kursus->nama_kursus }}</li>
                         </ol>
                     </div>
                 </div>
@@ -49,7 +50,7 @@
 <div class="content">
     <div class="card">
         <div class="card-header">
-            <strong>Tambah Detail Kursus {{ $kursus->nama_kursus }}</strong>
+            <strong>Pengaturan Detail Kursus {{ $kursus_unit->kursus->nama_kursus }}</strong>
         </div>
         <div class="card-body card-block">
             <form action="{{ route('unit.kursus.update', $kursus_unit->id) }}" method="POST">
@@ -60,16 +61,24 @@
                     <div class="col-md-6">
                         
                         <div class="form-group">
-                            <label for="">Pilih Type Kursus</label>
+                            <label for="">Type Kursus</label>
 
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                                    Private
+                                    <input type="checkbox" class="form-check-input" checked>
+                                    {{ $kursus_unit->type_id == 1 ? 'Private' : 'Kelompok' }}
                                 </label>
-                                <label class="form-check-label ml-4">
-                                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                                    Kelompok
+                            </div>
+
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="">Status</label>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" name="status" class="js-switch" {{ $kursus_unit->status == 'aktif' ? 'checked' : '' }}>
+                                    
                                 </label>
                             </div>
 
@@ -78,27 +87,65 @@
 
                         <div class="form-group">
                             <label for="">Hari Kursus</label>
-                            <input type="date" name="" id="" class="form-control" placeholder=""
-                                aria-describedby="helpId">
-                            <small id="helpId" class="text-muted">Help text</small>
+                            @if ($kursus_unit->type_id == 1)
+                            <p class="text-danger">Jadwal tidak tersedia untuk kelas Private</p>
+                            @else
+                            <select name="hari" class="form-control">
+                                @if (!empty($jadwal->hari))
+                                @php
+                                    $list_hari = array('none','Senin','Selasa','Rabu','Kamis','Jum\'at','Sabtu','Minggu');
+                                @endphp
+                                <option value="{{ $jadwal->hari }}">{{ $list_hari[$jadwal->hari] }}</option>
+                                @else
+                                <option value=""></option>
+                                @endif
+                                <option value="1">Senin</option>
+                                <option value="2">Selasa</option>
+                                <option value="3">Rabu</option>
+                                <option value="4">Kamis</option>
+                                <option value="5">Jum'at</option>
+                                <option value="6">Sabtu</option>
+                                <option value="7">Minggu</option>
+                            </select>
+                                
+                            @endif
+                            <div class="invalid-feedback">
+                                {{$errors->first('hari')}}
+                            </div>
                         </div>
 
-
                         <div class="row">
+                            @if ($kursus_unit->type_id == 1)
+                                
+                            @else
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="awal">Jam Awal</label>
-                                    <input type="text" id="timepicker1" class="form-control" placeholder=""
-                                        aria-describedby="helpId">
+                                    @if ($jadwal)
+                                    <input type="text" id="timepicker1" name="waktu_mulai" class="form-control" value="{{ $jadwal->waktu_mulai }}">
+                                    @else
+                                    <input type="text" id="timepicker1" name="waktu_mulai" class="form-control">
+                                    @endif
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('waktu_mulai')}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="akhir">Jam Akhir</label>
-                                    <input type="text" id="timepicker2" class="form-control" placeholder=""
-                                        aria-describedby="helpId">
+                                    @if ($jadwal)
+                                    <input type="text" id="timepicker2" name="waktu_selesai" class="form-control" value="{{ $jadwal->waktu_selesai }}">
+                                    @else
+                                    <input type="text" id="timepicker2" name="waktu_selesai" class="form-control">
+                                    @endif
+                                    <div class="invalid-feedback">
+                                        {{$errors->first('waktu_selesai')}}
+                                    </div>
                                 </div>
                             </div>
+                            
+                            @endif
                         </div>
 
 
@@ -132,7 +179,16 @@
 
 @push('after-script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 <script src="{{ asset('assets/js/picker/mdtimepicker.js') }}"></script>
+<script>
+    let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+    elems.forEach(function (html) {
+        let switchery = new Switchery(html, {
+            size: 'small'
+        });
+    }); 
+</script>
 <script>
     $(document).ready(function () {
 

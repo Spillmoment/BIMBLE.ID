@@ -18,7 +18,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="{{ route('unit.siswa.home') }}">Siswa</a></li>
-                            <li><a href="{{ route('unit.siswa.kursus', $kursus->slug) }}">{{ $kursus->nama_kursus }}</a></li>
+                            <li><a href="{{ route('unit.siswa.kursus', $kursus->id) }}">{{ $kursus->kursus->nama_kursus }}</a></li>
                             <li class="active">Tambah Siswa</li>
                         </ol>
                     </div>
@@ -30,10 +30,10 @@
 <div class="content">
     <div class="card">
         <div class="card-header">
-            <strong>Tambah Siswa {{ $kursus->nama_kursus }}</strong>
+            <strong>Tambah Siswa {{ $kursus->kursus->nama_kursus }} {{ $kursus->type_id }}</strong>
         </div>
         <div class="card-body card-block">
-            <form action="{{ route('unit.siswa.store', $kursus->slug) }}" method="POST">
+            <form action="{{ route('unit.siswa.store', $kursus->kursus->slug) }}" method="POST">
                 @csrf
        
                 <div class="form-group ">

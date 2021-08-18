@@ -24,7 +24,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="{{ route('unit.siswa.home') }}">Siswa</a></li>
-                            <li class="active">{{ $kursus->nama_kursus }}</li>
+                            {{-- <li class="active">{{ $kursus->nama_kursus }}</li> --}}
                         </ol>
                     </div>
                 </div>
@@ -42,8 +42,7 @@
                     <div class="card-header">
                         <strong class="card-title">Table Siswa </strong>
 
-                        <a class="btn btn-primary btn-sm float-right" href="{{ route('unit.siswa.create', $kursus->slug) }}"> Tambah
-                            Siswa</a>
+                        <a class="btn btn-primary btn-sm float-right" href="{{ route('unit.siswa.create', $kursus_unit_id) }}"> Tambah Siswa</a>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -66,10 +65,10 @@
                                     <td>{{ $siswa->alamat }}</td>
                                     <td>{{ $siswa->nilai }}</td>
                                     <td>
-                                        <a class="btn btn-warning btn-sm text-light" href="{{route('unit.siswa.edit',
-                                        [$kursus->slug, $siswa->id])}}"> <i class="fa fa-pencil"></i></a>
+                                        {{-- <a class="btn btn-warning btn-sm text-light" href="{{route('unit.siswa.edit',
+                                        [$kursus->slug, $siswa->id])}}"> <i class="fa fa-pencil"></i></a> --}}
 
-                                        <form class="d-inline" action="{{route('unit.siswa.delete', [$siswa->id])}}"
+                                        {{-- <form class="d-inline" action="{{route('unit.siswa.delete', [$siswa->id])}}"
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -77,7 +76,7 @@
                                                 class="btn btn-danger btn-sm delete">
                                                 <i class="fa fa-trash"></i>
                                             </button>
-                                        </form>
+                                        </form> --}}
                                     </td>
 
                                 </tr>

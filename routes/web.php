@@ -63,7 +63,7 @@ Route::prefix('unit')
 
         // Detail Kursus
         Route::get('/kursus/detail/{slug}', 'Unit\KursusController@detail')->name('unit.kursus.detail');
-        Route::get('/kursus/create/{slug}', 'Unit\KursusController@tambah_detail')->name('unit.kursus.add');
+        Route::get('/kursus/create/{id}', 'Unit\KursusController@tambah_detail')->name('unit.kursus.add');
         Route::put('/kursus/update/{id}', 'Unit\KursusController@detail_store')->name('unit.kursus.update');
 
         // fasilitas
@@ -81,11 +81,11 @@ Route::prefix('unit')
 
         // nilai
         Route::get('/siswa', 'Unit\SiswaController@index')->name('unit.siswa.home');
-        Route::get('/siswa/{slug}', 'Unit\SiswaController@kursus_siswa')->name('unit.siswa.kursus');
-        Route::get('/siswa/{slug}/create', 'Unit\SiswaController@create_siswa')->name('unit.siswa.create');
-        Route::post('/siswa/{slug}/create', 'Unit\SiswaController@store_siswa')->name('unit.siswa.store');
-        Route::get('/siswa/{slug}/siswa/{id}', 'Unit\SiswaController@edit')->name('unit.siswa.edit');
-        Route::put('/siswa/{slug}/siswa/{id}', 'Unit\SiswaController@update')->name('unit.siswa.update');
+        Route::get('/siswa/{id}', 'Unit\SiswaController@kursus_siswa')->name('unit.siswa.kursus');
+        Route::get('/siswa/{id}/create', 'Unit\SiswaController@create_siswa')->name('unit.siswa.create');
+        Route::post('/siswa/{id}/create', 'Unit\SiswaController@store_siswa')->name('unit.siswa.store');
+        Route::get('/siswa/{id}/siswa/{id}', 'Unit\SiswaController@edit')->name('unit.siswa.edit');
+        Route::put('/siswa/{id}/siswa/{id}', 'Unit\SiswaController@update')->name('unit.siswa.update');
         Route::delete('/siswa/{id}', 'Unit\SiswaController@destroy')->name('unit.siswa.delete');
     });
 

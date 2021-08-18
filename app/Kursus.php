@@ -21,11 +21,6 @@ class Kursus extends Model
         return $this->hasMany(KursusUnit::class, 'kursus_id', 'id');
     }
 
-    public function siswa()
-    {
-        return $this->hasMany(Siswa::class, 'kursus_id', 'id');
-    }
-
     public function galleries()
     {
         return $this->hasMany(GaleriKursus::class, 'kursus_id', 'id');

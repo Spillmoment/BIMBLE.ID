@@ -52,15 +52,19 @@
                                 <div class="media-body">
                                     <h4 class="text-white display-6 mb-2">{{ $item->kursus->nama_kursus }}</h4>
                                     <p class="text-dark font-weight-bold">{{ auth()->user()->nama_unit }} </p>
+                                    <p>{{ $item->type_id == 1 ? 'Private' : 'Kelompok' }}</p>
                                 </div>
                             </div>
                         </div>
     
                         <ul class="list-group list-group-flush ">
                             <li class="list-group-item">
+                                <div class="float-left">
+                                    <span>{{ $item->status }}</span>
+                                </div>
                                 <div class="float-right">
                                     <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.detail', $item->kursus->slug) }}"> <i class="fa fa-eye"></i> Detail </a>
-                                    <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.add',$item->kursus->slug) }}"> <i class="fa fa-plus"></i> Tambah </a>
+                                    <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.add',$item->id) }}"> <i class="fa fa-tasks"></i> Pengaturan </a>
                                 </div>
                                 </li>
                         </ul>

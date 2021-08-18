@@ -146,12 +146,12 @@ class FrontController extends Controller
                 ->paginate(6);
 
                 // return response()->json(['data' => $kursus_unit]);
-                return response()->json([
-                    'kursus' => $kursus,
-                    'kursus_unit' => $kursus_unit,
-                    'gallery' => $gallery,
-                    'success' => true
-                ], 200);
+                // return response()->json([
+                //     'kursus' => $kursus,
+                //     'kursus_unit' => $kursus_unit,
+                //     'gallery' => $gallery,
+                //     'success' => true
+                // ], 200);
         }
 
         return view('web.web_detail_kursus_kelompok', [
