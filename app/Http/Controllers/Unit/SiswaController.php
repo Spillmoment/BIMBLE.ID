@@ -51,9 +51,9 @@ class SiswaController extends Controller
     }
 
 
-    public function store_siswa(Request $request, $slug)
+    public function store_siswa(Request $request, $id)
     {
-        $kursus = Kursus::where('slug', $slug)->first();
+        // $kursus = Kursus::where('slug', $slug)->first();
         $request->validate([
             'nama_siswa'    => 'required|max:255|min:3',
             'jenis_kelamin' => 'required|in:L,P',
@@ -62,12 +62,10 @@ class SiswaController extends Controller
         ]);
 
         $data = $request->all();
-        $data['kursus_id'] = $kursus->id;
-        $data['unit_id'] = Auth::id();
+        $data['kursus_unit_id'] = $id;
 
         Siswa::create($data);
-        return redirect()->route('unit.siswa.kursus', $kursus->slug)
-            ->with(['status' => 'Data Siswa Berhasil Ditambahkan']);
+        return redirect()->route('unit.siswa.kursus', $id)->with(['status' => 'Data Siswa Berhasil Ditambahkan']);
     }
 
 

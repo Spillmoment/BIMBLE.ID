@@ -33,7 +33,7 @@
             <strong>Tambah Siswa {{ $kursus->kursus->nama_kursus }} {{ $kursus->type_id }}</strong>
         </div>
         <div class="card-body card-block">
-            <form action="{{ route('unit.siswa.store', $kursus->kursus->slug) }}" method="POST">
+            <form action="{{ route('unit.siswa.store', $kursus->id) }}" method="POST">
                 @csrf
        
                 <div class="form-group ">
