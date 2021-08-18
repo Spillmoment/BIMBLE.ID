@@ -48,9 +48,8 @@ class KomentarController extends Controller
     public function destroy(Komentar $komentar)
     {
         $komentar->delete();
-        return redirect()->route('admin.komentar.index')->with([
-            'status' => 'Data Komentar Berhasil Dihapus!
-            '
+        return redirect()->route('komentar.index')->with([
+            'status' => 'Data Komentar Berhasil Dihapus!'
         ]);
     }
 }
