@@ -69,16 +69,15 @@ class SiswaController extends Controller
     }
 
 
-    public function edit($slug, $id)
+    public function edit($id, $id_siswa)
     {
-        // dd($slug);
-        $siswa = Siswa::findOrFail($id);
-        $kursus = Kursus::where('slug', $slug)->first();
-        return view('unit.siswa.siswa_edit', compact('siswa', 'kursus'));
+        $siswa = Siswa::findOrFail($id_siswa);
+        // $kursus = Kursus::where('slug', $slug)->first();
+        return view('unit.siswa.siswa_edit', compact('siswa','id'));
     }
 
 
-    public function update(Request $request, $slug, $id)
+    public function update(Request $request, $id, $id_siswa)
     {
         $request->validate([
             'nama_siswa'    => 'required|max:255|min:3',
@@ -87,11 +86,11 @@ class SiswaController extends Controller
             'nilai'         => 'required|numeric|between:0,100',
         ]);
 
-        $siswa = Siswa::findOrFail($id);
+        $siswa = Siswa::findOrFail($id_siswa);
         $data = $request->all();
 
         $siswa->update($data);
-        return redirect()->route('unit.siswa.kursus', $slug)->with([
+        return redirect()->route('unit.siswa.kursus', $id)->with([
             'status' => 'Data Siswa Berhasil Di Update'
         ]);
     }

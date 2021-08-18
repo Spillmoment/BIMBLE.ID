@@ -65,10 +65,10 @@
                                     <td>{{ $siswa->alamat }}</td>
                                     <td>{{ $siswa->nilai }}</td>
                                     <td>
-                                        {{-- <a class="btn btn-warning btn-sm text-light" href="{{route('unit.siswa.edit',
-                                        [$kursus->slug, $siswa->id])}}"> <i class="fa fa-pencil"></i></a> --}}
+                                        <a class="btn btn-warning btn-sm text-light" href="{{route('unit.siswa.edit',
+                                        [$siswa->kursus_unit_id, $siswa->id])}}"> <i class="fa fa-pencil"></i></a>
 
-                                        {{-- <form class="d-inline" action="{{route('unit.siswa.delete', [$siswa->id])}}"
+                                        <form class="d-inline" action="{{route('unit.siswa.delete', [$siswa->id])}}"
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -76,7 +76,7 @@
                                                 class="btn btn-danger btn-sm delete">
                                                 <i class="fa fa-trash"></i>
                                             </button>
-                                        </form> --}}
+                                        </form>
                                     </td>
 
                                 </tr>

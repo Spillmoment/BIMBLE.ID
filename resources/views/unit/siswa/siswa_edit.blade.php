@@ -18,7 +18,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="{{ route('unit.siswa.home') }}">Siswa</a></li>
-                            <li><a href="{{ route('unit.siswa.kursus', $kursus->slug) }}">{{ $kursus->nama_kursus }}</a></li>
+                            {{-- <li><a href="{{ route('unit.siswa.kursus', $siswa->kursus_unit_id) }}">{{ $kursus->nama_kursus }}</a></li> --}}
                             <li class="active">Edit Siswa</li>
                         </ol>
                     </div>
@@ -36,7 +36,7 @@
                     <strong class="card-title">Edit Siswa <span class="badge badge-success float-right mt-1">{{ $siswa->nama_siswa }}</span></strong>
                 </div>
                 <div class="card-body card-block">
-                    <form method="post" action="{{route('unit.siswa.update',[$kursus->slug, $siswa->id])}}">
+                    <form method="post" action="{{route('unit.siswa.update',[$id, $siswa->id])}}">
                         @csrf
                         @method('PUT')
         
