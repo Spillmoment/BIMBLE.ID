@@ -50,7 +50,7 @@ class UnitController extends Controller
         $data['status'] = '2';
 
         Unit::create($data);
-        return redirect()->back()->with(['message' => 'Pendaftaran Unit Berhasil Dikirim']);
+        return back()->with(['message' => 'Pendaftaran Unit Berhasil Dikirim']);
     }
 
     public function show($slug)
