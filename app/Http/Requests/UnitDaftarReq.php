@@ -24,11 +24,11 @@ class UnitDaftarReq extends FormRequest
     public function rules()
     {
         return [
-            'nama_unit' => 'required',
+            'nama_unit' => 'required|unique:unit',
             'email'     => 'required|unique:unit',
-            'no_telp'     => 'required|unique:unit',
+            'no_telp'    => 'required|numeric|digits_between:10,13|unique:unit',
             'alamat'     => 'required',
-            'bukti_alumni'  => 'required|file|mimes:doc,csv,xlsx,xls,docx,ppt,pdf',
+            'bukti_alumni'  => 'required|file|mimes:doc,docx,pdf',
         ];
     }
 }
