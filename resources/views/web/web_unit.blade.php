@@ -9,7 +9,7 @@
       <!-- Breadcrumbs -->
       <ol class="breadcrumb pl-0  justify-content-center">
         <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
-        <li class="breadcrumb-item active">Daftar Unit</li>
+        <li class="breadcrumb-item active">Pendaftaran Unit</li>
     </div>
 
     <div class="container">
@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label for="surname" class="form-label">Nama Unit</label>
                             <input type="text" name="nama_unit" id="surname" placeholder="Masukkan Nama Unit"
-                                required="required" class="form-control {{ $errors->first('nama_unit') ? 'is-invalid' : '' }}" value="{{ old('nama_unit') }}">
+                                class="form-control {{ $errors->first('nama_unit') ? 'is-invalid' : '' }}" value="{{ old('nama_unit') }}">
                                 <div class="invalid-feedback">
                                     {{$errors->first('nama_unit')}}
                                 </div>
@@ -41,8 +41,8 @@
                             
                         <div class="form-group">
                             <label for="no_telp" class="form-label">Nomor Telepon</label>
-                            <input type="text" name="no_telp" id="no_telp" placeholder="Masukkan Nomor Telepon" required="required"
-                                class="form-control {{ $errors->first('no_telp') }}" value="{{ old('no_telp') }}">
+                            <input type="number" name="no_telp" id="no_telp" placeholder="Masukkan Nomor Telepon" 
+                                class="form-control {{ $errors->first('no_telp') ? 'is-invalid' : '' }} " value="{{ old('no_telp') }}">
                                 <div class="invalid-feedback">
                                     {{ $errors->first('no_telp') }}
                                 </div>
@@ -50,7 +50,7 @@
 
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Masukkan Email" required="required"
+                            <input type="email" name="email" id="email" placeholder="Masukkan Email" 
                                 class="form-control {{ $errors->first('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}">
                                 <div class="invalid-feedback">
                                     {{$errors->first('email')}}
@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <label for="message" class="form-label">Alamat</label>
                             <textarea rows="4" name="alamat" id="message" placeholder="Masukkan Alamat"
-                                required="required" class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}">{{ old('alamat') }} 
+                                 class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}">{{ old('alamat') }} 
                             </textarea>
                             <div class="invalid-feedback">
                                 {{$errors->first('alamat')}}
@@ -71,14 +71,12 @@
                           <label for="bukti" class="form-label">File Alumni</label>
                           <input type="file" class="form-control-file" name="bukti_alumni" id="bukti" placeholder="" aria-describedby="fileHelpId">
                           <small id="fileHelpId" class="form-text text-muted {{ $errors->first('bukti_alumni') ? 
-                          'is-invalid' : '' }}">Upload File Bukti ALumni</small>
+                          'is-invalid' : '' }}">Upload File Bukti ALumni: doc,docx,pdf</small>
                         <div class="invalid-feedback">
                             {{$errors->first('bukti_alumni')}}
                         </div>
                         </div>
-
-                        <button type="reset" class="btn btn-outline-danger">Reset</button>
-                        <button type="submit" class="btn btn-outline-primary">Kirim</button>
+                        <button type="submit" class="btn btn-primary py-2 px-3"> Submit</button>
                     </div>
                 </form>
             </div>
@@ -87,7 +85,7 @@
                 <div class="pl-lg-4">
                  
                     <div class="mb-3">
-                        <h2 class="h4 mb-3">Kursus Yang Dipersiapkan</h2>
+                        <h5 class="mb-3">Kursus yang harus dipersiapkan unit</h5>
                             @foreach ($kursus as $item)
                         <span class="badge badge-pill badge-default p-3 text-muted font-weight-bold">{{ $item->nama_kursus }}</span>
                             @endforeach
@@ -137,10 +135,6 @@
                             notEmpty: {
                                 message: 'Silahkan isi nama unit'
                             },
-                            stringLength: {
-                                min: 3,
-                                max: 100,
-                            },
                             regexp: {
                                 regexp: /^[a-zA-Z ]+$/,
                             }
@@ -151,13 +145,6 @@
                             notEmpty: {
                                 message: 'Silahkan isi no telepon'
                             },
-                            stringLength: {
-                                min: 11,
-                                max: 13,
-                            },
-                            regexp: {
-                                regexp: /^[0-9+]+$/,
-                                // message: " Silahkan isi dengan angka"
                             }
                         }
                     },
