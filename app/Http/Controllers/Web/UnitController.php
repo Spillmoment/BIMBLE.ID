@@ -8,7 +8,6 @@ use App\Http\Requests\UnitDaftarReq;
 use App\Unit;
 use App\Kursus;
 use App\KursusUnit;
-use Illuminate\Support\Facades\Storage;
 use App\Galeri;
 use App\GaleriKursus;
 use Illuminate\Support\Str;
@@ -18,8 +17,8 @@ class UnitController extends Controller
 
     public function list(Request $request)
     {
-        $unit = Unit::where('status', '1')->latest()->paginate(9);
 
+        $unit = Unit::where('status', '1')->latest()->paginate(9);
         if ($request->keyword) {
             $unit = Unit::where('nama_unit', 'like', '%' . $request->keyword . '%')
                 ->latest()->paginate(9);
