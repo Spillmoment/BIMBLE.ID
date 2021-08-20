@@ -1,6 +1,6 @@
 @extends('admin.layouts.tutor')
 
-@section('title','Bimble - Siswa')
+@section('title','Unit - Siswa')
 
 @push('after-style')
 {{-- CDN untuk tost --}}
