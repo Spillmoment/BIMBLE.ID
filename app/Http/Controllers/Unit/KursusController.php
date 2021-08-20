@@ -20,8 +20,7 @@ class KursusController extends Controller
 
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('unit_id', Auth::id())
-            ->latest()->get();
-        // dd($kursus_unit);
+            ->latest()->paginate(6);
 
         return view('unit.kursus.index', [
             'list_kursus' => $list_kursus,
@@ -31,14 +30,13 @@ class KursusController extends Controller
 
     public function tambah_kursus(Request $request)
     {
-        $id_unit = Auth::id();
-        KursusUnit::insert(array(
-            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 1, 'biaya_kursus' => 0, 'status' => 'nonaktif'),
-            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 2, 'biaya_kursus' => 0, 'status' => 'nonaktif'),
-        ));
-
+        KursusUnit::create([
+            'kursus_id' => $request->kursus_id,
+            'unit_id'  => Auth::id(),
+            'biaya_kursus' => 0,
+            'status' => 'nonaktif'
+        ]);
         $kursus = Kursus::find($request->kursus_id);
-
         return response()->json([
             'message' => 'Bimbel ' . $kursus->nama_kursus . ' berhasil ditambahkan.'
         ]);
