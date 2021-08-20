@@ -32,23 +32,10 @@ class KursusController extends Controller
     public function tambah_kursus(Request $request)
     {
         $id_unit = Auth::id();
-        // KursusUnit::createMany([
-        //     'kursus_id' => $request->kursus_id,
-        //     'unit_id'  => $id_unit,
-        //     'type_id' => 1,
-        //     'biaya_kursus' => 0,
-        //     'status' => 'nonaktif'
-        // ],[
-        //     'kursus_id' => $request->kursus_id,
-        //     'unit_id'  => $id_unit,
-        //     'type_id' => 2,
-        //     'biaya_kursus' => 0,
-        //     'status' => 'nonaktif'
-        // ]);
         KursusUnit::insert(array(
-            array('kursus_id' => $request->kursus_id,'unit_id'  => $id_unit,'type_id' => 1,'biaya_kursus' => 0,'status' => 'nonaktif'),
-            array('kursus_id' => $request->kursus_id,'unit_id'  => $id_unit,'type_id' => 2,'biaya_kursus' => 0,'status' => 'nonaktif'),
-            ));
+            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 1, 'biaya_kursus' => 0, 'status' => 'nonaktif'),
+            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 2, 'biaya_kursus' => 0, 'status' => 'nonaktif'),
+        ));
 
         $kursus = Kursus::find($request->kursus_id);
 
@@ -86,25 +73,21 @@ class KursusController extends Controller
     }
 
 
-    public function tambah_detail(Request $request, $id)
+    public function tambah_detail($id)
     {
-        // $kursus = Kursus::where('slug', $slug)->first();
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('id', $id)
             ->where('unit_id', Auth::id())
             ->first();
-        
+
         $jadwal = Jadwal::with(['Kursus_unit'])
-                    ->where('kursus_unit_id', $kursus_unit->id)
-                    ->first();
-        
+            ->where('kursus_unit_id', $kursus_unit->id)
+            ->first();
+
         return view('unit.kursus.tambah', [
-            // 'kursus' => $kursus,
             'kursus_unit' => $kursus_unit,
             'jadwal' => $jadwal,
         ]);
-        
-        
     }
 
     public function detail_store(Request $request, $id)
@@ -121,7 +104,7 @@ class KursusController extends Controller
         } else {
             $status = 'nonaktif';
         }
-        
+
 
         $kursus = KursusUnit::findOrFail($id);
         $kursus->update([
