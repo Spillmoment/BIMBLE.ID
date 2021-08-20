@@ -108,10 +108,9 @@ class FrontController extends Controller
             ->firstOrFail();
 
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
-            ->where('type_id', 1)
+            ->where('type_id', 2)
             ->orderBy('created_at', 'desc')
             ->paginate(6);
-        // ->groupBy('unit_id')
 
         $gallery = GaleriKursus::with('kursus')
             ->where('kursus_id', $kursus->id)
@@ -143,7 +142,7 @@ class FrontController extends Controller
                     }
                 })
                 ->where('kursus_id', $kursus->id)
-                ->where('type_id', 1)
+                ->where('type_id', 2)
                 ->orderBy('created_at', 'desc')
                 ->paginate(6);
         }
