@@ -21,12 +21,9 @@
                     <form action="#" method="post" class="form-horizontal">
                         <div class="row form-group">                            
                             @foreach ($list_kursus as $kursus)
-                            {{-- @foreach ($kursus->kursus_unit as $kursus_unit) --}}
                                 <div class="col-6 pt-3">
                                     <input type="checkbox" class="js-switch" data-id ="{{ $kursus->id }}" {{ $kursus->kursus_unit->contains('unit_id',Auth::user()->id) ? 'checked' : '' }}> {{ $kursus->nama_kursus }}
                                 </div>
-                                
-                            {{-- @endforeach --}}
                             @endforeach
                         </div>
                     </form>
@@ -40,41 +37,28 @@
 
           <div class="row">
           
-            @foreach ($kursus_unit as $item)
-            <div class="col-md-4">
-                <aside class="profile-nav alt">
-                    <section class="card">
-                        <div class="card-header  bg-primary">
-                            <div class="media">
-                                <a href="#">
-                                    <img class="align-self-center mr-3" style="width:100px; height:80px;" alt="" src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="text-white display-6 mb-2">{{ $item->kursus->nama_kursus }}</h4>
-                                    <p class="text-dark font-weight-bold">{{ auth()->user()->nama_unit }} </p>
-                                    <p>{{ $item->type_id == 1 ? 'Private' : 'Kelompok' }}</p>
-                                </div>
-                            </div>
-                        </div>
-    
-                        <ul class="list-group list-group-flush ">
-                            <li class="list-group-item">
-                                <div class="float-left">
-                                    <span>{{ $item->status }}</span>
-                                </div>
-                                <div class="float-right">
-                                    <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.detail', $item->kursus->slug) }}"> <i class="fa fa-eye"></i> Detail </a>
-                                    <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.add',$item->id) }}"> <i class="fa fa-tasks"></i> Pengaturan </a>
-                                </div>
-                                </li>
-                        </ul>
-    
-                    </section>
-                </aside>
-            </div>
-            @endforeach
-
+            @forelse ($kursus_unit as $item)
+           <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}" alt="{{ $item->kursus->nama_kursus }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ $item->kursus->nama_kursus }}</h5>
+                  <a href="{{ route('unit.kursus.add',$item->id) }}" class="btn btn-primary btn-sm btn-block"> <i class="fa fa-eye"></i> Detail</a>
+                </div>
+              </div>
+           </div>
+           @empty
+                 <div class="alert alert-primary justify-content-center" role="alert">
+                     <h4><center>Belum ada kursus yang dipilih</center></h4>
+                 </div>
+             @endforelse
           </div>
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-template d-flex ">
+                {{ $kursus_unit->appends(Request::all())->links() }}
+            </ul>
+        </nav>
 
 </div>
 
