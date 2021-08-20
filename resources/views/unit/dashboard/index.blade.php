@@ -1,6 +1,6 @@
 @extends('admin.layouts.tutor')
 
-@section('title','Bimble - Dashboard Unit')
+@section('title','Unit - Halaman Dashboard')
 
 @section('content')
 
@@ -26,6 +26,7 @@
         <!-- Widgets  -->
         <div class="row">
 
+            
             <div class="col-lg-4 col-md-3">
                 <div class="card">
                     <div class="card-body">
@@ -35,8 +36,27 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">10</span></div>
+                                    <div class="stat-text"><span class="count">{{ $kursus }}</span></div>
                                     <div class="stat-heading">Kursus</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-five">
+                            <div class="stat-icon dib flat-color-2">
+                                <i class="pe-7s-browser"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="text-left dib">
+                                    <div class="stat-text"><span class="count">{{ $mentor }}</span></div>
+                                    <div class="stat-heading">Mentor</div>
                                 </div>
                             </div>
                         </div>
@@ -49,11 +69,11 @@
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-2">
-                                <i class="pe-7s-user"></i>
+                                <i class="pe-7s-browser"></i>
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">10</span></div>
+                                    <div class="stat-text"><span class="count">{{ $fasilitas }}</span></div>
                                     <div class="stat-heading">Fasilitas</div>
                                 </div>
                             </div>
@@ -61,6 +81,26 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-4 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-five">
+                            <div class="stat-icon dib flat-color-2">
+                                <i class="pe-7s-browser"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="text-left dib">
+                                    <div class="stat-text"><span class="count">{{ $galeri }}</span></div>
+                                    <div class="stat-heading">Galeri</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
 
         </div>
 
