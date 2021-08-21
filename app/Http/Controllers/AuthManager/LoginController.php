@@ -8,22 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest:manager')->except('logoutManager');
@@ -49,7 +34,7 @@ class LoginController extends Controller
         if (Auth::guard('manager')->attempt($credential, $request->member)) {
             return redirect()->intended(route('dashboard'));
         } else {
-            session()->flash('loginError', 'Periksa kembali login anda');
+            session()->flash('loginError', 'Email atau password salah, periksa kembali akun anda');
         }
 
         return redirect()->back()->withInput($request->only('email', 'remember'));
