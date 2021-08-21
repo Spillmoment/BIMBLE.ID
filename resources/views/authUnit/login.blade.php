@@ -17,14 +17,11 @@
                             <h5 class="text-muted mb-4 mt-2">Unit | Silahkan Login</h5>
 
                             @if(session('loginError'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <span class="alert_icon lnr lnr-warning"></span>
-                                {{ session('loginError') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span class="fas fa-times h6" aria-hidden="true"></span>
-                                </button>
+                            <div class="alert alert-warning" role="alert">
+                                <h6>{{ session('loginError') }}</h6>
                             </div>
-                            @endif
+                             @endif
+ 
                         </div>
                         <!--end auth-logo-text-->
 
