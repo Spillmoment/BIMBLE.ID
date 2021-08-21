@@ -27,18 +27,18 @@ class BannerController extends Controller
         $request->validate([
             'kata1' => 'required',
             'kata2' => 'required',
-            'gambar_banner' => 'nullable|sometimes|image|mimes:jpg,png,bmp,jpeg'
+            'gambar_banner' => 'nullable|sometimes|image|mimes:jpg,png,bmp,jpeg,webp'
         ]);
 
         $banner = Banner::findOrFail($id);
         $data = $request->all();
 
         if (!empty($data['gambar_banner'])) {
-            File::delete(public_path('images/banner/' . $banner->gambar_banner));
+            File::delete(public_path('assets/images/banner/' . $banner->gambar_banner));
             $nama_foto = rand(1, 999) . "-" . $data['gambar_banner']->getClientOriginalName();
             $data['gambar_banner'] = Image::make($data['gambar_banner']->getRealPath());
-            $data['gambar_banner']->resize(700, 500);
-            $data['gambar_banner']->save(public_path('images/banner/' . $nama_foto));
+            $data['gambar_banner']->resize(1200, 800);
+            $data['gambar_banner']->save(public_path('assets/images/banner/' . $nama_foto));
             $data['gambar_banner'] = $nama_foto;
         }
 
