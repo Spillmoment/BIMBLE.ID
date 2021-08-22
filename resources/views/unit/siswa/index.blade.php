@@ -35,7 +35,7 @@
 <!-- /.breadcrumbs-->
 
 <div class="content">
-    
+
     <div class="row">
 
         @foreach ($list_kursus as $kursus)
@@ -45,19 +45,19 @@
                     <div class="card-header user-header alt bg-dark">
                         <div class="media">
                             <a href="#">
-                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{ url('assets/images/kursus/'. $kursus->gambar_kursus) }}">
+                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;"
+                                    alt="" src="{{ url('assets/images/kursus/'. $kursus->kursus->gambar_kursus) }}">
                             </a>
                             <div class="media-body">
                                 <h4 class="text-light display-6">{{ $kursus->kursus->nama_kursus }}</h4>
-                                {{-- <p>{{ $kursus_unit->type_id }} </p> --}}
                             </div>
                         </div>
                     </div>
 
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            {{-- <a href="{{ route('unit.siswa.kursus', $kursus->slug) }}"> <i class="fa fa-bell-o"></i> Siswa <span class="badge badge-success pull-right">11</span></a> --}}
-                            <a href="{{ route('unit.siswa.kursus', $kursus->id) }}"> <i class="fa fa-user"></i> Siswa</a>
+                            <a href="{{ route('unit.siswa.kursus', $kursus->id) }}"> <i class="fa fa-user"></i>
+                                Siswa</a>
                         </li>
                     </ul>
 
