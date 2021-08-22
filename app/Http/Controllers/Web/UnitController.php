@@ -64,10 +64,11 @@ class UnitController extends Controller
             ->get();
 
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
+            ->whereNotNull('type_id')
             ->where('unit_id', $unit->id)
+            ->where('status', 'aktif')
+            ->groupBy('kursus_id')
             ->get();
-
-        // dd($kursus_check);
 
         return view('web.web_unit_kursus', [
             'unit' => $unit,
