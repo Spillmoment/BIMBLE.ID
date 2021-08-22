@@ -58,7 +58,7 @@
                         <div class="card-img-top overflow-hidden gradient-overlay">
                             <img src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                 alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" />
-                            <a href="{{ Request::get('type') == 2 ? route('front.detail.private', $item->kursus->slug) : route('front.detail.kelompok', $item->kursus->slug) }}"
+                            <a href="{{ Request::get('type') == 1 ? route('front.detail.private', $item->kursus->slug) : route('front.detail.kelompok', $item->kursus->slug) }}"
                                 class="tile-link"></a>
 
                             <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
