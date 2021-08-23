@@ -1,8 +1,18 @@
-@include('layouts.style')
+<!-- Google fonts - Playfair Display-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
+<!-- Google fonts - Poppins-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
+<!-- Magnigic Popup-->
+<link rel="stylesheet" href="{{asset('assets/frontend/vendor/magnific-popup/magnific-popup.css') }}">
+<!-- theme stylesheet-->
+<link rel="stylesheet" href="{{asset('assets/frontend/vendor/bootstrap/style.default.css') }}" id="theme-stylesheet">
+<!-- Custom stylesheet - for your changes-->
+<link rel="stylesheet" href="{{asset('assets/frontend/css/custom.css') }}">
+<!-- Favicon-->
+<link rel="shortcut icon" href="{{asset('assets/frontend/img/favicon.png') }}">
 
-<title> Unit | Login </title>
 
-
+<title> Bimble | Unit Login </title>
 <main class="login-container">
     <div class="container">
         <div class="row page-login d-flex justify-content-center">
@@ -17,14 +27,11 @@
                             <h5 class="text-muted mb-4 mt-2">Unit | Silahkan Login</h5>
 
                             @if(session('loginError'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <span class="alert_icon lnr lnr-warning"></span>
-                                {{ session('loginError') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span class="fas fa-times h6" aria-hidden="true"></span>
-                                </button>
+                            <div class="alert alert-warning" role="alert">
+                                <h6>{{ session('loginError') }}</h6>
                             </div>
                             @endif
+
                         </div>
                         <!--end auth-logo-text-->
 

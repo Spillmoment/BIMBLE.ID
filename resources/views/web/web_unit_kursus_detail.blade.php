@@ -148,7 +148,7 @@
                                     @if ($kursus_unit->biaya_kursus != null)
                                     @currency($kursus_unit->biaya_kursus).00
                                     @else
-                                    0
+                                    Harga belum ada
                                     @endif
                                 </td>
                             </tr>
@@ -232,7 +232,7 @@
                                 {{ $errors->first('komentar') }}
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Kirim</button>
+                        <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
                     </form>
                 </div>
             </div>
@@ -247,7 +247,7 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
-        $('.btn-primary').on('click', function () {
+        $('.btn-kirim').on('click', function () {
             var $this = $(this);
             $('button').css("opacity", 0.4);
             var loadingText =

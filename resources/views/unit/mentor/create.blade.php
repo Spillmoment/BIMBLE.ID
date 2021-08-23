@@ -1,6 +1,6 @@
 @extends('admin.layouts.tutor')
 
-@section('title','Bimble - Tambah Data Mentor')
+@section('title','Unit - Tambah Data Mentor')
 @section('content')
 
 <div class="breadcrumbs">

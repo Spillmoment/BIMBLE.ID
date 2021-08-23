@@ -16,7 +16,8 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         $banner = Banner::all();
-        $kursus_unit = KursusUnit::selectRaw('kursus_id')
+        $kursus_unit = KursusUnit::where('type_id', 2)
+            ->where('status', 'aktif')
             ->with('kursus')->groupBy('kursus_id')
             ->latest()->paginate(9);
         $type = Type::all();
@@ -36,6 +37,8 @@ class FrontController extends Controller
         $kursus = Kursus::latest()
             ->paginate(9);
         $kursus_unit = KursusUnit::with('kursus', 'type')
+            ->where('type_id', 2)
+            ->where('status', 'aktif')
             ->groupBy('kursus_id')->paginate(9);
         $typeKursus = Type::all();
 
@@ -48,6 +51,7 @@ class FrontController extends Controller
                 ->whereHas('kursus', function ($query) use ($keyword) {
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
+                ->where('status', 'aktif')
                 ->groupBy('kursus_id')
                 ->latest()
                 ->paginate(9);
@@ -59,6 +63,7 @@ class FrontController extends Controller
                 ->whereHas('kursus', function ($query) use ($keyword) {
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
+                ->where('status', 'aktif')
                 ->groupBy('kursus_id')
                 ->latest()
                 ->paginate(9);
@@ -106,10 +111,9 @@ class FrontController extends Controller
             ->firstOrFail();
 
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
-            ->where('type_id', 1)
+            ->where('type_id', 2)
             ->orderBy('created_at', 'desc')
             ->paginate(6);
-        // ->groupBy('unit_id')
 
         $gallery = GaleriKursus::with('kursus')
             ->where('kursus_id', $kursus->id)
@@ -141,17 +145,9 @@ class FrontController extends Controller
                     }
                 })
                 ->where('kursus_id', $kursus->id)
-                ->where('type_id', 1)
+                ->where('type_id', 2)
                 ->orderBy('created_at', 'desc')
                 ->paginate(6);
-
-                // return response()->json(['data' => $kursus_unit]);
-                // return response()->json([
-                //     'kursus' => $kursus,
-                //     'kursus_unit' => $kursus_unit,
-                //     'gallery' => $gallery,
-                //     'success' => true
-                // ], 200);
         }
 
         return view('web.web_detail_kursus_kelompok', [
@@ -174,36 +170,35 @@ class FrontController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(9);
 
-            $startday = $request->query('startday');
-            $endday = $request->query('endday');
-            $get_time = $request->query('clock');        
-            $clock = date('H:00:00',strtotime($get_time));        
-    
-            if ($startday || $endday || $get_time) {
-                $kursus_unit = KursusUnit::with('jadwal')
-                    ->whereHas('jadwal', function ($query) use ($startday, $endday, $clock, $get_time) {
-                        if ($startday == 0 || $endday == 0) { 
-                            $query->whereTime('waktu_mulai', '=', $clock);
-                        } elseif (empty($get_time)) {
-                            if ($startday <= $endday) {
-                                $query->whereBetween('hari', [$startday, $endday]);
-                            } else {
-                                $query->whereNotBetween('hari', [$endday+1, $startday-1]);
-                            }     
+        $startday = $request->query('startday');
+        $endday = $request->query('endday');
+        $get_time = $request->query('clock');
+        $clock = date('H:00:00', strtotime($get_time));
+
+        if ($startday || $endday || $get_time) {
+            $kursus_unit = KursusUnit::with('jadwal')
+                ->whereHas('jadwal', function ($query) use ($startday, $endday, $clock, $get_time) {
+                    if ($startday == 0 || $endday == 0) {
+                        $query->whereTime('waktu_mulai', '=', $clock);
+                    } elseif (empty($get_time)) {
+                        if ($startday <= $endday) {
+                            $query->whereBetween('hari', [$startday, $endday]);
                         } else {
-                            if ($startday <= $endday) {
-                                $query->whereBetween('hari', [$startday, $endday])->whereTime('waktu_mulai', '=', $clock);
-                            } else {
-                                $query->whereNotBetween('hari', [$endday+1, $startday-1])->whereTime('waktu_mulai', '=', $clock);
-                            }
-                            
+                            $query->whereNotBetween('hari', [$endday + 1, $startday - 1]);
                         }
-                    })
-                    ->where('kursus_id', $kursus->id)
-                    ->where('type_id', 2)
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(6);
-            }
+                    } else {
+                        if ($startday <= $endday) {
+                            $query->whereBetween('hari', [$startday, $endday])->whereTime('waktu_mulai', '=', $clock);
+                        } else {
+                            $query->whereNotBetween('hari', [$endday + 1, $startday - 1])->whereTime('waktu_mulai', '=', $clock);
+                        }
+                    }
+                })
+                ->where('kursus_id', $kursus->id)
+                ->where('type_id', 2)
+                ->orderBy('created_at', 'desc')
+                ->paginate(6);
+        }
 
         return view('web.web_detail_kursus_private', [
             'kursus' => $kursus,

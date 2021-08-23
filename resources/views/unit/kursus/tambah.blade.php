@@ -1,6 +1,6 @@
 @extends('admin.layouts.tutor')
 
-@section('title','Bimble - Data Unit Kursus')
+@section('title','Unit - Tambah Kursus')
 @section('content')
 
 @push('after-style')

@@ -38,7 +38,7 @@ class LoginController extends Controller
         if (Auth::guard('unit')->attempt($credential, $request->member)) {
             return redirect()->intended(route('unit.home'));
         } else {
-            session()->flash('loginError', 'Periksa kembali login anda');
+            session()->flash('loginError', 'Email atau password salah, periksa kembali akun anda');
         }
 
         return redirect()->back()->withInput($request->only('email', 'remember'));

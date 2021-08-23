@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Unit;
 
+use App\Fasilitas;
+use App\Galeri;
 use App\Http\Controllers\Controller;
+use App\KursusUnit;
+use App\Mentor;
 use Illuminate\Http\Request;
 use App\Unit;
 use Illuminate\Support\Facades\File;
@@ -18,18 +22,18 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // $kursus = Kursus::with('tutor')
-        //     ->where('id_tutor', Auth::id())->count();
-        // $jumlah_siswa = Siswa::with('tutor')
-        //     ->where('id_tutor', Auth::id())->count();
-        // $jumlah_pendaftar = DB::table('order_detail')
-        //                     ->join('kursus', 'order_detail.id_kursus', '=', 'kursus.id')
-        //                     ->select('order_detail.*')
-        //                     ->where('order_detail.status', '=', 'SUCCESS')
-        //                     ->where('kursus.id_tutor', '=', Auth::id())
-        //                     ->count();
 
-        return view('unit.dashboard.index');
+        $kursus = KursusUnit::with(['unit', 'kursus'])
+            ->where('unit_id', Auth::id())
+            ->groupBy('kursus_id')
+            ->get()
+            ->count();
+
+        $mentor = Mentor::where('unit_id', Auth::id())->count();
+        $fasilitas = Fasilitas::where('unit_id', Auth::id())->count();
+        $galeri = Galeri::where('unit_id', Auth::id())->count();
+
+        return view('unit.dashboard.index', compact('kursus', 'mentor', 'fasilitas', 'galeri'));
     }
 
     public function profile()

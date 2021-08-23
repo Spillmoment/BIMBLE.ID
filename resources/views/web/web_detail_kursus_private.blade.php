@@ -17,21 +17,12 @@
 
 </style>
 
-<section style="background-image: url('{{url('assets/images/kursus/'. $kursus->gambar_kursus) }}');"
+<section style="background-image: url('{{ url('assets/images/kursus/'. $kursus->gambar_kursus) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb text-white justify-content-center no-border mb-0">
-            <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('front.kursus') }}">
-                    Daftar Kursus</a></li>
-            <li class="breadcrumb-item"><a href="#">
-                    {{ $kursus->nama_kursus }}</a></li>
-
-        </ol>
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
             <div class="text-white mb-4 mb-lg-0">
-
+                <div class="badge badge-pill badge-transparent px-3 py-2 mb-4 text-capitalize">Kursus Private</div>
                 <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
                 <p><i class="fa-map-marker-alt fas mr-2"></i> Paiton, Probolinggo</p>
 
@@ -71,30 +62,6 @@
                     </div>
                 </div>
             </div>
-{{-- 
-            <div class="text-block">
-                <h5 class="mb-4 mt-4">Galeri Kursus</h5>
-                <div class="row gallery mb-3 ml-n1 mr-n1">
-
-                    @forelse ($gallery as $item)
-                    @foreach (explode('|', $item->gambar) as $image)
-                    <div class="col-lg-4 col-6 px-1 mb-2">
-                        <a href="/storage/image/{{$image}}" data-fancybox="gallery" title="{{ $kursus->nama_kursus }}">
-                            <img src="/storage/image/{{$image}}" alt="" class="img-fluid mt-2"></a>
-                    </div>
-                    @endforeach
-
-                    @empty
-                    <div class="alert alert-primary text-sm mb-3 mt-3 col">
-                        <div class="media align-items-center">
-                            <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
-                            </div>
-                        </div>
-                    </div>
-                    @endforelse
-                </div>
-            </div> --}}
-
 
         </div>
     </div>
@@ -155,7 +122,7 @@
                 </nav>
             </div>
         </div>
-        <div class="col-lg-4">
+        {{-- <div class="col-lg-4">
             <div class="card border-0 shadow-lg">
                 <div class="card-body p-4">
                     <form>
@@ -202,7 +169,7 @@
 
 
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 </div>

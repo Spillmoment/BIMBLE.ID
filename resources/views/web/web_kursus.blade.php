@@ -20,7 +20,9 @@
                     <label for="form_category" class="form-label">Type Kursus</label>
                     <select name="type" id="form_category" data-style="btn-selectpicker" title=""
                         class="selectpicker form-control">
-                        <option value=""></option>
+                        @if (Request::get('type') == null && Request::get('keyword') == null)
+                        <option value="">Pilih Type</option>
+                        @endif
                         @foreach ($typeKursus as $item)
                         <option value="{{ $item->id }}" {{ ( $item->id == Request::get('type')) ? 'selected' : '' }}>
                             {{ $item->nama_type }}</option>
@@ -28,7 +30,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-outline-primary"> <i class="fas fa-search mr-1"></i>
+                <button type="submit" class="btn btn-primary"> <i class="fas fa-search mr-1"></i>
                     Cari Kursus
                 </button>
             </form>
@@ -56,7 +58,7 @@
                         <div class="card-img-top overflow-hidden gradient-overlay">
                             <img src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                 alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" />
-                            <a href="{{ Request::get('type') == 2 ? route('front.detail.private', $item->kursus->slug) : route('front.detail.kelompok', $item->kursus->slug) }}"
+                            <a href="{{ Request::get('type') == 1 ? route('front.detail.private', $item->kursus->slug) : route('front.detail.kelompok', $item->kursus->slug) }}"
                                 class="tile-link"></a>
 
                             <div class="card-img-overlay-top d-flex justify-content-between align-items-center">

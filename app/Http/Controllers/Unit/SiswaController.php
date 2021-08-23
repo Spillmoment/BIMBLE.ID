@@ -31,10 +31,9 @@ class SiswaController extends Controller
         ]);
     }
 
-    public function kursus_siswa(Request $request, $id)
+    public function kursus_siswa($id)
     {
-        $id_unit = Auth::id();
-        // $kursus = Kursus::where('slug', $slug)->first();
+
         $siswa = Siswa::where('kursus_unit_id', $id)->get();
 
         return view('unit.siswa.siswa', [
@@ -46,19 +45,16 @@ class SiswaController extends Controller
 
     public function create_siswa($id)
     {
-        // $kursus = Kursus::where('slug', $slug)->first();
         $kursus = KursusUnit::with(['kursus'])->where('id', $id)->first();
 
         return view('unit.siswa.siswa_create', [
             'kursus' => $kursus,
-            // 'siswa' => $siswa,
         ]);
     }
 
 
     public function store_siswa(Request $request, $id)
     {
-        // $kursus = Kursus::where('slug', $slug)->first();
         $request->validate([
             'nama_siswa'    => 'required|max:255|min:3',
             'jenis_kelamin' => 'required|in:L,P',
@@ -78,7 +74,7 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::findOrFail($id_siswa);
         // $kursus = Kursus::where('slug', $slug)->first();
-        return view('unit.siswa.siswa_edit', compact('siswa','id'));
+        return view('unit.siswa.siswa_edit', compact('siswa', 'id'));
     }
 
 

@@ -1,6 +1,6 @@
 @extends('admin.layouts.tutor')
 
-@section('title','Bimble - Dashboard Tutor')
+@section('title','Unit - Halaman Kursus')
 
 @push('after-style')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
@@ -21,12 +21,9 @@
                     <form action="#" method="post" class="form-horizontal">
                         <div class="row form-group">                            
                             @foreach ($list_kursus as $kursus)
-                            {{-- @foreach ($kursus->kursus_unit as $kursus_unit) --}}
                                 <div class="col-6 pt-3">
                                     <input type="checkbox" class="js-switch" data-id ="{{ $kursus->id }}" {{ $kursus->kursus_unit->contains('unit_id',Auth::user()->id) ? 'checked' : '' }}> {{ $kursus->nama_kursus }}
                                 </div>
-                                
-                            {{-- @endforeach --}}
                             @endforeach
                         </div>
                     </form>
@@ -64,6 +61,12 @@
             @endforeach
 
           </div>
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-template d-flex ">
+                {{ $kursus_unit->appends(Request::all())->links() }}
+            </ul>
+        </nav>
 
 </div>
 

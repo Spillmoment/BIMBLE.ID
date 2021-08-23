@@ -17,7 +17,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-outline-primary"> <i class="fas fa-search mr-1"></i>
+                <button type="submit" class="btn btn-primary py-2 px-3"> <i class="fas fa-search mr-1"></i>
                     Cari Unit
                 </button>
             </form>
@@ -27,7 +27,11 @@
 
             <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
                 <div class="mr-3" style="color: #322F56">
-
+                     @if (Request::get('keyword') != null)
+                     <span class="text-item text-capitalize"><strong> Unit {{ Request::get('keyword') }}</strong></span>
+                     @else
+                     <strong>Semua Unit</strong>
+                     @endif
                 </div>
 
             </div>
@@ -56,9 +60,16 @@
                     </div>
                 </div>
                 @empty
-                <div class="mt-5 col alert alert-warning text-center" role="alert">
-                    <strong>Pencarian tidak ditemukan </strong>
-                    <a href="{{ route('unit.list') }}" class="btn btn-warning">Kembali</a>
+                <div class="col-md-6 offset-md-3 text-center">
+                    <img width="300px" src="{{ asset('assets/frontend/img/schedule.gif') }}" alt="" srcset="">
+                    <h3 class="text-warning">Whoops!</h1>
+                        <p> Unit tersebut segera hadir.
+                            <br>
+                            Silahkan cari dilain kesempatan.
+                        </p>
+                        <a href="{{ route('unit.list') }}" class="btn btn-outline-primary btn-sm mt-3 px-5">
+                            Muat ulang
+                        </a>
                 </div>
                 @endforelse
 
@@ -74,7 +85,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-
-@endpush

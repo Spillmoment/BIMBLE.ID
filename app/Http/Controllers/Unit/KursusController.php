@@ -20,7 +20,7 @@ class KursusController extends Controller
 
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('unit_id', Auth::id())
-            ->groupBy('kursus_id')->get();
+            ->groupBy('kursus_id')->paginate(6);
         // dd($kursus_unit);
 
         return view('unit.kursus.index', [
@@ -38,7 +38,6 @@ class KursusController extends Controller
             ));
 
         $kursus = Kursus::find($request->kursus_id);
-
         return response()->json([
             'message' => 'Bimbel ' . $kursus->nama_kursus . ' berhasil ditambahkan.'
         ]);
@@ -72,7 +71,7 @@ class KursusController extends Controller
     }
 
 
-    public function tambah_detail(Request $request, $id)
+    public function tambah_detail($id)
     {
         // $kursus = Kursus::where('slug', $slug)->first();
         $kursus_unit_kelompok = KursusUnit::with(['kursus', 'unit'])
@@ -121,8 +120,6 @@ class KursusController extends Controller
             'sabtu' => $sabtu,
             'minggu' => $minggu,
         ]);
-        
-        
     }
 
     public function update_harga(Request $request, $id)
@@ -137,7 +134,7 @@ class KursusController extends Controller
         } else {
             $status = 'nonaktif';
         }
-        
+
 
         $kursus = KursusUnit::findOrFail($id);
         $kursus->update([
