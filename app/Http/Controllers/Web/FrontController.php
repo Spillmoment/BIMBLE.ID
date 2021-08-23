@@ -16,8 +16,9 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         $banner = Banner::all();
-        $kursus_unit = KursusUnit::selectRaw('kursus_id')
-            ->where('type_id', 2)
+        $kursus_unit = KursusUnit::where('type_id', 2)
+            ->whereNotNull('unit_id')
+            ->where('status', 'aktif')
             ->with('kursus')->groupBy('kursus_id')
             ->latest()->paginate(9);
         $type = Type::all();
@@ -38,6 +39,7 @@ class FrontController extends Controller
             ->paginate(9);
         $kursus_unit = KursusUnit::with('kursus', 'type')
             ->where('type_id', 2)
+            ->where('status', 'aktif')
             ->groupBy('kursus_id')->paginate(9);
         $typeKursus = Type::all();
 
@@ -50,6 +52,7 @@ class FrontController extends Controller
                 ->whereHas('kursus', function ($query) use ($keyword) {
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
+                ->where('status', 'aktif')
                 ->groupBy('kursus_id')
                 ->latest()
                 ->paginate(9);
@@ -61,6 +64,7 @@ class FrontController extends Controller
                 ->whereHas('kursus', function ($query) use ($keyword) {
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
+                ->where('status', 'aktif')
                 ->groupBy('kursus_id')
                 ->latest()
                 ->paginate(9);
