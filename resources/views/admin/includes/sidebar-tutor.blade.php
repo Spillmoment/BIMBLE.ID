@@ -32,9 +32,16 @@
                 </li>
                 
                 
-                <li class="menu-title text-capitalize">Manage Siswa</li>
-                <li class="{{ (request()->is('unit/siswa*')) ? 'active' : '' }}">
+                <li class="menu-title text-capitalize">Manage Nilai</li>
+                {{-- <li class="{{ (request()->is('unit/siswa*')) ? 'active' : '' }}">
                     <a href="{{ route('unit.siswa.home') }}"> <i class="menu-icon fa fa-pencil-square-o"></i>Nilai Siswa</a>
+                </li> --}}
+                <li class="menu-item-has-children active dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-pencil-square-o"></i>Manage Siswa</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.kelompok') }}">Kursus Kelompok</a></li>
+                        <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.private') }}">Kursus Private</a></li>
+                    </ul>
                 </li>
 
             </ul>
