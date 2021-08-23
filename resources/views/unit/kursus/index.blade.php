@@ -42,35 +42,24 @@
           
             @foreach ($kursus_unit as $item)
             <div class="col-md-4">
-                <aside class="profile-nav alt">
-                    <section class="card">
-                        <div class="card-header  bg-primary">
-                            <div class="media">
-                                <a href="#">
-                                    <img class="align-self-center mr-3" style="width:100px; height:80px;" alt="" src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="text-white display-6 mb-2">{{ $item->kursus->nama_kursus }}</h4>
-                                    <p class="text-dark font-weight-bold">{{ auth()->user()->nama_unit }} </p>
-                                    <p>{{ $item->type_id == 1 ? 'Private' : 'Kelompok' }}</p>
-                                </div>
+                <section class="card">
+                    <div class="twt-feed blue-bg">
+                        <div class="corner-ribon black-ribon">
+                            <i class="fa fa-twitter"></i>
+                        </div>
+                        <div class="fa fa-twitter wtt-mark"></div>
+
+                        <div class="media">
+                            <a href="{{ route('unit.kursus.add',$item->kursus_id) }}">
+                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}">
+                            </a>
+                            <div class="media-body">
+                                <h3 class="text-white display-6">{{ $item->kursus->nama_kursus }}</h3>
+                                <p class="text-light">{{ auth()->user()->nama_unit }}</p>
                             </div>
                         </div>
-    
-                        <ul class="list-group list-group-flush ">
-                            <li class="list-group-item">
-                                <div class="float-left">
-                                    <span>{{ $item->status }}</span>
-                                </div>
-                                <div class="float-right">
-                                    <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.detail', $item->kursus->slug) }}"> <i class="fa fa-eye"></i> Detail </a>
-                                    <a class="btn btn-success btn-sm" href="{{ route('unit.kursus.add',$item->id) }}"> <i class="fa fa-tasks"></i> Pengaturan </a>
-                                </div>
-                                </li>
-                        </ul>
-    
-                    </section>
-                </aside>
+                    </div>
+                </section>
             </div>
             @endforeach
 
@@ -126,24 +115,43 @@
                     }
                 });
             } else {
-                $.ajax({
-                    type: 'delete',
-                    // dataType: "json",
-                    url: '{{ route('unit.kursus.hapus') }}',
-                    data: {
-                        kursus_id: id_kursus
-                    },
-                    success: function (data) {
-                        toastr.options.closeButton = true;
-                        toastr.options.closeMethod = 'fadeOut';
-                        toastr.options.closeDuration = 100;
-                        toastr.warning(data.message);
-
+                swal({
+                    title: "Apakah anda yakin?",
+                    text: "Jika data dihapus, semua data yang berkaitan dengan kursus ini akan terhapus Permanen!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: 'delete',
+                            // dataType: "json",
+                            url: '{{ route('unit.kursus.hapus') }}',
+                            data: {
+                                kursus_id: id_kursus
+                            },
+                            success: function (data) {
+                                swal({
+                                    title: "Success",
+                                    text: data.message,
+                                    icon: "success",
+                                    button: false,
+                                    timer: 2000
+                                });
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 200);
+                            }
+                        });
+                    } else {
+                        swal("Hapus berhasil digagalkan!");
                         setTimeout(function () {
-                            location.reload();
+                            window.location.replace('/unit/kursus');
                         }, 200);
                     }
                 });
+                
             }
         });
 
