@@ -20,7 +20,7 @@ class KursusController extends Controller
 
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('unit_id', Auth::id())
-            ->latest()->get();
+            ->groupBy('kursus_id')->get();
         // dd($kursus_unit);
 
         return view('unit.kursus.index', [
@@ -32,19 +32,6 @@ class KursusController extends Controller
     public function tambah_kursus(Request $request)
     {
         $id_unit = Auth::id();
-        // KursusUnit::createMany([
-        //     'kursus_id' => $request->kursus_id,
-        //     'unit_id'  => $id_unit,
-        //     'type_id' => 1,
-        //     'biaya_kursus' => 0,
-        //     'status' => 'nonaktif'
-        // ],[
-        //     'kursus_id' => $request->kursus_id,
-        //     'unit_id'  => $id_unit,
-        //     'type_id' => 2,
-        //     'biaya_kursus' => 0,
-        //     'status' => 'nonaktif'
-        // ]);
         KursusUnit::insert(array(
             array('kursus_id' => $request->kursus_id,'unit_id'  => $id_unit,'type_id' => 1,'biaya_kursus' => 0,'status' => 'nonaktif'),
             array('kursus_id' => $request->kursus_id,'unit_id'  => $id_unit,'type_id' => 2,'biaya_kursus' => 0,'status' => 'nonaktif'),
@@ -61,8 +48,7 @@ class KursusController extends Controller
     {
         $id_unit = Auth::id();
         $kursus_unit = KursusUnit::where('kursus_id', $request->kursus_id)
-            ->where('unit_id', $id_unit)->first();
-        $kursus_unit->forceDelete();
+            ->where('unit_id', $id_unit)->forceDelete();
 
         $kursus = Kursus::find($request->kursus_id);
 
@@ -89,30 +75,60 @@ class KursusController extends Controller
     public function tambah_detail(Request $request, $id)
     {
         // $kursus = Kursus::where('slug', $slug)->first();
-        $kursus_unit = KursusUnit::with(['kursus', 'unit'])
-            ->where('id', $id)
+        $kursus_unit_kelompok = KursusUnit::with(['kursus', 'unit'])
+            ->where('kursus_id', $id)
             ->where('unit_id', Auth::id())
+            ->where('type_id', 2)
+            ->first();
+
+        $kursus_unit_private = KursusUnit::with(['kursus', 'unit'])
+            ->where('kursus_id', $id)
+            ->where('unit_id', Auth::id())
+            ->where('type_id', 1)
             ->first();
         
-        $jadwal = Jadwal::with(['Kursus_unit'])
-                    ->where('kursus_unit_id', $kursus_unit->id)
+        $senin = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+                    ->where('hari', 1)
                     ->first();
-        
+        $selasa = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+                    ->where('hari', 2)
+                    ->first();
+        $rabu = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+                    ->where('hari', 3)
+                    ->first();
+        $kamis = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+                    ->where('hari', 4)
+                    ->first();
+        $jumat = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+                    ->where('hari', 5)
+                    ->first();
+        $sabtu = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+                    ->where('hari', 6)
+                    ->first();
+        $minggu = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+                    ->where('hari', 7)
+                    ->first();
+
         return view('unit.kursus.tambah', [
             // 'kursus' => $kursus,
-            'kursus_unit' => $kursus_unit,
-            'jadwal' => $jadwal,
+            'kursus_unit_kelompok' => $kursus_unit_kelompok,
+            'kursus_unit_private' => $kursus_unit_private,
+            'senin' => $senin,
+            'selasa' => $selasa,
+            'rabu' => $rabu,
+            'kamis' => $kamis,
+            'jumat' => $jumat,
+            'sabtu' => $sabtu,
+            'minggu' => $minggu,
         ]);
         
         
     }
 
-    public function detail_store(Request $request, $id)
+    public function update_harga(Request $request, $id)
     {
-        // dd($request->all());
         $request->validate([
             'biaya_kursus' => 'required|numeric|min:0',
-            'hari' => 'numeric|min:1|max:7',
         ]);
 
         // checklistbox 
@@ -129,16 +145,26 @@ class KursusController extends Controller
             'status' => $status
         ]);
 
-        if ($request->hari || $request->waktu_mulai || $request->waktu_selesai) {
-            Jadwal::updateOrCreate(
-                ['kursus_unit_id' => $id],
-                [
-                    'hari' => $request->hari,
-                    'waktu_mulai' => $request->waktu_mulai,
-                    'waktu_selesai' => $request->waktu_selesai
-                ]
-            );
-        }
+        return redirect()->back()->with(['status' => 'Detail Kursus Berhasil Diupdate']);
+    }
+
+    public function detail_store(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            'hari' => 'numeric|min:1|max:7',
+            'waktu_mulai' => 'required',
+            'waktu_selesai' => 'required',
+        ]);
+
+        Jadwal::updateOrCreate(
+            ['kursus_unit_id' => $id, 'hari' => $request->hari],
+            [
+                'hari' => $request->hari,
+                'waktu_mulai' => $request->waktu_mulai,
+                'waktu_selesai' => $request->waktu_selesai
+            ]
+        );
 
         return redirect()->back()->with(['status' => 'Detail Kursus Berhasil Diupdate']);
     }
