@@ -145,7 +145,7 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md-8">
-                    <h4>Rekomendasi Bimble</h4>
+                    <h4>Rekomendasi Kursus</h4>
 
                     @if(Request::get('keyword'))
                     <h6 class="mt-2">Pencarian: <i> {{ Request::get('keyword')}} </i></h6>
@@ -199,47 +199,48 @@
     <!-- Section Testimonial -->
     <section class="pt-5 section-header" style="background-color: #4E66F8">
         <div class="container">
-          <br>
-          <h3 class="text-white text-center my-3">Testimonial</h3>
-          <!-- Slider main container-->
-          <div class="swiper-container testimonials-slider testimonials">
-            <!-- Additional required wrapper-->
-            <div class="swiper-wrapper pt-2 pb-5">
-              <!-- Slides-->
-              <div class="swiper-slide px-3">
-                <div class="testimonial card rounded-lg shadow border-0">
-                  <div class="testimonial-avatar"><img
-                      src="https://media-exp3.licdn.com/dms/image/C4E03AQECXvDjaLa55w/profile-displayphoto-shrink_200_200/0/1618435117023?e=1631750400&v=beta&t=455hxUgwBH7X89-G6kS6en2P2Xo9HfTpeCb1Zwh9zjE"
-                      alt="..." class="img-fluid"></div>
-                  <div class="text">
-                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                    <p class="testimonial-text">
-                        Belajar di bimble.id sangat rekomendasi bagi pemula seperti saya
-                    </p><strong>M Hafid Masruri</strong>
-                  </div>
+            <br>
+            <h3 class="text-white text-center my-3">Testimonial</h3>
+            <!-- Slider main container-->
+            <div class="swiper-container testimonials-slider testimonials">
+                <!-- Additional required wrapper-->
+                <div class="swiper-wrapper pt-2 pb-5">
+                    <!-- Slides-->
+                    <div class="swiper-slide px-3">
+                        <div class="testimonial card rounded-lg shadow border-0">
+                            <div class="testimonial-avatar"><img
+                                    src="https://media-exp3.licdn.com/dms/image/C4E03AQECXvDjaLa55w/profile-displayphoto-shrink_200_200/0/1618435117023?e=1631750400&v=beta&t=455hxUgwBH7X89-G6kS6en2P2Xo9HfTpeCb1Zwh9zjE"
+                                    alt="..." class="img-fluid"></div>
+                            <div class="text">
+                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                                <p class="testimonial-text">
+                                    Belajar di bimble.id sangat rekomendasi bagi pemula seperti saya
+                                </p><strong>M Hafid Masruri</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide px-3">
+                        <div class="testimonial card rounded-lg shadow border-0">
+                            <div class="testimonial-avatar"><img
+                                    src="https://0.academia-photos.com/26655222/7421713/8341901/s200_deddy_sujarwadi.candra_gunawan.jpg"
+                                    alt="..." class="img-fluid"></div>
+                            <div class="text">
+                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                                <p class="testimonial-text">
+                                    Belajar di bimble.id sangat menyenangkan dan mempunyai mentor yang kompeten di
+                                    bidang nya
+                                </p><strong>Deddy Sujarwadi C.G</strong>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-              </div>
-              <div class="swiper-slide px-3">
-                <div class="testimonial card rounded-lg shadow border-0">
-                  <div class="testimonial-avatar"><img
-                      src="https://0.academia-photos.com/26655222/7421713/8341901/s200_deddy_sujarwadi.candra_gunawan.jpg" alt="..."
-                      class="img-fluid"></div>
-                  <div class="text">
-                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                    <p class="testimonial-text">
-                        Belajar di bimble.id sangat menyenangkan dan mempunyai mentor yang kompeten di bidang nya
-                    </p><strong>Deddy Sujarwadi C.G</strong>
-                  </div>
-                </div>
-              </div>
-    
+                <div class="swiper-pagination"> </div>
             </div>
-            <div class="swiper-pagination"> </div>
-          </div>
         </div>
-    
-      </section>
-      <!-- End Section Testimonial -->
+
+    </section>
+    <!-- End Section Testimonial -->
 
     @include('web.layouts.footer')
     @include('web.layouts.script')
