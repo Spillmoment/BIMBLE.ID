@@ -33,9 +33,9 @@ class KursusController extends Controller
     {
         $id_unit = Auth::id();
         KursusUnit::insert(array(
-            array('kursus_id' => $request->kursus_id,'unit_id'  => $id_unit,'type_id' => 1,'biaya_kursus' => 0,'status' => 'nonaktif'),
-            array('kursus_id' => $request->kursus_id,'unit_id'  => $id_unit,'type_id' => 2,'biaya_kursus' => 0,'status' => 'nonaktif'),
-            ));
+            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 1, 'biaya_kursus' => 0, 'status' => 'nonaktif'),
+            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 2, 'biaya_kursus' => 0, 'status' => 'nonaktif'),
+        ));
 
         $kursus = Kursus::find($request->kursus_id);
         return response()->json([
@@ -46,7 +46,7 @@ class KursusController extends Controller
     public function hapus_kursus(Request $request)
     {
         $id_unit = Auth::id();
-        $kursus_unit = KursusUnit::where('kursus_id', $request->kursus_id)
+        KursusUnit::where('kursus_id', $request->kursus_id)
             ->where('unit_id', $id_unit)->forceDelete();
 
         $kursus = Kursus::find($request->kursus_id);
@@ -85,28 +85,28 @@ class KursusController extends Controller
             ->where('unit_id', Auth::id())
             ->where('type_id', 1)
             ->first();
-        
-        $senin = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
-                    ->where('hari', 1)
-                    ->first();
-        $selasa = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
-                    ->where('hari', 2)
-                    ->first();
-        $rabu = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
-                    ->where('hari', 3)
-                    ->first();
-        $kamis = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
-                    ->where('hari', 4)
-                    ->first();
-        $jumat = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
-                    ->where('hari', 5)
-                    ->first();
-        $sabtu = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
-                    ->where('hari', 6)
-                    ->first();
-        $minggu = Jadwal::with(['Kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
-                    ->where('hari', 7)
-                    ->first();
+
+        $senin = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+            ->where('hari', 1)
+            ->first();
+        $selasa = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+            ->where('hari', 2)
+            ->first();
+        $rabu = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+            ->where('hari', 3)
+            ->first();
+        $kamis = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+            ->where('hari', 4)
+            ->first();
+        $jumat = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+            ->where('hari', 5)
+            ->first();
+        $sabtu = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+            ->where('hari', 6)
+            ->first();
+        $minggu = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
+            ->where('hari', 7)
+            ->first();
 
         return view('unit.kursus.tambah', [
             // 'kursus' => $kursus,
