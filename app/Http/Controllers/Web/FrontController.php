@@ -17,7 +17,6 @@ class FrontController extends Controller
     {
         $banner = Banner::all();
         $kursus_unit = KursusUnit::where('type_id', 2)
-            ->whereNotNull('unit_id')
             ->where('status', 'aktif')
             ->with('kursus')->groupBy('kursus_id')
             ->latest()->paginate(9);
