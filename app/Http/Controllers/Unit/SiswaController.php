@@ -13,15 +13,20 @@ class SiswaController extends Controller
 {
 
 
-    public function index()
+    public function index_kelompok()
     {
-        // $list_kursus = Kursus::with(['kursus_unit' => function ($q) {
-        //     $q->where('unit_id', Auth::id());
-        // }], 'kursus_unit')->get();
-        // dd($list_kursus);
-        $list_kursus = KursusUnit::with((['kursus']))->where('unit_id', Auth::id())->get();
+        $list_kursus = KursusUnit::with('kursus')->where('unit_id', Auth::id())->where('type_id', 2)->get();
 
-        return view('unit.siswa.index', [
+        return view('unit.siswa.index_kelompok', [
+            'list_kursus' => $list_kursus,
+        ]);
+    }
+    
+    public function index_private()
+    {
+        $list_kursus = KursusUnit::with('kursus')->where('unit_id', Auth::id())->where('type_id', 1)->get();
+
+        return view('unit.siswa.index_private', [
             'list_kursus' => $list_kursus,
         ]);
     }
