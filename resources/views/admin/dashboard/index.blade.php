@@ -114,10 +114,10 @@
         <!-- Chart -->
         <div class="row">
 
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mb-3">Kursus Unit</h4>
+                        <h4 class="mb-3">Chart Kursus Unit</h4>
                         <div class="chart-container ov-h">
                             <div id="flotPie1" class="float-chart"></div>
                         </div>
@@ -128,7 +128,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mb-3"> Pendaftar Unit </h4>
+                        <h4 class="mb-3">Chart Pendaftar Unit </h4>
                         <canvas id="lineChart"></canvas>
                     </div>
                 </div>
@@ -150,3 +150,4 @@
 @push('after-script')
 @include('admin.dashboard.chart.kursus')
 @endpush
+
