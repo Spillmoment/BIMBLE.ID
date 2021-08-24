@@ -13,17 +13,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-8">
+            {{-- <div class="col-sm-8">
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="{{ route('unit.siswa.home') }}">Siswa</a></li>
-                            {{-- <li><a href="{{ route('unit.siswa.kursus', $siswa->kursus_unit_id) }}">{{ $kursus->nama_kursus }}</a></li> --}}
+                            <li><a href="{{ route('unit.siswa.kursus', $siswa->kursus_unit_id) }}">{{ $kursus->nama_kursus }}</a></li>
                             <li class="active">Edit Siswa</li>
                         </ol>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
@@ -98,53 +98,6 @@
 
         </div>
 
-        {{-- <div class="col-md-4 offset-md-1">
-                <section class="card">
-                    <div class="twt-feed blue-bg">
-                        <div class="corner-ribon black-ribon">
-                            <i class="fa fa-address-card"></i>
-                        </div>
-                        <div class="fa fa-address-card wtt-mark"></div>
-
-                        <div class="media">
-                            <a href="#">
-                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{ Storage::url('public/'.$siswa->foto) }}">
-                            </a>
-                            <div class="media-body">
-                                <h2 class="text-white display-6">{{ $siswa->nama_siswa }}</h2>
-                                <p class="text-light">{{ $siswa->kompetensi }}</p>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                    <div class="weather-category twt-category">
-                        <ul>
-                            <li class="active">
-                                <h5>750</h5>
-                                Tweets
-                            </li>
-                            <li>
-                                <h5>865</h5>
-                                Following
-                            </li>
-                            <li>
-                                <h5>3645</h5>
-                                Followers
-                            </li>
-                        </ul>
-                    </div>
-                    <footer class="twt-footer">
-                        <a href="#"><i class="fa fa-camera"></i></a>
-                        <a href="#"><i class="fa fa-map-marker"></i></a>
-                        Bimble ID
-                        <span class="pull-right">
-                            Aktif
-                        </span>
-                    </footer>
-                </section>
-            </div> --}}
     </div>
 </div>
 @endsection
