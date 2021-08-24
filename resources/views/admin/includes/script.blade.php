@@ -37,18 +37,20 @@
 
 </script>
 <script>
-    $(document).ready(function () {
-        $('#bootstrap-data-table-export').DataTable();
-    });
-
-    ClassicEditor
-        .create(document.querySelector('.ckeditor'))
-        .then(editor => {
-            console.log(editor);
-        })
-        .catch(error => {
-            console.error(error);
+    (function($){
+        $(document).ready(function () {
+            $('#bootstrap-data-table-export').DataTable();
         });
+
+        ClassicEditor
+            .create(document.querySelector('.ckeditor'))
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
 
 </script>
 
