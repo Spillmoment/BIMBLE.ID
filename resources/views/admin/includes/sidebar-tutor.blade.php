@@ -30,17 +30,17 @@
                 <li class="{{  (request()->is('unit/fasilitas*')) ? 'active' : ''  }}">
                     <a href="{{ route('unit.fasilitas.home') }}"> <i class="menu-icon fa fa-building"></i>Fasilitas</a>
                 </li>
-                
-                
+
+
                 <li class="menu-title text-capitalize">Manage Nilai</li>
-                {{-- <li class="{{ (request()->is('unit/siswa*')) ? 'active' : '' }}">
-                    <a href="{{ route('unit.siswa.home') }}"> <i class="menu-icon fa fa-pencil-square-o"></i>Nilai Siswa</a>
-                </li> --}}
-                <li class="menu-item-has-children active dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-pencil-square-o"></i>Manage Siswa</a>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i class="menu-icon fa fa-pencil-square-o"></i>Manage Siswa</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.kelompok') }}">Kursus Kelompok</a></li>
-                        <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.private') }}">Kursus Private</a></li>
+                        <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.kelompok') }}">Kursus Kelompok</a>
+                        </li>
+                        <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.private') }}">Kursus Private</a>
+                        </li>
                     </ul>
                 </li>
 
