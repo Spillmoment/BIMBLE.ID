@@ -30,6 +30,8 @@
             @yield('content')
   
         <div class="clearfix"></div>
+        <!-- Footer -->
+      @include('admin.includes.footer')
     </div>
     
     {{-- Script --}}
