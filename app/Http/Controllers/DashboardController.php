@@ -16,14 +16,18 @@ class DashboardController extends Controller
     public function index()
     {
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
-            ->groupBy('unit_id')->get();
-
-        $unit_month = Unit::select(DB::raw("(COUNT(*)) as count"), DB::raw("MONTHNAME(created_at) as monthname"))
-            ->whereYear('created_at', date('Y'))
-            ->groupBy('monthname')
+            ->groupBy('unit_id')
             ->get();
 
-        dd($unit_month);
+        $kursus_count = KursusUnit::all()
+            ->where('unit_id', 1)
+            ->groupBy('kursus_id')
+            ->count();
+
+        $unit_month = Unit::select(DB::raw("COUNT(*) as count"))
+            ->whereYear('created_at', date('Y'))
+            ->groupBy(DB::raw("Month(created_at)"))
+            ->pluck('count');
 
         return view(
             'admin.dashboard.index',
