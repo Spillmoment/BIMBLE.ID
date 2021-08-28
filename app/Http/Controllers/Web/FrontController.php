@@ -16,13 +16,20 @@ class FrontController extends Controller
     public function index(Request $request)
     {
         $banner = Banner::all();
-        $kursus_unit = KursusUnit::where('type_id', 2)
+
+        $kursus_kelompok = KursusUnit::where('type_id', 2)
             ->where('status', 'aktif')
-            ->with('kursus')->groupBy('kursus_id')
-            ->latest()->paginate(9);
+            ->with(['kursus', 'type'])->groupBy('kursus_id')
+            ->latest()->take(4)->get();
+
+        $kursus_private = KursusUnit::where('type_id', 1)
+            ->where('status', 'aktif')
+            ->with(['kursus', 'type'])->groupBy('kursus_id')
+            ->latest()->take(4)->get();
+
         $type = Type::all();
 
-        return view('web.web_home', compact('kursus_unit', 'banner', 'type'));
+        return view('web.web_home', compact('banner', 'kursus_private', 'kursus_kelompok', 'type'));
     }
 
 
@@ -39,7 +46,9 @@ class FrontController extends Controller
         $kursus_unit = KursusUnit::with('kursus', 'type')
             ->where('type_id', 2)
             ->where('status', 'aktif')
-            ->groupBy('kursus_id')->paginate(9);
+            ->groupBy('kursus_id')
+            ->latest()
+            ->paginate(9);
         $typeKursus = Type::all();
 
         $keyword = $request->query('keyword');
@@ -120,6 +129,8 @@ class FrontController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(9);
 
+        $tes = ['1', '2', '3', '4', '5', '6', '7'];
+
         $startday = $request->query('startday');
         $endday = $request->query('endday');
         $get_time = $request->query('clock');
@@ -153,7 +164,8 @@ class FrontController extends Controller
         return view('web.web_detail_kursus_kelompok', [
             'kursus' => $kursus,
             'kursus_unit' => $kursus_unit,
-            'gallery' => $gallery
+            'gallery' => $gallery,
+            'batas' => $tes
         ]);
     }
 
