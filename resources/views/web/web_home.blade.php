@@ -155,9 +155,10 @@
 
             <div class="row">
                 <div class="col-md-12">
-
+                    
                     <div class="owl-carousel">
-                        @forelse ($kursus_unit as $item)
+
+                        @foreach ($kursus_kelompok as $item)
                         <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
                             <div class="card card-kelas h-100 border-0 shadow">
                                 <div class="card-img-top overflow-hidden gradient-overlay">
@@ -166,6 +167,12 @@
                                         href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
                                         class="tile-link"></a>
 
+                                        <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                            <div class="badge badge-transparent badge-pill px-3 py-2">
+                                                {{ $item->type->nama_type }}
+                                            </div>
+                                        </div>
+            
                                 </div>
                                 <div class="card-body d-flex align-items-center">
                                     <div class="w-100">
@@ -179,13 +186,41 @@
                                 </div>
                             </div>
                         </div>
-                        @empty
+                        @endforeach
 
-                        @endforelse
+                        @foreach ($kursus_private as $item)
+                        <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
+                            <div class="card card-kelas h-100 border-0 shadow">
+                                <div class="card-img-top overflow-hidden gradient-overlay">
+                                    <img src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
+                                        alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" /><a
+                                        href="{{ route('front.detail.private', $item->kursus->slug) }}"
+                                        class="tile-link"></a>
+
+                                        <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                            <div class="badge badge-transparent badge-pill px-3 py-2">
+                                                {{ $item->type->nama_type }}
+                                            </div>
+                                        </div>
+            
+                                </div>
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="w-100">
+                                        <h6 class="card-title"><a
+                                                href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
+                                                class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
+                                        </h6>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+
+
                     </div>
-
                 </div>
-
 
                 <div class="col-md-12 d-lg-flex align-items-center justify-content-end">
                     <a href="{{ route('front.kursus') }}" class="text-primary text-sm"> Lihat Semua<i
@@ -197,7 +232,7 @@
     </section>
 
     <!-- Section Testimonial -->
-    <section class="pt-5 section-header" style="background-color: #4E66F8">
+    <section class="pt-5 mb-5 section-header" style="background-color: #4E66F8">
         <div class="container">
             <br>
             <h3 class="text-white text-center my-3">Testimonial</h3>
