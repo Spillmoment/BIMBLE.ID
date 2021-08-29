@@ -24,11 +24,12 @@ class DashboardController extends Controller
             ->groupBy('kursus_id')
             ->count();
 
-        $unit_month = Unit::select(DB::raw("COUNT(*) as count"))
+        $unit_month = Unit::select(DB::raw("(COUNT(*)) as count"), DB::raw("MONTHNAME(created_at) as monthname"))
             ->whereYear('created_at', date('Y'))
-            ->groupBy(DB::raw("Month(created_at)"))
-            ->pluck('count');
+            ->groupBy('monthname')
+            ->get();
 
+        dd($unit_month);
         return view(
             'admin.dashboard.index',
             [
