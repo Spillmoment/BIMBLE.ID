@@ -138,73 +138,6 @@
     
             </div>
 
-            <div class="row">
-               
-                {{-- <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">Yearly Sales </h4>
-                            <canvas id="sales-chart"></canvas>
-                        </div>
-                    </div>
-                </div><!-- /# column -->
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">Team Commits </h4>
-                            <canvas id="team-chart"></canvas>
-                        </div>
-                    </div>
-                </div><!-- /# column -->
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">Bar chart </h4>
-                            <canvas id="barChart"></canvas>
-                        </div>
-                    </div>
-                </div><!-- /# column -->
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">Rader chart </h4>
-                            <canvas id="radarChart"></canvas>
-                        </div>
-                    </div>
-                </div><!-- /# column -->
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">Line Chart </h4>
-                            <canvas id="lineChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="mb-3">Doughut Chart </h4>
-                                <canvas id="doughutChart"></canvas>
-                            </div>
-                        </div>
-                    </div><!-- /# column -->
-
-                </div><!-- /# column -->
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="mb-3">Pie Chart </h4>
-                            <canvas id="pieChart"></canvas>
-                        </div>
-                    </div>
-                </div><!-- /# column --> --}}
-
-            </div><!-- /# column -->
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
@@ -245,9 +178,24 @@
     ( function ( $ ) {
     "use strict";
 
-    var users =  <?php echo json_encode($unit_chart) ?>;
-      // single bar chart
-      var ctx = document.getElementById( "singelBarChart" );
+    let list_months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    
+
+    const temp = [];
+    for(let i=0; i<12; i++){
+        let cek_month = <?php echo json_encode($unit_chart) ?>;
+        let data_length = cek_month.length;
+        temp[i] = ''
+        for(let data=0; data<data_length; data++){
+            if (list_months[i] == cek_month[data].monthname) {
+                temp[i] = cek_month[data].count
+            }
+            
+        }        
+    }
+
+    // single bar chart
+    var ctx = document.getElementById( "singelBarChart" );
     ctx.height = 150;
     var myChart = new Chart( ctx, {
         type: 'bar',
@@ -256,12 +204,12 @@
             datasets: [
                 {
                     label: "Pendaftar Unit",
-                    data: users,
+                    data: temp,
                     borderColor: "rgba(0, 194, 146, 0.9)",
                     borderWidth: "0",
                     backgroundColor: "rgba(0, 194, 146, 0.5)"
-                            }
-                        ]
+                }
+            ]
         },
         options: {
             scales: {
