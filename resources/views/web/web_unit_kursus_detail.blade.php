@@ -3,7 +3,7 @@
 @section('title', 'Unit - ' . $unit->nama_unit )
 @section('content')
 
-<section style="background-image: url('{{ Storage::url('public/'. $kursus_unit->unit->gambar_unit) }}');"
+<section style="background-image: url('{{ url('assets/images/kursus/'. $kursus_unit->kursus->gambar_kursus) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
         <!-- Breadcrumbs -->
@@ -20,7 +20,7 @@
                 <div class="badge badge-pill badge-transparent px-3 py-2 mb-4 text-capitalize">Kursus {{ $kursus_unit->type->nama_type }}</div>
                 <h1 class="text-shadow verified">{{ $kursus_unit->kursus->nama_kursus  }}</h1>
                 <p><i class="fas fa-home mr-2"></i>
-                <a class="text-white" href="{{ route('unit.detail', $kursus_unit->unit->slug) }}"> Lihat Profil Kami  
+                <a class="text-white" href="{{ route('unit.detail', $kursus_unit->unit->slug) }}"> Lihat Profil Unit <b>{{ $kursus_unit->unit->nama_unit }}</b>
                 </a></p>
             </div>
         </div>
@@ -101,7 +101,7 @@
                     @endforeach
 
                     @empty
-                    <div class="alert alert-primary text-sm mb-3 mt-3 col">
+                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
                         <div class="media align-items-center">
                             <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
                             </div>

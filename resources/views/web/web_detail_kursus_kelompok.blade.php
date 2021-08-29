@@ -94,6 +94,42 @@
         <div class="col-lg-8">
             <div class="text-block">
                 <h4>Pilih Unit Kursus </h4>
+
+                <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4 mt-3">
+                    <div class="mr-3">
+    
+                        @if (Request::get('startday') != null || Request::get('endday') != null)
+                        <span class="text-item text-capitalize"><strong>
+                            Hari: 
+                             {{ Request::get('startday') == '1' ? 'senin' : '' }} 
+                             {{ Request::get('startday') == '2' ? 'selasa' : '' }} 
+                             {{ Request::get('startday') == '3' ? 'rabu' : '' }} 
+                             {{ Request::get('startday') == '4' ? 'kamis' : '' }} 
+                             {{ Request::get('startday') == '5' ? "jum'at" : '' }} 
+                             {{ Request::get('startday') == '6' ? 'sabtu' : '' }} 
+                             {{ Request::get('startday') == '7' ? 'minggu' : '' }} 
+                             @if (!empty(Request::get('endday')))
+                             @if (Request::get('startday') != 0 && Request::get('startday') != $batas)  
+                                -
+                             @endif
+                             {{ Request::get('endday') == '1' ? 'senin' : '' }} 
+                             {{ Request::get('endday') == '2' ? 'selasa' : '' }} 
+                             {{ Request::get('endday') == '3' ? 'rabu' : '' }} 
+                             {{ Request::get('endday') == '4' ? 'kamis' : '' }} 
+                             {{ Request::get('endday') == '5' ? "jum'at" : '' }} 
+                             {{ Request::get('endday') == '6' ? 'sabtu' : '' }} 
+                             {{ Request::get('endday') == '7' ? 'minggu' : '' }} 
+                             @endif
+                            </strong>
+                        
+                        </span>
+                        @else
+                        <strong>Semua Unit</strong>
+                        @endif
+                    </div>
+    
+                </div>
+
                 <div class="row mt-4 mb-2" id="card-kursus">
                     @forelse ($kursus_unit as $item)
                     <div class="col-md-4 mb-3">
@@ -150,38 +186,42 @@
                     <form action="{{ route('front.detail.kelompok', Request::route('slug')) }}" method="GET">
                         <div class="text-block">
                             <div>
-                                <label for="form_sort" class="form-label ">Hari Kursus</label>
+                                <label for="form_sort" class="form-label ">hari kursus</label>
                                 <select name="startday" id="startday" data-style="btn-selectpicker"
-                                    class="selectpicker form-control">
-                                    <option value="0"></option>
-                                    <option value="7">Minggu</option>
-                                    <option value="1">Senin</option>
-                                    <option value="2">Selasa</option>
-                                    <option value="3">Rabu</option>
-                                    <option value="4">Kamis</option>
-                                    <option value="5">Jum'at</option>
-                                    <option value="6">Sabtu</option>
+                                    class="selectpicker form-control">   
+                                    @if(Request::get('startday') == 0 && Request::get('startday') != $batas)
+                                    <option value="0">Pilih Hari</option>
+                                    @endif
+                                    <option value="7" {{ Request::get('startday') == '7' ? 'selected' : ''}}>Minggu</option>
+                                    <option value="1" {{ Request::get('startday') == '1' ? 'selected' : ''}}>Senin</option>
+                                    <option value="2" {{ Request::get('startday') == '2' ? 'selected' : ''}}>Selasa</option>
+                                    <option value="3" {{ Request::get('startday') == '3' ? 'selected' : ''}}>Rabu</option>
+                                    <option value="4" {{ Request::get('startday') == '4' ? 'selected' : ''}}>Kamis</option>
+                                    <option value="5" {{ Request::get('startday') == '5' ? 'selected' : ''}}>Jum'at</option>
+                                    <option value="6" {{ Request::get('startday') == '6' ? 'selected' : ''}}>Sabtu</option>
                                 </select>
                             </div>
                             <div class="form-group text-center">
                                 <label for="rang" class="form-label text-gray-500">sampai dengan</label>
                                 <select name="endday" id="endday" data-style="btn-selectpicker"
                                     class="selectpicker form-control">
-                                    <option value="0"></option>
-                                    <option value="7">Minggu</option>
-                                    <option value="1">Senin</option>
-                                    <option value="2">Selasa</option>
-                                    <option value="3">Rabu</option>
-                                    <option value="4">Kamis</option>
-                                    <option value="5">Jum'at</option>
-                                    <option value="6">Sabtu</option>
+                                    @if(Request::get('endday') == 0 && Request::get('endday') != $batas)
+                                    <option value="0">Pilih Hari</option>
+                                    @endif
+                                    <option value="7" {{ Request::get('endday') == '7' ? 'selected' : ''}}>Minggu</option>
+                                    <option value="1" {{ Request::get('endday') == '1' ? 'selected' : ''}}>Senin</option>
+                                    <option value="2" {{ Request::get('endday') == '2' ? 'selected' : ''}}>Selasa</option>
+                                    <option value="3" {{ Request::get('endday') == '3' ? 'selected' : ''}}>Rabu</option>
+                                    <option value="4" {{ Request::get('endday') == '4' ? 'selected' : ''}}>Kamis</option>
+                                    <option value="5" {{ Request::get('endday') == '5' ? 'selected' : ''}}>Jum'at</option>
+                                    <option value="6" {{ Request::get('endday') == '6' ? 'selected' : ''}}>Sabtu</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="jam" class="form-label">Jam Kursus</label>
                                 <input type="text" name="clock" id="timepicker1" class="selectpicker form-control"
-                                    placeholder="" aria-describedby="helpId">
+                                    placeholder="" aria-describedby="helpId" value="{{ Request::get('clock') }}">
                             </div>
                         </div>
 
