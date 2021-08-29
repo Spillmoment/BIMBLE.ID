@@ -28,8 +28,8 @@ class DashboardController extends Controller
             ->whereYear('created_at', date('Y'))
             ->groupBy('monthname')
             ->get();
-
-        dd($unit_month);
+        $unit_month_array = $unit_month->toArray();
+        // dd($unit_month_array[1]['monthname']);
         return view(
             'admin.dashboard.index',
             [
@@ -38,7 +38,7 @@ class DashboardController extends Controller
                 'pendaftar' => Unit::where('status', '0')->count(),
                 'komentar' => Komentar::all()->count(),
                 'kursus_unit' => $kursus_unit,
-                'unit_chart' => $unit_month,
+                'unit_chart' => $unit_month_array,
             ]
         );
     }
