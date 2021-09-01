@@ -8,6 +8,27 @@
                     <img src="{{asset('assets/frontend/img/logo.png') }}" class="mb-3" alt="Directory logo" style="width: 150px;"></a>
                     <p>Dapatkan "Info Bimbel murah" hanya di EH - BIMBEL App.
                        </p>
+                       <i class="fa fa-map-marker-alt"> </i> Jln. KH. Zaini Mun'im , Karang Anyar, Paiton Probolinggo
+                       <br> <i class="fa fa-phone" aria-hidden="true"></i> Telp 0888 30 77077
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <h6 class="text-uppercase text-dark mb-3">Tentang Kami</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Job Eh - Bimbel </a></li>
+                        <li><a href="#" class="text-muted">Promosi Iklan Gratis </a></li>
+                        <li><a href="#" class="text-muted">Pusat Bantuan </a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                    <h6 class="text-uppercase text-dark mb-3">Kebijakan</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Bantuan </a></li>
+                        <li><a href="#" class="text-muted">Kebijakan Privasi </a></li>
+                        <li><a href="#" class="text-muted">Syarat dan Kententuan Umum </a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="text-uppercase text-dark mb-3">Hubungi Kami</h6>
                     <ul class="list-inline">
                         <li class="list-inline-item"><a href="#" target="_blank" title="twitter"
                                 class="text-muted text-hover-primary"><i class="fab fa-twitter"></i></a></li>
@@ -21,37 +42,6 @@
                                 class="text-muted text-hover-primary"><i class="fab fa-vimeo"></i></a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                    <h6 class="text-uppercase text-dark mb-3">EH - BIMBEL</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html" class="text-muted">Tentang Kami </a></li>
-                        <li><a href="category-rooms.html" class="text-muted">Job Eh - Bimbel </a></li>
-                        <li><a href="category-2-rooms.html" class="text-muted">Promosi Iklan Gratis </a></li>
-                        <li><a href="category-3-rooms.html" class="text-muted">Pusat Bantuan </a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                    <h6 class="text-uppercase text-dark mb-3">Kebijakan</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-muted">Kebijakan Privasi </a></li>
-                        <li><a href="#" class="text-muted">Syarat dan Kententuan Umum </a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <h6 class="text-uppercase text-dark mb-3">Hubungi Kami</h6>
-                    <p class="mb-3"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.
-                    </p>
-                    <form action="#" id="newsletter-form">
-                        <div class="input-group mb-3">
-                            <input type="email" placeholder="Your Email Address" aria-label="Your Email Address"
-                                class="form-control bg-transparent border-dark border-right-0">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-outline-dark border-left-0"> <i
-                                        class="fa fa-paper-plane text-lg"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
@@ -60,9 +50,9 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-left">
-                    <p class="text-sm mb-md-0">&copy; 2020
-                        <a href="https://github.com/dzunn86">IT Bimble</a>
-                        all right reserved</p>
+                    <p class="text-sm mb-md-0">
+                        bimble.id | Universitas Nurul Jadid © 2021, All rights reserved
+                        </p>
                 </div>
                
             </div>
