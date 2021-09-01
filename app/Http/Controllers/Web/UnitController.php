@@ -17,10 +17,10 @@ class UnitController extends Controller
 
     public function list(Request $request)
     {
-
         $unit = Unit::where('status', '1')->latest()->paginate(9);
         if ($request->keyword) {
             $unit = Unit::where('nama_unit', 'like', '%' . $request->keyword . '%')
+                ->where('status', '1')
                 ->latest()->paginate(9);
         }
 
@@ -63,16 +63,25 @@ class UnitController extends Controller
             ->latest()
             ->get();
 
-        $kursus_unit = KursusUnit::with(['kursus', 'unit'])
+        $kursus_kelompok = KursusUnit::with(['kursus', 'unit'])
             ->whereNotNull('type_id')
+            ->where('type_id', 2)
             ->where('unit_id', $unit->id)
             ->where('status', 'aktif')
-            ->groupBy('kursus_id')
             ->get();
+
+        $kursus_private = KursusUnit::with(['kursus', 'unit'])
+            ->whereNotNull('type_id')
+            ->where('type_id', 1)
+            ->where('unit_id', $unit->id)
+            ->where('status', 'aktif')
+            ->get();
+
 
         return view('web.web_unit_kursus', [
             'unit' => $unit,
-            'kursus_unit' => $kursus_unit,
+            'kursus_kelompok' => $kursus_kelompok,
+            'kursus_private' => $kursus_private,
             'galeri' => $galeri
         ]);
     }
