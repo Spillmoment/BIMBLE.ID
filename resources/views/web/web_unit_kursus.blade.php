@@ -123,43 +123,118 @@
         </div>
     </div>
 
-
-    <div class="row">
-        <div class="col-md-12">
-            <hr>
-            <h4 class="mb-5">Kursus Kami</h4>
-            <div class="owl-carousel">
-                @forelse ($kursus_unit as $item)
-                <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
-                    <div class="card card-kelas h-100 border-0 shadow">
-                        <div class="card-img-top overflow-hidden gradient-overlay">
-                            <img src="{{url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
-                                alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
-                                href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug]) }}"
-                                class="tile-link"></a>
-
-                        </div>
-                        <div class="card-body d-flex align-items-center">
-                            <div class="w-100">
-                                <h6 class="card-title"><a
-                                        href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug])  }}"
-                                        class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
-                                <div class="d-flex card-subtitle mb-3">
-                                    <p class="flex-grow-1 mb-0 text-muted text-sm">
-                                    </p>
+    <hr>
+    <div class="row mt-5">
+        <div class="col-12 mx-auto">
+            <h4 class="ml-auto">Kursus Kami</h4>
+            <ul class="nav nav-pills mb-3 justify-content-end" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Kelompok</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Private</a>
+                </li>
+                
+              </ul>
+              <div class="tab-content mt-5" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    @forelse ($kursus_kelompok as $item)
+                    @empty              
+                    <div class="col">
+                        <div class="alert alert-success col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                        <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
+                         <p>Kursus kelompok masih kosong</p>
+                    </div>
+                </div>
+                @endforelse
+                    <br>
+                    <br>
+                    <div class="owl-carousel">
+                        @foreach ($kursus_kelompok as $item)
+                        <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
+                            <div class="card card-kelas h-100 border-0 shadow">
+                                <div class="card-img-top overflow-hidden gradient-overlay">
+                                    <img src="{{url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
+                                        alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
+                                        href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug]) }}"
+                                        class="tile-link"></a>
+                  
+                                        <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                            <div class="badge badge-transparent badge-pill px-3 py-2">
+                                                {{ $item->type->nama_type }}
+                                            </div>
+                                        </div>
+                  
                                 </div>
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="w-100">
+                                        <h6 class="card-title"><a
+                                                href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug])  }}"
+                                                class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
+                                        <div class="d-flex card-subtitle mb-3">
+                                            <p class="flex-grow-1 mb-0 text-muted text-sm">
+                                            </p>
+                                        </div>
+                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        @endforeach
+                    </div>
 
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    @forelse ($kursus_private as $item)
+                    @empty              
+                    <div class="col">
+                        <div class="alert alert-success col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                        <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
+                         <p>Kursus private masih kosong</p>
+                    </div>
+                </div>
+                @endforelse
+                    <br>
+                 <br>
+                    <div class="owl-carousel">
+                    @foreach ($kursus_private as $item)
+                    <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
+                        <div class="card card-kelas h-100 border-0 shadow">
+                            <div class="card-img-top overflow-hidden gradient-overlay">
+                                <img src="{{url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
+                                    alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
+                                    href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug]) }}"
+                                    class="tile-link"></a>
+              
+                                    <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
+                                        <div class="badge badge-transparent badge-pill px-3 py-2">
+                                            {{ $item->type->nama_type }}
+                                        </div>
+                                    </div>
+              
+                            </div>
+                            <div class="card-body d-flex align-items-center">
+                                <div class="w-100">
+                                    <h6 class="card-title"><a
+                                            href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug])  }}"
+                                            class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
+                                    <div class="d-flex card-subtitle mb-3">
+                                        <p class="flex-grow-1 mb-0 text-muted text-sm">
+                                        </p>
+                                    </div>
+              
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                 </div>
                 </div>
-                @empty
-
-                @endforelse
-            </div>
+               
+              </div>
         </div>
+       
     </div>
-
 
 </div>
 @endsection
