@@ -232,51 +232,62 @@
     </section>
 
     <!-- Section Testimonial -->
-    <section class="pt-5 mb-5 section-header" style="background-color: #4E66F8">
+    <section class="py-3 mb-3">
         <div class="container">
-            <br>
-            <h3 class="text-white text-center my-3">Testimonial</h3>
-            <!-- Slider main container-->
-            <div class="swiper-container testimonials-slider testimonials">
-                <!-- Additional required wrapper-->
-                <div class="swiper-wrapper pt-2 pb-5">
-                    <!-- Slides-->
-                    <div class="swiper-slide px-3">
-                        <div class="testimonial card rounded-lg shadow border-0">
-                            <div class="testimonial-avatar"><img
-                                    src="https://media-exp3.licdn.com/dms/image/C4E03AQECXvDjaLa55w/profile-displayphoto-shrink_200_200/0/1618435117023?e=1631750400&v=beta&t=455hxUgwBH7X89-G6kS6en2P2Xo9HfTpeCb1Zwh9zjE"
-                                    alt="..." class="img-fluid"></div>
-                            <div class="text">
-                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                <p class="testimonial-text">
-                                    Belajar di bimble.id sangat rekomendasi bagi pemula seperti saya
-                                </p><strong>M Hafid Masruri</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide px-3">
-                        <div class="testimonial card rounded-lg shadow border-0">
-                            <div class="testimonial-avatar"><img
-                                    src="https://0.academia-photos.com/26655222/7421713/8341901/s200_deddy_sujarwadi.candra_gunawan.jpg"
-                                    alt="..." class="img-fluid"></div>
-                            <div class="text">
-                                <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                                <p class="testimonial-text">
-                                    Belajar di bimble.id sangat menyenangkan dan mempunyai mentor yang kompeten di
-                                    bidang nya
-                                </p><strong>Deddy Sujarwadi C.G</strong>
-                            </div>
-                        </div>
-                    </div>
-
+          <div class="text-center">
+           
+            <h2 class="mb-5">Testimoni Alumni</h2>
+          </div>
+          <!-- Slider main container-->
+          <div class="swiper-container testimonials-slider testimonials">
+            <!-- Additional required wrapper-->
+            <div class="swiper-wrapper pt-2 pb-5">
+              <!-- Slides-->
+              <div class="swiper-slide px-3">
+                <div class="testimonial card rounded-lg shadow border-0">
+                  <div class="testimonial-avatar"><img src="https://0.academia-photos.com/26655222/7421713/8341901/s200_deddy_sujarwadi.candra_gunawan.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                    <p class="testimonial-text">
+                        Belajar di bimble.id adalah langkah yang tepat. materi sangat mudah dipahami, detail dan selalu ada ilmu baru yang dipelajari    
+                    </p><strong>Deddy Sujarwadi C.G</strong>
+                  </div>
                 </div>
-                <div class="swiper-pagination"> </div>
+              </div>
+              <div class="swiper-slide px-3">
+                <div class="testimonial card rounded-lg shadow border-0">
+                  <div class="testimonial-avatar"><img src="https://media-exp3.licdn.com/dms/image/C4E03AQECXvDjaLa55w/profile-displayphoto-shrink_200_200/0/1618435117023?e=1631750400&v=beta&t=455hxUgwBH7X89-G6kS6en2P2Xo9HfTpeCb1Zwh9zjE" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                    <p class="testimonial-text">Bimble.id adalah platform kursus offline yang tepat untuk belajar banyak hal. Materinya lengkap, semua dijelaskan dari dasar dan tentunya sangat mudah dipahami.</p><strong>M Hafid Masruri</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide px-3">
+                <div class="testimonial card rounded-lg shadow border-0">
+                  <div class="testimonial-avatar"><img src="../../../d19m59y37dris4.cloudfront.net/directory/1-4-1/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                    <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide px-3">
+                <div class="testimonial card rounded-lg shadow border-0">
+                  <div class="testimonial-avatar"><img src="../../../d19m59y37dris4.cloudfront.net/directory/1-4-1/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
+                  <div class="text">
+                    <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                    <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                  </div>
+                </div>
+              </div>
+             
             </div>
+            <div class="swiper-pagination">     </div>
+          </div>
         </div>
-
-    </section>
+      </section>
     <!-- End Section Testimonial -->
-
     @include('web.layouts.footer')
     @include('web.layouts.script')
     <script src="{{ asset('assets/frontend/vendor/Swiper/4.4.1/js/swiper.min.js') }}"></script>
