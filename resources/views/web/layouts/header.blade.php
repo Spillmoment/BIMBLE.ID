@@ -6,7 +6,7 @@
                 <a href="{{ URL::to('/') }}" class="navbar-brand py-1">
                     <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="Directory logo"
                         style="width: 150px;"></a>
-                <form action="" method="POST" id="search" class="form-inline d-none d-sm-flex scroll" >
+                <form action="{{ route('front.kursus') }}" id="search" class="form-inline d-none d-sm-flex scroll" >
                     <div
                         class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
                         <label for="search_search" class="label-absolute"><i class="fa fa-search"></i><span
