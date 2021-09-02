@@ -43,7 +43,7 @@
                     <div class="card card-kelas h-100 border-0 shadow">
                         <div class="card-img-top overflow-hidden gradient-overlay">
                             <img @if ($item->gambar_unit != null)
-                            src="{{ Storage::url('public/'.$item->gambar_unit) }}"
+                            src="{{ url('assets/images/unit/'.$item->gambar_unit ) }}"
                             @else
                             src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
                             @endif

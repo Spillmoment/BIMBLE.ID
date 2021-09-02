@@ -7,7 +7,7 @@ use App\Galeri;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class GaleriController extends Controller
 {
@@ -33,7 +33,7 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'gambar.*' => 'required|image|mimes:jpg,jpeg,png,bmp'
+            'gambar.*' => 'required|image|mimes:jpg,jpeg,png,bmp,gif,svg'
         ]);
 
         $images = array();
@@ -75,7 +75,7 @@ class GaleriController extends Controller
     public function destroy($id)
     {
         $galeri = Galeri::findOrFail($id);
-        Storage::delete('public/' . $galeri->foto);
+        File::delete('/storage/galeri/' . $galeri->foto);
         $galeri->delete();
         return redirect()->route('unit.galeri.home')->with('status', 'Data Galeri Berhasil Dihapus');
     }

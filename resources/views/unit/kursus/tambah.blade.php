@@ -63,142 +63,15 @@
 @endif
 
 <div class="content">
-    {{-- <div class="card">
-        <div class="card-header">
-            <strong>Pengaturan Detail Kursus {{ $kursus_unit->kursus->nama_kursus }}</strong>
-        </div>
-        <div class="card-body card-block">
-            <form action="{{ route('unit.kursus.update', $kursus_unit->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-
-                <div class="row">
-                    <div class="col-md-6">
-                        
-                        <div class="form-group">
-                            <label for="">Type Kursus</label>
-
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input" checked>
-                                    {{ $kursus_unit->type_id == 1 ? 'Private' : 'Kelompok' }}
-                                </label>
-                            </div>
-
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="">Status</label>
-
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" name="status" class="js-switch" {{ $kursus_unit->status == 'aktif' ? 'checked' : '' }}>
-                                    
-                                </label>
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="">Hari Kursus</label>
-                            @if ($kursus_unit->type_id == 1)
-                            <p class="text-danger">Jadwal tidak tersedia untuk kelas Private</p>
-                            @else
-                            <select name="hari" class="form-control">
-                                @if (!empty($jadwal->hari))
-                                @php
-                                    $list_hari = array('none','Senin','Selasa','Rabu','Kamis','Jum\'at','Sabtu','Minggu');
-                                @endphp
-                                <option value="{{ $jadwal->hari }}">{{ $list_hari[$jadwal->hari] }}</option>
-                                @else
-                                <option value=""></option>
-                                @endif
-                                <option value="1">Senin</option>
-                                <option value="2">Selasa</option>
-                                <option value="3">Rabu</option>
-                                <option value="4">Kamis</option>
-                                <option value="5">Jum'at</option>
-                                <option value="6">Sabtu</option>
-                                <option value="7">Minggu</option>
-                            </select>
-                                
-                            @endif
-                            <div class="invalid-feedback">
-                                {{$errors->first('hari')}}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            @if ($kursus_unit->type_id == 1)
-                                
-                            @else
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="awal">Jam Awal</label>
-                                    @if ($jadwal)
-                                    <input type="text" id="timepicker1" name="waktu_mulai" class="form-control" value="{{ $jadwal->waktu_mulai }}">
-                                    @else
-                                    <input type="text" id="timepicker1" name="waktu_mulai" class="form-control">
-                                    @endif
-                                    <div class="invalid-feedback">
-                                        {{$errors->first('waktu_mulai')}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="akhir">Jam Akhir</label>
-                                    @if ($jadwal)
-                                    <input type="text" id="timepicker2" name="waktu_selesai" class="form-control" value="{{ $jadwal->waktu_selesai }}">
-                                    @else
-                                    <input type="text" id="timepicker2" name="waktu_selesai" class="form-control">
-                                    @endif
-                                    <div class="invalid-feedback">
-                                        {{$errors->first('waktu_selesai')}}
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            @endif
-                        </div>
-
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="">Harga Kursus</label>
-                            <input type="number" id="biaya_kursus" name="biaya_kursus"
-                                class="input-sm form-control-sm form-control"
-                                value="{{ $kursus_unit->biaya_kursus != 0 ? $kursus_unit->biaya_kursus : 0 }}">
-                            <div class="invalid-feedback">
-                                {{$errors->first('biaya_kursus')}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">
-                        Simpan
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div> --}}
-
+ 
     <div class="row">
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <h4>Centered Tabs and Pills</h4>
+                    <h4>Form Tambah Kursus Kelompok & Private</h4>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted m-b-15">To center/justify the tabs and pills, use the <code>.nav-justified</code> class.</p>
-
+                    
                     <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-kelompok" role="tab" aria-controls="pills-kelompok" aria-selected="true">Kelompok</a>
