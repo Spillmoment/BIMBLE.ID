@@ -141,7 +141,7 @@
                     @forelse ($kursus_kelompok as $item)
                     @empty              
                     <div class="col">
-                        <div class="alert alert-success col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                        <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
                         <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
                          <p>Kursus kelompok masih kosong</p>
                     </div>
@@ -188,7 +188,7 @@
                     @forelse ($kursus_private as $item)
                     @empty              
                     <div class="col">
-                        <div class="alert alert-success col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                        <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
                         <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
                          <p>Kursus private masih kosong</p>
                     </div>
