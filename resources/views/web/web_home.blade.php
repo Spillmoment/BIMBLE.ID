@@ -243,7 +243,7 @@
               <!-- Slides-->
               <div class="swiper-slide px-3">
                 <div class="testimonial card rounded-lg shadow border-0">
-                  <div class="testimonial-avatar"><img src="https://0.academia-photos.com/26655222/7421713/8341901/s200_deddy_sujarwadi.candra_gunawan.jpg" alt="..." class="img-fluid"></div>
+                  <div class="testimonial-avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMx1itTXTXLB8p4ALTTL8mUPa9TFN_m9h5VQ&usqp=CAU" alt="..." class="img-fluid"></div>
                   <div class="text">
                     <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
                     <p class="testimonial-text">
@@ -254,7 +254,7 @@
               </div>
               <div class="swiper-slide px-3">
                 <div class="testimonial card rounded-lg shadow border-0">
-                  <div class="testimonial-avatar"><img src="https://media-exp3.licdn.com/dms/image/C4E03AQECXvDjaLa55w/profile-displayphoto-shrink_200_200/0/1618435117023?e=1631750400&v=beta&t=455hxUgwBH7X89-G6kS6en2P2Xo9HfTpeCb1Zwh9zjE" alt="..." class="img-fluid"></div>
+                  <div class="testimonial-avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmE--NjTTosid1jFeMFdc12EVQtKi7XPRMYqeHI0_4jJlqBanUiyQ-KrqN5tsdK_MO0j8&usqp=CAU" alt="..." class="img-fluid"></div>
                   <div class="text">
                     <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
                     <p class="testimonial-text">Bimble.id adalah platform kursus offline yang tepat untuk belajar banyak hal. Materinya lengkap, semua dijelaskan dari dasar dan tentunya sangat mudah dipahami.</p><strong>M Hafid Masruri</strong>
@@ -263,19 +263,19 @@
               </div>
               <div class="swiper-slide px-3">
                 <div class="testimonial card rounded-lg shadow border-0">
-                  <div class="testimonial-avatar"><img src="../../../d19m59y37dris4.cloudfront.net/directory/1-4-1/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
+                  <div class="testimonial-avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv3v8eT0Vp-0n3xYiISR6P-5Q1GZ0zoKHUQbXd-66yiWE2W4mmpO5LQfk0tUnpAvo54KU&usqp=CAU" alt="..." class="img-fluid"></div>
                   <div class="text">
                     <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                    <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                    <p class="testimonial-text">Bimble.id adalah rekomendasi platform kursus yang sangat cocok bagi pemula khususnya di bidang IT</p><strong>Fatih Nauval Azzidan</strong>
                   </div>
                 </div>
               </div>
               <div class="swiper-slide px-3">
                 <div class="testimonial card rounded-lg shadow border-0">
-                  <div class="testimonial-avatar"><img src="../../../d19m59y37dris4.cloudfront.net/directory/1-4-1/img/avatar/avatar-3.jpg" alt="..." class="img-fluid"></div>
+                  <div class="testimonial-avatar"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyg0cHzGlwYy3wEgrjyuPdWSJZBm50KIxB4N4Y5h73lCfWXg60UddPtW6e1F_GEG1LMQo&usqp=CAU" alt="..." class="img-fluid"></div>
                   <div class="text">
                     <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
-                    <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                    <p class="testimonial-text">Bimble.id adalah salah satu platform kursus dengan kurikulum yang profesional serta dimentori oleh orang-orang yang expert dibindang nya</p><strong>Hasyim Asy'ari</strong>
                   </div>
                 </div>
               </div>
