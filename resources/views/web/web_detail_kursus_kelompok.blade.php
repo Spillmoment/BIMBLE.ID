@@ -4,18 +4,16 @@
 
 @push('style')
 <link href="{{ asset('assets/js/picker/mdtimepicker.css') }}" rel="stylesheet">
-@endpush
-
-@section('content')
-
-<link rel="stylesheet" href="{{ asset('assets/frontend/vendor/Swiper/4.4.1/css/swiper.min.css')}}"
-    id="theme-stylesheet">
+<link rel="stylesheet" href="{{ asset('assets/frontend/vendor/Swiper/4.4.1/css/swiper.min.css') }}" id="theme-stylesheet">
 <style>
     .nav .nav-pills .nav-justified li a {
         width: 50px;
     }
 
 </style>
+@endpush
+
+@section('content')
 
 <section style="background-image: url('{{ url('assets/images/kursus/'. $kursus->gambar_kursus) }}');"
     class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover">
@@ -60,31 +58,6 @@
                     </div>
                 </div>
             </div>
-
-            {{-- <div class="text-block">
-                <h5 class="mb-4 mt-4">Galeri Kursus</h5>
-                <div class="row gallery mb-3 ml-n1 mr-n1">
-
-                    @forelse ($gallery as $item)
-                    @foreach (explode('|', $item->gambar) as $image)
-                    <div class="col-lg-4 col-6 px-1 mb-2">
-                        <a href="/storage/image/{{$image}}" data-fancybox="gallery" title="{{ $kursus->nama_kursus }}">
-                            <img src="/storage/image/{{$image}}" alt="" class="img-fluid mt-2"></a>
-                    </div>
-                    @endforeach
-
-                    @empty
-                    <div class="alert alert-primary text-sm mb-3 mt-3 col">
-                        <div class="media align-items-center">
-                            <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
-                            </div>
-                        </div>
-                    </div>
-                    @endforelse
-                </div>
-            </div> --}}
-
-
         </div>
     </div>
 
@@ -270,27 +243,6 @@
             clearBtn: false
 
         });
-
-        // $('#action-cari').click(function (event) {
-        //     event.preventDefault();
-        //     let startday = $('#startday').val();
-        //     let endday = $('#endday').val();
-        //     let clock = $('#timepicker1').val();
-            
-        //     $.ajax({
-        //         type: 'get',
-        //         // dataType: "json",
-        //         url: '{{ route('front.detail.kelompok', Request::route('slug')) }}',
-        //         data: {
-        //             startday: startday,
-        //             endday: endday,
-        //             clock: clock
-        //         },
-        //         success: function (data) {
-        //             $('#card-kursus').html(data);
-        //         }
-        //     })
-        // });
     });
 
 </script>
