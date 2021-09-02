@@ -6,6 +6,47 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
 {{-- CDN untuk tost --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<style>
+    .card-custom {
+    overflow: hidden;
+    min-height: 200px;
+    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+  }
+
+  .card-custom-img {
+    height: 200px;
+    min-height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-color: inherit;
+  }
+
+  /* First border-left-width setting is a fallback */
+  .card-custom-img::after {
+    position: absolute;
+    content: '';
+    top: 161px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-top-width: 40px;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 545px;
+    border-left-width: calc(575px - 5vw);
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: inherit;
+  }
+</style>
 @endpush
 
 @section('content')
@@ -39,24 +80,16 @@
           
             @foreach ($kursus_unit as $item)
             <div class="col-md-4">
-                <section class="card">
-                    <div class="twt-feed blue-bg">
-                        <div class="corner-ribon black-ribon">
-                            <i class="fa fa-twitter"></i>
-                        </div>
-                        <div class="fa fa-twitter wtt-mark"></div>
-
-                        <div class="media">
-                            <a href="{{ route('unit.kursus.add',$item->kursus_id) }}">
-                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}">
-                            </a>
-                            <div class="media-body">
-                                <h3 class="text-white display-6">{{ $item->kursus->nama_kursus }}</h3>
-                                <p class="text-light">{{ auth()->user()->nama_unit }}</p>
-                            </div>
-                        </div>
+                <div class="card card-custom bg-white border-white border-0" style="height: 380px">
+                    <div class="card-custom-img" style="background-image: url({{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }});"></div>
+                    <div class="card-body" style="overflow-y: auto">
+                        <h4 class="card-title">{{ $item->kursus->nama_kursus }}</h4>
+                        <p class="card-text">{{ $item->kursus->keterangan }}</p>
                     </div>
-                </section>
+                    <div class="card-footer" style="background: inherit; border-color: inherit;">
+                        <a href="{{ route('unit.kursus.add',$item->kursus_id) }}" class="btn btn-outline-primary">Detail</a>
+                    </div>
+                </div>           
             </div>
             @endforeach
 
