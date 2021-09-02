@@ -4,8 +4,7 @@
         <div class="container-fluid">
             <div class="d-flex align-items-center">
                 <a href="{{ URL::to('/') }}" class="navbar-brand py-1">
-                    <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="Directory logo"
-                        style="width: 150px;"></a>
+                    <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="Directory logo" style="height: 40px;"></a>
                 <form action="{{ route('front.kursus') }}" id="search" class="form-inline d-none d-sm-flex scroll" >
                     <div
                         class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
