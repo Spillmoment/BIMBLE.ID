@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\UserOldPassword;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 
 class DashboardController extends Controller
@@ -57,17 +58,13 @@ class DashboardController extends Controller
 
         $data = $request->all();
 
-        if ($request->hasFile('gambar_unit')) {
-            if ($request->file('gambar_unit')) {
-                if ($user->gambar_unit && file_exists(storage_path('app/public/' . $user->gambar_unit))) {
-                    Storage::delete('public/' . $user->gambar_unit);
-                    $file = $request->file('gambar_unit')->store('unit', 'public');
-                    $data['gambar_unit'] = $file;
-                } else {
-                    $file = $request->file('gambar_unit')->store('unit', 'public');
-                    $data['gambar_unit'] = $file;
-                }
-            }
+        if (!empty($data['gambar_unit'])) {
+            File::delete(public_path('assets/images/unit/' . $user->gambar_unit));
+            $nama_foto = rand(1, 999) . "-" . $data['gambar_unit']->getClientOriginalName();
+            $data['gambar_unit'] = Image::make($data['gambar_unit']->getRealPath());
+            $data['gambar_unit']->resize(500, 300);
+            $data['gambar_unit']->save(public_path('assets/images/unit/' . $nama_foto));
+            $data['gambar_unit'] = $nama_foto;
         }
 
         $nama_slug = $data['nama_unit'];
@@ -120,17 +117,13 @@ class DashboardController extends Controller
 
         $data = $request->all();
 
-        if ($request->hasFile('gambar_unit')) {
-            if ($request->file('gambar_unit')) {
-                if ($user->gambar_unit && file_exists(storage_path('app/public/' . $user->gambar_unit))) {
-                    Storage::delete('public/' . $user->gambar_unit);
-                    $file = $request->file('gambar_unit')->store('unit', 'public');
-                    $data['gambar_unit'] = $file;
-                } else {
-                    $file = $request->file('gambar_unit')->store('unit', 'public');
-                    $data['gambar_unit'] = $file;
-                }
-            }
+        if (!empty($data['gambar_unit'])) {
+            File::delete(public_path('assets/images/unit/' . $user->gambar_unit));
+            $nama_foto = rand(1, 999) . "-" . $data['gambar_unit']->getClientOriginalName();
+            $data['gambar_unit'] = Image::make($data['gambar_unit']->getRealPath());
+            $data['gambar_unit']->resize(500, 300);
+            $data['gambar_unit']->save(public_path('assets/images/unit/' . $nama_foto));
+            $data['gambar_unit'] = $nama_foto;
         }
 
         $user->update($data);
