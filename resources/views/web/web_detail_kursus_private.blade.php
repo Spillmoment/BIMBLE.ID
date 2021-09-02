@@ -74,18 +74,14 @@
                         <div class="card h-100 border-0 shadow hover-animate">
                             <div class="card-img-top overflow-hidden gradient-overlay">
                                 <img @if ($item->unit->gambar_unit != null)
-                                src="{{ Storage::url('public/'.$item->unit->gambar_unit) }}"
+                                src="{{ url('assets/images/unit/'.$item->unit->gambar_unit) }}"
                                 @else
                                 src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
                                 @endif
                                 alt="{{ $item->unit->nama_unit }}" class="img-fluid" height="200px"/>
                                 <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug, 'type' => 2]) }}"
                                     class="tile-link"></a>
-                                <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
-                                    <div class="badge badge-transparent badge-pill px-3 py-2">
-
-                                    </div>
-                                </div>
+                               
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
