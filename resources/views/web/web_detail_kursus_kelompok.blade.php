@@ -112,7 +112,7 @@
                                 src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
                                 @endif
                                 alt="{{ $item->unit->nama_unit }}" class="img-fluid" height="200px"/>
-                                <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug]) }}"
+                                <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug, 'type' => 2]) }}"
                                     class="tile-link"></a>
                                 <div class="card-img-overlay-bottom z-index-20">
 
