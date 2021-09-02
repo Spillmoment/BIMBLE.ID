@@ -86,8 +86,10 @@ class UnitController extends Controller
         ]);
     }
 
-    public function show_kursus($slug, $slug_kursus)
+    public function show_kursus($slug, $slug_kursus, Request $request)
     {
+        $type_kursus = $request->query('type');
+
         $unit = Unit::with(['kursus_unit', 'mentor', 'fasilitas'])
             ->where('slug', $slug)
             ->firstOrFail();
@@ -97,6 +99,7 @@ class UnitController extends Controller
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('kursus_id', $kursus->id)
             ->where('unit_id', $unit->id)
+            ->where('type_id', $type_kursus)
             ->first();
 
         $kursus_lainya = KursusUnit::with(['kursus', 'unit'])
