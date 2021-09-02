@@ -15,7 +15,7 @@ class MentorController extends Controller
     public function index()
     {
         return view('unit.mentor.index', [
-            'mentor' => Mentor::where('unit_id', Auth::id())->get()
+            'mentor' => Mentor::where('unit_id', Auth::id())->latest()->get()
         ]);
     }
 
