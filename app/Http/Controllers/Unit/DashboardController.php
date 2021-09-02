@@ -46,15 +46,30 @@ class DashboardController extends Controller
         $user = Unit::findOrFail($id);
         $request->validate([
             'nama_unit'             => 'required|min:3|max:100',
-            // 'deskripsi'             => 'required|min:10',
-            // 'email'                 => 'required|email|unique:unit,email,' . $id,
+            'deskripsi'             => 'required|min:10',
+            'email'                 => 'required|email|unique:unit,email,' . $id,
             'whatsapp'              => 'required',
             'telegram'              => 'required',
             'instagram'             => 'required',
-            // 'username'              => 'required|min:3|max:100|unique:unit,username,' . $id,
+            'username'              => 'required|min:3|max:100|unique:unit,username,' . $id,
+            'gambar_unit'           => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
         $data = $request->all();
+
+        if ($request->hasFile('gambar_unit')) {
+            if ($request->file('gambar_unit')) {
+                if ($user->gambar_unit && file_exists(storage_path('app/public/' . $user->gambar_unit))) {
+                    Storage::delete('public/' . $user->gambar_unit);
+                    $file = $request->file('gambar_unit')->store('unit', 'public');
+                    $data['gambar_unit'] = $file;
+                } else {
+                    $file = $request->file('gambar_unit')->store('unit', 'public');
+                    $data['gambar_unit'] = $file;
+                }
+            }
+        }
+
         $nama_slug = $data['nama_unit'];
         $data['slug'] = Str::slug($nama_slug, '-');
 
