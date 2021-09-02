@@ -161,10 +161,10 @@
                     <div class="media align-items-center">
                         <div class="media-body">
                             <h6 class="text-primary text-center mb-2">Hubungi Kami </h6>
-                            <div class="clearfix my-3">
+                            <div class="clearfix my-3 text-capitalize">
                                 <button type="submit" class="btn btn-success btn-sm">
                                     <img src="{{ asset('assets/frontend/img/logo/wa.png') }}" width="20px">
-                                    <a href="https://api.whatsapp.com/send?phone={{ $unit->whatsapp }}&text=Halo%20Admin%20{{ $kursus_unit->unit->nama_unit }}%20Saya%20Mau%20Order%20Kursus%20{{ $kursus_unit->kursus->nama_kursus }}"
+                                    <a href="https://api.whatsapp.com/send?phone={{ $unit->whatsapp }}&text=Halo%20Admin%20{{ $kursus_unit->unit->nama_unit }}%20Saya%20Mau%20Order%20Kursus%20{{ $kursus_unit->kursus->nama_kursus }}%20Dengan%20Type%20Kursus%20{{ $kursus_unit->type->nama_type }}"
                                         target="_blank" class="text-white text-decoration-none"> Whats App </a>
                                 </button>
                                 <button type="submit" class="btn btn-primary btn-sm">
