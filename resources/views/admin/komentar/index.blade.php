@@ -92,7 +92,7 @@
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" id="deleteButton" data-name="{{ $r->nama }}"
+                                            <button type="submit" id="deleteButton" data-name="{{ $item->kursus->nama_kursus }}"
                                                 class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i>
                                             </button>
@@ -122,7 +122,7 @@
         e.preventDefault();
         swal({
                 title: "Yakin!",
-                text: "Menghapus Kursus Unit  " + name + "?",
+                text: "Menghapus review kursus  " + name + "?",
                 icon: "warning",
                 dangerMode: true,
                 buttons: {
