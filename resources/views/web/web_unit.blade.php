@@ -43,6 +43,7 @@
                             <label for="no_telp" class="form-label">Nomor Telepon</label>
                             <input type="number" name="no_telp" id="no_telp" placeholder="Masukkan Nomor Telepon" 
                                 class="form-control {{ $errors->first('no_telp') ? 'is-invalid' : '' }} " value="{{ old('no_telp') }}">
+                                <small id="fileHelpId" class="form-text text-muted">contoh penulisan: +625236639572</small>
                                 <div class="invalid-feedback">
                                     {{ $errors->first('no_telp') }}
                                 </div>
