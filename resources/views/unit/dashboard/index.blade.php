@@ -200,7 +200,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <img src="{{ Storage::url('public/'.Auth::user()->gambar_unit ) }}" alt="gambar unit">
+                                <img src="{{ url('assets/images/unit/'.Auth::user()->gambar_unit ) }}" alt="gambar unit">
                             </div>
                         </div>
 
