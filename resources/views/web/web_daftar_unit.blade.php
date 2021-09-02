@@ -12,7 +12,7 @@
                     <label for="form_search" class="form-label">Pencarian</label>
                     <div class="input-label-absolute input-label-absolute-right">
                         <div class="label-absolute"><i class="fa fa-search"></i></div>
-                        <input type="search" id="search" name="keyword" placeholder="Cari Unit ..." id="form_search"
+                        <input type="search" id="search" name="keyword" placeholder="Masukkan Unit ..." id="form_search"
                             class="cari form-control pr-4" value="{{ Request::get('keyword') }}">
                     </div>
                 </div>
