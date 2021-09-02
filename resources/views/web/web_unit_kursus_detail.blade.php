@@ -19,6 +19,7 @@
             <div class="text-white mb-4 mb-lg-0">
                 <div class="badge badge-pill badge-transparent px-3 py-2 mb-4 text-capitalize">Kursus {{ $kursus_unit->type->nama_type }}</div>
                 <h1 class="text-shadow verified">{{ $kursus_unit->kursus->nama_kursus  }}</h1>
+                <p><i class="fa-map-marker-alt fas mr-2"></i> {{ $kursus_unit->unit->alamat }}</p>
                 <p><i class="fas fa-home mr-2"></i>
                 <a class="text-white" href="{{ route('unit.detail', $kursus_unit->unit->slug) }}"> Lihat Profil Unit <b>{{ $kursus_unit->unit->nama_unit }}</b>
                 </a></p>
