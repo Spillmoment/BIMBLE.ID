@@ -79,7 +79,7 @@
                                 src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}"
                                 @endif
                                 alt="{{ $item->unit->nama_unit }}" class="img-fluid" height="200px"/>
-                                <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug]) }}"
+                                <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug, 'type' => 2]) }}"
                                     class="tile-link"></a>
                                 <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
                                     <div class="badge badge-transparent badge-pill px-3 py-2">
@@ -120,54 +120,6 @@
                 </nav>
             </div>
         </div>
-        {{-- <div class="col-lg-4">
-            <div class="card border-0 shadow-lg">
-                <div class="card-body p-4">
-                    <form>
-                        <div class="text-block">
-                            <div>
-                                <label for="form_sort" class="form-label ">Hari Kursus</label>
-                                <select name="startday" id="form_sort" data-style="btn-selectpicker" title=""
-                                    class="selectpicker form-control">
-                                    <option value="2">Senin</option>
-                                    <option value="3">Selasa</option>
-                                    <option value="4">Rabu</option>
-                                    <option value="5">Kamis</option>
-                                    <option value="6">Jum'at</option>
-                                    <option value="7">Sabtu</option>
-                                    <option value="1">Minggu</option>
-                                </select>
-                            </div>
-                            <div class="form-group text-center">
-                                <label for="rang" class="form-label text-gray-500">sampai dengan</label>
-                                <select name="endday" id="form_sort" data-style="btn-selectpicker" title=""
-                                    class="selectpicker form-control">
-                                    <option value="2">Senin</option>
-                                    <option value="3">Selasa</option>
-                                    <option value="4">Rabu</option>
-                                    <option value="5">Kamis</option>
-                                    <option value="6">Jum'at</option>
-                                    <option value="7">Sabtu</option>
-                                    <option value="1">Minggu</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="jam" class="form-label">Jam Kursus</label>
-                                <input type="text" name="jam" id="timepicker1" class="selectpicker form-control"
-                                    placeholder="" aria-describedby="helpId">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block text-uppercase">Cari</button>
-                        </div>
-                    </form>
-                </div>
-
-
-            </div>
-        </div> --}}
     </div>
 </div>
 </div>
