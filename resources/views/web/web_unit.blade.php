@@ -86,7 +86,7 @@
                 <div class="pl-lg-4">
                  
                     <div class="mb-3">
-                        <h5 class="mb-3">Kursus yang harus dipersiapkan unit</h5>
+                        <h5 class="mb-3">Beberapa kursus yang tersedia</h5>
                             @foreach ($kursus as $item)
                         <span class="badge badge-pill badge-default p-3 text-muted font-weight-bold">{{ $item->nama_kursus }}</span>
                             @endforeach
