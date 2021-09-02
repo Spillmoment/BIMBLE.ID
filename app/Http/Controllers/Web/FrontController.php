@@ -57,6 +57,7 @@ class FrontController extends Controller
 
         if ($keyword) {
             $kursus_unit = KursusUnit::with('kursus')
+                ->where('type_id', 2)
                 ->whereHas('kursus', function ($query) use ($keyword) {
                     $query->where('nama_kursus', 'LIKE', "%$keyword%");
                 })
@@ -121,6 +122,7 @@ class FrontController extends Controller
 
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
             ->where('type_id', 2)
+            ->where('status', 'aktif')
             ->orderBy('created_at', 'desc')
             ->paginate(6);
 
@@ -174,6 +176,7 @@ class FrontController extends Controller
         $kursus = Kursus::where('slug', $slug)->firstOrFail();
         $kursus_unit = KursusUnit::where('kursus_id', $kursus->id)
             ->where('type_id', 2)
+            ->where('status', 'aktif')
             ->orderBy('created_at', 'desc')
             ->paginate(6);
 
