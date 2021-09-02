@@ -20,7 +20,7 @@
                     <label for="form_category" class="form-label">Type Kursus</label>
                     <select name="type" id="form_category" data-style="btn-selectpicker" title=""
                         class="selectpicker form-control">
-                        @if (Request::get('type') == null && Request::get('keyword') == null)
+                        @if (Request::get('type') == null)
                         <option value="">Pilih Type</option>
                         @endif
                         @foreach ($typeKursus as $item)
