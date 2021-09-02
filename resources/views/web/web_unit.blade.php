@@ -32,7 +32,7 @@
                                                     
                         <div class="form-group">
                             <label for="surname" class="form-label">Nama Unit</label>
-                            <input type="text" name="nama_unit" id="surname" placeholder="Masukkan Nama Unit"
+                            <input type="text" required name="nama_unit" id="surname" placeholder="Masukkan Nama Unit"
                                 class="form-control {{ $errors->first('nama_unit') ? 'is-invalid' : '' }}" value="{{ old('nama_unit') }}">
                                 <div class="invalid-feedback">
                                     {{$errors->first('nama_unit')}}
@@ -41,7 +41,7 @@
                             
                         <div class="form-group">
                             <label for="no_telp" class="form-label">Nomor Telepon</label>
-                            <input type="number" name="no_telp" id="no_telp" placeholder="Masukkan Nomor Telepon" 
+                            <input type="number" required name="no_telp" id="no_telp" placeholder="Masukkan Nomor Telepon" 
                                 class="form-control {{ $errors->first('no_telp') ? 'is-invalid' : '' }} " value="{{ old('no_telp') }}">
                                 <small id="fileHelpId" class="form-text text-muted">contoh penulisan: +625236639572</small>
                                 <div class="invalid-feedback">
@@ -51,7 +51,7 @@
 
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Masukkan Email" 
+                            <input type="email" required name="email" id="email" placeholder="Masukkan Email" 
                                 class="form-control {{ $errors->first('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}">
                                 <div class="invalid-feedback">
                                     {{$errors->first('email')}}
@@ -60,7 +60,7 @@
 
                         <div class="form-group">
                             <label for="message" class="form-label">Alamat</label>
-                            <textarea rows="4" name="alamat" id="message" placeholder="Masukkan Alamat"
+                            <textarea required rows="4" name="alamat" id="message" placeholder="Masukkan Alamat"
                                  class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}">{{ old('alamat') }} 
                             </textarea>
                             <div class="invalid-feedback">
@@ -77,7 +77,7 @@
                             {{$errors->first('bukti_alumni')}}
                         </div>
                         </div>
-                        <button type="submit" class="btn btn-primary py-2 px-3"> Submit</button>
+                        <button type="submit" class="btn btn-outline-primary py-2 px-4"> Submit</button>
                     </div>
                 </form>
             </div>
