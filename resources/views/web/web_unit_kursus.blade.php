@@ -8,7 +8,7 @@
     <img src="{{asset('assets/frontend/img/photo/photo-1426122402199-be02db90eb90.jpg')}}" alt="Text page"
         class="bg-image">
     @else
-    <img src="{{ Storage::url('public/' . $unit->gambar_unit) }}" alt="Text page" class="bg-image">
+    <img src="{{ url('assets/images/unit/'.$unit->gambar_unit ) }}" alt="Text page" class="bg-image">
     @endif
 
     <div class="container overlay-content">
