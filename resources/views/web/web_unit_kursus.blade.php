@@ -156,7 +156,7 @@
                                 <div class="card-img-top overflow-hidden gradient-overlay">
                                     <img src="{{url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                         alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
-                                        href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug]) }}"
+                                        href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug, 'type' => 2]) }}"
                                         class="tile-link"></a>
                   
                                         <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
@@ -203,7 +203,7 @@
                             <div class="card-img-top overflow-hidden gradient-overlay">
                                 <img src="{{url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                     alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
-                                    href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug]) }}"
+                                    href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug, 'type' => 1]) }}"
                                     class="tile-link"></a>
               
                                     <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
