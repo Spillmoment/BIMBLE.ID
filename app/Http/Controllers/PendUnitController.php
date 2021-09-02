@@ -49,7 +49,7 @@ class PendUnitController extends Controller
     public function setStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:0,1'
+            'status' => 'required|in:0,1,2'
         ]);
 
         $item = Unit::findOrFail($id);
