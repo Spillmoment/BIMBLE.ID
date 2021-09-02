@@ -31,7 +31,7 @@ class UnitController extends Controller
 
     public function index()
     {
-        return view('web.web_unit', ['kursus' => Kursus::all()]);
+        return view('web.web_unit', ['kursus' => Kursus::limit(6)->get()]);
     }
 
     public function post(UnitDaftarReq $request)
