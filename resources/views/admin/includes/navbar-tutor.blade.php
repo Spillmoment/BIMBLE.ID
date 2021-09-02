@@ -19,7 +19,7 @@
                     aria-expanded="false">
                          @if (Auth::user()->gambar_unit != null)
                            <img class="user-avatar rounded-circle"
-                            src="{{ Storage::url('public/'.Auth::user()->gambar_unit ) }}"
+                            src="{{ url('assets/images/unit/'.Auth::user()->gambar_unit ) }}"
                             width="70px">
                          @else
                             <img class="user-avatar rounded-circle img-thumbnail img-fluid"
