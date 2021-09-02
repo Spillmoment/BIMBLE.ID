@@ -3,10 +3,10 @@
     <div class="top-left">
         <div class="navbar-header">
             <a class="navbar-brand" href="{{ route('unit.home') }}">
-                <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="" class="w-50 mb-2 mt-2" />
+                <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="" style="height: 35px;" class="mb-1 mt-1" />
             </a>
             <a class="navbar-brand hidden" href="{{ route('unit.home') }}">
-                <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="" class="w-50 mb-2 mt-2" />
+                <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="" style="height: 35px;" class="mb-1 mt-1" />
             </a>
             <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
         </div>
