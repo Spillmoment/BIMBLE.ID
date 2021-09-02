@@ -210,8 +210,6 @@
                                                 href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
                                                 class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
                                         </h6>
-
-
                                     </div>
                                 </div>
                             </div>
