@@ -152,7 +152,7 @@
                     <div class="owl-carousel">
                         @foreach ($kursus_kelompok as $item)
                         <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
-                            <div class="card card-kelas h-100 border-0 shadow">
+                            <div class="card card-kelas h-100 border-0 shadow-lg">
                                 <div class="card-img-top overflow-hidden gradient-overlay">
                                     <img src="{{url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                         alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
@@ -199,7 +199,7 @@
                     <div class="owl-carousel">
                     @foreach ($kursus_private as $item)
                     <div data-marker-id="59c0c8e322f3375db4d89128" class="w-100 h-100 hover-animate">
-                        <div class="card card-kelas h-100 border-0 shadow">
+                        <div class="card card-kelas h-100 border-0 shadow-lg">
                             <div class="card-img-top overflow-hidden gradient-overlay">
                                 <img src="{{url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
                                     alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" height="200px" /><a
