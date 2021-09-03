@@ -12,7 +12,7 @@
                                 class="sr-only">What
                                 are you looking for?</span></label>
                         <input id="search_search" name="keyword" placeholder="Search" aria-label="Search"
-                            class="form-control form-control-sm border-0 shadow-0 bg-gray-200" value="{{ Request::get('keyword') }}">
+                            class="form-control form-control-sm border-0 shadow-lg-0 bg-gray-200" value="{{ Request::get('keyword') }}">
                         <button type="reset" class="btn btn-reset btn-sm"><i class="fa-times fas"></i></button>
                     </div>
                 </form>
