@@ -79,9 +79,9 @@
                 <div id="buy" role="tabpanel" class="tab-pane fade show active">
                     <form action="{{ route('front.kursus') }}">
                         <div class="row">
-                            <div class="col-lg-6 pl-lg-6 d-flex align-items-center form-group no-divider">
-                                <input type="text" name="keyword" placeholder="Kursus apa yang anda cari?"
-                                    class="form-control border-0 shadow">
+                            <div class="col-lg-6 pl-lg-6 d-flex align-items-center form-group no-divider shadow">
+                                <input type="text" name="keyword" placeholder="Masukkan kursus yang anda cari ..."
+                                    class="form-control border-0 ">
                             </div>
 
                             <div class="col-md-4 col-lg-3 d-flex align-items-center form-group no-divider">
