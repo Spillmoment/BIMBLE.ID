@@ -219,13 +219,12 @@
                                 <td class="font-weight-bold text-right pt-3 text-capitalize"> {{ substr($jadwal->waktu_mulai, 0,-3) }} - {{ substr($jadwal->waktu_selesai, 0,-3) }} </td>
                             </tr> 
                             @empty
-                            <tr>
-                                <th colspan="2">
-                                    <div class="alert alert-warning" role="alert">
-                                        Jadwal masih belum tersedia, silahkan hubungi unit pada kontak diatas.
-                                      </div>
-                                </th>
-                            </tr>
+                            <div class="col">
+                                <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                                <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
+                                 <p>Jadwal masih belum tersedia, silahkan hubungi unit pada kontak diatas.</p>
+                            </div>
+                        </div>
                             @endforelse
                             
                         </table>
