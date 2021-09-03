@@ -33,7 +33,7 @@
                 <!-- venue item-->
                 @foreach ($kursus_unit as $item)
                 <div data-marker-id="59c0c8e322f3375db4d89128" class="col-sm-6 col-xl-4 mb-5 hover-animate">
-                    <div class="card card-kelas h-100 border-0 shadow">
+                    <div class="card card-kelas h-100 border-0 shadow-lg">
                         <div class="card-img-top overflow-hidden gradient-overlay">
                             <img src="{{ Storage::url('public/'. $item->unit->gambar_unit) }}"
                                 alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" /><a
