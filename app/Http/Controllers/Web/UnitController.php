@@ -10,6 +10,7 @@ use App\Kursus;
 use App\KursusUnit;
 use App\Galeri;
 use App\GaleriKursus;
+use App\Jadwal;
 use Illuminate\Support\Str;
 
 class UnitController extends Controller
@@ -102,6 +103,8 @@ class UnitController extends Controller
             ->where('type_id', $type_kursus)
             ->first();
 
+        $jadwal = Jadwal::where('kursus_unit_id', $kursus_unit->id)->get();
+
         $kursus_lainya = KursusUnit::with(['kursus', 'unit'])
             ->where('unit_id', $unit->id)
             ->get();
@@ -111,11 +114,12 @@ class UnitController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(9);
 
-        // dd($kursus_unit);
+        // dd($kursus_unit->id);
 
         return view('web.web_unit_kursus_detail', [
             'unit' => $unit,
             'kursus_unit' => $kursus_unit,
+            'jadwals' => $jadwal,
             'kursus_lainya' => $kursus_lainya,
             'gallery' => $gallery
         ]);
