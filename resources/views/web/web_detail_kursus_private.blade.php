@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade py-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="card border-0 shadow">
+                    <div class="card border-0 shadow-lg">
                         <div class="card-body">
                             {!! $kursus->materi !!}
                         </div>
@@ -71,7 +71,7 @@
                 <div class="row mt-4 mb-2">
                     @forelse ($kursus_unit as $item)
                     <div class="col-md-4 mb-3">
-                        <div class="card h-100 border-0 shadow hover-animate">
+                        <div class="card h-100 border-0 shadow-lg hover-animate">
                             <div class="card-img-top overflow-hidden gradient-overlay">
                                 <img @if ($item->unit->gambar_unit != null)
                                 src="{{ url('assets/images/unit/'.$item->unit->gambar_unit) }}"
