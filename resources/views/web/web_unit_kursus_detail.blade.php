@@ -74,8 +74,7 @@
                                    {{ $f->item == 'toilet' ? 'fa fa-shower' : '' }}
                                    {{ $f->item == 'komputer' ? 'fa fa-laptop' : '' }}
                                     text-secondary w-1rem mr-3 text-center"></i> 
-                                    <span
-                                    class="text-sm">{{ $f->item }}</span></li>
+                                    <span class="text-sm">{{ $f->item }}</span></li>
                             </ul>
                         </div>
                         @empty
@@ -189,6 +188,60 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Jadwal section --}}
+
+            <div class="card border-0 shadow-lg mt-3">
+                <div class="card-header text-primary text-center">
+                    <h6 class="text-primary text-center"> </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-block pb-3">
+                        <div class="media align-items-center">
+                            <div class="media-body">
+                                <h6> <a href="#" class="text-reset"></a>
+                                    Jadwal Kursus
+                                </h6>
+                                <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
+                            </div>
+                            <img src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}" alt="" width="100" class="ml-3 rounded">
+                        </div>
+                    </div>
+
+                    <div class="text-block pt-1 pb-0">
+                        <table class="w-100">
+                            @php
+                                $init_hari = array('','Senin','Selasa','Rabu','Kamis','Jum\'at','Sabtu','Minggu')
+                            @endphp
+                            @forelse ($jadwals as $jadwal)
+                            <tr>
+                                <th class="pt-3">{{ $init_hari[$jadwal->hari] }}</th>
+                                <td class="font-weight-bold text-right pt-3 text-capitalize"> {{ substr($jadwal->waktu_mulai, 0,-3) }} - {{ substr($jadwal->waktu_selesai, 0,-3) }} </td>
+                            </tr> 
+                            @empty
+                            <tr>
+                                <th colspan="2">
+                                    <div class="alert alert-warning" role="alert">
+                                        Jadwal masih belum tersedia, silahkan hubungi unit pada kontak diatas.
+                                      </div>
+                                </th>
+                            </tr>
+                            @endforelse
+                            
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light py-2 border-top">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            <h6 class="text-primary text-center mb-2"> </h6>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        {{-- End jadwal section --}}
 
             
             <div class="pt-4">
