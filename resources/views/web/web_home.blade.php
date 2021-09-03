@@ -29,8 +29,10 @@
     <link rel="stylesheet" href="{{asset('assets/frontend/css/custom.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/owl-carousel/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/owl-carousel/dist/assets/owl.theme.default.css') }}">
-
-
+    <!-- Google fonts - Playfair Display-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
+    <!-- Google fonts - Poppins-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
 </head>
 
 <body style="padding-top: 0;">
@@ -51,8 +53,8 @@
                         <div class="w-100">
                             <div class="row -mt-5 text-center mx-auto">
                                 <div class="col-xl-10 mx-auto">
-                                    <h1 class="display-4 font-weight-bold text-shadow">{{$item->kata1}}</h1>
-                                    <p class="text-lg text-shadow">{{ $item->kata2 }}</p>
+                                    <h1 class="display-4 font-weight-bold text-shadow kata1">{{$item->kata1}}</h1>
+                                    <p class="text-lg text-shadow kata2">{{ $item->kata2 }}</p>
                                 </div>
                             </div>
                         </div>
@@ -69,6 +71,7 @@
         </div>
     </div>
 
+    <br>
     <div class="container position-relative mt-n4 z-index-20 ">
 
         <div class="search-bar search-bar-with-tabs p-4 p-lg-3">
