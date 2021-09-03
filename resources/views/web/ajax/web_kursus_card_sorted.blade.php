@@ -1,7 +1,7 @@
 <div class="row">
     @forelse ($kursus as $krs)
     <div data-marker-id="59c0c8e33b1527bfe2abaf92" class="col-sm-6 col-xl-4 mb-5 hover-animate">
-        <div class="card h-100 border-0 shadow">
+        <div class="card h-100 border-0 shadow-lg">
             <div class="card-img-top overflow-hidden gradient-overlay"> <img
                     src="{{ Storage::url('public/'.$krs->gambar_kursus) }}" alt="{{ $krs->nama_kursus }}"
                     class="img-fluid" /><a href="{{ route('front.detail', [$krs->slug]) }}" class="tile-link"></a>
