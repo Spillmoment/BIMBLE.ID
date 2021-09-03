@@ -54,10 +54,10 @@
                 <!-- venue item-->
                 @forelse ($kursus_unit as $item)
                 <div data-marker-id="59c0c8e322f3375db4d89128" class="col-sm-6 col-xl-4 mb-5 hover-animate">
-                    <div class="card card-kelas h-100 border-0 shadow">
+                    <div class="card card-kelas h-60 border-0 shadow-lg">
                         <div class="card-img-top overflow-hidden gradient-overlay">
                             <img src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}"
-                                alt="{{ $item->kursus->nama_kursus }}" class="img-fluid" />
+                                alt="{{ $item->kursus->nama_kursus }}" class="img-fluid rounded-lg" />
                             <a href="{{ Request::get('type') == 1 ? route('front.detail.private', $item->kursus->slug) : route('front.detail.kelompok', $item->kursus->slug) }}"
                                 class="tile-link"></a>
 
