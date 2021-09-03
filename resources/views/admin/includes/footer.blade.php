@@ -5,7 +5,7 @@
               Copyright &copy; 2021 Bimble.id
           </div>
           <div class="col-sm-6 text-right">
-              Designed by <a href="https://colorlib.com">Colorlib</a>
+              Designed by <a href="#">UNUJA Dev Team</a>
           </div>
       </div>
   </div>
