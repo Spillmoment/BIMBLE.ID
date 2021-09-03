@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade py-2" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="card border-0 shadow">
+                    <div class="card border-0 shadow-lg">
                         <div class="card-body">
                             {!! $kursus_unit->kursus->materi !!}
                         </div>
@@ -118,7 +118,7 @@
 
         <div class="col-lg-4">
 
-            <div class="card border-0 shadow">
+            <div class="card border-0 shadow-lg">
                 <div class="card-header text-primary text-center">
                     <h6 class="text-primary text-center">Detail Kursus </h6>
                 </div>
