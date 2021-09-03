@@ -79,12 +79,12 @@
                             </ul>
                         </div>
                         @empty
-                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                            <div class="media align-items-center">
-                                <div class="media-body text-center ">Belum ada <strong>Fasilitas</strong> untuk unit ini
-                                </div>
-                            </div>
+                        <div class="col">
+                            <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                            <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
+                             <p>Belum ada fasilitas untuk kursus ini</p>
                         </div>
+                    </div>
                         @endforelse
                  
                 </div>
@@ -102,12 +102,12 @@
                     @endforeach
 
                     @empty
-                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                        <div class="media align-items-center">
-                            <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
-                            </div>
-                        </div>
+                    <div class="col">
+                        <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                        <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
+                         <p>Belum ada galeri untuk kursus ini</p>
                     </div>
+                </div>
                     @endforelse
                 </div>
             </div>
@@ -138,6 +138,10 @@
 
                     <div class="text-block pt-1 pb-0">
                         <table class="w-100">
+                            <tr>
+                                <th class="pt-3">Unit Kursus</th>
+                                <td class="font-weight-bold text-right pt-3 text-capitalize"> {{ $kursus_unit->unit->nama_unit }} </td>
+                            </tr>
                             <tr>
                                 <th class="pt-3">Type Kursus</th>
                                 <td class="font-weight-bold text-right pt-3 text-capitalize"> {{ $kursus_unit->type->nama_type }} </td>

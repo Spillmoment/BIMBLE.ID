@@ -46,12 +46,12 @@
                             </div>
                         </div>
                         @empty
-                        <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                            <div class="media align-items-center">
-                                <div class="media-body text-center ">Belum ada <strong>Mentor</strong> untuk unit ini
-                                </div>
-                            </div>
+                        <div class="col">
+                            <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                            <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
+                             <p>Mentor kursus masih kosong</p>
                         </div>
+                    </div>
                         @endforelse
 
 
@@ -72,12 +72,12 @@
                     @endforeach
 
                     @empty
-                    <div class="alert alert-warning text-sm mb-3 mt-3 col">
-                        <div class="media align-items-center">
-                            <div class="media-body text-center ">Belum ada <strong>Gallery</strong> untuk kursus ini
-                            </div>
-                        </div>
+                    <div class="col">
+                        <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                        <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
+                         <p>Galeri kursus masih kosong</p>
                     </div>
+                </div>
                     @endforelse
                 </div>
             </div>
