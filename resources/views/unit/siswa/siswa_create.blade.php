@@ -34,7 +34,7 @@
                 <strong>Tambah Siswa {{ $kursus->kursus->nama_kursus }} {{ $kursus->type_id == 1 ? 'Private' : 'Kelompok' }}</strong>
             </div>
             <div class="card-body card-block">
-                <form action="{{ route('unit.siswa.store', $kursus->id) }}" method="POST">
+                <form action="{{ route('unit.siswa.store', $kursus->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group ">
                         <label for="nama_siswa">Nama Siswa</label>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="custom-control custom-radio">
                                 <input type="radio" id="perempuan" name="jenis_kelamin" class="custom-control-input" value="P"
-                                    required {{ (old('perempuan') == 'P') ? 'checked' : ''}}>
+                                    required {{ (old('jenis_kelamin') == 'P') ? 'checked' : ''}}>
         
                                 <label for="perempuan" class="custom-control-label">Perempuan</label>
                             </div>
@@ -76,10 +76,19 @@
         
                     <div class="form-group ">
                         <label for="nilai">Nilai</label>
-                        <input type="nilai" class="form-control {{ $errors->first('nilai') ? 'is-invalid' : '' }}"
+                        <input type="number" class="form-control {{ $errors->first('nilai') ? 'is-invalid' : '' }}"
                             name="nilai" id="nilai" value="{{old('nilai')}}" placeholder="nilai">
                         <div class="invalid-feedback">
                             {{$errors->first('nilai')}}
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="sertifikat">Sertifikat <small>(.pdf)</small></label>
+                        <input type="file" class="form-control {{ $errors->first('sertifikat') ? 'is-invalid' : '' }}"
+                            name="sertifikat" id="sertifikat" value="{{old('sertifikat')}}" placeholder="sertifikat">
+                        <div class="invalid-feedback">
+                            {{$errors->first('sertifikat')}}
                         </div>
                     </div>
             

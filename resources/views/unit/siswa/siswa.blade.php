@@ -40,7 +40,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Table Siswa </strong>
+                        <strong class="card-title">Table Siswa {{ $kursus->kursus->nama_kursus }} ({{ $kursus->type->nama_type }})</strong>
 
                         <a class="btn btn-primary btn-sm float-right" href="{{ route('unit.siswa.create', $kursus_unit_id) }}"> Tambah Siswa</a>
                     </div>
@@ -53,6 +53,7 @@
                                     <th width="150">Gender</th>
                                     <th width="250">Alamat</th>
                                     <th width="50">Nilai</th>
+                                    <th width="50">Sertifikat</th>
                                     <th width="100">Opsi</th>
                                 </tr>
                             </thead>
@@ -64,6 +65,7 @@
                                     <td>{{ $siswa->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     <td>{{ $siswa->alamat }}</td>
                                     <td>{{ $siswa->nilai }}</td>
+                                    <td><a href="{{ asset('storage/sertifikat/'.$siswa->sertifikat) }}" target="_blank">{{ $siswa->sertifikat }}</a></td>
                                     <td>
                                         <a class="btn btn-warning btn-sm text-light" href="{{route('unit.siswa.edit',
                                         [$siswa->kursus_unit_id, $siswa->id])}}"> <i class="fa fa-pencil"></i></a>

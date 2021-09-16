@@ -36,7 +36,7 @@
                     <strong class="card-title">Edit Siswa <span class="badge badge-success float-right mt-1">{{ $siswa->nama_siswa }}</span></strong>
                 </div>
                 <div class="card-body card-block">
-                    <form method="post" action="{{route('unit.siswa.update',[$id, $siswa->id])}}">
+                    <form method="post" action="{{route('unit.siswa.update',[$id, $siswa->id])}}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
         
@@ -80,10 +80,19 @@
 
                         <div class="form-group ">
                             <label for="nilai">Nilai</label>
-                            <input type="text" class="form-control {{ $errors->first('nilai') ? 'is-invalid' : '' }}"
+                            <input type="number" class="form-control {{ $errors->first('nilai') ? 'is-invalid' : '' }}"
                                 name="nilai" id="nilai" value="{{$siswa->nilai }}">
                             <div class="invalid-feedback">
                                 {{$errors->first('nilai')}}
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="sertifikat">Sertifikat <small>(.pdf)</small></label>
+                            <input type="file" class="form-control {{ $errors->first('sertifikat') ? 'is-invalid' : '' }}"
+                                name="sertifikat" id="sertifikat" value="{{old('sertifikat')}}" placeholder="sertifikat">
+                            <div class="invalid-feedback">
+                                {{$errors->first('sertifikat')}}
                             </div>
                         </div>
         
