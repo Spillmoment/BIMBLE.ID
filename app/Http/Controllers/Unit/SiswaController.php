@@ -8,6 +8,7 @@ use App\KursusUnit;
 use App\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SiswaController extends Controller
 {
@@ -35,9 +36,11 @@ class SiswaController extends Controller
     {
 
         $siswa = Siswa::where('kursus_unit_id', $id)->get();
+        $kursus = KursusUnit::with(['kursus','type'])->where('id', $id)->first();
 
         return view('unit.siswa.siswa', [
             'kursus_unit_id' => $id,
+            'kursus' => $kursus,
             'siswa' => $siswa,
         ]);
     }
@@ -55,14 +58,24 @@ class SiswaController extends Controller
 
     public function store_siswa(Request $request, $id)
     {
+        // $kursus = Kursus::where('slug', $slug)->first();
         $request->validate([
             'nama_siswa'    => 'required|max:255|min:3',
             'jenis_kelamin' => 'required|in:L,P',
             'alamat'        => 'required|max:255|min:3',
             'nilai'         => 'required|numeric|between:0,100',
+            'sertifikat'    => 'nullable|max:10000|mimes:pdf'
         ]);
 
         $data = $request->all();
+
+        if ($file = $request->file('sertifikat')) {
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time(). "." .$extension;
+            $file->move('storage/sertifikat', $fileName);
+            $data['sertifikat'] = $fileName;
+        }
+
         $data['kursus_unit_id'] = $id;
 
         Siswa::create($data);
@@ -85,10 +98,19 @@ class SiswaController extends Controller
             'jenis_kelamin' => 'required|in:L,P',
             'alamat'        => 'required|max:255|min:3',
             'nilai'         => 'required|numeric|between:0,100',
+            'sertifikat'    => 'nullable|max:10000|mimes:pdf'
         ]);
 
         $siswa = Siswa::findOrFail($id_siswa);
         $data = $request->all();
+
+        if ($file = $request->file('sertifikat')) {
+            Storage::delete('public/sertifikat/' . $siswa->sertifikat);
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time(). "." .$extension;
+            $file->move('storage/sertifikat', $fileName);
+            $data['sertifikat'] = $fileName;
+        }
 
         $siswa->update($data);
         return redirect()->route('unit.siswa.kursus', $id)->with([
@@ -100,6 +122,7 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         $siswa = Siswa::findOrFail($id);
+        Storage::delete('public/sertifikat/' . $siswa->sertifikat);
         $siswa->forceDelete();
         return redirect()->back()->with('status', 'Data Siswa Berhasil Dihapus');
     }
