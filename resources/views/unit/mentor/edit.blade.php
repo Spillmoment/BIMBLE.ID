@@ -111,30 +111,6 @@
 
 
                     </div>
-                    <div class="weather-category twt-category">
-                        <ul>
-                            <li class="active">
-                                <h5>750</h5>
-                                Tweets
-                            </li>
-                            <li>
-                                <h5>865</h5>
-                                Following
-                            </li>
-                            <li>
-                                <h5>3645</h5>
-                                Followers
-                            </li>
-                        </ul>
-                    </div>
-                    <footer class="twt-footer">
-                        <a href="#"><i class="fa fa-camera"></i></a>
-                        <a href="#"><i class="fa fa-map-marker"></i></a>
-                        Bimble ID
-                        <span class="pull-right">
-                            Aktif
-                        </span>
-                    </footer>
                 </section>
             </div>
     </div>
