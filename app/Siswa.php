@@ -8,10 +8,6 @@ class Siswa extends Model
 {
     protected $table = 'siswa';
 
-    protected $fillable = ['kursus_unit_id', 'nama_siswa', 'jenis_kelamin', 'alamat', 'nilai'];
+    protected $fillable = ['nama_siswa', 'jenis_kelamin', 'agama', 'alamat', 'status', 'email', 'username', 'password'];
 
-    public function kursus()
-    {
-        return $this->belongsTo(KursusUnit::class, 'kursus_unit_id');
-    }
 }
