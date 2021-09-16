@@ -22,7 +22,7 @@ class AlterTableSiswa extends Migration
             $table->enum('status', ['1', '0'])->after('alamat');
             $table->string('email')->unique()->after('status');
             $table->timestamp('email_verified_at')->nullable()->after('email');
-            $table->string('username', 100)->after('email_verified_at');
+            $table->string('username', 100)->unique()->after('email_verified_at');
             $table->string('password', 100)->after('username');
             $table->rememberToken()->after('password');
         });
