@@ -68,6 +68,17 @@ return [
             'provider' => 'units',
             'hash' => false,
         ],
+        
+        'siswa' => [
+            'driver' => 'session',
+            'provider' => 'siswas',
+        ],
+
+        'api-siswa' => [
+            'driver' => 'token',
+            'provider' => 'siswas',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -99,6 +110,10 @@ return [
         'units' => [
             'driver' => 'eloquent',
             'model' => App\Unit::class,
+        ],
+        'siswas' => [
+            'driver' => 'eloquent',
+            'model' => App\Siswa::class,
         ],
 
         // 'users' => [
@@ -137,6 +152,12 @@ return [
         ],
         'units' => [
             'provider' => 'units',
+            'table' => 'password_resets',
+            'expire' => 15,
+            'throttle' => 15,
+        ],
+        'siswas' => [
+            'provider' => 'siswas',
             'table' => 'password_resets',
             'expire' => 15,
             'throttle' => 15,
