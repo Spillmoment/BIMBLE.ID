@@ -30,6 +30,18 @@ Route::group(['prefix' => 'unit'], function () {
     Route::post('/password/reset', 'AuthUnit\ResetPasswordController@reset');
 });
 
+// Auth Siswa
+Route::group(['prefix' => 'siswa'], function () {
+    Route::get('/login', 'AuthSiswa\LoginController@showLoginForm')->name('siswa.login');
+    Route::post('/login', 'AuthSiswa\LoginController@login')->name('siswa.login.submit');
+
+    Route::get('/logout', 'AuthSiswa\LoginController@logoutSiswa')->name('siswa.logout');
+    Route::get('/password/reset', 'AuthSiswa\ForgotPasswordController@showLinkRequestForm')->name('siswa.password.request');
+    Route::post('/password/email', 'AuthSiswa\ForgotPasswordController@sendResetLinkEmail')->name('siswa.password.email');
+    Route::get('/password/reset/{token}', 'AuthSiswa\ResetPasswordController@showResetForm')->name('siswa.password.reset');
+    Route::post('/password/reset', 'AuthSiswa\ResetPasswordController@reset');
+});
+
 Route::prefix('unit')
     ->middleware('auth:unit')
     ->group(function () {
