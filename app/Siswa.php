@@ -2,12 +2,35 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\SiswaResetPasswordNotification;
 
-class Siswa extends Model
+class Siswa extends Authenticatable
 {
-    protected $table = 'siswa';
+    use Notifiable;
+    use SoftDeletes;
 
-    protected $fillable = ['nama_siswa', 'jenis_kelamin', 'agama', 'alamat', 'status', 'email', 'username', 'password'];
+    protected $table = 'siswa';
+    protected $guard = 'siswa';
+
+    protected $fillable = ['nama_siswa', 'jenis_kelamin', 'agama', 'alamat', 'foto', 'status', 'email', 'username', 'password'];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new SiswaResetPasswordNotification($token));
+    }
+
+    protected $dates = ['deleted_at'];
 
 }
