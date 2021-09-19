@@ -32,6 +32,9 @@ Route::group(['prefix' => 'unit'], function () {
 
 // Auth Siswa
 Route::group(['prefix' => 'siswa'], function () {
+    Route::get('/register', 'AuthSiswa\RegisterController@registrationForm')->name('siswa.register');
+    Route::post('/register', 'AuthSiswa\RegisterController@register')->name('siswa.register.post');
+
     Route::get('/login', 'AuthSiswa\LoginController@showLoginForm')->name('siswa.login');
     Route::post('/login', 'AuthSiswa\LoginController@login')->name('siswa.login.submit');
 
@@ -42,6 +45,13 @@ Route::group(['prefix' => 'siswa'], function () {
     Route::post('/password/reset', 'AuthSiswa\ResetPasswordController@reset');
 });
 
+Route::prefix('siswa')
+    ->middleware('auth:siswa')
+    ->group(function () {
+        Route::get('/home', function () {
+            return 'hello';
+        })->name('siswa.home');
+    });   
 Route::prefix('unit')
     ->middleware('auth:unit')
     ->group(function () {
