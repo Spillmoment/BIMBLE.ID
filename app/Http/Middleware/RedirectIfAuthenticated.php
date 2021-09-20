@@ -30,10 +30,10 @@ class RedirectIfAuthenticated
                     return redirect()->route('unit.home');
                 }
                 break;
-            
+
             case 'siswa':
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('siswa.home');
+                    return redirect()->route('front.index');
                 }
                 break;
 
