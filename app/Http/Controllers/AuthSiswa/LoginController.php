@@ -36,7 +36,7 @@ class LoginController extends Controller
         ];
 
         if (Auth::guard('siswa')->attempt($credential, $request->member)) {
-            return redirect()->intended(route('siswa.home'));
+            return redirect()->intended(route('front.index'));
         } else {
             session()->flash('loginError', 'Email atau password salah, periksa kembali akun anda');
         }
