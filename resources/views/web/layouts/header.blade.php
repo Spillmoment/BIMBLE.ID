@@ -23,20 +23,67 @@
             <!-- Navbar Collapse -->
             <div id="navbarCollapse" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
+                   
+                    @guest
                     <li class="nav-item"><a href="{{ route('front.index') }}" class="nav-link 
-                {{ (Request::route()->getName() == 'front.index') ? 'active' : '' }}">Beranda</a></li>
-                    <li class="nav-item"><a href="{{ route('front.kursus') }}"
-                            class="nav-link  {{ (request()->is('kursus*')) ? 'active' : '' }}">
-                            Kursus</a>
+                        {{ (Request::route()->getName() == 'front.index') ? 'active' : '' }}">Beranda</a></li>
+                            <li class="nav-item"><a href="{{ route('front.kursus') }}"
+                                    class="nav-link  {{ (request()->is('kursus*')) ? 'active' : '' }}">
+                                    Kursus</a>
+                            </li>
+                            <li class="nav-item}"><a href="{{ route('unit.list') }}"
+                                    class="nav-link  {{ (request()->is('unit*')) || (request()->is('daftar-unit*')) ? 'active' : '' }}">
+                                    Unit</a>
+                            </li>
+                            <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
+                                    class="nav-link  {{ (Request::route()->getName() == 'unit.daftar') ? 'active' : '' }}">
+                                    Pendaftaran Unit</a>
+                            </li>
+
+                            <li class="nav-item"><a href="{{ route('siswa.register') }}" class="nav-link  
+                                {{ (Request::route()->getName() == 'siswa.register') ? 'active' : '' }}">Daftar</a></li>
+                            <li class="nav-item"><a href="{{ route('siswa.login') }}" class="nav-link 
+                                 {{ (Request::route()->getName() == 'siswa.login') ? 'active' : '' }}">
+                                    Masuk
+                                </a></li>
+                          
+                    @endguest
+
+                    @auth
+                    <li class="nav-item"><a href="{{ route('front.index') }}" class="nav-link 
+                        {{ (Request::route()->getName() == 'front.index') ? 'active' : '' }}">Beranda</a></li>
+                            <li class="nav-item"><a href="{{ route('front.kursus') }}"
+                                    class="nav-link  {{ (request()->is('kursus*')) ? 'active' : '' }}">
+                                    Kursus</a>
+                            </li>
+                            <li class="nav-item}"><a href="{{ route('unit.list') }}"
+                                    class="nav-link  {{ (request()->is('unit*')) || (request()->is('daftar-unit*')) ? 'active' : '' }}">
+                                    Unit</a>
+                            </li>
+                            <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
+                                    class="nav-link  {{ (Request::route()->getName() == 'unit.daftar') ? 'active' : '' }}">
+                                    Pendaftaran Unit</a>
+                            </li>
+
+                    <li class="nav-item dropdown ml-lg-3">
+                        <a id="userDropdownMenuLink" href="#" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <img src="{{ url('storage/siswa/'.Auth::user()->foto ) }}"
+                    class="avatar avatar-sm avatar-border-white mr-2">
+                    </a>
+                    <div class="d-flex">
+                        <div class="dropdown-menu dropdown-menu-right z-index-1;">
+                            <a class="dropdown-item {{ Route::currentRouteName() == 'profile.index' ? 'active' : '' }}" href="{{ route('profile.index') }}">Profil</a>
+                            <a class="dropdown-item  {{ Route::currentRouteName() == 'front.kursus' ? 'active' : '' }}" href="{{ route('front.kursus') }}">Kursus Saya</a>
+                            <a class="dropdown-item  {{ Route::currentRouteName() == 'front.kursus' ? 'active' : '' }}" href="{{ route('front.kursus') }}">Sertifikat</a>
+                            <a class="dropdown-item" href="{{ route('siswa.logout') }}">
+                                <i class="fas fa-sign-out-alt mr-2 text-muted"></i>
+                                Keluar
+                            </a>
+                        </div>
+                    </div>
                     </li>
-                    <li class="nav-item}"><a href="{{ route('unit.list') }}"
-                            class="nav-link  {{ (request()->is('unit*')) || (request()->is('daftar-unit*')) ? 'active' : '' }}">
-                            Unit</a>
-                    </li>
-                    <li class="nav-item}"><a href="{{ route('unit.daftar') }}"
-                            class="nav-link  {{ (Request::route()->getName() == 'unit.daftar') ? 'active' : '' }}">
-                            Pendaftaran Unit</a>
-                    </li>
+                    @endauth
 
                 </ul>
             </div>
