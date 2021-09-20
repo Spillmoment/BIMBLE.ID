@@ -119,6 +119,16 @@ Route::group(['prefix' => 'siswa'], function () {
 
 // Route Front
 
+Route::prefix('profile')
+    ->middleware('auth:siswa')
+    ->group(function () {
+        Route::put('update/{id}/profile', 'Web\ProfileController@update_profile')->name('profile.update');
+        Route::get('/', 'Web\ProfileController@profile')->name('profile.index');
+        // Route::get('kursus', 'Web\ProfileController@kursus')->name('profile.kursus');
+        Route::put('update/{id}/pengaturan', 'Web\ProfileController@update_pengaturan')->name('pengaturan.update');
+        Route::get('pengaturan', 'Web\ProfileController@pengaturan')->name('profile.pengaturan');
+    });
+
 Route::get('/', 'Web\FrontController@index')->name('front.index');
 Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.pusat');
 
