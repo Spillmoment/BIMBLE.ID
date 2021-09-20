@@ -1,7 +1,7 @@
 @include('web.layouts.style')
 
 @include('web.layouts.header')
-<title> Bimble | User Login </title>
+<title> Bimble | User Register </title>
 
 <div class="container-fluid px-3 mt-5">
     <div class="row min-vh-100 justify-content-center">
