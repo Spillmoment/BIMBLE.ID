@@ -30,28 +30,8 @@ Route::group(['prefix' => 'unit'], function () {
     Route::post('/password/reset', 'AuthUnit\ResetPasswordController@reset');
 });
 
-// Auth Siswa
-Route::group(['prefix' => 'siswa'], function () {
-    Route::get('/register', 'AuthSiswa\RegisterController@registrationForm')->name('siswa.register');
-    Route::post('/register', 'AuthSiswa\RegisterController@register')->name('siswa.register.post');
 
-    Route::get('/login', 'AuthSiswa\LoginController@showLoginForm')->name('siswa.login');
-    Route::post('/login', 'AuthSiswa\LoginController@login')->name('siswa.login.submit');
 
-    Route::get('/logout', 'AuthSiswa\LoginController@logoutSiswa')->name('siswa.logout');
-    Route::get('/password/reset', 'AuthSiswa\ForgotPasswordController@showLinkRequestForm')->name('siswa.password.request');
-    Route::post('/password/email', 'AuthSiswa\ForgotPasswordController@sendResetLinkEmail')->name('siswa.password.email');
-    Route::get('/password/reset/{token}', 'AuthSiswa\ResetPasswordController@showResetForm')->name('siswa.password.reset');
-    Route::post('/password/reset', 'AuthSiswa\ResetPasswordController@reset');
-});
-
-Route::prefix('siswa')
-    ->middleware('auth:siswa')
-    ->group(function () {
-        Route::get('/home', function () {
-            return 'hello';
-        })->name('siswa.home');
-    });   
 Route::prefix('unit')
     ->middleware('auth:unit')
     ->group(function () {
@@ -120,7 +100,25 @@ Route::prefix('manager')
         ]);
     });
 
+
+// Auth Siswa
+Route::group(['prefix' => 'siswa'], function () {
+    Route::get('/register', 'AuthSiswa\RegisterController@registrationForm')->name('siswa.register');
+    Route::post('/register', 'AuthSiswa\RegisterController@register')->name('siswa.register.post');
+
+    Route::get('/login', 'AuthSiswa\LoginController@showLoginForm')->name('siswa.login');
+    Route::post('/login', 'AuthSiswa\LoginController@login')->name('siswa.login.submit');
+
+    Route::get('/logout', 'AuthSiswa\LoginController@logoutSiswa')->name('siswa.logout');
+    Route::get('/password/reset', 'AuthSiswa\ForgotPasswordController@showLinkRequestForm')->name('siswa.password.request');
+    Route::post('/password/email', 'AuthSiswa\ForgotPasswordController@sendResetLinkEmail')->name('siswa.password.email');
+    Route::get('/password/reset/{token}', 'AuthSiswa\ResetPasswordController@showResetForm')->name('siswa.password.reset');
+    Route::post('/password/reset', 'AuthSiswa\ResetPasswordController@reset');
+});
+
+
 // Route Front
+
 Route::get('/', 'Web\FrontController@index')->name('front.index');
 Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.pusat');
 
