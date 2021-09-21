@@ -15,14 +15,18 @@ class CreateTableSiswa extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('kursus_unit_id');
-            $table->foreign('kursus_unit_id')->references('id')->on('kursus_unit')->onDelete('cascade');
-
             $table->string('nama_siswa', 100);
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->text('alamat')->nullable();
             $table->double('nilai', 8, 2)->nullable();
+            $table->string('agama', 50);
+            $table->enum('status', ['1', '0']);
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('sertifikat');
+            $table->string('username', 100)->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
