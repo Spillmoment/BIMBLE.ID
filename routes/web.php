@@ -125,7 +125,8 @@ Route::prefix('profile')
         Route::put('update/{id}/profile', 'Web\ProfileController@update_profile')->name('profile.update');
         Route::get('/', 'Web\ProfileController@profile')->name('profile.index');
         // Route::get('kursus', 'Web\ProfileController@kursus')->name('profile.kursus');
-        Route::put('update/{id}/pengaturan', 'Web\ProfileController@update_pengaturan')->name('pengaturan.update');
+        Route::put('update/{id}/pengaturan', 'Web\ProfileController@update_pengaturan')
+            ->name('pengaturan.update');
         Route::get('pengaturan', 'Web\ProfileController@pengaturan')->name('profile.pengaturan');
     });
 
