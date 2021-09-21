@@ -65,6 +65,7 @@ class ProfileController extends Controller
             'foto'          => 'nullable|sometimes|image|mimes:jpeg,png,jpg|max:2048',
             'username'      => 'required|string|max:255|unique:siswa,username,' . $id,
             'email'         => 'required|string|email|max:255|unique:siswa,email,' . $id,
+            'alamat'        => 'required'
         ]);
 
         $user = Siswa::findOrFail($id);
@@ -75,15 +76,24 @@ class ProfileController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = time() . "." . $extension;
             $file->move('storage/siswa', $fileName);
-        }
 
-        $user->update([
-            'nama_siswa' => $request->nama_siswa,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'foto' => $fileName,
-            'username' => $request->username,
-            'email' => $request->email,
-        ]);
+            $user->update([
+                'nama_siswa' => $request->nama_siswa,
+                'email' => $request->email,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'username' => $request->username,
+                'alamat' => $request->alamat,
+                'foto' => $fileName,
+            ]);
+        } else {
+            $user->update([
+                'nama_siswa' => $request->nama_siswa,
+                'email' => $request->email,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'username' => $request->username,
+                'alamat' => $request->alamat,
+            ]);
+        }
 
         return back()->with(['success' => 'Profil']);
     }
