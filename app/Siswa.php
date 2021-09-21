@@ -16,7 +16,7 @@ class Siswa extends Authenticatable
     protected $table = 'siswa';
     protected $guard = 'siswa';
 
-    protected $fillable = ['nama_siswa', 'jenis_kelamin', 'agama', 'alamat', 'foto', 'status', 'email', 'username', 'password'];
+    protected $fillable = ['nama_siswa', 'jenis_kelamin', 'agama', 'alamat', 'foto', 'status', 'email', 'username', 'password', 'nilai', 'sertifikat'];
 
     protected $hidden = [
         'password', 'remember_token',
@@ -32,5 +32,4 @@ class Siswa extends Authenticatable
     }
 
     protected $dates = ['deleted_at'];
-
 }
