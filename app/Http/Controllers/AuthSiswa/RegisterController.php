@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest:siswa')->except('logoutSiswa');
+    }
+
     public function register(Request $request)
     {
         // dd($request->all());
