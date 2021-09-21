@@ -2,7 +2,7 @@
 
     @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        Profile <strong>{{ session('success') }}</strong> Berhasil Diupdate!
+        <strong>{{ session('success') }}</strong> Berhasil Diupdate!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -90,17 +90,13 @@
                     </div>
                 </div>
 
-                {{-- <div class="col form-group">
+                <div class="col form-group">
                     <label for="alamat" class="form-label">Alamat</label>
-                    <textarea readonly rows="4" name="alamat" id="alamat" placeholder="Masukkan Alamat"
-                        class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}">
-                                         {{old('alamat',Auth::user()->alamat) }}
-                    </textarea>
-
+                    <textarea readonly rows="4" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}" />{{old('alamat',Auth::user()->alamat) }}</textarea>
                     <div class="invalid-feedback">
                         {{$errors->first('alamat')}}
                     </div>
-                </div> --}}
+                </div>
 
             </div>
            
