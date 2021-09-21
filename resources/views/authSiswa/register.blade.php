@@ -138,11 +138,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
-            <!-- Image-->
-            <div style="background-image: url(assets/img/photo/photo-1426122402199-be02db90eb90.jpg);"
-                class="bg-cover h-100 mr-n3"></div>
-        </div>
+       
     </div>
 </div>
 @include('web.layouts.script')
