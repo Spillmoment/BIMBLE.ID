@@ -33,6 +33,8 @@
   <script src="{{ asset('dist/js/demo.js') }}"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
+  <!-- Ekko Lightbox -->
+  <script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
   <!-- DataTables  & Plugins -->
   <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -48,6 +50,7 @@
   <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script>
+      // datatable  
       $(function () {
           $("#example1").DataTable({
               "responsive": true,
@@ -64,6 +67,28 @@
               "autoWidth": false,
               "responsive": true,
           });
+
+          // Editor Summernote
+          $('#deskripsi').summernote()
+          $('#materi').summernote()
+
+          //  read images
+          var readURL = function (input) {
+              if (input.files && input.files[0]) {
+                  var reader = new FileReader();
+
+                  reader.onload = function (e) {
+                      $('.img-target').attr('src', e.target.result);
+                  }
+                  reader.readAsDataURL(input.files[0]);
+              }
+          }
+
+          $(".form-control-file").on('change', function () {
+              readURL(this);
+          });
+
+
       });
 
   </script>
