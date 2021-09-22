@@ -45,9 +45,9 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DataTable with default features</h3>
-                        <a name="" id="" class="btn btn-primary float-right" href="tambah-kursus.html" role="button"> <i
-                                class="fas fa-plus"></i> Tambah
+                        <h3 class="card-title">Tabel Data Kursus</h3>
+                        <a name="" id="" class="btn btn-primary float-right" href="{{ route('kursus.create') }}"
+                            role="button"> <i class="fas fa-plus"></i> Tambah
                             Kursus</a>
                     </div>
                     <!-- /.card-header -->
