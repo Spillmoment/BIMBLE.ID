@@ -1,60 +1,58 @@
-@extends('admin.layouts.manager')
+@extends('admin.layouts.main')
 
-@section('title','Bimble - Data Kursus')
+@section('title','Bimble - Halaman Kursus')
 @section('content')
-
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Data Kursus</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="{{ route('kursus.index') }}">Data Kursus</a></li>
-                            <li class="active">List Kursus </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Halaman Kursus</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Kursus </li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
+<!-- /.content-header -->
 
-@if(session('status'))
-@push('after-script')
-<script>
-    swal({
-        title: "Success",
-        text: "{{session('status')}}",
-        icon: "success",
-        button: false,
-        timer: 2000
-    });
+<!-- Main content -->
+<section class="content">
 
-</script>
-@endpush
-@endif
+    <div class="container-fluid">
 
-<div class="content">
-    <div class="animated fadeIn">
+        @if(session('status'))
+        @push('scripts')
+        <script>
+            swal({
+                title: "Success",
+                text: "{{session('status')}}",
+                icon: "success",
+                button: false,
+                timer: 2000
+            });
+
+        </script>
+        @endpush
+        @endif
+
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
+
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Table Kursus</strong>
-
-                        <a class="btn btn-primary btn-sm float-right" href="{{ route('kursus.create') }}"> Tambah
+                        <h3 class="card-title">DataTable with default features</h3>
+                        <a name="" id="" class="btn btn-primary float-right" href="tambah-kursus.html" role="button"> <i
+                                class="fas fa-plus"></i> Tambah
                             Kursus</a>
                     </div>
+                    <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -64,6 +62,7 @@
                                     <th width="210">Option</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($kursus as $krs)
                                 <tr>
@@ -81,9 +80,9 @@
                                     </td>
                                     <td>
                                         <a class="btn btn-success btn-sm text-light" href="{{route('kursus.gallery',
-                                       [$krs->id])}}"> <i class="fa fa-image"></i></a>
+                                       [$krs->id])}}"> <i class="fas fa-image"></i></a>
                                         <a class="btn btn-warning btn-sm text-light" href="{{route('kursus.edit',
-                                       [$krs->id])}}"> <i class="fa fa-pencil"></i></a>
+                                       [$krs->id])}}"> <i class="fas fa-edit"></i></a>
 
                                         <form class="d-inline" action="{{route('kursus.destroy', [$krs->id])}}"
                                             method="POST">
@@ -91,7 +90,7 @@
                                             @csrf
                                             <button type="submit" id="deleteButton" data-name="{{ $krs->nama_kursus }}"
                                                 class="btn btn-danger btn-sm delete">
-                                                <i class="fa fa-trash"></i>
+                                                <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
                                     </td>
@@ -102,18 +101,20 @@
 
                         </table>
                     </div>
+                    <!-- /.card-body -->
                 </div>
+                <!-- /.card -->
             </div>
-
-
+            <!-- /.col -->
         </div>
-    </div><!-- .animated -->
-</div>
 
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 @endsection
 
-@push('after-script')
-@include('admin.includes.datatable')
+@push('scripts')
 <script>
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');
