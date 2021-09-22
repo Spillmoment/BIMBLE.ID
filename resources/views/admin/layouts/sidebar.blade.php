@@ -24,7 +24,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route('dashboard') }}"
+                        class="nav-link {{ (request()->is('manager/dashboard')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -76,10 +77,39 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('kursus.index') }}"
-                                class="nav-link {{ Request::route()->getName('kursus.index') ? 'active' : '' }}">
+                            <a href="{{ route('kursus.index') }}" class="nav-link
+                            {{ (request()->is('manager/kursus')) ? 'active' : '' }}
+                                 ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Kursus</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Galeri Kursus -->
+                <li class="nav-item {{ (request()->is('manager/gallery*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('manager/gallery*')) ? 'active' : '' }}">
+                        <i class="nav-icon far fa-envelope"></i>
+                        <p>
+                            Galeri Kursus
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('gallery.create') }}"
+                                class="nav-link {{ (request()->is('manager/gallery/create')) ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tambah Galeri</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('gallery.index') }}" class="nav-link
+                            {{ (request()->is('manager/gallery')) ? 'active' : '' }}
+                                 ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Galeri</p>
                             </a>
                         </li>
                     </ul>
