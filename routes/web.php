@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 
-// Auth User
 // Auth Manager
 Route::group(['prefix' => 'manager'], function () {
 
@@ -30,8 +29,27 @@ Route::group(['prefix' => 'unit'], function () {
     Route::post('/password/reset', 'AuthUnit\ResetPasswordController@reset');
 });
 
+// Admin Manager
+Route::prefix('manager')
+    ->middleware('auth:manager')
+    ->group(function () {
+
+        // Route Dashboard
+        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('pendaftar/{id}/set-status', 'PendUnitController@setStatus')->name('pendaftar.status');
+        Route::get('kursus-gallery/{id}', 'KursusController@gallery')->name('kursus.gallery');
+        Route::resources([
+            'kursus' => 'KursusController',
+            'unit'   => 'UnitController',
+            'banner' => 'BannerController',
+            'pendaftar' => 'PendUnitController',
+            'komentar' => 'KomentarController',
+            'gallery' => 'GalleryController',
+        ]);
+    });
 
 
+// Admin Unit
 Route::prefix('unit')
     ->middleware('auth:unit')
     ->group(function () {
@@ -81,26 +99,6 @@ Route::prefix('unit')
         Route::delete('/siswa/{id}', 'Unit\SiswaController@destroy')->name('unit.siswa.delete');
     });
 
-// Route Manager
-Route::prefix('manager')
-    ->middleware('auth:manager')
-    ->group(function () {
-
-        // Route Dashboard
-        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-        Route::get('pendaftar/{id}/set-status', 'PendUnitController@setStatus')->name('pendaftar.status');
-        Route::get('kursus-gallery/{id}', 'KursusController@gallery')->name('kursus.gallery');
-        Route::resources([
-            'kursus' => 'KursusController',
-            'unit'   => 'UnitController',
-            'banner' => 'BannerController',
-            'pendaftar' => 'PendUnitController',
-            'komentar' => 'KomentarController',
-            'gallery' => 'GalleryController',
-        ]);
-    });
-
-
 // Auth Siswa
 Route::group(['prefix' => 'siswa'], function () {
     Route::get('/register', 'AuthSiswa\RegisterController@registrationForm')->name('siswa.register');
@@ -117,8 +115,7 @@ Route::group(['prefix' => 'siswa'], function () {
 });
 
 
-// Route Front
-
+// Route Web
 Route::prefix('profile')
     ->middleware('auth:siswa')
     ->group(function () {
@@ -130,13 +127,13 @@ Route::prefix('profile')
         Route::get('pengaturan', 'Web\ProfileController@pengaturan')->name('profile.pengaturan');
     });
 
+
 Route::get('/', 'Web\FrontController@index')->name('front.index');
-Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.pusat');
-
 Route::get('/kursus', 'Web\FrontController@kursus')->name('front.kursus');
-route::get('/kursus/search/', 'Web\FrontController@liveSearch')->name('search');
 
-Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
+// Route::get('/kursus/search/', 'Web\FrontController@liveSearch')->name('search');
+// Route::get('/kursus_sort', 'Web\FrontController@kursusSort');
+
 Route::get('/kursus/{slug}/kelompok', 'Web\FrontController@show_kelompok')->name('front.detail.kelompok');
 Route::get('/kursus/{slug}/private', 'Web\FrontController@show_private')->name('front.detail.private');
 Route::get('/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
