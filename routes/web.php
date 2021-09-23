@@ -38,6 +38,7 @@ Route::prefix('manager')
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
         Route::get('pendaftar/{id}/set-status', 'PendUnitController@setStatus')->name('pendaftar.status');
         Route::get('kursus-gallery/{id}', 'KursusController@gallery')->name('kursus.gallery');
+        Route::resource('kategori', 'KategoriController')->except('show');
         Route::resources([
             'kursus' => 'KursusController',
             'unit'   => 'UnitController',
