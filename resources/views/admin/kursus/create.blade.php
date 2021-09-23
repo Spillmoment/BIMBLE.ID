@@ -50,6 +50,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="kategori">Pilih Kategori</label>
+                                <select class="form-control" name="kategori_id" id="kategori">
+                                    @foreach ($kategori as $item)
+                                    <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="gambar_kursus">Gambar Kursus</label>
                                 <input type="file"
                                     class="form-control-file {{ $errors->first('gambar_kursus') ? 'is-invalid' : '' }}"
