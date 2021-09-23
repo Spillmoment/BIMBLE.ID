@@ -8,6 +8,8 @@ use App\Kursus;
 use App\Http\Requests\GalleryRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 
 class GalleryController extends Controller
 {
@@ -78,16 +80,21 @@ class GalleryController extends Controller
         $gallery = GaleriKursus::findOrFail($id);
         $data = $request->all();
 
-        if ($request->hasFile('gambar')) {
-            if ($gallery->gambar && file_exists(storage_path('app/public/' . $gallery->gambar))) {
-                Storage::delete('public/' . $gallery->gambar);
-                $data['gambar'] =  $request->file('gambar')->store('gallery', 'public');
-            } else {
-                $data['gambar'] =  $request->file('gambar')->store('gallery', 'public');
+        $images = array();
+
+        if ($files = $request->file('gambar')) {
+            foreach ($files as $file) {
+                $name = $file->getClientOriginalName();
+                $file->move('storage/image', $name);
+                $images[] = $name;
             }
         }
 
-        $gallery->update($data);
+        $gallery->update([
+            'kursus_id' => $data['kursus_id'],
+            'gambar' =>  implode("|", $images),
+        ]);
+
         return redirect()->route('gallery.index')
             ->with(['status' => 'Data Gallery Berhasil Diubah']);
     }
@@ -96,8 +103,16 @@ class GalleryController extends Controller
     public function destroy($id)
     {
         $gallery = GaleriKursus::findOrFail($id);
+        // File::delete('/storage/image/' . $gallery->gambar);
+
+        $images = explode(",", $gallery->gambar);
+        foreach ($images as $image) {
+            $image_path = public_path() . 'storage/image/' . $image;
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+            }
+        }
         $gallery->delete();
-        Storage::delete('public/' . $gallery->gambar);
 
         return redirect()->route('gallery.index')
             ->with(['status'  => 'Data Gallery Berhasil Dihapus']);
