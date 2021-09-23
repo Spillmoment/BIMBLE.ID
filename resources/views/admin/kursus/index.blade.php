@@ -58,7 +58,7 @@
                                     <th>No</th>
                                     <th width="300">Nama Kursus</th>
                                     <th width="150">Gambar Kursus</th>
-                                    <th width="200">Keterangan</th>
+                                    <th width="200">Kategori</th>
                                     <th width="210">Option</th>
                                 </tr>
                             </thead>
@@ -76,7 +76,11 @@
                                     Tidak Ada Gambar
                                     @endif
                                     <td>
-                                        {{ $krs->keterangan }}
+                                        @if ($krs->kategori->nama_kategori != null)
+                                        {{ $krs->kategori->nama_kategori }}
+                                        @else
+                                        Kategori belum ada
+                                        @endif
                                     </td>
                                     <td>
                                         <a class="btn btn-success btn-sm text-light" href="{{route('kursus.gallery',
