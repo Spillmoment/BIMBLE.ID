@@ -11,7 +11,7 @@ class Kursus extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nama_kursus', 'slug', 'gambar_kursus', 'keterangan', 'tentang', 'status', 'materi'
+        'kategori_id', 'nama_kursus', 'slug', 'gambar_kursus', 'keterangan', 'tentang', 'status', 'materi'
     ];
 
     use SoftDeletes;
@@ -24,5 +24,10 @@ class Kursus extends Model
     public function galleries()
     {
         return $this->hasMany(GaleriKursus::class, 'kursus_id', 'id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
     }
 }
