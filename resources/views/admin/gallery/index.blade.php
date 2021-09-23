@@ -1,65 +1,63 @@
-@extends('admin.layouts.manager')
+@extends('admin.layouts.main')
 
-@section('title','Bimble - Data Gallery')
+@section('title','Bimble - Galeri Kursus')
 @section('content')
-
-
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Data Gallery Kursus</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="{{ route('gallery.index') }}">Data Gallery</a></li>
-                            <li class="active">List Gallery </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Galeri Kursus</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Galeri Kursus </li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
+<!-- /.content-header -->
 
-@if(session('status'))
-@push('after-script')
-<script>
-    swal({
-        title: "Success",
-        text: "{{session('status')}}",
-        icon: "success",
-        button: false,
-        timer: 2000
-    });
+<!-- Main content -->
+<section class="content">
 
-</script>
-@endpush
-@endif
+    <div class="container-fluid">
 
-<div class="content">
-    <div class="animated fadeIn">
+        @if(session('status'))
+        @push('scripts')
+        <script>
+            swal({
+                title: "Success",
+                text: "{{session('status')}}",
+                icon: "success",
+                button: false,
+                timer: 2000
+            });
+
+        </script>
+        @endpush
+        @endif
+
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
+
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Table Gallery</strong>
-
-                        <a class="btn btn-primary btn-sm float-right" href="{{ route('gallery.create') }}"> <i
-                                class="fa fa-plus" aria-hidden="true"></i>Tambah Gallery</a>
+                        <h3 class="card-title">Tabel Galeri Kursus</h3>
+                        <a name="" id="" class="btn btn-primary float-right" href="{{ route('gallery.create') }}"
+                            role="button"> <i class="fas fa-plus"></i> Tambah
+                            Galeri</a>
                     </div>
+                    <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <table id="example1" class="table table-bordered table-striped">
+
 
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>No</th>
                                     <th>Kursus</th>
                                     <th>Gambar</th>
                                     <th>Option</th>
@@ -80,9 +78,8 @@
 
                                     <td>
                                         <a class="btn btn-warning text-white btn-sm" href="{{route('gallery.edit',
-                                        [$gallery->id])}}"> <i class="fa fa-pencil"></i></a>
-                                        <form  
-                                            class="d-inline" action="{{route('gallery.destroy', [$gallery->id])}}"
+                                        [$gallery->id])}}"> <i class="fa fa-edit"></i></a>
+                                        <form class="d-inline" action="{{route('gallery.destroy', [$gallery->id])}}"
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -101,18 +98,20 @@
 
                         </table>
                     </div>
+                    <!-- /.card-body -->
                 </div>
+                <!-- /.card -->
             </div>
-
-
+            <!-- /.col -->
         </div>
-    </div><!-- .animated -->
-</div>
 
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 @endsection
 
-@push('after-script')
-@include('admin.includes.datatable')
+@push('scripts')
 <script>
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');
