@@ -35,8 +35,8 @@
 
                 <li class="nav-header">KURSUS</li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ (request()->is('manager/kategori*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('manager/kategori*')) ? 'active' : '' }}">
                         <i class="nav-icon far fa-envelope"></i>
                         <p>
                             Kategori
@@ -45,13 +45,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/mailbox/mailbox.html" class="nav-link">
+                            <a href="{{ route('kategori.create') }}"
+                                class="nav-link {{ (request()->is('manager/kategori/create')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tambah Kategori</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/mailbox/compose.html" class="nav-link">
+                            <a href="{{ route('kategori.index') }}"
+                                class="nav-link   {{ (request()->is('manager/kategori')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Kategori</p>
                             </a>
@@ -90,7 +92,7 @@
                 <!-- Galeri Kursus -->
                 <li class="nav-item {{ (request()->is('manager/gallery*')) ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ (request()->is('manager/gallery*')) ? 'active' : '' }}">
-                        <i class="nav-icon far fa-envelope"></i>
+                        <i class="nav-icon far fa-images"></i>
                         <p>
                             Galeri Kursus
                             <i class="fas fa-angle-left right"></i>
