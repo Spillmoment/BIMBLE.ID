@@ -34,9 +34,10 @@
 
                 <li class="menu-title text-capitalize">Manage Nilai</li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false"> <i class="menu-icon fa fa-pencil-square-o"></i>Manage Siswa</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-pencil-square-o"></i>Manage Siswa</a>
                     <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.konfirmasi') }}">Konfirmasi siswa</a>
+                        </li>
                         <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.kelompok') }}">Kursus Kelompok</a>
                         </li>
                         <li><i class="fa fa-table"></i><a href="{{ route('unit.siswa.private') }}">Kursus Private</a>
