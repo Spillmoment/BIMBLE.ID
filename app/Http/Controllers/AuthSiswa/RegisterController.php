@@ -50,11 +50,11 @@ class RegisterController extends Controller
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'status' => 1,
             ]);
         }
 
-        return Auth::guard('siswa')->login($create_siswa);
+        Auth::guard('siswa')->login($create_siswa);
+        return redirect()->intended(route('front.index'));
     }
 
     public function registrationForm()
