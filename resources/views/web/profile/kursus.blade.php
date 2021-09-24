@@ -4,7 +4,7 @@
         <div class="card-header">
             <div class="alert alert-light text-dark" role="alert">
                <h5>
-                   <strong>Kursus {{ Auth::user()->nama_pendaftar }} </strong>
+                   <strong>Kursus {{ Auth::user()->nama_siswa }} </strong>
                    </h5> 
             </div>
     </div>
@@ -13,136 +13,101 @@
 
     <nav class="mb-3 mt-2">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Proses</a>
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Pending</a>
-          <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Sukses</a>
+          <a class="nav-item nav-link active" id="nav-kelas-tab" data-toggle="tab" href="#nav-kelas" role="tab" aria-controls="nav-kelas" aria-selected="true">Kelas saya</a>
+          <a class="nav-item nav-link" id="nav-proses-tab" data-toggle="tab" href="#nav-proses" role="tab" aria-controls="nav-proses" aria-selected="false">Proses</a>
         </div>
       </nav>
 
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">   
-            
-            <table class="table table-hover table-striped table-light">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th scope="col" width="200">Nama Kursus</th>
-                    <th scope="col" width="200">Gambar Kursus</th>
-                    <th scope="col" width="200">Mentor</th>
-                    <th  scope="col" width="200">Biaya</th>
-                    <th>Status</th>
-                </tr>
-             </thead>
-             <tbody>
-                 
-                @php $i = 1; @endphp
-                @forelse ($process as $item)
-                @foreach ($item->kursus as $cours)
-                <tr>
-                    <td scope="row">{{ $i++ }}</td>
-                    <td><img src="{{ Storage::url('public/' . $cours->gambar_kursus) }}" class="img-fluid img-thumbnail" width="200px" height="200px"></td>
-                    <td>{{ $cours->nama_kursus }}</td>
-                    <td>{{ $cours->tutor->first()->nama_tutor }}</td>
-                    <td>@currency($item->biaya_kursus).00</td>
-                    <td><span class="badge badge-secondary badge-pill">Masih Diproses</span></td>
-                </tr>
-                @endforeach
-                @empty
-                <table>
-                    <thead>
-                     <div class="alert alert-light col text-center" role="alert">
-                         <strong>Data kursus proses kosong</strong>
-                      </div>
-                    </thead>
-                </table>
-                @endforelse
-                
-            </tbody>
-        </table>
-
-        </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="tab-pane fade show active" id="nav-kelas" role="tabpanel" aria-labelledby="nav-kelas-tab">   
+            @if(!$kursus_terima->isEmpty())
             <table class="table table-hover table-striped table-light">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        {{-- <th>#</th> --}}
                         <th scope="col" width="200">Nama Kursus</th>
-                        <th scope="col" width="200">Gambar Kursus</th>
+                        <th scope="col" width="200">Penyedia Kursus</th>
                         <th scope="col" width="200">Mentor</th>
+                        <th scope="col" width="200">Materi</th>
                         <th scope="col" width="200">Biaya</th>
-                        <th scope="col">Status</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                   
-                    @php $i = 1; @endphp
-                    @forelse ($pending as $item)
-                    @foreach ($item->kursus as $cours)
+                    
+                    @foreach ($kursus_terima as $data)
                     <tr>
-                        <td scope="row"> {{ $i++ }}</td>
-                        <td>{{ $cours->nama_kursus }}</td>
+                        {{-- <td scope="row">{{ $loop->iteration }}</td> --}}
+                        <td class="text-black-50">{{ $data->kursus_unit->kursus->nama_kursus }}</td>
+                        <td class="text-black-50">{{ $data->kursus_unit->unit->nama_unit }}</td>
+                        <td class="text-black-50"></td>
+                        <td class="text-black-50"><a href="{{ route('user.materi', $data->kursus_unit->id) }}" class="badge badge-default badge-pill">Buka</a></td>
+                        <td class="text-black-50">@currency($data->kursus_unit->biaya_kursus)</td>
                         <td>
-                            <img src="{{ Storage::url('public/' . $cours->gambar_kursus) }}" class="img-fluid img-thumbnail" width="200px" height="200px">
+                            @if ($data->status_sertifikat == 'terima')
+                            <span class="badge badge-primary badge-pill">Siswa</span>
+                            @else
+                            <span class="badge badge-success badge-pill">Lulus</span>
+                            @endif
                         </td>
-                        <td>{{ $cours->tutor->first()->nama_tutor }}</td>
-                        <td>@currency($item->biaya_kursus).00</td>
-                        <td><span class="badge badge-warning badge-pill text-light ">Menunggu Konfirmasi</span></td>
                     </tr>
                     @endforeach
-                  
-                    @empty
-                    <table>
-                        <thead>
-                         <div class="alert alert-light col text-center" role="alert">
-                             <strong>Data kursus pending kosong</strong>
-                          </div>
-                        </thead>
-                    </table>
-                    @endforelse
                     
                 </tbody>
             </table>
+            @else
+            <table>
+                <thead>
+                 <div class="alert alert-light col text-center" role="alert">
+                     <strong>Kelas anda masih kosong. Silahkan pesan kursus!</strong>
+                  </div>
+                </thead>
+            </table>                
+            @endif
+
+
         </div>
-        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+        <div class="tab-pane fade" id="nav-proses" role="tabpanel" aria-labelledby="nav-proses-tab">
+            @if(!$kursus_proses->isEmpty())
             <table class="table table-hover table-striped table-light">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        {{-- <th>#</th> --}}
                         <th scope="col" width="200">Nama Kursus</th>
-                        <th scope="col" width="200">Gambar Kursus</th>
+                        <th scope="col" width="200">Penyedia Kursus</th>
                         <th scope="col" width="200">Mentor</th>
                         <th scope="col" width="200">Biaya</th>
-                        <th scope="col">Status</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     
-                    @php $i = 1; @endphp
-                    @forelse ($success as $item)
-                    @foreach ($item->kursus as $cours)
+                    @foreach ($kursus_proses as $data)
                     <tr>
-                        <td scope="row">{{ $i++ }}</td>
-                        <td><img src="{{ Storage::url('public/' . $cours->gambar_kursus) }}" class="img-fluid img-thumbnail" width="200px" height="200px"></td>
-                        <td>{{ $cours->nama_kursus }}</td>
-                        <td>{{ $cours->tutor->first()->nama_tutor }}</td>
-                        <td>@currency($item->biaya_kursus).00</td>
-                        <td><span class="badge badge-success badge-pill">Aktif</span></td>
+                        {{-- <td scope="row">{{ $loop->iteration }}</td> --}}
+                        <td class="text-black-50">{{ $data->kursus_unit->kursus->nama_kursus }}</td>
+                        <td class="text-black-50">{{ $data->kursus_unit->unit->nama_unit }}</td>
+                        <td class="text-black-50"></td>
+                        <td class="text-black-50">@currency($data->kursus_unit->biaya_kursus)</td>
+                        <td>
+                            <span class="badge badge-warning badge-pill">Menunggu konfirmasi</span> <br>
+                            <small class="text-danger">Silahkan langsung mendatangi rumah kursus! </small>
+                        </td>
                     </tr>
-
                     @endforeach
-                    @empty
-                   <table>
-                       <thead>
-                        <div class="alert alert-light col text-center" role="alert">
-                            <strong>Data kursus sukses kosong</strong>
-                         </div>
-                       </thead>
-                   </table>
-                    @endforelse
                     
                 </tbody>
             </table>
-            
+            @else
+            <table>
+                <thead>
+                 <div class="alert alert-light col text-center" role="alert">
+                     <strong>Tidak ada aktivitas pemesanan kursus.</strong>
+                  </div>
+                </thead>
+            </table>                
+            @endif
         </div>
       </div>
 
