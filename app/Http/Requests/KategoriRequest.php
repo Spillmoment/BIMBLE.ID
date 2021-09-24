@@ -25,7 +25,6 @@ class KategoriRequest extends FormRequest
     {
         return [
             'nama_kategori' => 'required|min:3|max:100',
-            'keterangan' => 'required'
         ];
     }
 }

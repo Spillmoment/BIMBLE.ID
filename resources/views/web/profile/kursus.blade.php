@@ -4,10 +4,10 @@
         <div class="card-header">
             <div class="alert alert-light text-dark" role="alert">
                <h5>
-                   <strong>Kursus {{ Auth::user()->nama_siswa }} </strong>
+                   <strong>Daftar Kursus {{ Auth::user()->nama_siswa }} </strong>
                    </h5> 
             </div>
-    </div>
+    </div> 
 
  
 

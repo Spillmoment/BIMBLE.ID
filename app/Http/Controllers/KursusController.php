@@ -7,6 +7,7 @@ use App\Http\Requests\KursusRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\GaleriKursus;
+use App\Kategori;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\File;
 
@@ -15,12 +16,18 @@ class KursusController extends Controller
 
     public function index()
     {
-        return view('admin.kursus.index', ['kursus' => Kursus::latest()->get()]);
+        $kursus = Kursus::with(['kategori'])->latest()->get();
+        return view('admin.kursus.index', [
+            'kursus' => $kursus
+        ]);
     }
 
     public function create()
     {
-        return view('admin.kursus.create');
+        $kategori = Kategori::latest()->get();
+        return view('admin.kursus.create', [
+            'kategori' => $kategori
+        ]);
     }
 
     public function store(KursusRequest $request)
@@ -47,8 +54,10 @@ class KursusController extends Controller
 
     public function edit($id)
     {
+        $kategori = Kategori::latest()->get();
         return view('admin.kursus.edit', [
-            'kursus' => Kursus::findOrFail($id)
+            'kategori' => $kategori,
+            'kursus'   => Kursus::findOrFail($id)
         ]);
     }
 

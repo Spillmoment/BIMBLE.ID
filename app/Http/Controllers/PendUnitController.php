@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Unit;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class PendUnitController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.pendaftar.index', [
             'unit' => Unit::where('status', '2')
@@ -22,28 +19,31 @@ class PendUnitController extends Controller
 
     public function create()
     {
-        return view('admin.unit.create');
+        abort(404);
     }
 
 
-    public function store(Request $request)
+    public function store()
     {
+        abort(404);
     }
 
 
-    public function show(Unit $unit)
+    public function show()
     {
+        abort(404);
     }
 
 
-    public function edit(Unit $unit)
+    public function edit()
     {
-        return view('admin.unit.edit', compact('unit'));
+        abort(404);
     }
 
 
-    public function update(Request $request)
+    public function update()
     {
+        abort(404);
     }
 
     public function setStatus(Request $request, $id)
@@ -56,7 +56,7 @@ class PendUnitController extends Controller
         $item->status = $request->status;
 
         $item->save();
-        return redirect()->route('pendaftar.index')->with([
+        return redirect()->route('pendaftar-unit.index')->with([
             'success' => 'Data Pendaftar Unit telah disetujui, Silahkan update data di Unit'
         ]);
     }
@@ -64,9 +64,15 @@ class PendUnitController extends Controller
     public function destroy($id)
     {
         $unit = Unit::findOrFail($id);
+        File::delete('storage/file/' . $unit->bukti_alumni);
         $unit->forceDelete();
-        Storage::delete('public/' . $unit->bukti_alumni);
-        return redirect()->route('pendaftar.index')
+        return redirect()->route('pendaftar-unit.index')
             ->with(['status' => 'Data Pendaftar Unit Berhasil Dihapus']);
+    }
+
+    public function download($file)
+    {
+        $file_path = public_path('storage/file/' . $file);
+        return response()->download($file_path);
     }
 }
