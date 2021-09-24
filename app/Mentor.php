@@ -14,6 +14,11 @@ class Mentor extends Model
     ];
     use SoftDeletes;
     
+    public function mentor_kursus()
+    {
+        return $this->hasMany(MentorKursus::class, 'mentor_id', 'id');
+    }
+
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id');
