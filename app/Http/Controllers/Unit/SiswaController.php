@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Kursus;
 use App\KursusUnit;
 use App\Siswa;
+use App\SiswaKursus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +35,6 @@ class SiswaController extends Controller
 
     public function kursus_siswa($id)
     {
-
         $siswa = Siswa::where('kursus_unit_id', $id)->get();
         $kursus = KursusUnit::with(['kursus','type'])->where('id', $id)->first();
 
@@ -45,7 +45,6 @@ class SiswaController extends Controller
         ]);
     }
 
-
     public function create_siswa($id)
     {
         $kursus = KursusUnit::with(['kursus'])->where('id', $id)->first();
@@ -54,7 +53,6 @@ class SiswaController extends Controller
             'kursus' => $kursus,
         ]);
     }
-
 
     public function store_siswa(Request $request, $id)
     {
@@ -82,14 +80,12 @@ class SiswaController extends Controller
         return redirect()->route('unit.siswa.kursus', $id)->with(['status' => 'Data Siswa Berhasil Ditambahkan']);
     }
 
-
     public function edit($id, $id_siswa)
     {
         $siswa = Siswa::findOrFail($id_siswa);
         // $kursus = Kursus::where('slug', $slug)->first();
         return view('unit.siswa.siswa_edit', compact('siswa', 'id'));
     }
-
 
     public function update(Request $request, $id, $id_siswa)
     {
@@ -118,12 +114,42 @@ class SiswaController extends Controller
         ]);
     }
 
-
     public function destroy($id)
     {
         $siswa = Siswa::findOrFail($id);
         Storage::delete('public/sertifikat/' . $siswa->sertifikat);
         $siswa->forceDelete();
         return redirect()->back()->with('status', 'Data Siswa Berhasil Dihapus');
+    }
+
+    public function konfirmasi_siswa()
+    {
+        $semua_siswa = SiswaKursus::with(['siswa','kursus_unit'])
+                                    ->whereHas('kursus_unit', function ($q) {
+                                        $q->where('unit_id', Auth::id());
+                                    })
+                                    ->where('status_sertifikat', 'daftar')
+                                    ->get();
+        // dd($semua_siswa);
+        return view('unit.siswa.konfirmasi', compact('semua_siswa'));
+    }
+    
+    public function update_konfirmasi(Request $request)
+    {
+        $cek_data = SiswaKursus::find($request->siswa);
+        if ($cek_data) {
+            SiswaKursus::where('id', $request->siswa)
+                        ->update([
+                            'status_sertifikat' => 'terima'
+                        ]);
+    
+            return response()->json([
+                'message' => 'Siswa berhasil diterima.'
+            ]);
+        } else {
+            // abort(500, 'Terjadi kesalahan request.');
+            return response()->json(['message' => 'Terjadi kesalahan requesting.'], 404);
+        }
+                
     }
 }
