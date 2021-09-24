@@ -124,7 +124,7 @@
                 <div class="card-body p-4">
                     <div class="text-block pb-3">
                         <div class="media align-items-center">
-                            <div class="media-body">
+                            <div class="">
                                 <h6> <a href="#" class="text-reset"></a>
                                     {{ $kursus_unit->kursus->nama_kursus }}
                                 </h6>
@@ -163,26 +163,27 @@
                 <div class="card-footer bg-light py-2 border-top">
                     <div class="media align-items-center">
                         <div class="media-body">
-                            <h6 class="text-primary text-center mb-2">Hubungi Kami </h6>
-                            <div class="clearfix my-3 text-capitalize">
-                                <button type="submit" class="btn btn-success btn-sm">
-                                    <img src="{{ asset('assets/frontend/img/logo/wa.png') }}" width="20px">
-                                    <a href="https://api.whatsapp.com/send?phone={{ $unit->whatsapp }}"
-                                        target="_blank" class="text-white text-decoration-none"> Whats App </a>
-                                </button>
-                                <button type="submit" class="btn btn-primary btn-sm">
-                                    <img src="{{ asset('assets/frontend/img/logo/telegram.png') }}" width="20px">
-                                    <a href="https://t.me/{{ $unit->telegram }}" target="_blank"
-                                        class="text-white text-decoration-none">Telegram</a>
-                                </button>
-                                <button type="submit" class="btn btn-secondary btn-sm mt-1">
-                                    <img src="https://www.freepnglogos.com/uploads/amazing-instagram-logo-png-image-16.png"
-                                        width="20px">
-                                    <a href="https://www.instagram.com/{{ $unit->instagram }}" target="_blank"
-                                        class="text-white text-decoration-none">Instagram</a>
-                                </button>
-                            </div>
+                            @guest('siswa')
+                                <p class="text-primary text-sm"> Belum punya akun ? </p>
+                                <a href="{{ route('siswa.register') }}" class="btn btn-success btn-block">Register</a>
+                            @endguest
 
+                            @auth('siswa')
+                                @if ($check_kursus != null)
+                                <div class="alert alert-success" role="alert">
+                                    <a href="{{ route('user.kursus') }}" class="btn btn-success btn-block">Lihat Kursus</a>
+                                </div>
+                                @else
+                                <form action="{{ route('user.pesan', $kursus_unit->id) }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary btn-block btn-rounded-md btn-active">
+                                        Pesan
+                                    </button>
+                                
+                                </form>
+                                @endif
+                            @endauth
+                            
                         </div>
 
                     </div>
@@ -198,7 +199,7 @@
                 <div class="card-body p-4">
                     <div class="text-block pb-3">
                         <div class="media align-items-center">
-                            <div class="media-body">
+                            <div class="">
                                 <h6> <a href="#" class="text-reset"></a>
                                     Jadwal Kursus
                                 </h6>
