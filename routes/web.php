@@ -71,6 +71,9 @@ Route::prefix('unit')
         Route::delete('/galeri/{id}', 'Unit\GaleriController@destroy')->name('unit.galeri.hapus');
 
         // nilai
+        Route::get('/siswa/konfirmasi', 'Unit\SiswaController@konfirmasi_siswa')->name('unit.siswa.konfirmasi');
+        Route::put('/siswa/konfirmasi', 'Unit\SiswaController@update_konfirmasi')->name('unit.konfirmasi.update');
+        
         Route::get('/siswa/kelompok', 'Unit\SiswaController@index_kelompok')->name('unit.siswa.kelompok');
         Route::get('/siswa/private', 'Unit\SiswaController@index_private')->name('unit.siswa.private');
         Route::get('/siswa/{id}', 'Unit\SiswaController@kursus_siswa')->name('unit.siswa.kursus');
@@ -128,6 +131,15 @@ Route::prefix('profile')
         Route::put('update/{id}/pengaturan', 'Web\ProfileController@update_pengaturan')
             ->name('pengaturan.update');
         Route::get('pengaturan', 'Web\ProfileController@pengaturan')->name('profile.pengaturan');
+    });
+
+Route::prefix('user')
+    ->middleware('auth:siswa')
+    ->group(function () {
+        Route::post('/pesan_kursus/{kursus_unit_id}', 'Siswa\KursusController@pesan_kursus')->name('user.pesan');
+
+        Route::get('/kursus', 'Siswa\KursusController@kursus')->name('user.kursus');
+        Route::get('/materi/{kursus_unit_id}', 'Siswa\KursusController@materi')->name('user.materi');
     });
 
 Route::get('/', 'Web\FrontController@index')->name('front.index');
