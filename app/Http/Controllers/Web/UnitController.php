@@ -11,6 +11,8 @@ use App\KursusUnit;
 use App\Galeri;
 use App\GaleriKursus;
 use App\Jadwal;
+use App\SiswaKursus;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class UnitController extends Controller
@@ -114,14 +116,17 @@ class UnitController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(9);
 
-        // dd($kursus_unit->id);
+        $check_kursus = SiswaKursus::where('siswa_id', Auth::id())->where('kursus_unit_id', $kursus_unit->id)->exists();
+
+        // dd($check_kursus);
 
         return view('web.web_unit_kursus_detail', [
             'unit' => $unit,
             'kursus_unit' => $kursus_unit,
             'jadwals' => $jadwal,
             'kursus_lainya' => $kursus_lainya,
-            'gallery' => $gallery
+            'gallery' => $gallery,
+            'check_kursus' => $check_kursus
         ]);
     }
 }
