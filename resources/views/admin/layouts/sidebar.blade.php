@@ -37,7 +37,7 @@
 
                 <li class="nav-item {{ (request()->is('manager/kategori*')) ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ (request()->is('manager/kategori*')) ? 'active' : '' }}">
-                        <i class="nav-icon far fa-envelope"></i>
+                        <i class="nav-icon fas fa-tags"></i>
                         <p>
                             Kategori
                             <i class="fas fa-angle-left right"></i>
@@ -64,7 +64,7 @@
                 <!-- Kursus -->
                 <li class="nav-item {{ (request()->is('manager/kursus*')) ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ (request()->is('manager/kursus*')) ? 'active' : '' }}">
-                        <i class="nav-icon far fa-envelope"></i>
+                        <i class="nav-icon fas fa-book"></i>
                         <p>
                             Kursus
                             <i class="fas fa-angle-left right"></i>
@@ -130,18 +130,18 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('unit.create') }}"
-                                class="nav-link {{ (request()->is('manager/unit/create')) ? 'active' : '' }}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tambah Unit</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('unit.index') }}" class="nav-link
                             {{ (request()->is('manager/unit')) ? 'active' : '' }}
                                  ">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List Unit</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('unit.create') }}"
+                                class="nav-link {{ (request()->is('manager/unit/create')) ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Siswa Unit</p>
                             </a>
                         </li>
                     </ul>

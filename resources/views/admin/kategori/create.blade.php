@@ -43,7 +43,7 @@
                                 <input type="text"
                                     class="form-control {{ $errors->first('nama_kategori') ? 'is-invalid' : '' }}"
                                     name="nama_kategori" id="nama_kategori" value="{{old('nama_kategori')}}"
-                                    placeholder="Nama Kursus">
+                                    placeholder="Masukkan Kategori">
                                 <div class="invalid-feedback">
                                     {{$errors->first('nama_kategori')}}
                                 </div>
