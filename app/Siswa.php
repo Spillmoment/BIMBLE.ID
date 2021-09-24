@@ -31,5 +31,10 @@ class Siswa extends Authenticatable
         $this->notify(new SiswaResetPasswordNotification($token));
     }
 
+    public function siswa_kursus()
+    {
+        return $this->hasMany(SiswaKursus::class, 'siswa_id', 'id');
+    }
+
     protected $dates = ['deleted_at'];
 }
