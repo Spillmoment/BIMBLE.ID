@@ -1,60 +1,58 @@
-@extends('admin.layouts.manager')
-@section('title','Bimble - Data Unit')
+@extends('admin.layouts.main')
 
-
+@section('title','Bimble - Halaman Unit')
 @section('content')
-
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Data Unit</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="{{ route('unit.index') }}">Data Unit</a></li>
-                            <li class="active">List Unit </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Halaman Unit</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Unit </li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
+<!-- /.content-header -->
 
-@if(session('status'))
-@push('after-script')
-<script>
-    swal({
-        title: "Success",
-        text: "{{session('status')}}",
-        icon: "success",
-        button: false,
-        timer: 2000
-    });
+<!-- Main content -->
+<section class="content">
 
-</script>
-@endpush
-@endif
+    <div class="container-fluid">
 
-<div class="content">
-    <div class="animated fadeIn">
+        @if(session('status'))
+        @push('scripts')
+        <script>
+            swal({
+                title: "Success",
+                text: "{{session('status')}}",
+                icon: "success",
+                button: false,
+                timer: 2000
+            });
+
+        </script>
+        @endpush
+        @endif
+
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
+
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Table Unit</strong>
-
-                        <a class="btn btn-primary btn-sm float-right" href="{{ route('unit.create') }}"> Tambah Unit</a>
+                        <h3 class="card-title">Tabel Data Unit</h3>
+                        <a name="" id="" class="btn btn-primary float-right" href="{{ route('unit.create') }}"
+                            role="button"> <i class="fas fa-plus"></i> Tambah
+                            Unit</a>
                     </div>
+                    <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -73,7 +71,12 @@
                                     <td>{{ $u->nama_unit }}</td>
                                     <td> {{ $u->alamat }} </td>
 
-                                    <td> {{ $u->deskripsi != null ? $u->deskripsi : 'Belum ada deskripsi' }}</td>
+                                    <td>@if ($u->deskripsi != null)
+                                        {!! $u->deskripsi !!}
+                                        @else
+                                        Belum ada deskripsi
+                                        @endif
+                                    </td>
 
                                     <td>
                                         @if ($u->status === '1')
@@ -82,12 +85,12 @@
                                         <span class="badge badge-pill badge-danger">Tidak Aktif</span>
                                         @endif
                                     </td>
-                                   
+
                                     <td>
                                         <a class="btn btn-info text-white btn-sm" href="{{route('unit.show',
                                        [$u->id])}}"> <i class="fa fa-eye"></i></a>
                                         <a class="btn btn-warning text-white btn-sm" href="{{route('unit.edit',
-                                          [$u->id])}}"> <i class="fa fa-pencil"></i> </a>
+                                          [$u->id])}}"> <i class="fa fa-edit"></i> </a>
                                         <form class="d-inline" action="{{route('unit.destroy', [$u->id])}}"
                                             method="POST">
                                             @method('DELETE')
@@ -103,19 +106,23 @@
                                 @endforeach
                             </tbody>
 
+
                         </table>
                     </div>
+                    <!-- /.card-body -->
                 </div>
+                <!-- /.card -->
             </div>
-
-
+            <!-- /.col -->
         </div>
-    </div><!-- .animated -->
-</div>
+
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 @endsection
 
-@push('after-script')
-@include('admin.includes.datatable')
+@push('scripts')
 <script>
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');

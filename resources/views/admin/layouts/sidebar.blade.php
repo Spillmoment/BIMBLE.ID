@@ -120,16 +120,35 @@
 
                 <!-- Unit -->
                 <li class="nav-header">UNIT</li>
-                <li class="nav-item">
-                    <a href="pages/gallery.html" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                <li class="nav-item {{ (request()->is('manager/unit*')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('manager/unit*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-home"></i>
                         <p>
-                            List Unit
+                            Unit
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('unit.create') }}"
+                                class="nav-link {{ (request()->is('manager/unit/create')) ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tambah Unit</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('unit.index') }}" class="nav-link
+                            {{ (request()->is('manager/unit')) ? 'active' : '' }}
+                                 ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List Unit</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/kanban.html" class="nav-link">
+                    <a href="{{ route('pendaftar-unit.index') }}"
+                        class="nav-link   {{ (request()->is('manager/pendaftar-unit')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-columns"></i>
                         <p>
                             Pendaftar Unit

@@ -1,67 +1,55 @@
-@extends('admin.layouts.manager')
-@section('title','Bimble - Data Pendaftar Unit')
+@extends('admin.layouts.main')
 
-
+@section('title','Bimble - Halaman Pendaftar Unit')
 @section('content')
-
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Data Pendaftar Unit</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="{{ route('unit.index') }}">Data Pendaftar Unit</a></li>
-                            <li class="active">List Pendaftar Unit </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Halaman Pendaftar Unit</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Pendaftar Unit </li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
 </div>
+<!-- /.content-header -->
 
-@push('after-script')
-@if(session('status'))
-<script>
-    swal({
-        title: "Success",
-        text: "{{session('status')}}",
-        icon: "success",
-        button: false,
-        timer: 2000
-    });
-</script>
-@elseif(session('success'))
-<script>
-    swal({
-        title: "Success",
-        text: "{{session('success')}}",
-        icon: "success",
-        // timer: 2000
-    });
-</script>
-@endif
-@endpush
+<!-- Main content -->
+<section class="content">
 
-<div class="content">
-    <div class="animated fadeIn">
+    <div class="container-fluid">
+
+        @if(session('status'))
+        @push('scripts')
+        <script>
+            swal({
+                title: "Success",
+                text: "{{session('status')}}",
+                icon: "success",
+                button: false,
+                timer: 2000
+            });
+
+        </script>
+        @endpush
+        @endif
+
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
+
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Table Pendaftar Unit</strong>
-
+                        <h3 class="card-title">Tabel Pendaftar Unit</h3>
                     </div>
+                    <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -69,7 +57,7 @@
                                     <th width="100">No Telp</th>
                                     <th width="100">Email</th>
                                     <th>Alamat</th>
-                                    <th>File ALumni</th>
+                                    <th>File Alumni</th>
                                     <th width="100">Option</th>
                                 </tr>
                             </thead>
@@ -82,14 +70,20 @@
                                     <td> {{ $u->alamat }} </td>
                                     <td>{{ $u->email }}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="/storage/file/{{ $u->bukti_alumni }}">
-                                        Download 
+                                        <a class="btn btn-primary btn-sm" target="_blank"
+                                            href="/storage/file/{{ $u->bukti_alumni }}">
+                                            Preview
+                                        </a>
+                                        <a class="btn btn-primary btn-sm" target="_blank"
+                                            href="{{ route('download',$u->bukti_alumni) }}">
+                                            Download
                                         </a>
                                     </td>
-      
+
                                     <td>
 
-                                        <form class="d-inline" action="{{ route('pendaftar.status', $u->id) }}?status=1"
+                                        <form class=" d-inline"
+                                            action="{{ route('pendaftar-unit.status', $u->id) }}?status=1"
                                             method="POST">
                                             @csrf
                                             @method('HEAD')
@@ -100,7 +94,7 @@
                                             </button>
                                         </form>
                                         <div class="mt-2"></div>
-                                        <form class="d-inline" action="{{route('pendaftar.destroy', [$u->id])}}"
+                                        <form class="d-inline" action="{{route('pendaftar-unit.destroy', [$u->id])}}"
                                             method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -118,17 +112,20 @@
 
                         </table>
                     </div>
+                    <!-- /.card-body -->
                 </div>
+                <!-- /.card -->
             </div>
-
-
+            <!-- /.col -->
         </div>
-    </div><!-- .animated -->
-</div>
+
+        <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
 @endsection
 
-@push('after-script')
-@include('admin.includes.datatable')
+@push('scripts')
 <script>
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');
@@ -169,7 +166,6 @@
                 }
             });
     });
-
 
 </script>
 @endpush
