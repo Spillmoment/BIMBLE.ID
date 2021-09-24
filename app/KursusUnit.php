@@ -39,4 +39,19 @@ class KursusUnit extends Model
         return $this->hasMany(Jadwal::class, 'kursus_unit_id', 'id');
     }
 
+    public function mentor_kursus()
+    {
+        return $this->hasMany(MentorKursus::class, 'kursus_unit_id', 'id');
+    }
+    
+    public function siswa_kursus()
+    {
+        return $this->hasMany(SiswaKursus::class, 'kursus_unit_id', 'id');
+    }
+    
+    public function materi()
+    {
+        return $this->hasMany(Materi::class, 'kursus_unit_id', 'id');
+    }
+
 }
