@@ -36,15 +36,23 @@ Route::prefix('manager')
 
         // Route Dashboard
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-        Route::get('/pendaftar/download/{file}', 'PendUnitController@download')->name('download');
-        Route::get('pendaftar/{id}/status', 'PendUnitController@setStatus')->name('pendaftar-unit.status');
+        // Kursus
         Route::get('kursus-gallery/{id}', 'KursusController@gallery')->name('kursus.gallery');
-
-        // Resource
+        Route::resource('kursus', 'KursusController');
+        // Kategori
         Route::resource('kategori', 'KategoriController')->except('show');
+        // Komentar
+        // Gallery
+        // Unit
+        Route::resource('unit', 'Admin\UnitController');
+        Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
+        // Banner
+        // Pendaftar Unit
+        Route::get('pendaftar/{id}/status', 'PendUnitController@setStatus')->name('pendaftar-unit.status');
+        Route::get('/pendaftar/download/{file}', 'PendUnitController@download')->name('download');
         Route::resource('pendaftar-unit', 'PendUnitController');
+
         Route::resources([
-            'kursus' => 'KursusController',
             'unit'   => 'UnitController',
             'banner' => 'BannerController',
             'komentar' => 'KomentarController',
@@ -95,7 +103,7 @@ Route::prefix('unit')
         // nilai
         Route::get('/siswa/konfirmasi', 'Unit\SiswaController@konfirmasi_siswa')->name('unit.siswa.konfirmasi');
         Route::put('/siswa/konfirmasi', 'Unit\SiswaController@update_konfirmasi')->name('unit.konfirmasi.update');
-        
+
         Route::get('/siswa/kelompok', 'Unit\SiswaController@index_kelompok')->name('unit.siswa.kelompok');
         Route::get('/siswa/private', 'Unit\SiswaController@index_private')->name('unit.siswa.private');
         Route::get('/siswa/{id}', 'Unit\SiswaController@kursus_siswa')->name('unit.siswa.kursus');
