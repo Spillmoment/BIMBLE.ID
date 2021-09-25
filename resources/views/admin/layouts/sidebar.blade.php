@@ -120,7 +120,8 @@
 
                 <!-- Unit -->
                 <li class="nav-header">UNIT</li>
-                <li class="nav-item {{ (request()->is('manager/unit*')) ? 'menu-open' : '' }}">
+                <li
+                    class="nav-item {{ (request()->is('manager/unit*')) || (request()->is('manager/siswa-unit*')) ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ (request()->is('manager/unit*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
@@ -138,8 +139,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('unit.create') }}"
-                                class="nav-link {{ (request()->is('manager/unit/create')) ? 'active' : '' }}">
+                            <a href="{{ route('siswa.unit') }}"
+                                class="nav-link {{ (request()->is('manager/unit-siswa')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Siswa Unit</p>
                             </a>
