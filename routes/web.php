@@ -42,22 +42,19 @@ Route::prefix('manager')
         // Kategori
         Route::resource('kategori', 'KategoriController')->except('show');
         // Komentar
+        Route::resource('komentar', 'Admin\KomentarController');
         // Gallery
+        Route::resource('gallery', 'Admin\GalleryController');
         // Unit
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
         // Banner
+        Route::resource('banner', 'Admin\BannerController');
         // Pendaftar Unit
         Route::get('pendaftar/{id}/status', 'PendUnitController@setStatus')->name('pendaftar-unit.status');
         Route::get('/pendaftar/download/{file}', 'PendUnitController@download')->name('download');
         Route::resource('pendaftar-unit', 'PendUnitController');
 
-        Route::resources([
-            'unit'   => 'UnitController',
-            'banner' => 'BannerController',
-            'komentar' => 'KomentarController',
-            'gallery' => 'GalleryController',
-        ]);
     });
 
 
