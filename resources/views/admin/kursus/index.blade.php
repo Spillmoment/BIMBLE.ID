@@ -1,125 +1,107 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Halaman Kursus')
+@section('title', 'Admin - Halaman Kursus')
+
 @section('content')
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Halaman Kursus</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Kursus </li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
 
-<!-- Main content -->
-<section class="content">
-
-    <div class="container-fluid">
-
-        @if(session('status'))
-        @push('scripts')
-        <script>
-            swal({
-                title: "Success",
-                text: "{{session('status')}}",
-                icon: "success",
-                button: false,
-                timer: 2000
-            });
-
-        </script>
-        @endpush
-        @endif
-
-        <div class="row">
-            <div class="col-12">
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Tabel Data Kursus</h3>
-                        <a name="" id="" class="btn btn-primary float-right" href="{{ route('kursus.create') }}"
-                            role="button"> <i class="fas fa-plus"></i> Tambah
-                            Kursus</a>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th width="300">Nama Kursus</th>
-                                    <th width="150">Gambar Kursus</th>
-                                    <th width="200">Kategori</th>
-                                    <th width="210">Option</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach ($kursus as $krs)
-                                <tr>
-                                    <td scope="row"> {{$loop->iteration}} </td>
-                                    <td>{{ $krs->nama_kursus }}</td>
-                                    @if($krs->gambar_kursus)
-                                    <td> <img src="{{ url('assets/images/kursus/'.$krs->gambar_kursus) }}"
-                                            width="100px">
-                                    </td>
-                                    @else
-                                    Tidak Ada Gambar
-                                    @endif
-                                    <td>
-                                        @if ($krs->kategori->nama_kategori != null)
-                                        {{ $krs->kategori->nama_kategori }}
-                                        @else
-                                        Kategori belum ada
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-success btn-sm text-light" href="{{route('kursus.gallery',
-                                       [$krs->id])}}"> <i class="fas fa-image"></i></a>
-                                        <a class="btn btn-warning btn-sm text-light" href="{{route('kursus.edit',
-                                       [$krs->id])}}"> <i class="fas fa-edit"></i></a>
-
-                                        <form class="d-inline" action="{{route('kursus.destroy', [$krs->id])}}"
-                                            method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" id="deleteButton" data-name="{{ $krs->nama_kursus }}"
-                                                class="btn btn-danger btn-sm delete">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
-        </div>
-
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-@endsection
-
+@if (session('status'))
 @push('scripts')
 <script>
+    swal({
+        title: "Good job!",
+        text: "{{ session('status') }}",
+        icon: "success",
+        button: false,
+        timer: 3000
+    });
+
+</script>
+@endpush
+@endif
+
+<div class="row">
+    <div class="col-12 mb-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">Kursus</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Halaman Kursus</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Table Kursus</h2>
+            </div>
+
+        </div>
+        <div class="card border-light shadow-sm components-section">
+            <div class="row">
+                <div class="card-body">
+                    <table class="table table-hover" id="kursusTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kursus</th>
+                                <th>Kategori</th>
+                                <th>Gambar Kursus</th>
+                                <th width="210">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <footer class="footer section py-2">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+@push('scripts')
+<script>
+    // AJAX DataTable
+    var datatable = $('#kursusTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: true,
+        ajax: {
+            url: '{!! url()->current() !!}',
+        },
+        columns: [{
+                "data": 'id',
+                "sortable": false,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            {
+                data: 'nama_kursus',
+                name: 'nama_kursus'
+            },
+            {
+                data: 'kategori',
+                name: 'kategori.nama_kategori'
+            },
+            {
+                data: 'gambar_kursus',
+                name: 'gambar_kursus'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                width: '20%'
+            },
+        ],
+
+    });
+
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');
         e.preventDefault();
