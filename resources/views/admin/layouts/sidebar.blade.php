@@ -3,7 +3,7 @@
         <div
             class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
 
-            @if (Auth::guard('manager'))
+            @auth('manager')
             <div class="d-flex align-items-center">
                 <div class="user-avatar lg-avatar mr-4">
                     <img src="" class="card-img-top rounded-circle border-white" alt="Bonnie Green">
@@ -16,12 +16,13 @@
                 </div>
                 <form id="logout-form" action="{{ route('manager.logout') }}" method="POST" style="display: none;">
                     @csrf
+                    @method('HEAD')
                 </form>
             </div>
-            @endif
+            @endauth
 
 
-            @if (Auth::guard('unit'))
+            @auth('unit')
             <div class="d-flex align-items-center">
                 <div class="user-avatar lg-avatar mr-4">
                     <img src="{{ Storage::url('public/'. Auth::user()->gambar_unit) }}"
@@ -35,9 +36,10 @@
                 </div>
                 <form id="logout-form" action="{{ route('unit.logout') }}" method="POST" style="display: none;">
                     @csrf
+                    @method('HEAD')
                 </form>
             </div>
-            @endif
+            @endauth
 
 
 
@@ -50,7 +52,7 @@
         <ul class="nav flex-column">
 
             <!-- Sidebar Admin -->
-            @if (Auth::guard('manager'))
+            @auth('manager')
             <li class="nav-item {{ Request::route()->getName() == 'dashboard' ? 'active' : '' }}">
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
@@ -120,7 +122,7 @@
                     </ul>
                 </div>
             </li>
-            @endif
+            @endauth
 
 
             <!-- Sidebar Unit -->
