@@ -18,7 +18,7 @@ class KursusController extends Controller
     {
 
         if (request()->ajax()) {
-            $query = Kursus::query()->with(['kategori']);
+            $query = Kursus::query()->with(['kategori'])->latest();
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return
