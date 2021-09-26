@@ -37,8 +37,8 @@ Route::prefix('manager')
         // Route Dashboard
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
         // Kursus
-        Route::get('kursus-gallery/{id}', 'KursusController@gallery')->name('kursus.gallery');
-        Route::resource('kursus', 'KursusController');
+        Route::get('kursus-gallery/{id}', 'Admin\KursusController@gallery')->name('kursus.gallery');
+        Route::resource('kursus', 'Admin\KursusController');
         // Kategori
         Route::resource('kategori', 'KategoriController')->except('show');
         // Komentar
@@ -54,7 +54,6 @@ Route::prefix('manager')
         Route::get('pendaftar/{id}/status', 'PendUnitController@setStatus')->name('pendaftar-unit.status');
         Route::get('/pendaftar/download/{file}', 'PendUnitController@download')->name('download');
         Route::resource('pendaftar-unit', 'PendUnitController');
-
     });
 
 
