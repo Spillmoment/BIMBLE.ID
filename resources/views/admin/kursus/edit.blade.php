@@ -121,7 +121,6 @@
                                     </span>
 
                                 </div>
-                                <br>
                                 <button type="submit" class="btn btn-block btn-primary">
                                     Simpan</button>
                             </div>
