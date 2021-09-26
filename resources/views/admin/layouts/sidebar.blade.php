@@ -49,7 +49,7 @@
         </div>
         <ul class="nav flex-column">
 
-            {{-- Sidebar Admin --}}
+            <!-- Sidebar Admin -->
             @if (Auth::guard('manager'))
             <li class="nav-item ">
                 <a href="{{ route('dashboard') }}" class="nav-link">
@@ -57,10 +57,31 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    data-toggle="collapse" data-target="#submenu-app">
+                    <span>
+                        <span class="sidebar-icon"><span class="fas fa-book"></span></span>
+                        Kursus
+                    </span>
+                    <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
+                </span>
+                <div class="multi-level collapse {{ (request()->is('manager/kursus*')) ? 'show' : '' }}" role="list"
+                    id="submenu-app" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item {{ (Request::route()->getName() == 'kursus.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('kursus.index') }}"><span>Data Kursus</span></a>
+                        </li>
+                        <li class="nav-item {{ (Request::route()->getName() == 'kursus.create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('kursus.create') }}"><span>Tambah Kursus</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
             @endif
 
 
-
+            <!-- Sidebar Unit -->
 
 
 
