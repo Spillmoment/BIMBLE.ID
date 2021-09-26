@@ -40,7 +40,7 @@ Route::prefix('manager')
         Route::get('kursus-gallery/{id}', 'Admin\KursusController@gallery')->name('kursus.gallery');
         Route::resource('kursus', 'Admin\KursusController');
         // Kategori
-        Route::resource('kategori', 'KategoriController')->except('show');
+        Route::resource('kategori', 'Admin\KategoriController')->except('show');
         // Komentar
         Route::resource('komentar', 'Admin\KomentarController');
         // Gallery
