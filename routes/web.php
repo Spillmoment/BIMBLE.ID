@@ -35,7 +35,7 @@ Route::prefix('manager')
     ->group(function () {
 
         // Route Dashboard
-        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
         // Kursus
         Route::get('kursus-gallery/{id}', 'Admin\KursusController@gallery')->name('kursus.gallery');
         Route::resource('kursus', 'Admin\KursusController');
@@ -49,11 +49,11 @@ Route::prefix('manager')
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
         // Banner
-        Route::resource('banner', 'Admin\BannerController');
+        Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
         // Pendaftar Unit
-        Route::get('pendaftar/{id}/status', 'PendUnitController@setStatus')->name('pendaftar-unit.status');
-        Route::get('/pendaftar/download/{file}', 'PendUnitController@download')->name('download');
-        Route::resource('pendaftar-unit', 'PendUnitController');
+        Route::get('pendaftar/{id}/status', 'Admin\PendUnitController@setStatus')->name('pendaftar-unit.status');
+        Route::get('/pendaftar/download/{file}', 'Admin\PendUnitController@download')->name('download');
+        Route::resource('pendaftar-unit', 'Admin\PendUnitController');
     });
 
 
