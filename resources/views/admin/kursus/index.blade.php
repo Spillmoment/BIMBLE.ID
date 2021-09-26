@@ -8,7 +8,7 @@
 @push('scripts')
 <script>
     swal({
-        title: "Good job!",
+        title: "Berhasil",
         text: "{{ session('status') }}",
         icon: "success",
         button: false,
