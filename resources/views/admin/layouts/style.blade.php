@@ -8,5 +8,12 @@
     <!-- Volt CSS -->
     <link type="text/css" href="{{ asset('assets/backend/css/volt.css') }}" rel="stylesheet">
 
-    {{-- DataTable --}}
+    <!-- DataTable -->
     <link rel="stylesheet" href="{{ asset('assets/backend/vendor/datatables/css/dataTables.bootstrap5.min.css') }}">
+
+    <style>
+        .ck-editor__editable {
+            min-height: 170px;
+        }
+
+    </style>
