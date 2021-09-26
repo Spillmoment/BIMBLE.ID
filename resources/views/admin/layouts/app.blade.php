@@ -52,8 +52,8 @@
 
     @include('admin.layouts.script')
     @stack('prepend-script')
-    <script src="{{ asset('vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/vendor/datatables/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @stack('scripts')
 </body>
