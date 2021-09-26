@@ -1,108 +1,102 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Halaman Kategori')
+@section('title', 'Admin - Halaman Kategori')
+
 @section('content')
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Halaman Kategori</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Kategori </li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
 
-<!-- Main content -->
-<section class="content">
-
-    <div class="container-fluid">
-
-        @if(session('status'))
-        @push('scripts')
-        <script>
-            swal({
-                title: "Success",
-                text: "{{session('status')}}",
-                icon: "success",
-                button: false,
-                timer: 2000
-            });
-
-        </script>
-        @endpush
-        @endif
-
-        <div class="row">
-            <div class="col-12">
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Tabel Data Kategori</h3>
-                        <a name="" id="" class="btn btn-primary float-right" href="{{ route('kategori.create') }}"
-                            role="button"> <i class="fas fa-plus"></i> Tambah
-                            Kategori</a>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Kategori</th>
-                                    <th>Option</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach ($kategori as $kat)
-                                <tr>
-                                    <td scope="row"> {{$loop->iteration}} </td>
-                                    <td>{{ $kat->nama_kategori }}</td>
-                                    <td>
-                                        <a class="btn btn-warning btn-sm text-light" href="{{route('kategori.edit',
-                                       [$kat->id])}}"> <i class="fas fa-edit"></i></a>
-
-                                        <form class="d-inline" action="{{route('kategori.destroy', [$kat->id])}}"
-                                            method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" id="deleteButton"
-                                                data-name="{{ $kat->nama_kategori }}"
-                                                class="btn btn-danger btn-sm delete">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
-        </div>
-
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-@endsection
-
+@if (session('status'))
 @push('scripts')
 <script>
+    swal({
+        title: "Berhasil",
+        text: "{{ session('status') }}",
+        icon: "success",
+        button: false,
+        timer: 3000
+    });
+
+</script>
+@endpush
+@endif
+
+<div class="row">
+    <div class="col-12 mb-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">Kategori</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Halaman Kategori</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Table Kategori</h2>
+            </div>
+
+        </div>
+        <div class="card border-light shadow-sm components-section">
+            <div class="row">
+                <div class="card-body">
+                    <table class="table table-hover" id="kursusTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kategori</th>
+                                <th>Slug</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <footer class="footer section py-2">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+@push('scripts')
+<script>
+    // AJAX DataTable
+    var datatable = $('#kursusTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: true,
+        ajax: {
+            url: '{!! url()->current() !!}',
+        },
+        columns: [{
+                "data": 'id',
+                "sortable": false,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            {
+                data: 'nama_kategori',
+                name: 'nama_kategori'
+            },
+            {
+                data: 'slug',
+                name: 'slug'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                width: '20%'
+            },
+        ],
+
+    });
+
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');
         e.preventDefault();
