@@ -35,7 +35,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="kategori">Pilih Kategori</label>
-                                <select class="form-control" name="kategori_id" id="kategori">
+                                <select class="form-select" name="kategori_id" id="kategori">
                                     @foreach ($kategori as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                     @endforeach
@@ -81,7 +81,6 @@
                                 </div>
                             </div>
 
-                            <br>
                             <button type="submit" class="btn btn-block btn-primary">
                                 Simpan</button>
                         </div>
