@@ -112,7 +112,7 @@
         e.preventDefault();
         swal({
                 title: "Yakin!",
-                text: "menghapus kursus  " + name + "?",
+                text: "menghapus unit  " + name + "?",
                 icon: "warning",
                 dangerMode: true,
                 buttons: {
