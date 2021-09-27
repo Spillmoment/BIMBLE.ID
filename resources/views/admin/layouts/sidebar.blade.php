@@ -122,7 +122,8 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item {{ (request()->is('manager/unit*')) ? 'active' : '' }}">
+            <li
+                class="nav-item {{ (request()->is('manager/unit*')) || request()->is('manager/pendaftar-unit*') ? 'active' : '' }}">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-toggle="collapse" data-target="#submenu-unit">
                     <span>
@@ -131,11 +132,14 @@
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
                 </span>
-                <div class="multi-level collapse {{ (request()->is('manager/unit*')) ? 'show' : '' }}" role="list"
-                    id="submenu-unit" aria-expanded="false">
+                <div class="multi-level collapse {{ (request()->is('manager/unit*')) || request()->is('manager/pendaftar-unit*') ? 'show' : '' }}"
+                    role="list" id="submenu-unit" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ (Request::route()->getName() == 'unit.index') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('unit.index') }}"><span>Data Unit</span></a>
+                        </li>
+                        <li class="nav-item {{ (Request::route()->getName() == 'unit.create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('unit.create') }}"><span>Tambah Unit</span></a>
                         </li>
                         <li
                             class="nav-item {{ (Request::route()->getName() == 'pendaftar-unit.index') ? 'active' : '' }}">
