@@ -51,9 +51,12 @@ Route::prefix('manager')
         // Banner
         Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
         // Pendaftar Unit
-        Route::get('pendaftar/{id}/status', 'Admin\PendUnitController@setStatus')->name('pendaftar-unit.status');
-        Route::get('/pendaftar/download/{file}', 'Admin\PendUnitController@download')->name('download');
-        Route::resource('pendaftar-unit', 'Admin\PendUnitController');
+        Route::get('pendaftar/{id}/status', 'Admin\PendaftarUnitController@setStatus')
+            ->name('pendaftar-unit.status');
+        Route::get('/pendaftar/download/{file}', 'Admin\PendaftarUnitController@download')
+            ->name('download');
+        Route::resource('pendaftar-unit', 'Admin\PendaftarUnitController')
+            ->only(['index', 'show', 'destroy']);
     });
 
 
