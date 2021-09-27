@@ -84,7 +84,7 @@
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-toggle="collapse" data-target="#submenu-app">
                     <span>
-                        <span class="sidebar-icon"><span class="fas fa-book"></span></span>
+                        <span class="sidebar-icon"><span class="fas fa-database"></span></span>
                         Kursus
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
@@ -105,7 +105,7 @@
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-toggle="collapse" data-target="#submenu-galerikursus">
                     <span>
-                        <span class="sidebar-icon"><span class="fas fa-images"></span></span>
+                        <span class="sidebar-icon"><span class="fas fa-camera"></span></span>
                         Galeri Kursus
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
@@ -118,6 +118,32 @@
                         </li>
                         <li class="nav-item {{ (Request::route()->getName() == 'gallery.create') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('gallery.create') }}"><span>Tambah Galeri</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item {{ (request()->is('manager/unit*')) ? 'active' : '' }}">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    data-toggle="collapse" data-target="#submenu-unit">
+                    <span>
+                        <span class="sidebar-icon"><span class="fas fa-landmark"></span></span>
+                        Unit
+                    </span>
+                    <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
+                </span>
+                <div class="multi-level collapse {{ (request()->is('manager/unit*')) ? 'show' : '' }}" role="list"
+                    id="submenu-unit" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item {{ (Request::route()->getName() == 'unit.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('unit.index') }}"><span>Data Unit</span></a>
+                        </li>
+                        <li
+                            class="nav-item {{ (Request::route()->getName() == 'pendaftar-unit.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('pendaftar-unit.index') }}"><span>Pendaftar
+                                    Unit</span></a>
+                        </li>
+                        <li class="nav-item {{ (Request::route()->getName() == 'siswa.unit') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('siswa.unit') }}"><span>Siswa Unit</span></a>
                         </li>
                     </ul>
                 </div>
