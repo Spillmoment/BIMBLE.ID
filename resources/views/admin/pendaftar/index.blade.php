@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Admin - Halaman Unit')
+@section('title', 'Admin - Halaman Pendaftar Unit')
 
 @section('content')
 
@@ -28,7 +28,7 @@
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                         <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
                         <li class="breadcrumb-item"><a href="#">Unit</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Halaman Unit</li>
+                        <li class="breadcrumb-item active" aria-current="page">Pendaftar Unit</li>
                     </ol>
                 </nav>
                 <h2 class="h4">Table Unit</h2>
