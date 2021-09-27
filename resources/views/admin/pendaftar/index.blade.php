@@ -1,170 +1,105 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Halaman Pendaftar Unit')
+@section('title', 'Admin - Halaman Unit')
+
 @section('content')
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Halaman Pendaftar Unit</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Pendaftar Unit </li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
 
-<!-- Main content -->
-<section class="content">
-
-    <div class="container-fluid">
-
-        @if(session('status'))
-        @push('scripts')
-        <script>
-            swal({
-                title: "Success",
-                text: "{{session('status')}}",
-                icon: "success",
-                button: false,
-                timer: 2000
-            });
-
-        </script>
-        @endpush
-        @endif
-
-        <div class="row">
-            <div class="col-12">
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Tabel Pendaftar Unit</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th width="100">Nama Unit</th>
-                                    <th width="100">No Telp</th>
-                                    <th width="100">Email</th>
-                                    <th>Alamat</th>
-                                    <th>File Alumni</th>
-                                    <th width="100">Option</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($unit as $u)
-                                <tr>
-                                    <td scope="row"> {{$loop->iteration}} </td>
-                                    <td>{{ $u->nama_unit }}</td>
-                                    <td>{{ $u->no_telp }}</td>
-                                    <td> {{ $u->alamat }} </td>
-                                    <td>{{ $u->email }}</td>
-                                    <td>
-                                        <a class="btn btn-primary btn-sm" target="_blank"
-                                            href="/storage/file/{{ $u->bukti_alumni }}">
-                                            Preview
-                                        </a>
-                                        <a class="btn btn-primary btn-sm" target="_blank"
-                                            href="{{ route('download',$u->bukti_alumni) }}">
-                                            Download
-                                        </a>
-                                    </td>
-
-                                    <td>
-
-                                        <form class=" d-inline"
-                                            action="{{ route('pendaftar-unit.status', $u->id) }}?status=1"
-                                            method="POST">
-                                            @csrf
-                                            @method('HEAD')
-                                            <button type="submit" id="aktifButton" data-name="{{ $u->nama_unit }}"
-                                                class="btn btn-success btn-sm">
-                                                <i class="fa fa-check"></i>
-                                                Konfirmasi
-                                            </button>
-                                        </form>
-                                        <div class="mt-2"></div>
-                                        <form class="d-inline" action="{{route('pendaftar-unit.destroy', [$u->id])}}"
-                                            method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" id="deleteButton" data-name="{{ $u->nama_unit }}"
-                                                class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
-        </div>
-
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-@endsection
-
+@if (session('status'))
 @push('scripts')
 <script>
-    $('button#deleteButton').on('click', function (e) {
-        var name = $(this).data('name');
-        e.preventDefault();
-        swal({
-                title: "Yakin!",
-                text: "Menghapus Pendaftar Unit  " + name + "?",
-                icon: "warning",
-                dangerMode: true,
-                buttons: {
-                    cancel: "Cancel",
-                    confirm: "OK",
-                },
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $(this).closest("form").submit();
-                }
-            });
+    swal({
+        title: "Berhasil",
+        text: "{{ session('status') }}",
+        icon: "success",
+        button: false,
+        timer: 3000
     });
 
-    $('button#aktifButton').on('click', function (e) {
-        var name = $(this).data('name');
-        e.preventDefault();
-        swal({
-                title: "Yakin!",
-                text: "Menyetujui Unit " + name + "?",
-                icon: "warning",
-                dangerMode: true,
-                buttons: {
-                    cancel: "Cancel",
-                    confirm: "OK",
-                },
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $(this).closest("form").submit();
+</script>
+@endpush
+@endif
+
+<div class="row">
+    <div class="col-12 mb-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">Unit</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Halaman Unit</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Table Unit</h2>
+            </div>
+
+        </div>
+        <div class="card border-light shadow-sm components-section">
+            <div class="row">
+                <div class="card-body">
+                    <table class="table table-hover" id="unitTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Unit</th>
+                                <th>Nomor Telepon</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <footer class="footer section py-2">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+@push('scripts')
+<script>
+    // AJAX DataTable
+    var datatable = $('#unitTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: true,
+        ajax: {
+            url: '{!! url()->current() !!}',
+        },
+        columns: [{
+                "data": 'id',
+                "sortable": false,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
                 }
-            });
+            },
+            {
+                data: 'nama_unit',
+                name: 'nama_unit'
+            },
+            {
+                data: 'no_telp',
+                name: 'no_telp'
+            },
+            {
+                data: 'email',
+                name: 'email'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                width: '20%'
+            },
+        ],
+
     });
 
 </script>
