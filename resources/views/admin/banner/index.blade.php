@@ -1,51 +1,42 @@
-@extends('admin.layouts.manager')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Data Banner')
+@section('title', 'Admin - Halaman Banner')
+
 @section('content')
 
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Data Banner</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="{{ route('banner.index') }}">Data Banner</a></li>
-                            <li class="active">List Banner </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-@if(session('status'))
-@push('after-script')
+@if (session('status'))
+@push('scripts')
 <script>
     swal({
-        title: "Success",
-        text: "{{session('status')}}",
+        title: "Berhasil",
+        text: "{{ session('status') }}",
         icon: "success",
         button: false,
-        timer: 2000
+        timer: 3000
     });
 
 </script>
 @endpush
 @endif
 
-<div class="content">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
+<div class="row">
+    <div class="col-12 mb-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">Banner</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Halaman Banner</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Banner Web</h2>
+            </div>
+
+        </div>
+        <div class="card border-light shadow-sm components-section">
+            <div class="card-body">
                 <ul class="nav nav-tabs nav-pills" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -72,7 +63,7 @@
                                     @csrf
                                     @method('put')
 
-                                    <div class="form-group ">
+                                    <div class="mb-3">
                                         <label for="kata1">Text 1</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata1') ? 'is-invalid' : '' }}"
@@ -83,7 +74,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group ">
+                                    <div class="mb-3">
                                         <label for="kata2">Text 2</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata2') ? 'is-invalid' : '' }}"
@@ -99,8 +90,10 @@
                                         <input type="file"
                                             class="form-control-file {{ $errors->first('gambar_banner') ? 'is-invalid' : '' }}"
                                             name="gambar_banner" id="gambar_banner">
-                                        <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                                            Gambar</small>
+                                        <div>
+                                            <small class="form-text text-muted">Kosongkan jika tidak ingin mengubah
+                                                Gambar</small>
+                                        </div>
                                         <div class="mt-3">
                                             <img id="img" class="img-target" width="200px">
                                         </div>
@@ -131,7 +124,7 @@
                                     @csrf
                                     @method('put')
 
-                                    <div class="form-group ">
+                                    <div class="mb-3">
                                         <label for="kata1">Text 1</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata1') ? 'is-invalid' : '' }}"
@@ -142,7 +135,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group ">
+                                    <div class="mb-3">
                                         <label for="kata2">Text 2</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata2') ? 'is-invalid' : '' }}"
@@ -158,8 +151,10 @@
                                         <input type="file"
                                             class="form-control-file {{ $errors->first('gambar_banner') ? 'is-invalid' : '' }}"
                                             name="gambar_banner" id="gambar_banner">
-                                        <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                                            Gambar</small>
+                                        <div>
+                                            <small class="form-text text-muted">Kosongkan jika tidak ingin mengubah
+                                                Gambar</small>
+                                        </div>
                                         <div class="mt-3">
                                             <img id="img" class="img-target2" width="200px">
                                         </div>
@@ -188,7 +183,7 @@
                                     @csrf
                                     @method('put')
 
-                                    <div class="form-group ">
+                                    <div class="mb-3">
                                         <label for="kata1">Text 1</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata1') ? 'is-invalid' : '' }}"
@@ -199,7 +194,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group ">
+                                    <div class="mb-3">
                                         <label for="kata2">Text 2</label>
                                         <input type="text"
                                             class="form-control {{ $errors->first('kata2') ? 'is-invalid' : '' }}"
@@ -215,8 +210,10 @@
                                         <input type="file"
                                             class="form-control-file {{ $errors->first('gambar_banner') ? 'is-invalid' : '' }}"
                                             name="gambar_banner" id="gambar_banner">
-                                        <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                                            Gambar</small>
+                                        <div>
+                                            <small class="text-muted">Kosongkan jika tidak ingin mengubah
+                                                Gambar</small>
+                                        </div>
                                         <div class="mt-3">
                                             <img id="img" class="img-target" width="200px">
                                         </div>
@@ -239,10 +236,27 @@
 
                 </div>
             </div>
-
-
         </div>
-    </div><!-- .animated -->
+    </div>
 </div>
 
 @endsection
+@push('scripts')
+<script>
+    var readURL = function (input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.img-target').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".form-control-file").on('change', function () {
+        readURL(this);
+    });
+
+</script>
+@endpush
