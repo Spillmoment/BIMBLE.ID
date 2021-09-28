@@ -11,12 +11,16 @@ class Materi extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'kursus_unit_id', 'bab', 'judul', 'file'
+        'kursus_id', 'unit_id', 'bab', 'judul', 'file'
     ];
 
-    public function kursus_unit()
+    public function kursus()
     {
-        return $this->belongsTo(KursusUnit::class, 'kursus_unit_id');
+        return $this->belongsTo(Kursus::class, 'kursus_id');
     }
 
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id');
+    }
 }
