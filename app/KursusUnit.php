@@ -49,9 +49,4 @@ class KursusUnit extends Model
         return $this->hasMany(SiswaKursus::class, 'kursus_unit_id', 'id');
     }
     
-    public function materi()
-    {
-        return $this->hasMany(Materi::class, 'kursus_unit_id', 'id');
-    }
-
 }
