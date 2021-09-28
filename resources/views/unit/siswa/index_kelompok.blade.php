@@ -2,12 +2,6 @@
 
 @section('title','Unit - Halaman Siswa')
 
-@push('after-style')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
-{{-- CDN untuk tost --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-@endpush
-
 @section('content')
 <!-- Breadcrumbs-->
 <div class="breadcrumbs">
@@ -16,7 +10,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Nilai Siswa</h1>
+                        <h1>Siswa</h1>
                     </div>
                 </div>
             </div>
@@ -24,7 +18,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="#">Siswa</a></li>
+                            <li class="active">Type Kelompok</li>
                         </ol>
                     </div>
                 </div>
@@ -38,32 +32,41 @@
 
     <div class="row">
 
-        @foreach ($list_kursus as $kursus)
-        <div class="col-md-4">
-            <aside class="profile-nav alt">
-                <section class="card">
-                    <div class="card-header user-header alt bg-dark">
-                        <div class="media">
-                            <a href="{{ route('unit.siswa.kursus', $kursus->id) }}">
-                                <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="{{ url('assets/images/kursus/'. $kursus->kursus->gambar_kursus) }}">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="text-light display-6">{{ $kursus->kursus->nama_kursus }}</h4>
-                            </div>
-                        </div>
-                    </div>
-
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            {{-- <a href="{{ route('unit.siswa.kursus', $kursus->slug) }}"> <i class="fa fa-bell-o"></i> Siswa <span class="badge badge-success pull-right">11</span></a> --}}
-                            <a href="{{ route('unit.siswa.kursus', $kursus->id) }}"> <i class="fa fa-book"></i> Penilaian Siswa</a>
-                        </li>
-                    </ul>
-
-                </section>
-            </aside>
-        </div>
-        @endforeach
+        @if (!$list_siswa->isEmpty())
+            
+            @foreach ($list_siswa as $data)
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nama Siswa</th>
+                        <th>Kursus</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="{{ route('unit.siswa.kelompok.card', $data->id) }}">{{ $data->siswa->nama_siswa }}</a></td>
+                        <td>{{ $data->kursus_unit->kursus->nama_kursus }}</td>
+                        <td>
+                            @switch($data->status_sertifikat)
+                                @case('terima')
+                                    <span class="badge badge-primary">Siswa</span>
+                                    @break
+                                @case('lulus')
+                                    <span class="badge badge-success">Lulus</span>
+                                    @break
+                                @default
+                                    <button class="btn btn-success"><i class="fa fa-download"></i> Lulus</button>
+                            @endswitch
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            @endforeach
+        @else
+        <h2>Tidak tersesia data siswa di kursus type kelompok</h2>
+            
+        @endif
 
         <div class="col-lg-12">
             <div class="card">
@@ -77,7 +80,3 @@
 <!-- .animated -->
 
 @endsection
-
-@push('after-script')
-
-@endpush
