@@ -68,16 +68,7 @@
 
 @push('after-script')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script>
-    let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-    elems.forEach(function (html) {
-        let switchery = new Switchery(html, {
-            size: 'small'
-        });
-    }); 
-</script>
 <script>
     $(document).ready(function () {
         $.ajaxSetup({
