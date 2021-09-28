@@ -17,8 +17,16 @@
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Mentor</li>
-                <li class="{{ (request()->is('unit/mentor*')) ? 'active' : '' }} ">
-                    <a href="{{ route('mentor.index') }}"> <i class="menu-icon fa fa-users"></i>Mentor</a>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-pencil-square-o"></i>Manage Mentor</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li class="{{ (request()->is('unit/mentor*')) ? 'active' : '' }} ">
+                            <a href="{{ route('mentor.index') }}"> <i class="menu-icon fa fa-users"></i>Tambah</a>
+                        </li>
+                        <li class="{{ (request()->is('unit/mentor*')) ? 'active' : '' }} ">
+                            <a href="{{ route('penempatan.index') }}"> <i class="menu-icon fa fa-users"></i>Penempatan</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="menu-title text-capitalize">Manage Galeri</li>
