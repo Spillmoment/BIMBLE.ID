@@ -17,109 +17,126 @@ class SiswaController extends Controller
 
     public function index_kelompok()
     {
-        $list_kursus = KursusUnit::with('kursus')->where('unit_id', Auth::id())->where('type_id', 2)->get();
+        $list_siswa = SiswaKursus::with(['siswa','kursus_unit'])
+                                ->whereHas('kursus_unit', function ($q) {
+                                    $q->where('unit_id', Auth::id())
+                                    ->where('type_id', 2);
+                                })
+                                ->where(function($q) {
+                                    $q->where('status_sertifikat', 'terima')
+                                      ->orWhere('status_sertifikat', 'lulus')
+                                      ->orWhere('status_sertifikat', 'sertifikat');
+                                  })
+                                ->get();
 
         return view('unit.siswa.index_kelompok', [
-            'list_kursus' => $list_kursus,
+            'list_siswa' => $list_siswa,
         ]);
+    }
+    
+    public function card_kelompok($id)
+    {
+        $list_siswa = SiswaKursus::with(['siswa','kursus_unit'])
+                                ->whereHas('kursus_unit', function ($q) {
+                                    $q->where('unit_id', Auth::id())
+                                    ->where('type_id', 2);
+                                })
+                                ->where('id', $id)
+                                ->where(function($q) {
+                                    $q->where('status_sertifikat', 'terima')
+                                      ->orWhere('status_sertifikat', 'lulus')
+                                      ->orWhere('status_sertifikat', 'sertifikat');
+                                  })
+                                ->get();
+        $kursus_siswa = SiswaKursus::find($id);
+        $siswa = Siswa::find($kursus_siswa->siswa_id);
+
+        return view('unit.siswa.card_kelompok', [
+            'list_siswa' => $list_siswa,
+            'siswa' => $siswa
+        ]);
+    }
+    
+    public function edit_card_kelompok(Request $request, $id)
+    {
+        $cek_data = SiswaKursus::find($id);
+        if ($cek_data) {
+            $request->validate([
+                'nilai'             => 'required|numeric|between:0,100',
+                'status_sertifikat' => 'required|in:terima,lulus'
+            ]);
+
+            $data = $request->all();
+            $cek_data->update($data);
+            return redirect()->route('unit.siswa.kelompok.card', $id)->with([
+                'status' => 'Data Siswa Berhasil Di Update'
+            ]);
+        } else {
+            // abort(500, 'Terjadi kesalahan request.');
+            return response()->json(['message' => 'Terjadi kesalahan requesting.'], 404);
+        }
     }
     
     public function index_private()
     {
-        $list_kursus = KursusUnit::with('kursus')->where('unit_id', Auth::id())->where('type_id', 1)->get();
+        $list_siswa = SiswaKursus::with(['siswa','kursus_unit'])
+                                ->whereHas('kursus_unit', function ($q) {
+                                    $q->where('unit_id', Auth::id())
+                                    ->where('type_id', 1);
+                                })
+                                ->where(function($q) {
+                                    $q->where('status_sertifikat', 'terima')
+                                      ->orWhere('status_sertifikat', 'lulus')
+                                      ->orWhere('status_sertifikat', 'sertifikat');
+                                  })
+                                ->get();
 
         return view('unit.siswa.index_private', [
-            'list_kursus' => $list_kursus,
+            'list_siswa' => $list_siswa,
         ]);
     }
 
-    public function kursus_siswa($id)
+    public function card_private($id)
     {
-        $siswa = Siswa::where('kursus_unit_id', $id)->get();
-        $kursus = KursusUnit::with(['kursus','type'])->where('id', $id)->first();
+        $list_siswa = SiswaKursus::with(['siswa','kursus_unit'])
+                                ->whereHas('kursus_unit', function ($q) {
+                                    $q->where('unit_id', Auth::id())
+                                    ->where('type_id', 1);
+                                })
+                                ->where('id', $id)
+                                ->where(function($q) {
+                                    $q->where('status_sertifikat', 'terima')
+                                      ->orWhere('status_sertifikat', 'lulus')
+                                      ->orWhere('status_sertifikat', 'sertifikat');
+                                  })
+                                ->get();
+        $kursus_siswa = SiswaKursus::find($id);
+        $siswa = Siswa::find($kursus_siswa->siswa_id);
 
-        return view('unit.siswa.siswa', [
-            'kursus_unit_id' => $id,
-            'kursus' => $kursus,
-            'siswa' => $siswa,
+        return view('unit.siswa.card_private', [
+            'list_siswa' => $list_siswa,
+            'siswa' => $siswa
         ]);
     }
-
-    public function create_siswa($id)
+    
+    public function edit_card_private(Request $request, $id)
     {
-        $kursus = KursusUnit::with(['kursus'])->where('id', $id)->first();
+        $cek_data = SiswaKursus::find($id);
+        if ($cek_data) {
+            $request->validate([
+                'nilai'             => 'required|numeric|between:0,100',
+                'status_sertifikat' => 'required|in:terima,lulus'
+            ]);
 
-        return view('unit.siswa.siswa_create', [
-            'kursus' => $kursus,
-        ]);
-    }
-
-    public function store_siswa(Request $request, $id)
-    {
-        // $kursus = Kursus::where('slug', $slug)->first();
-        $request->validate([
-            'nama_siswa'    => 'required|max:255|min:3',
-            'jenis_kelamin' => 'required|in:L,P',
-            'alamat'        => 'required|max:255|min:3',
-            'nilai'         => 'required|numeric|between:0,100',
-            'sertifikat'    => 'nullable|max:10000|mimes:pdf'
-        ]);
-
-        $data = $request->all();
-
-        if ($file = $request->file('sertifikat')) {
-            $extension = $file->getClientOriginalExtension();
-            $fileName = time(). "." .$extension;
-            $file->move('storage/sertifikat', $fileName);
-            $data['sertifikat'] = $fileName;
+            $data = $request->all();
+            $cek_data->update($data);
+            return redirect()->route('unit.siswa.private.card', $id)->with([
+                'status' => 'Data Siswa Berhasil Di Update'
+            ]);
+        } else {
+            // abort(500, 'Terjadi kesalahan request.');
+            return response()->json(['message' => 'Terjadi kesalahan requesting.'], 404);
         }
-
-        $data['kursus_unit_id'] = $id;
-
-        Siswa::create($data);
-        return redirect()->route('unit.siswa.kursus', $id)->with(['status' => 'Data Siswa Berhasil Ditambahkan']);
-    }
-
-    public function edit($id, $id_siswa)
-    {
-        $siswa = Siswa::findOrFail($id_siswa);
-        // $kursus = Kursus::where('slug', $slug)->first();
-        return view('unit.siswa.siswa_edit', compact('siswa', 'id'));
-    }
-
-    public function update(Request $request, $id, $id_siswa)
-    {
-        $request->validate([
-            'nama_siswa'    => 'required|max:255|min:3',
-            'jenis_kelamin' => 'required|in:L,P',
-            'alamat'        => 'required|max:255|min:3',
-            'nilai'         => 'required|numeric|between:0,100',
-            'sertifikat'    => 'nullable|max:10000|mimes:pdf'
-        ]);
-
-        $siswa = Siswa::findOrFail($id_siswa);
-        $data = $request->all();
-
-        if ($file = $request->file('sertifikat')) {
-            Storage::delete('public/sertifikat/' . $siswa->sertifikat);
-            $extension = $file->getClientOriginalExtension();
-            $fileName = time(). "." .$extension;
-            $file->move('storage/sertifikat', $fileName);
-            $data['sertifikat'] = $fileName;
-        }
-
-        $siswa->update($data);
-        return redirect()->route('unit.siswa.kursus', $id)->with([
-            'status' => 'Data Siswa Berhasil Di Update'
-        ]);
-    }
-
-    public function destroy($id)
-    {
-        $siswa = Siswa::findOrFail($id);
-        Storage::delete('public/sertifikat/' . $siswa->sertifikat);
-        $siswa->forceDelete();
-        return redirect()->back()->with('status', 'Data Siswa Berhasil Dihapus');
     }
 
     public function konfirmasi_siswa()
