@@ -50,6 +50,11 @@ class Unit extends Authenticatable
     {
         return $this->hasMany(KursusUnit::class, 'unit_id', 'id');
     }
+    
+    public function materi()
+    {
+        return $this->hasMany(Materi::class, 'unit_id', 'id');
+    }
 
     public function fasilitas()
     {
