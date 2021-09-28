@@ -78,6 +78,8 @@ Route::prefix('unit')
         Route::get('/kursus/create/{id}', 'Unit\KursusController@tambah_detail')->name('unit.kursus.add');
         Route::put('/kursus/update/harga/{id}', 'Unit\KursusController@update_harga')->name('unit.kursus.update.harga');
         Route::put('/kursus/update/{id}', 'Unit\KursusController@detail_store')->name('unit.kursus.update');
+        Route::post('/kursus/update/{kursus_id}', 'Unit\KursusController@create_materi')->name('unit.kursus.materi');
+        Route::delete('/kursus/update/{materi_id}', 'Unit\KursusController@delete_materi')->name('unit.kursus.materi.delete');
 
         // fasilitas
         Route::get('/fasilitas', 'Unit\FasilitasController@index')->name('unit.fasilitas.home');
@@ -85,6 +87,12 @@ Route::prefix('unit')
         Route::delete('/fasilitas/hapus', 'Unit\FasilitasController@hapus_fasilitas')->name('unit.fasilitas.hapus');
 
         // mentor
+        Route::get('/mentor/penempatan', 'Unit\MentorController@penempatan')->name('penempatan.index');
+        Route::get('/mentor/penempatan/create', 'Unit\MentorController@create_penempatan')->name('penempatan.create');
+        Route::post('/mentor/penempatan/create', 'Unit\MentorController@store_penempatan')->name('penempatan.store');
+        Route::get('/mentor/penempatan/edit/{id}', 'Unit\MentorController@edit_penempatan')->name('penempatan.edit');
+        Route::put('/mentor/penempatan/edit/{id}', 'Unit\MentorController@update_penempatan')->name('penempatan.update');
+        Route::delete('/mentor/penempatan/hapus/{id}', 'Unit\MentorController@delete_penempatan')->name('penempatan.delete');
         Route::resource('mentor', 'Unit\MentorController');
 
         // galeri
@@ -97,13 +105,11 @@ Route::prefix('unit')
         Route::put('/siswa/konfirmasi', 'Unit\SiswaController@update_konfirmasi')->name('unit.konfirmasi.update');
         
         Route::get('/siswa/kelompok', 'Unit\SiswaController@index_kelompok')->name('unit.siswa.kelompok');
+        Route::get('/siswa/kelompok/{id}', 'Unit\SiswaController@card_kelompok')->name('unit.siswa.kelompok.card');
+        Route::put('/siswa/kelompok/{id}', 'Unit\SiswaController@edit_card_kelompok')->name('unit.siswa.kelompok.edit');
         Route::get('/siswa/private', 'Unit\SiswaController@index_private')->name('unit.siswa.private');
-        Route::get('/siswa/{id}', 'Unit\SiswaController@kursus_siswa')->name('unit.siswa.kursus');
-        Route::get('/siswa/{id}/create', 'Unit\SiswaController@create_siswa')->name('unit.siswa.create');
-        Route::post('/siswa/{id}/create', 'Unit\SiswaController@store_siswa')->name('unit.siswa.store');
-        Route::get('/siswa/{id}/edit/{id_siswa}', 'Unit\SiswaController@edit')->name('unit.siswa.edit');
-        Route::put('/siswa/{id}/edit/{id_siswa}', 'Unit\SiswaController@update')->name('unit.siswa.update');
-        Route::delete('/siswa/{id}', 'Unit\SiswaController@destroy')->name('unit.siswa.delete');
+        Route::get('/siswa/private/{id}', 'Unit\SiswaController@card_private')->name('unit.siswa.private.card');
+        Route::put('/siswa/private/{id}', 'Unit\SiswaController@edit_card_private')->name('unit.siswa.private.edit');
     });
 
 // Auth Siswa
@@ -142,6 +148,11 @@ Route::prefix('user')
         Route::get('/kursus', 'Siswa\KursusController@kursus')->name('user.kursus');
         Route::get('/materi/{kursus_unit_id}', 'Siswa\KursusController@materi')->name('user.materi');
     });
+
+Route::middleware('auth:siswa,unit,manager')->group(function () {
+    Route::get('unit/materi/{filename}', 'Unit\KursusController@download_materi')->name('materi.download');
+});
+        
 
 Route::get('/', 'Web\FrontController@index')->name('front.index');
 Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.pusat');
