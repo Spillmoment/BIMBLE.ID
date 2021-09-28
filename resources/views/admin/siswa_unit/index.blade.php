@@ -1,81 +1,43 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Halaman Siswa Unit')
+@section('title', 'Admin - Halaman Siswa Unit')
+
 @section('content')
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Halaman Siswa Unit</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Siswa Unit </li>
+
+<div class="row">
+    <div class="mb-3 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+        <div class="d-block mb-md-0 ">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item"><a href="#"><span class="fas fa-landmark"></span></a></li>
+                    <li class="breadcrumb-item"><a href="#">Siswa Unit</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Halaman Kursus</li>
                 </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
-
-<!-- Main content -->
-<section class="content">
-
-    <div class="container-fluid">
-
-        @if(session('status'))
-        @push('scripts')
-        <script>
-            swal({
-                title: "Success",
-                text: "{{session('status')}}",
-                icon: "success",
-                button: false,
-                timer: 2000
-            });
-
-        </script>
-        @endpush
-        @endif
-
-        <div class="row">
-            <div class="col-12">
-
-
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
+            </nav>
         </div>
+    </div>
 
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
+    <h4>Unit Pengelola Siswa</h4>
+
+    @foreach ($unit as $item)
+    <div class="col-sm-3 my-4">
+        <div class="card shadow-lg">
+            <img class="card-img-top" src="{{ url('assets/images/unit/'. $item->kursus_unit->unit->gambar_unit) }}"
+                alt="">
+            <div class="card-body">
+                <h5 class="card-title">{{ $item->kursus_unit->unit->nama_unit }}</h5>
+                <a href="{{ route('siswa.unit.detail', $item->id) }}" class="btn btn-primary btn-sm float-right my-1">
+                    <i class="fas fa-eye"></i> Detail Unit</a>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-template d-flex justify-content-center">
+            {{ $unit->appends(Request::all())->links() }}
+        </ul>
+    </nav>
+</div>
+
 @endsection
-
-@push('scripts')
-<script>
-    $('button#deleteButton').on('click', function (e) {
-        var name = $(this).data('name');
-        e.preventDefault();
-        swal({
-                title: "Yakin!",
-                text: "menghapus kursus  " + name + "?",
-                icon: "warning",
-                dangerMode: true,
-                buttons: {
-                    cancel: "Cancel",
-                    confirm: "OK",
-                },
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $(this).closest("form").submit();
-                }
-            });
-    });
-
-</script>
-@endpush
