@@ -1,80 +1,61 @@
-@extends('admin.layouts.manager')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Edit Data Gallery')
+@section('title', 'Admin - Edit Galeri Kursus')
+
 @section('content')
 
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Edit Gallery Kursus</h1>
+<div class="py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+            <li class="breadcrumb-item"><a href="#">Galeri Kursus</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Galeri</li>
+        </ol>
+    </nav>
+
+</div>
+
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card border-light shadow-sm components-section">
+            <div class="card-body">
+                <form method="post" action="{{route('gallery.update',$gallery->id)}}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="row mb-4">
+                        <div class="col-lg-12 col-sm-6">
+                            <div class="mb-3">
+                                <label for="kursus_id">Kursus</label>
+                                <select class="form-control" name="kursus_id" id="kursus_id">
+                                    <option value="{{ $gallery->kursus_id }}"> Jangan Diubah</option>
+
+                                    @foreach ($kursus as $kursus)
+                                    <option value="{{ $kursus->id }}">
+                                        {{ $kursus->nama_kursus }}
+                                    </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div class="form-file mb-3">
+                                <input type="file" class="form-file-input" id="customFile" multiple name="gambar[]">
+                                <label class="form-file-label" for="customFile">
+                                    <span class="form-file-text">Upload Gambar Lebih Dari Satu ...</span>
+                                    <span class="form-file-button">Browse</span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-block btn-primary">
+                                Simpan</button>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="{{ route('gallery.index') }}">Data Gallery</a></li>
-                            <li class="active">Edit Gallery </li>
-                        </ol>
-                    </div>
-                </div>
+
             </div>
         </div>
+        </form>
+
     </div>
 </div>
 
-<div class="content">
-
-    <div class="card">
-        <div class="card-header">
-            <strong>Edit Gallery
-                <span class="badge badge-pill badge-primary"> {{ $gallery->kursus->nama_kursus }} </span>
-            </strong>
-        </div>
-        <div class="card-body card-block">
-            <form method="post" action="{{route('gallery.update',$gallery->id)}}" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-
-                <div class="form-group">
-                    <label for="kursus_id">Kursus</label>
-                    <select class="form-control" name="kursus_id" id="kursus_id">
-                        <option value="{{ $gallery->kursus_id }}"> Jangan Diubah</option>
-
-                        @foreach ($kursus as $kursus)
-                        <option value="{{ $kursus->id }}">
-                            {{ $kursus->nama_kursus }}
-                        </option>
-                        @endforeach
-
-                    </select>
-                </div>
-
-                
-            <div class="form-group">
-                <label for="gambar">Gambar</label>
-                <input type="file" class="form-control-file {{ $errors->first('gambar') ? 'is-invalid' : '' }}"
-                    name="gambar" id="gambar">
-                <small class="text-muted">Kosongkan jika tidak ingin mengubah
-                    gambar</small>
-            </div>
-            <div class="invalid-feedback">
-                {{$errors->first('gambar')}}
-            </div
-
-
-                <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">
-                        Edit Kursus
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 @endsection

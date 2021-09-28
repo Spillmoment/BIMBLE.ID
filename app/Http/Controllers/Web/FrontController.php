@@ -41,15 +41,14 @@ class FrontController extends Controller
 
     public function kursus(Request $request)
     {
-        $kursus = Kursus::latest()
-            ->paginate(9);
+
         $kursus_unit = KursusUnit::with('kursus', 'type')
             ->where('type_id', 2)
             ->where('status', 'aktif')
             ->groupBy('kursus_id')
-            ->orderBy('updated_at','desc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(9);
-            
+
         $typeKursus = Type::all();
 
         $keyword = $request->query('keyword');
@@ -147,8 +146,7 @@ class FrontController extends Controller
                     } elseif (empty($get_time)) {
                         if (!empty($startday) && $endday == 0) {
                             $query->where('hari', $startday);
-                        }
-                        elseif ($startday <= $endday) {
+                        } elseif ($startday <= $endday) {
                             $query->whereBetween('hari', [$startday, $endday]);
                         } else {
                             $query->whereNotBetween('hari', [$endday + 1, $startday - 1]);

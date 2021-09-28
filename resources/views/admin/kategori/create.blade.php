@@ -1,44 +1,29 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Tambah Data Kategori')
+@section('title', 'Admin - Tambah Kategori Kursus')
+
 @section('content')
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Tambah Data Kategori</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('kategori.index') }}">Kategori</a></li>
-                    <li class="breadcrumb-item active">Tambah Kursus </li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+
+<div class="py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+            <li class="breadcrumb-item"><a href="#">Kategori Kursus</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah Kategori</li>
+        </ol>
+    </nav>
+
 </div>
-<!-- /.content-header -->
 
-<!-- Main content -->
-<section class="content">
-
-    <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-md-12">
-                <!-- general form elements -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Form Tambah Kursus</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form method="post" action="{{route('kategori.store')}}">
-                        @csrf
-                        <div class="card-body">
-
-                            <div class="form-group ">
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card border-light shadow-sm components-section">
+            <div class="card-body">
+                <form action="{{ route('kategori.store') }}" method="post">
+                    @csrf
+                    <div class="row mb-4">
+                        <div class="col-lg-12 col-sm-6">
+                            <div class="mb-3">
                                 <label for="nama_kursus">Nama Kategori</label>
                                 <input type="text"
                                     class="form-control {{ $errors->first('nama_kategori') ? 'is-invalid' : '' }}"
@@ -49,23 +34,17 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <button class="btn btn-primary btn-block" type="submit">
-                                    Simpan
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn-block btn-primary">
+                                Simpan</button>
                         </div>
-                    </form>
-                </div>
-                <!-- /.card -->
-
+                    </div>
 
             </div>
-            <!-- /.col -->
         </div>
+        </form>
 
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
+    </div>
+</div>
+
+
 @endsection

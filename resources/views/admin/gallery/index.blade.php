@@ -1,124 +1,108 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Galeri Kursus')
+@section('title', 'Admin - Halaman Galeri Kursus')
+
 @section('content')
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Galeri Kursus</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Galeri Kursus </li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<!-- /.content-header -->
 
-<!-- Main content -->
-<section class="content">
-
-    <div class="container-fluid">
-
-        @if(session('status'))
-        @push('scripts')
-        <script>
-            swal({
-                title: "Success",
-                text: "{{session('status')}}",
-                icon: "success",
-                button: false,
-                timer: 2000
-            });
-
-        </script>
-        @endpush
-        @endif
-
-        <div class="row">
-            <div class="col-12">
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Tabel Galeri Kursus</h3>
-                        <a name="" id="" class="btn btn-primary float-right" href="{{ route('gallery.create') }}"
-                            role="button"> <i class="fas fa-plus"></i> Tambah
-                            Galeri</a>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-
-
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Kursus</th>
-                                    <th>Gambar</th>
-                                    <th>Option</th>
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach ($gallery as $gallery)
-                                <tr>
-                                    <td> {{$loop->iteration}} </td>
-                                    <td> {{ $gallery->kursus->nama_kursus }} </td>
-                                    <td>
-                                        @foreach (explode('|', $gallery->gambar) as $image)
-                                        <img width="130px" height="80px" src="/storage/image/{{$image}}">
-                                        @endforeach
-                                    </td>
-
-                                    <td>
-                                        <a class="btn btn-warning text-white btn-sm" href="{{route('gallery.edit',
-                                        [$gallery->id])}}"> <i class="fa fa-edit"></i></a>
-                                        <form class="d-inline" action="{{route('gallery.destroy', [$gallery->id])}}"
-                                            method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" id="deleteButton"
-                                                data-name="{{ $gallery->kursus->nama_kursus }}"
-                                                class="btn btn-danger btn-sm">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-                                @endforeach
-
-                            </tbody>
-
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-            <!-- /.col -->
-        </div>
-
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
-@endsection
-
+@if (session('status'))
 @push('scripts')
 <script>
+    swal({
+        title: "Berhasil",
+        text: "{{ session('status') }}",
+        icon: "success",
+        button: false,
+        timer: 3000
+    });
+
+</script>
+@endpush
+@endif
+
+<div class="row">
+    <div class="col-12 mb-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">Kursus</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Halaman Galeri Kursus</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Table Galeri Kursus</h2>
+            </div>
+
+        </div>
+        <div class="card border-light shadow-sm components-section">
+            <div class="row">
+                <div class="card-body">
+                    <table class="table table-hover" id="galerikurTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kursus</th>
+                                <th>Gambar</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <footer class="footer section py-2">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+@push('scripts')
+<script>
+    // AJAX DataTable
+    var datatable = $('#galerikurTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: true,
+        ajax: {
+            url: '{!! url()->current() !!}',
+        },
+        columns: [{
+                "data": 'id',
+                "sortable": false,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            {
+                data: 'kursus',
+                name: 'kursus.nama_kursus'
+            },
+            {
+                data: 'gambar',
+                name: 'gambar'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                width: '20%'
+            },
+        ],
+
+    });
+
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');
         e.preventDefault();
         swal({
                 title: "Yakin!",
-                text: "menghapus galleri  " + name + "?",
+                text: "menghapus galeri  " + name + "?",
                 icon: "warning",
                 dangerMode: true,
                 buttons: {

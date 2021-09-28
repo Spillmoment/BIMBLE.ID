@@ -1,44 +1,29 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.app')
 
-@section('title','Bimble - Tambah Data Kursus')
+@section('title', 'Admin - Tambah Kursus')
+
 @section('content')
-<!-- Content Header (Page header) -->
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Tambah Data Kursus</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('kursus.index') }}">Kursus</a></li>
-                    <li class="breadcrumb-item active">Tambah Kursus </li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+
+<div class="py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+            <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+            <li class="breadcrumb-item"><a href="#">Kursus</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tambah Kursus</li>
+        </ol>
+    </nav>
+
 </div>
-<!-- /.content-header -->
 
-<!-- Main content -->
-<section class="content">
-
-    <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-md-12">
-                <!-- general form elements -->
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Form Tambah Kursus</h3>
-                    </div>
-                    <!-- /.card-header -->
-                    <!-- form start -->
-                    <form method="post" enctype="multipart/form-data" action="{{route('kursus.store')}}">
-                        @csrf
-                        <div class="card-body">
-
-                            <div class="form-group ">
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card border-light shadow-sm components-section">
+            <div class="card-body">
+                <form action="{{ route('kursus.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row mb-4">
+                        <div class="col-lg-12 col-sm-6">
+                            <div class="mb-3">
                                 <label for="nama_kursus">Nama Kursus</label>
                                 <input type="text"
                                     class="form-control {{ $errors->first('nama_kursus') ? 'is-invalid' : '' }}"
@@ -48,40 +33,27 @@
                                     {{$errors->first('nama_kursus')}}
                                 </div>
                             </div>
-
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label for="kategori">Pilih Kategori</label>
-                                <select class="form-control" name="kategori_id" id="kategori">
+                                <select class="form-select" name="kategori_id" id="kategori">
                                     @foreach ($kategori as $item)
                                     <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label for="gambar_kursus">Gambar Kursus</label>
                                 <input type="file"
                                     class="form-control-file {{ $errors->first('gambar_kursus') ? 'is-invalid' : '' }}"
                                     name="gambar_kursus" id="gambar_kursus">
-                            </div>
-                            <div class="my-3">
-                                <img id="img" class="img-target" width="200px">
-                            </div>
-                            <div class="invalid-feedback">
-                                {{$errors->first('gambar_kursus')}}
-                            </div>
-
-                            <div class="form-group">
-                                <label for="keterangan">Deksripsi Kursus</label>
-                                <textarea name="tentang"
-                                    class="form-control {{ $errors->first('tentang') ? 'is-invalid' : '' }}"
-                                    id="deskripsi" rows=" 3" placeholder="Tentang Kursus">{{old('tentang')}}</textarea>
+                                <div class="my-3">
+                                    <img id="img" class="img-target" width="200px">
+                                </div>
                                 <div class="invalid-feedback">
-                                    {{$errors->first('tentang')}}
+                                    {{$errors->first('gambar_kursus')}}
                                 </div>
                             </div>
-
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label for="deskripsiEditor">Materi Kursus</label>
                                 <textarea name="materi"
                                     class="form-control {{ $errors->first('materi') ? 'is-invalid' : '' }}" id="materi"
@@ -90,8 +62,16 @@
                                     {{$errors->first('materi')}}
                                 </div>
                             </div>
-
-                            <div class="form-group">
+                            <div class="mb-3">
+                                <label for="keterangan">Deksripsi Kursus</label>
+                                <textarea name="tentang"
+                                    class="form-control {{ $errors->first('tentang') ? 'is-invalid' : '' }}"
+                                    id="deskripsi" rows=" 3" placeholder="Tentang Kursus">{{old('tentang')}}</textarea>
+                                <div class="invalid-feedback">
+                                    {{$errors->first('tentang')}}
+                                </div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="keterangan">Keterangan</label>
                                 <textarea name="keterangan"
                                     class="form-control {{ $errors->first('keterangan') ? 'is-invalid' : '' }}"
@@ -101,23 +81,55 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <button class="btn btn-primary btn-block" type="submit">
-                                    Simpan
-                                </button>
-                            </div>
+                            <button type="submit" class="btn btn-block btn-primary">
+                                Simpan</button>
                         </div>
-                    </form>
-                </div>
-                <!-- /.card -->
-
+                    </div>
 
             </div>
-            <!-- /.col -->
         </div>
+        </form>
 
-        <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
-</section>
-<!-- /.content -->
+    </div>
+</div>
+
+
 @endsection
+@push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+<script>
+    var readURL = function (input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.img-target').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".form-control-file").on('change', function () {
+        readURL(this);
+    });
+
+    ClassicEditor
+        .create(document.querySelector('#materi'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    ClassicEditor
+        .create(document.querySelector('#deskripsi'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+</script>
+@endpush

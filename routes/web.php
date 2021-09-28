@@ -35,21 +35,28 @@ Route::prefix('manager')
     ->group(function () {
 
         // Route Dashboard
-        Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-        Route::get('/pendaftar/download/{file}', 'PendUnitController@download')->name('download');
-        Route::get('pendaftar/{id}/status', 'PendUnitController@setStatus')->name('pendaftar-unit.status');
-        Route::get('kursus-gallery/{id}', 'KursusController@gallery')->name('kursus.gallery');
-
-        // Resource
-        Route::resource('kategori', 'KategoriController')->except('show');
-        Route::resource('pendaftar-unit', 'PendUnitController');
-        Route::resources([
-            'kursus' => 'KursusController',
-            'unit'   => 'UnitController',
-            'banner' => 'BannerController',
-            'komentar' => 'KomentarController',
-            'gallery' => 'GalleryController',
-        ]);
+        Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+        // Kursus
+        Route::get('kursus-gallery/{id}', 'Admin\KursusController@gallery')->name('kursus.gallery');
+        Route::resource('kursus', 'Admin\KursusController');
+        // Kategori
+        Route::resource('kategori', 'Admin\KategoriController')->except('show');
+        // Komentar
+        Route::resource('komentar', 'Admin\KomentarController');
+        // Gallery
+        Route::resource('gallery', 'Admin\GalleryController');
+        // Unit
+        Route::resource('unit', 'Admin\UnitController');
+        Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
+        // Banner
+        Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
+        // Pendaftar Unit
+        Route::get('pendaftar/{id}/status', 'Admin\PendaftarUnitController@setStatus')
+            ->name('pendaftar-unit.status');
+        Route::get('/pendaftar/download/{file}', 'Admin\PendaftarUnitController@download')
+            ->name('download');
+        Route::resource('pendaftar-unit', 'Admin\PendaftarUnitController')
+            ->only(['index', 'show', 'destroy']);
     });
 
 
@@ -103,7 +110,7 @@ Route::prefix('unit')
         // nilai
         Route::get('/siswa/konfirmasi', 'Unit\SiswaController@konfirmasi_siswa')->name('unit.siswa.konfirmasi');
         Route::put('/siswa/konfirmasi', 'Unit\SiswaController@update_konfirmasi')->name('unit.konfirmasi.update');
-        
+
         Route::get('/siswa/kelompok', 'Unit\SiswaController@index_kelompok')->name('unit.siswa.kelompok');
         Route::get('/siswa/kelompok/{id}', 'Unit\SiswaController@card_kelompok')->name('unit.siswa.kelompok.card');
         Route::put('/siswa/kelompok/{id}', 'Unit\SiswaController@edit_card_kelompok')->name('unit.siswa.kelompok.edit');
