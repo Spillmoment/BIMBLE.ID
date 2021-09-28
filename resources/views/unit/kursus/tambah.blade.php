@@ -23,7 +23,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="{{ route('unit.kursus.home') }}">Kursus</a></li>
-                            <li class="active">Pengaturan kursus {{ $kursus_unit_kelompok->kursus->nama_kursus }}</li>
+                            <li class="active">Pengaturan kursus {{ $kursus->nama_kursus }}</li>
                         </ol>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
         <div class="col-lg">
             <div class="card">
                 <div class="card-header">
-                    <h4>Form Tambah Kursus Kelompok & Private</h4>
+                    <h4>Form Pengaturan Kursus Kelompok & Private</h4>
                 </div>
                 <div class="card-body">
                     
@@ -128,59 +128,6 @@
                                     </form>
                                 </div>
                                 <div class="col-md-8">
-                                    {{-- <div class="form-group">
-                                        <label for="">Hari Kursus</label>
-                                        <select name="hari" class="form-control">
-                                            @if (!empty($jadwal->hari))
-                                            @php
-                                                $list_hari = array('none','Senin','Selasa','Rabu','Kamis','Jum\'at','Sabtu','Minggu');
-                                            @endphp
-                                            <option value="{{ $jadwal->hari }}">{{ $list_hari[$jadwal->hari] }}</option>
-                                            @else
-                                            <option value=""></option>
-                                            @endif
-                                            <option value="1">Senin</option>
-                                            <option value="2">Selasa</option>
-                                            <option value="3">Rabu</option>
-                                            <option value="4">Kamis</option>
-                                            <option value="5">Jum'at</option>
-                                            <option value="6">Sabtu</option>
-                                            <option value="7">Minggu</option>
-                                        </select>
-                                            
-                                        <div class="invalid-feedback">
-                                            {{$errors->first('hari')}}
-                                        </div>
-                                    </div>
-            
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="awal">Jam Awal</label>
-                                                @if ($jadwal)
-                                                <input type="text" id="timepicker1" name="waktu_mulai" class="form-control" value="{{ $jadwal->waktu_mulai }}">
-                                                @else
-                                                <input type="text" id="timepicker1" name="waktu_mulai" class="form-control">
-                                                @endif
-                                                <div class="invalid-feedback">
-                                                    {{$errors->first('waktu_mulai')}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="akhir">Jam Akhir</label>
-                                                @if ($jadwal)
-                                                <input type="text" id="timepicker2" name="waktu_selesai" class="form-control" value="{{ $jadwal->waktu_selesai }}">
-                                                @else
-                                                <input type="text" id="timepicker2" name="waktu_selesai" class="form-control">
-                                                @endif
-                                                <div class="invalid-feedback">
-                                                    {{$errors->first('waktu_selesai')}}
-                                                </div>
-                                            </div>
-                                        </div>                                        
-                                    </div> --}}
                                         <form action="{{ route('unit.kursus.update', $kursus_unit_kelompok->id) }}" method="post" class="form-horizontal">
                                             @csrf
                                             @method('put')
@@ -361,11 +308,82 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Materi kursus {{ $kursus->nama_kursus }}</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('unit.kursus.materi', $kursus->id) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="bab">BAB</label>
+                                <select name="bab" id="bab" class="form-control { $errors->first('bab') ? 'is-invalid' : '' }}">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    {{$errors->first('bab')}}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="judul">Judul</label>
+                                <input type="judul" name="judul" id="judul" class="form-control { $errors->first('judul') ? 'is-invalid' : '' }}" value="{{ old('judul') }}">
+                                <div class="invalid-feedback">
+                                    {{$errors->first('judul')}}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="file">File</label>
+                                <input type="file" name="file" id="file" class="form-control { $errors->first('file') ? 'is-invalid' : '' }}">
+                                <div class="invalid-feedback">
+                                    {{$errors->first('file')}}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
+                    </form>
 
-
-
-
-
+                    @if (!$materi->isEmpty())
+                    <table class="table table-stripped">
+                        <thead>
+                            <tr>
+                                <th>BAB</th>
+                                <th>Judul Materi</th>
+                                <th>File</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach ($materi as $data)
+                                <tr>
+                                    <td>{{ $data->bab }}</td>
+                                    <td>{{ $data->judul }}</td>
+                                    <td><a href="{{ route('materi.download', $data->file) }}">{{ $data->file }}</a></td>
+                                    <td>
+                                        <form action="{{ route('unit.kursus.materi.delete', $data->id) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                        </tbody>
+                    </table>
+                    @endif
                 </div>
             </div>
         </div>
