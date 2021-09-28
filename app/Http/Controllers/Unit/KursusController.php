@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Jadwal;
 use App\Kursus;
 use App\KursusUnit;
+use App\Materi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class KursusController extends Controller
 {
@@ -70,10 +73,9 @@ class KursusController extends Controller
         ]);
     }
 
-
     public function tambah_detail($id)
     {
-        // $kursus = Kursus::where('slug', $slug)->first();
+        $kursus = Kursus::find($id);
         $kursus_unit_kelompok = KursusUnit::with(['kursus', 'unit'])
             ->where('kursus_id', $id)
             ->where('unit_id', Auth::id())
@@ -85,6 +87,8 @@ class KursusController extends Controller
             ->where('unit_id', Auth::id())
             ->where('type_id', 1)
             ->first();
+        
+        $materi = Materi::where('kursus_id', $id)->where('unit_id', Auth::id())->get();
 
         $senin = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
             ->where('hari', 1)
@@ -109,7 +113,8 @@ class KursusController extends Controller
             ->first();
 
         return view('unit.kursus.tambah', [
-            // 'kursus' => $kursus,
+            'kursus' => $kursus,
+            'materi' => $materi,
             'kursus_unit_kelompok' => $kursus_unit_kelompok,
             'kursus_unit_private' => $kursus_unit_private,
             'senin' => $senin,
@@ -164,5 +169,48 @@ class KursusController extends Controller
         );
 
         return redirect()->back()->with(['status' => 'Detail Kursus Berhasil Diupdate']);
+    }
+
+    public function create_materi(Request $request, $kursus_id)
+    {
+        $request->validate([
+            'bab' => 'required|numeric|between:1,10',
+            'judul' => 'required',
+            'file' => 'required|max:2000|mimes:pdf',
+        ]);
+
+        $cek_bab = Materi::where('kursus_id', $kursus_id)->where('unit_id', Auth::id())->where('bab', $request->bab)->first();
+
+        if ($cek_bab) {
+            return redirect()->back()->withErrors(['message' => 'Bab telah ada.']);
+        } else {
+            $extention = $request->file('file')->extension();
+            $filename = Auth::id().'-'.date('dmyHis').'.'.$extention;
+            Storage::putFileAs('public/materi', $request->file('file'), $filename);
+            
+            Materi::create([
+                'kursus_id' => $kursus_id,
+                'unit_id' => Auth::id(),
+                'bab' => $request->bab,
+                'judul' => $request->judul,
+                'file' => $filename
+            ]);
+
+            return redirect()->back()->with(['status' => 'Materi Berhasil Ditambah.']);
+        }
+        
+    }
+
+    public function delete_materi($materi_id)
+    {
+        $materi = Materi::findOrFail($materi_id);
+        unlink(storage_path('app/public/materi/'.$materi->file));
+        $materi->delete();
+        return redirect()->back()->with(['status' => 'Materi Berhasil Dihapus.']);
+    }
+
+    public function download_materi($filename){
+        $filepath = storage_path().'/'.'app'.'/public/materi/'.$filename;
+        return Response::download($filepath); 
     }
 }
