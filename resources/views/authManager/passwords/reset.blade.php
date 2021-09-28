@@ -1,131 +1,79 @@
-@include('layouts.style')
+@include('admin.layouts.style')
 
-<title>Manager | Reset Password</title>
-<main class="login-container">
-    <div class="container">
-        <div class="row page-login d-flex justify-content-center">
-            <div class="section-left col-12 col-md-6">
-                <div class="card card-shadow mt-5" style="width: 30rem;">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <img
-                                src="{{ asset('assets/frontend/img/logo.png') }}"
-                                alt=""
-                                class="w-50 mb-2 mt-2"
-                            />
-                        </div>
-                        <div class="text-center auth-logo-text">
-                            <h5 class="text-muted mb-4 mt-2">
-                                Reset Password Anda
-                            </h5>
-                        </div>
-                        <!--end auth-logo-text-->
+<title>Bimble | Admin Login</title>
 
-                        <div class="card-body">
-                            <form
-                                method="POST"
-                                action="{{ route('manager.password.request') }}"
-                            >
+<body class="bg-soft">
+    <main>
+        <!-- Section -->
+        <section class="vh-lg-100 bg-soft d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center form-bg-image">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div
+                            class="signin-inner my-3 my-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <h1 class="h3 mb-4">Reset password</h1>
+
+                            <form method="POST" action="{{ route('manager.password.request') }}">
                                 @csrf
-
-                                <input
-                                    type="hidden"
-                                    name="token"
-                                    value="{{ $token }}"
-                                />
-
-                                <div class="form-group row">
-                                    <label
-                                        for="email"
-                                        class="col-md-4 col-form-label text-md-right"
-                                        >{{ __('Alamat Email') }}</label
-                                    >
-
-                                    <div class="col-md-6">
-                                        <input
-                                            id="email"
-                                            type="email"
+                                <input type="hidden" name="token" value="{{ $token }}" />
+                                <!-- Form -->
+                                <div class="mb-4">
+                                    <label for="email">{{ __('Alamat Email') }}</label>
+                                    <div class="input-group">
+                                        <input id="email" type="email"
                                             class="form-control form-input @error('email') is-invalid @enderror"
-                                            name="email"
-                                            value="{{ $email ?? old('email') }}"
-                                            required
-                                            autocomplete="email"
-                                            autofocus
-                                        />
-
+                                            name="email" value="{{ $email ?? old('email') }}" required
+                                            autocomplete="email" autofocus>
                                         @error('email')
-                                        <span
-                                            class="invalid-feedback"
-                                            role="alert"
-                                        >
+                                        <div class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
-                                        </span>
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label
-                                        for="password"
-                                        class="col-md-4 col-form-label text-md-right"
-                                        >{{ __('Password') }}</label
-                                    >
-
-                                    <div class="col-md-6">
-                                        <input
-                                            id="password"
-                                            type="password"
+                                <!-- End of Form -->
+                                <!-- Form -->
+                                <div class="mb-4">
+                                    <label for="password">{{ __('Password') }}</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon4"><span
+                                                class="fas fa-unlock-alt"></span></span>
+                                        <input type="password" placeholder="Password"
                                             class="form-control form-input @error('password') is-invalid @enderror"
-                                            name="password"
-                                            required
-                                            autocomplete="new-password"
-                                        />
-
+                                            name="password" id="password" required autofocus>
                                         @error('password')
-                                        <span
-                                            class="invalid-feedback"
-                                            role="alert"
-                                        >
+                                        <div class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
-                                        </span>
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="mb-4">
+                                    <label for="confirm_password">{{ __('Konfirmasi Password') }}</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon5"><span
+                                                class="fas fa-unlock-alt"></span></span>
+                                        <input type="password" placeholder="Confirm Password" class="form-control"
+                                            name="password_confirmation" id="confirm_password" required>
 
-                                <div class="form-group row">
-                                    <label
-                                        for="password-confirm"
-                                        class="col-md-4 col-form-label text-md-right"
-                                        >{{ __('Confirm Password') }}</label
-                                    >
-
-                                    <div class="col-md-6">
-                                        <input
-                                            id="password-confirm"
-                                            type="password"
-                                            class="form-control form-input"
-                                            name="password_confirmation"
-                                            required
-                                            autocomplete="new-password"
-                                        />
                                     </div>
                                 </div>
-
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-4">
-                                        <button
-                                            type="submit"
-                                            class="btn btn-primary"
-                                        >
-                                            {{ __('Reset Password') }}
-                                        </button>
-                                    </div>
-                                </div>
+                                <!-- End of Form -->
+                                <button type="submit" class="btn btn-block btn-primary">Reset password</button>
                             </form>
                         </div>
+                        <!-- End of Form -->
+                        <!-- Form -->
+
+
+
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</main>
+            </div>
+        </section>
+    </main>
+
+    @include('admin.layouts.script')
+
+</body>
