@@ -48,6 +48,8 @@ Route::prefix('manager')
         // Unit
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
+        Route::get('siswa-unit/detail', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
+        Route::get('siswa-unit/{id}/confirm', 'Admin\SiswaUnitController@confirm')->name('siswa.unit.confirm');
         // Banner
         Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
         // Pendaftar Unit
