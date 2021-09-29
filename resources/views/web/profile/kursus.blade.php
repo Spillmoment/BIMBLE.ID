@@ -27,7 +27,6 @@
                         {{-- <th>#</th> --}}
                         <th scope="col" width="200">Nama Kursus</th>
                         <th scope="col" width="200">Penyedia Kursus</th>
-                        <th scope="col" width="200">Mentor</th>
                         <th scope="col" width="200">Materi</th>
                         <th scope="col" width="200">Biaya</th>
                         <th>Status</th>
@@ -40,7 +39,6 @@
                         {{-- <td scope="row">{{ $loop->iteration }}</td> --}}
                         <td class="text-black-50">{{ $data->kursus_unit->kursus->nama_kursus }}</td>
                         <td class="text-black-50">{{ $data->kursus_unit->unit->nama_unit }}</td>
-                        <td class="text-black-50"></td>
                         <td class="text-black-50"><a href="{{ route('user.materi', $data->kursus_unit->id) }}" class="badge badge-default badge-pill">Buka</a></td>
                         <td class="text-black-50">@currency($data->kursus_unit->biaya_kursus)</td>
                         <td>
@@ -76,7 +74,6 @@
                         {{-- <th>#</th> --}}
                         <th scope="col" width="200">Nama Kursus</th>
                         <th scope="col" width="200">Penyedia Kursus</th>
-                        <th scope="col" width="200">Mentor</th>
                         <th scope="col" width="200">Biaya</th>
                         <th>Status</th>
                     </tr>
@@ -88,7 +85,6 @@
                         {{-- <td scope="row">{{ $loop->iteration }}</td> --}}
                         <td class="text-black-50">{{ $data->kursus_unit->kursus->nama_kursus }}</td>
                         <td class="text-black-50">{{ $data->kursus_unit->unit->nama_unit }}</td>
-                        <td class="text-black-50"></td>
                         <td class="text-black-50">@currency($data->kursus_unit->biaya_kursus)</td>
                         <td>
                             <span class="badge badge-warning badge-pill">Menunggu konfirmasi</span> <br>
