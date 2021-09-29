@@ -15,9 +15,9 @@
         <thead>
             <tr>
                 {{-- <th>#</th> --}}
-                <th scope="col" width="50">BAB</th>
+                <th scope="col" width="30">Modul</th>
                 <th scope="col" width="300">Materi</th>
-                <th scope="col" width="100">File</th>
+                <th scope="col" width="200">File</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                 {{-- <td scope="row">{{ $loop->iteration }}</td> --}}
                 <td class="text-black-50">{{ $data->bab }}</td>
                 <td class="text-black-50">{{ $data->judul }}</td>
-                <td class="text-black-50">{{ $data->file }}</td>
+                <td class="text-black-50"><a href="{{ route('materi.download', $data->file) }}">modul_{{ $data->bab }}-{{ $data->judul }}.pdf</a></td>
             </tr>
             @endforeach
             
