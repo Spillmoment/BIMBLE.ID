@@ -15,8 +15,8 @@
                         class="{{ Route::currentRouteName() == 'profile.index' ? 'active' : '' }} list-group-item list-group-item-action">Profil</a>
                     <a href="{{ route('user.kursus') }}"
                         class="{{ Route::currentRouteName() == 'user.kursus' ? 'active' : '' }} list-group-item list-group-item-action">Kursus</a>
-                    <a href=""
-                        class=" list-group-item list-group-item-action">Sertifikat</a>
+                    <a href="{{ route('sertifikat.index') }}"
+                        class="{{ Route::currentRouteName() == 'sertifikat.index' ? 'active' : '' }} list-group-item list-group-item-action">Sertifikat</a>
                     <a href="{{ route('profile.pengaturan') }}"
                         class="{{ Route::currentRouteName() == 'profile.pengaturan' ? 'active' : '' }} list-group-item list-group-item-action">Pengaturan</a>
                 </div>
@@ -31,6 +31,8 @@
                             @include('web.profile.kursus')
                         @elseif(Route::currentRouteName() == 'user.materi')
                             @include('web.profile.materi')
+                        @elseif(Route::currentRouteName() == 'sertifikat.index')
+                            @include('web.profile.sertifikat')
                         @elseif(Route::currentRouteName() == 'profile.pengaturan')
                         @include('web.profile.pengaturan')
                         @endif
