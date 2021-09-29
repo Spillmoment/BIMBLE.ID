@@ -154,6 +154,9 @@ Route::prefix('user')
 
         Route::get('/kursus', 'Siswa\KursusController@kursus')->name('user.kursus');
         Route::get('/materi/{kursus_unit_id}', 'Siswa\KursusController@materi')->name('user.materi');
+
+        Route::get('/sertifikat', 'Siswa\KursusController@sertifikat_index')->name('sertifikat.index');
+        Route::put('/sertifikat/{id}', 'Siswa\KursusController@sertifikat_update')->name('sertifikat.update');
     });
 
 Route::middleware('auth:siswa,unit,manager')->group(function () {
