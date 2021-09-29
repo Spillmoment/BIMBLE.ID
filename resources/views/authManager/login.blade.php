@@ -1,81 +1,87 @@
-<!-- Google fonts - Playfair Display-->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700">
-<!-- Google fonts - Poppins-->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700">
-<!-- Magnigic Popup-->
-<link rel="stylesheet" href="{{asset('assets/frontend/vendor/magnific-popup/magnific-popup.css') }}">
-<!-- theme stylesheet-->
-<link rel="stylesheet" href="{{asset('assets/frontend/vendor/bootstrap/style.default.css') }}" id="theme-stylesheet">
-<!-- Custom stylesheet - for your changes-->
-<link rel="stylesheet" href="{{asset('assets/frontend/css/custom.css') }}">
-<!-- Favicon-->
-<link rel="shortcut icon" href="{{asset('assets/frontend/img/favicon.png') }}">
+@include('admin.layouts.style')
+
+<title>Bimble | Admin Login</title>
+
+<body class="bg-soft">
+    <main>
+
+        <!-- Section -->
+        <section class="vh-lg-100 d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center form-bg-image"
+                    data-background-lg="../../assets/img/illustrations/signin.svg">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div
+                            class="signin-inner my-3 my-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <h1 class="mb-0 h3">Admin | Silahkan Login</h1>
 
 
-<title> Bimble | Manager Login </title>
-<main class="login-container">
-    <div class="container">
-        <div class="row page-login d-flex justify-content-center">
-            <div class="section-left col-12 col-md-6">
-
-                <div class="card card-shadow mt-5" style="width: 30rem">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="" class="w-50 mb-2 mt-2" />
-                        </div>
-                        <div class="text-center auth-logo-text">
-                            <h5 class="text-muted mb-4 mt-2">Manager | Silahkan Login</h5>
-
-                            @if(session('loginError'))
-                            <div class="alert alert-warning" role="alert">
-                                <h6>{{ session('loginError') }}</h6>
-                            </div>
-                            @endif
-
-
-                        </div>
-                        <!--end auth-logo-text-->
-
-                        <form method="post" action="{{ route('manager.login.submit') }}">
-                            @csrf
-                            <div class="form-group">
-                                <label class="form-label" for="email">Alamat Email</label>
-                                <input id="email" type="email"
-                                    class="form-control form-input @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" required autocomplete="email" autofocus
-                                    placeholder="Masukan Email">
-                                @error('email')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                                @if(session('loginError'))
+                                <div class="alert alert-danger mt-3 text-light" role="alert">
+                                    <h6>{{ session('loginError') }}</h6>
                                 </div>
-                                @enderror
-                            </div>
+                                @endif
 
-                            <div class="form-group">
-                                <label class="form-label" for="password">Password</label>
-                                <input id="password" type="password"
-                                    class="form-control form-input @error('password') is-invalid @enderror"
-                                    name="password" required autocomplete="current-password"
-                                    placeholder="Masukan Password" value="{{ old('password') }}">
-                                @error('password')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
+                            </div>
+                            <form class="mt-4" method="post" action="{{ route('manager.login.submit') }}">
+                                @csrf
+                                <!-- Form -->
+                                <div class="form-group mb-4">
+                                    <label for="email">Alamat Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><span
+                                                class="fas fa-envelope"></span></span>
+                                        <input type="email" name="email"
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            placeholder="Masukan Email" id="email" value="{{ old('email') }}" autofocus
+                                            required>
+                                        @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
                                 </div>
-                                @enderror
-                            </div>
+                                <!-- End of Form -->
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="password"> Password</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2"><span
+                                                    class="fas fa-unlock-alt"></span></span>
+                                            <input type="password" name="password" placeholder="Masukan Password"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                id="password" required value="{{ old('password') }}">
+                                            @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
 
-                            <div class="form-group form-check mb-5 mt-4">
-                                <a href="{{route('manager.password.request') }}" class="float-right">
-                                    <small>Lupa Password?</small> </a>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block mt-2">
-                                Login
-                            </button>
+                                        <div class="float-right">
+                                            <a href="{{route('manager.password.request') }}"
+                                                class="small text-right">Lupa password?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary">Masuk</button>
+                            </form>
 
-                        </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</main>
+        </section>
+
+    </main>
+
+    @include('admin.layouts.script')
+
+</body>

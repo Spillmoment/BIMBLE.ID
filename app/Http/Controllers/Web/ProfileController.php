@@ -24,32 +24,6 @@ class ProfileController extends Controller
         return view('web.web_profile');
     }
 
-    // public function kursus()
-    // {
-    //     $pendaftarId = Auth::id();
-
-    //     $data['success'] =  OrderDetail::with('pendaftar', 'kursus')
-    //         ->where('id_pendaftar', $pendaftarId)
-    //         ->where('status', 'SUCCESS')
-    //         ->orderBy('created_at', 'desc')
-    //         ->paginate(10);
-
-    //     $data['pending'] =  OrderDetail::with('pendaftar', 'kursus')
-    //         ->where('id_pendaftar', $pendaftarId)
-    //         ->where('status', 'PENDING')
-    //         ->orderBy('created_at', 'desc')
-    //         ->paginate(10);
-
-    //     $data['process'] =  OrderDetail::with('pendaftar', 'kursus')
-    //         ->where('id_pendaftar', $pendaftarId)
-    //         ->where('status', 'PROCESs')
-    //         ->orderBy('created_at', 'desc')
-    //         ->paginate(10);
-
-    //     // dd($order);
-    //     return view('web.web_profile', $data);
-    // }
-
     public function pengaturan()
     {
         return view('web.web_profile');

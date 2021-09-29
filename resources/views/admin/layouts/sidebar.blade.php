@@ -71,16 +71,17 @@
                 <div class="multi-level collapse {{ (request()->is('manager/kategori*')) ? 'show' : '' }}" role="list"
                     id="submenu-kategori" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ (Request::route()->getName() == 'kategori.index') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('kategori.index') }}"><span>Data Kategori</span></a>
-                        </li>
                         <li class="nav-item {{ (Request::route()->getName() == 'kategori.create') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('kategori.create') }}"><span>Tambah Kategori</span></a>
+                        </li>
+                        <li class="nav-item {{ (Request::route()->getName() == 'kategori.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('kategori.index') }}"><span>Data Kategori</span></a>
                         </li>
                     </ul>
                 </div>
             </li>
-            <li class="nav-item {{ (request()->is('manager/kursus*')) ? 'active' : '' }}">
+            <li
+                class="nav-item {{ (request()->is('manager/kursus*')) || (request()->is('manager/komentar*')) ? 'active' : '' }}">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-toggle="collapse" data-target="#submenu-app">
                     <span>
@@ -89,14 +90,17 @@
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
                 </span>
-                <div class="multi-level collapse {{ (request()->is('manager/kursus*')) ? 'show' : '' }}" role="list"
-                    id="submenu-app" aria-expanded="false">
+                <div class="multi-level collapse {{ (request()->is('manager/kursus*')) || (request()->is('manager/komentar*')) ? 'show' : '' }}"
+                    role="list" id="submenu-app" aria-expanded="false">
                     <ul class="flex-column nav">
+                        <li class="nav-item {{ (Request::route()->getName() == 'kursus.create') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('kursus.create') }}"><span>Tambah Kursus</span></a>
+                        </li>
                         <li class="nav-item {{ (Request::route()->getName() == 'kursus.index') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('kursus.index') }}"><span>Data Kursus</span></a>
                         </li>
-                        <li class="nav-item {{ (Request::route()->getName() == 'kursus.create') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('kursus.create') }}"><span>Tambah Kursus</span></a>
+                        <li class="nav-item {{ (Request::route()->getName() == 'komentar.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('komentar.index') }}"><span>Komentar Kursus</span></a>
                         </li>
                     </ul>
                 </div>
@@ -123,7 +127,7 @@
                 </div>
             </li>
             <li
-                class="nav-item {{ (request()->is('manager/unit*')) || request()->is('manager/pendaftar-unit*') ? 'active' : '' }}">
+                class="nav-item {{ (request()->is('manager/unit*')) || request()->is('manager/pendaftar-unit*') || request()->is('manager/siswa-unit*') ? 'active' : '' }}">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-toggle="collapse" data-target="#submenu-unit">
                     <span>
@@ -132,7 +136,7 @@
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
                 </span>
-                <div class="multi-level collapse {{ (request()->is('manager/unit*')) || request()->is('manager/pendaftar-unit*') ? 'show' : '' }}"
+                <div class="multi-level collapse {{ (request()->is('manager/unit*')) || request()->is('manager/pendaftar-unit*') || request()->is('manager/siswa-unit*') ? 'show' : '' }}"
                     role="list" id="submenu-unit" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ (Request::route()->getName() == 'unit.index') ? 'active' : '' }}">
@@ -148,6 +152,25 @@
                         </li>
                         <li class="nav-item {{ (Request::route()->getName() == 'siswa.unit') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('siswa.unit') }}"><span>Siswa Unit</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li
+                class="nav-item {{ (request()->is('manager/unit*')) || request()->is('manager/pendaftar-unit*') || request()->is('manager/siswa-unit*') ? 'active' : '' }}">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    data-toggle="collapse" data-target="#submenu-settings">
+                    <span>
+                        <span class="sidebar-icon"><span class="fas fa-cog"></span></span>
+                        Pengaturan Web
+                    </span>
+                    <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
+                </span>
+                <div class="multi-level collapse {{ (request()->is('manager/unit*')) || request()->is('manager/pendaftar-unit*') || request()->is('manager/siswa-unit*') ? 'show' : '' }}"
+                    role="list" id="submenu-settings" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item {{ (Request::route()->getName() == 'banner.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('banner.index') }}"><span>Banner Web</span></a>
                         </li>
                     </ul>
                 </div>
