@@ -1,116 +1,59 @@
-@extends('admin.layouts.tutor')
+@extends('unit.layouts.app')
 
-@section('title','Unit - Halaman Kursus')
-
-@push('after-style')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
-{{-- CDN untuk tost --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&amp;subset=latin-ext" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-<style>
-    .card-custom {
-    overflow: hidden;
-    min-height: 200px;
-    box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
-  }
-
-  .card-custom-img {
-    height: 200px;
-    min-height: 200px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    border-color: inherit;
-  }
-
-  /* First border-left-width setting is a fallback */
-  .card-custom-img::after {
-    position: absolute;
-    content: '';
-    top: 161px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-top-width: 40px;
-    border-right-width: 0;
-    border-bottom-width: 0;
-    border-left-width: 545px;
-    border-left-width: calc(575px - 5vw);
-    border-top-color: transparent;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-    border-left-color: inherit;
-  }
-</style>
-@endpush
+@section('title', 'Unit - Halaman Kursus')
 
 @section('content')
-<div class="content">
-    
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    Pilihan kursus
-                </div>
-                <div class="card-body card-block">
-                    <form action="#" method="post" class="form-horizontal">
-                        <div class="row form-group">                            
-                            @foreach ($list_kursus as $kursus)
-                                <div class="col-6 pt-3">
-                                    <input type="checkbox" class="js-switch" data-id ="{{ $kursus->id }}" {{ $kursus->kursus_unit->contains('unit_id',Auth::user()->id) ? 'checked' : '' }}> {{ $kursus->nama_kursus }}
-                                </div>
-                            @endforeach
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer"><small class="text-secondary">Pilihan kursus boleh lebih dari satu</small></div>
+
+<div class="row mb-3">
+    <div class="col-sm-12">
+
+        <div class="card border-light shadow-sm components-section">
+            <div class="card-header">
+                Pilihan kursus
             </div>
-        </div>
-
-       
-        </div>
-
-          <div class="row">
-          
-            @foreach ($kursus_unit as $item)
-            <div class="col-md-4">
-                <div class="card card-custom bg-white border-white border-0" style="height: 380px">
-                    <div class="card-custom-img" style="background-image: url({{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }});"></div>
-                    <div class="card-body" style="overflow-y: auto">
-                        <h4 class="card-title">{{ $item->kursus->nama_kursus }}</h4>
-                        <p class="card-text">{{ $item->kursus->keterangan }}</p>
+            <div class="card-body card-block">
+                <form action="#" method="post" class="form-horizontal">
+                    <div class="row form-group">                            
+                        @foreach ($list_kursus as $kursus)
+                            <div class="col-6 pt-3 form-check form-switch">
+                                <input type="checkbox" class="form-check-input js-switch"  id="flexSwitchCheckChecked" data-id ="{{ $kursus->id }}" {{ $kursus->kursus_unit->contains('unit_id',Auth::user()->id) ? 'checked' : '' }}> {{ $kursus->nama_kursus }}
+                            </div>
+                        @endforeach
                     </div>
-                    <div class="card-footer" style="background: inherit; border-color: inherit;">
-                        <a href="{{ route('unit.kursus.add',$item->kursus_id) }}" class="btn btn-outline-primary">Detail</a>
-                    </div>
-                </div>           
+                </form>
             </div>
-            @endforeach
+            <div class="card-footer"><span class="text-warning font-weight-bold">Pilihan kursus boleh lebih dari satu</span></div>
+        </div>
+    </div>
 
-          </div>
+   
+    </div>
 
-          <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-template d-flex ">
-                {{ $kursus_unit->appends(Request::all())->links() }}
-            </ul>
-        </nav>
+      <div class="row my-3">
+        @foreach ($kursus_unit as $item)
+        <div class="col-md-4 my-2">
+            <div class="card" style="width: 20rem;">
+                <img src="{{ url('assets/images/kursus/'. $item->kursus->gambar_kursus) }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ $item->kursus->nama_kursus }}</h5>
+                  <a href="{{ route('unit.kursus.add',$item->kursus_id) }}" class="btn btn-primary float-right"> <i class="fas fa-eye"></i> Detail</a>
+                </div>
+              </div>
+        </div>
+        @endforeach
 
-</div>
+      </div>
 
-
-<!-- .animated -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-template d-flex ">
+            {{ $kursus_unit->appends(Request::all())->links() }}
+        </ul>
+    </nav>
 
 @endsection
 
-@push('after-script')
+@push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
@@ -140,14 +83,32 @@
                         kursus_id: id_kursus
                     },
                     success: function (data) {
-                        toastr.options.closeButton = true;
-                        toastr.options.closeMethod = 'fadeOut';
-                        toastr.options.closeDuration = 100;
-                        toastr.success(data.message);
-
+                
+                        const notyf = new Notyf({
+                        position: {
+                            x: 'right',
+                            y: 'top',
+                        },
+                        types: [
+                            {
+                                type: 'success',
+                                background: '#05A677',
+                                icon: {
+                                    className: 'fas fa-check',
+                                    tagName: 'span',
+                                    color: '#fff'
+                                },
+                                dismissible: false
+                            }
+                        ]
+                    });
+                    notyf.open({
+                        type: 'success',
+                        message: data.message
+                    });
                         setTimeout(function () {
                             location.reload();
-                        }, 200);
+                        }, 300);
                     }
                 });
             } else {
@@ -168,12 +129,27 @@
                                 kursus_id: id_kursus
                             },
                             success: function (data) {
-                                swal({
-                                    title: "Success",
-                                    text: data.message,
-                                    icon: "success",
-                                    button: false,
-                                    timer: 2000
+                                const notyf = new Notyf({
+                                    position: {
+                                        x: 'right',
+                                        y: 'top',
+                                    },
+                                    types: [
+                                        {
+                                            type: 'success',
+                                            background: '#05A677',
+                                            icon: {
+                                                className: 'fas fa-check',
+                                                tagName: 'span',
+                                                color: '#fff'
+                                            },
+                                            dismissible: false
+                                        }
+                                    ]
+                                });
+                                notyf.open({
+                                    type: 'success',
+                                    message: data.message
                                 });
                                 setTimeout(function () {
                                     location.reload();
