@@ -11,6 +11,7 @@ use App\KursusUnit;
 use App\Galeri;
 use App\GaleriKursus;
 use App\Jadwal;
+use App\Materi;
 use App\SiswaKursus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -118,7 +119,7 @@ class UnitController extends Controller
 
         $check_kursus = SiswaKursus::where('siswa_id', Auth::id())->where('kursus_unit_id', $kursus_unit->id)->exists();
 
-        // dd($check_kursus);
+        $materi = Materi::where('kursus_id', $kursus->id)->where('unit_id', $unit->id)->orderBy('bab', 'ASC')->get();
 
         return view('web.web_unit_kursus_detail', [
             'unit' => $unit,
@@ -126,7 +127,8 @@ class UnitController extends Controller
             'jadwals' => $jadwal,
             'kursus_lainya' => $kursus_lainya,
             'gallery' => $gallery,
-            'check_kursus' => $check_kursus
+            'check_kursus' => $check_kursus,
+            'materis' => $materi
         ]);
     }
 }
