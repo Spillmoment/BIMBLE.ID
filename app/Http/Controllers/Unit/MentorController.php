@@ -11,14 +11,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class MentorController extends Controller
 {
     public function index()
     {
-        return view('unit.mentor.index', [
-            'mentor' => Mentor::where('unit_id', Auth::id())->latest()->get()
-        ]);
+        if (request()->ajax()) {
+            $query = Mentor::where('unit_id', Auth::id())->latest()->get();
+            return DataTables::of($query)
+                ->addColumn('option', function ($item) {
+                    return
+                        '<div class="btn-group">
+                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <span class="icon icon-sm">
+                                    <span class="fas fa-ellipsis-h icon-dark"></span>
+                                </span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
+                                <a class="dropdown-item" href="' . route('mentor.edit', $item->id) . '"><span class="fas fa-edit mr-2"></span>Sunting</a>
+                                <form action="' . route('mentor.destroy', $item->id) . '" method="POST">
+                                    ' . method_field('delete') . csrf_field() . '
+                                    <button id="deleteButton" type="submit" class="dropdown-item text-danger" data-name="' . $item->nama_mentor .  '">
+                                        <span class="fas fa-trash-alt mr-2"></span>Hapus</a>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>';
+                })
+                ->editColumn('gambar_mentor', function ($item) {
+                    return '<img src="' . Storage::url('public/'.$item->foto) . '" style="max-height: 40px;"/>';
+                })
+                ->rawColumns(['option', 'gambar_mentor'])
+                ->make();
+        }
+
+        return view('unit.mentor.index');
     }
 
 
