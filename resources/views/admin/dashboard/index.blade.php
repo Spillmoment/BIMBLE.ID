@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.app-manager')
 
 @section('title','Bimble - Dashboard Admin LPPK')
 @section('content')
