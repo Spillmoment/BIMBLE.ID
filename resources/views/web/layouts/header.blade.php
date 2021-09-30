@@ -75,7 +75,7 @@
                         <div class="dropdown-menu dropdown-menu-right z-index-1;">
                             <a class="dropdown-item {{ Route::currentRouteName() == 'profile.index' ? 'active' : '' }}" href="{{ route('profile.index') }}">Profil</a>
                             <a class="dropdown-item  {{ Route::currentRouteName() == 'user.kursus' ? 'active' : '' }}" href="{{ route('user.kursus') }}">Kursus Saya</a>
-                            <a class="dropdown-item  {{ Route::currentRouteName() == 'front.kursus' ? 'active' : '' }}" href="{{ route('front.kursus') }}">Sertifikat</a>
+                            <a class="dropdown-item  {{ Route::currentRouteName() == 'sertifikat.index' ? 'active' : '' }}" href="{{ route('sertifikat.index') }}">Sertifikat</a>
                             <a class="dropdown-item" href="{{ route('siswa.logout') }}">
                                 <i class="fas fa-sign-out-alt mr-2 text-muted"></i>
                                 Keluar
