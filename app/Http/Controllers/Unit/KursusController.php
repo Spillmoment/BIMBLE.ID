@@ -176,6 +176,7 @@ class KursusController extends Controller
         $request->validate([
             'bab' => 'required|numeric|between:1,10',
             'judul' => 'required',
+            'konten' => 'required',
             'file' => 'required|max:2000|mimes:pdf',
         ]);
 
@@ -193,6 +194,7 @@ class KursusController extends Controller
                 'unit_id' => Auth::id(),
                 'bab' => $request->bab,
                 'judul' => $request->judul,
+                'konten' => $request->konten,
                 'file' => $filename
             ]);
 
