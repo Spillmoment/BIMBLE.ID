@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.app-manager')
 
 @section('title', 'Admin - Halaman Pendaftar Unit')
 
