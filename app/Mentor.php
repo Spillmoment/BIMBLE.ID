@@ -10,7 +10,7 @@ class Mentor extends Model
     protected $table = 'mentor';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'unit_id', 'nama_mentor', 'kompetensi', 'foto'
+        'unit_id', 'nama_mentor', 'kompetensi', 'pengalaman', 'foto'
     ];
     use SoftDeletes;
     
