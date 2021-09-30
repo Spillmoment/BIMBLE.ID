@@ -207,7 +207,6 @@
                                 <h6> <a href="#" class="text-reset"></a>
                                     Jadwal Kursus
                                 </h6>
-                                <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
                             </div>
                             <img src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}" alt=""
                                 width="100" class="ml-3 rounded">
@@ -222,7 +221,7 @@
                             @forelse ($jadwals as $jadwal)
                             <tr>
                                 <th class="pt-3">{{ $init_hari[$jadwal->hari] }}</th>
-                                <td class="font-weight-bold text-right pt-3 text-capitalize">
+                                <td class="text-right pt-3 text-capitalize">
                                     {{ substr($jadwal->waktu_mulai, 0,-3) }} -
                                     {{ substr($jadwal->waktu_selesai, 0,-3) }} </td>
                             </tr>
