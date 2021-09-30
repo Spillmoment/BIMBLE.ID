@@ -1,6 +1,21 @@
 @extends('web.layouts.main')
 
 @section('title', 'Detail Kursus ' . $kursus_unit->kursus->nama_kursus )
+
+@push('style')
+<style>
+    .accordion .card-header:after {
+        font-family: 'FontAwesome';  
+        content: "\f068";
+        float: right; 
+    }
+    .accordion .card-header.collapsed:after {
+        /* symbol for "collapsed" panels */
+        content: "\f067"; 
+    }
+</style>
+@endpush
+
 @section('content')
 
 <section style="background-image: url('{{ url('assets/images/kursus/'. $kursus_unit->kursus->gambar_kursus) }}');"
@@ -55,7 +70,24 @@
                 <div class="tab-pane fade py-2" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="card border-0 shadow-lg">
                         <div class="card-body">
-                            {!! $kursus_unit->kursus->materi !!}
+                            <div class="container">
+                                <div id="accordion" class="accordion">
+                                    <div class="card mb-0">
+                                        @foreach ($materis as $materi)
+                                        <div class="card-header collapsed" data-toggle="collapse" href="#modul-{{ $materi->bab }}">
+                                            <a class="card-title">
+                                                Modul {{ $materi->bab }} - {{ $materi->judul }}
+                                            </a>
+                                        </div>
+                                        <div id="modul-{{ $materi->bab }}" class="card-body collapse" data-parent="#accordion" >
+                                            {!! $materi->konten !!}
+                                        </div>
+
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
