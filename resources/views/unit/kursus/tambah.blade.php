@@ -269,7 +269,7 @@
 
             </div>
         </div>
-        <div class="card">
+        <div class="card mt-3">
             <div class="card-header">
                 <h4>Materi kursus {{ $kursus->nama_kursus }}</h4>
             </div>
@@ -309,6 +309,15 @@
                                 {{$errors->first('file')}}
                             </div>
                         </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <textarea id="konten" name="konten">{{ old('konten') }}</textarea>
+                        <div class="invalid-feedback">
+                            {{$errors->first('judul')}}
+                        </div>
+                    </div>
+                    <div class="form-row">
                         <div class="form-group col-md-4">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
@@ -351,16 +360,20 @@
    
     </div>
 
-     
-
-      <nav aria-label="Page navigation example">
-        <ul class="pagination pagination-template d-flex ">
-            {{ $kursus_unit->appends(Request::all())->links() }}
-        </ul>
-    </nav>
-
 @endsection
-@push('after-script')
+@push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#konten'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 <script src="{{ asset('assets/js/picker/mdtimepicker.js') }}"></script>
