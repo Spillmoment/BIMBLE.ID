@@ -11,7 +11,7 @@ class Materi extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'kursus_id', 'unit_id', 'bab', 'judul', 'file'
+        'kursus_id', 'unit_id', 'bab', 'judul', 'konten', 'file'
     ];
 
     public function kursus()
