@@ -87,7 +87,7 @@ class KursusController extends Controller
             ->where('unit_id', Auth::id())
             ->where('type_id', 1)
             ->first();
-        
+
         $materi = Materi::where('kursus_id', $id)->where('unit_id', Auth::id())->get();
 
         $senin = Jadwal::with(['kursus_unit'])->where('kursus_unit_id', $kursus_unit_kelompok->id)
@@ -185,9 +185,9 @@ class KursusController extends Controller
             return redirect()->back()->withErrors(['message' => 'Bab telah ada.']);
         } else {
             $extention = $request->file('file')->extension();
-            $filename = Auth::id().'-'.date('dmyHis').'.'.$extention;
+            $filename = Auth::id() . '-' . date('dmyHis') . '.' . $extention;
             Storage::putFileAs('public/materi', $request->file('file'), $filename);
-            
+
             Materi::create([
                 'kursus_id' => $kursus_id,
                 'unit_id' => Auth::id(),
@@ -198,19 +198,19 @@ class KursusController extends Controller
 
             return redirect()->back()->with(['status' => 'Materi Berhasil Ditambah.']);
         }
-        
     }
 
     public function delete_materi($materi_id)
     {
         $materi = Materi::findOrFail($materi_id);
-        unlink(storage_path('app/public/materi/'.$materi->file));
+        unlink(storage_path('app/public/materi/' . $materi->file));
         $materi->delete();
         return redirect()->back()->with(['status' => 'Materi Berhasil Dihapus.']);
     }
 
-    public function download_materi($filename){
-        $filepath = storage_path().'/'.'app'.'/public/materi/'.$filename;
-        return Response::download($filepath); 
+    public function download_materi($filename)
+    {
+        $filepath = storage_path() . '/' . 'app' . '/public/materi/' . $filename;
+        return Response::download($filepath);
     }
 }
