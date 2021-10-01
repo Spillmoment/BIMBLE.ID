@@ -46,6 +46,31 @@
                 </a>
             </li>
 
+            <li class="nav-item {{ (request()->is('unit/galeri*')) ? 'active' : '' }}">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    data-toggle="collapse" data-target="#submenu-galeri">
+                    <span>
+                        <span class="sidebar-icon"><span class="fas fa-user-circle"></span></span>
+                       Galeri
+                    </span>
+                    <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
+                </span>
+                <div class="multi-level collapse {{ (request()->is('unit/galeri*')) ? 'show' : '' }}" role="list"
+                    id="submenu-galeri" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li
+                            class="nav-item {{ (Request::route()->getName() == 'unit.galeri.tambah') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('unit.galeri.tambah') }}"><span>Kursus
+                                    Kelompok</span></a>
+                        </li>
+                        <li
+                            class="nav-item {{ (Request::route()->getName() == 'unit.siswa.private') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('unit.siswa.private') }}"><span>Kursus Private</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li
                 class="nav-item {{ (request()->is('unit/mentor*')) || (request()->is('unit/mentor/penempatan*')) ? 'active' : '' }}">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
@@ -96,6 +121,13 @@
                         </li>
                     </ul>
                 </div>
+            </li>
+
+            <li class="nav-item {{ Request::route()->getName() == 'unit.siswa.konfirmasi' ? 'active' : '' }}">
+                <a href="{{ route('unit.siswa.konfirmasi') }}" class="nav-link">
+                    <span class="sidebar-icon"><span class="fas fa-registered"></span></span>
+                    <span>Konfirmasi Siswa</span>
+                </a>
             </li>
 
             <li class="nav-item {{ Request::route()->getName() == 'unit.fasilitas.home' ? 'active' : '' }}">
