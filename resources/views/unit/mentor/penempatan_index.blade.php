@@ -1,34 +1,11 @@
-@extends('admin.layouts.tutor')
+@extends('unit.layouts.app')
 
-@section('title','Unit - Halaman Mentor')
+@section('title','Unit - Penempatan Mentor')
 @section('content')
 
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Penempatan Mentor</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li><a href="{{ route('penempatan.index') }}">Penempatan Mentor</a></li>
-                            <li class="active">List Mentor </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 @if(session('status'))
-@push('after-script')
+@push('scripts')
 <script>
     swal({
         title: "Success",
@@ -41,87 +18,101 @@
 </script>
 @endpush
 @endif
+<div class="row">
+    <div class="col-12 mb-4">
 
-<div class="content">
-    <div class="animated fadeIn">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <strong class="card-title">Table Mentor</strong>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="{{ route('unit.home') }}"><span class="fas fa-home"></span>
+                                Home </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Penempatan Mentor</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Table Penempatan Mentor</h2>
 
-                        <a class="btn btn-primary btn-sm float-right" href="{{ route('penempatan.create') }}"> Tambah Penempatan</a>
-                    </div>
-                    <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th width="300">Foto</th>
-                                    <th width="300">Nama</th>
-                                    <th width="150">Kursus</th>
-                                    <th width="200">Pengalaman</th>
-                                    <th width="210">Option</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($mentor as $mentor)
-                                <tr>
-                                    <td scope="row"> {{$loop->iteration}} </td>
-                                    @if($mentor->mentor->foto)
-                                    <td> <img src="{{ Storage::url('public/'.$mentor->mentor->foto) }}" width="100px">
-                                    </td>
-                                    @else
-                                    Tidak Ada Gambar
-                                    @endif
-                                    <td>{{ $mentor->mentor->nama_mentor }}</td>
-                                    <td>
-                                        {{ $mentor->kursus_unit->kursus->nama_kursus }} <br>
-                                        <footer class="blockquote-footer">{{ $mentor->kursus_unit->type->nama_type }}</footer>
-                                    </td>
-                                    <td>
-                                        {{ $mentor->pengalaman }}
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning btn-sm text-light" href="{{route('penempatan.edit',
-                                       [$mentor->id])}}"> <i class="fa fa-pencil"></i></a>
-
-                                        <form class="d-inline" action="{{route('penempatan.delete', [$mentor->id])}}"
-                                            method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" id="deleteButton" data-name="{{ $mentor->mentor->nama_mentor }}"
-                                                class="btn btn-danger btn-sm delete">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-                                @endforeach
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
             </div>
-
-
+            <div class="mt-4">
+                <a class="btn btn-primary btn-sm float-right" href="{{ route('penempatan.create') }}">
+                    <i class="fas fa-plus"></i> Tambah Data</a>
+            </div>
         </div>
-    </div><!-- .animated -->
+        <div class="card border-light shadow-sm components-section">
+            <div class="row">
+                <div class="card-body">
+                    <table class="table table-hover" id="penempatanTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Mentor</th>
+                                <th>Foto</th>
+                                <th>Kursus</th>
+                                <th>Option</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <footer class="footer section py-2">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
+
 
 @endsection
 
-@push('after-script')
-@include('admin.includes.datatable')
+@push('scripts')
 <script>
+    // AJAX DataTable
+    var datatable = $('#penempatanTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: true,
+        ajax: {
+            url: '{!! url()->current() !!}',
+        },
+        columns: [{
+                "data": 'id',
+                "sortable": false,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            {
+                data: 'nama_mentor',
+                name: 'mentor.nama_mentor'
+            },
+            {
+                data: 'foto',
+                name: 'mentor.foto'
+            },
+            {
+                data: 'kursus',
+                name: 'kursus.nama_kursus'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                width: '20%'
+            },
+        ],
+
+    });
+
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');
         e.preventDefault();
         swal({
                 title: "Yakin!",
-                text: "Menghapus penempatan mentor  " + name + "?",
+                text: "menghapus mentor  " + name + "?",
                 icon: "warning",
                 dangerMode: true,
                 buttons: {
