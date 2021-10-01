@@ -73,7 +73,7 @@
                 </div>
             </li>
 
-            <li class="nav-item {{ (request()->is('unit/siswa/*')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('unit/siswa*')) ? 'active' : '' }}">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-toggle="collapse" data-target="#submenu-siswa">
                     <span>
@@ -82,7 +82,7 @@
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
                 </span>
-                <div class="multi-level collapse {{ (request()->is('unit/siswa/*')) ? 'show' : '' }}" role="list"
+                <div class="multi-level collapse {{ (request()->is('unit/siswa*')) ? 'show' : '' }}" role="list"
                     id="submenu-siswa" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li
