@@ -4,9 +4,24 @@
 
 @section('content')
 
+
+@if (session('status'))
+@push('scripts')
+<script>
+    swal({
+        title: "Berhasil",
+        text: "{{ session('status') }}",
+        icon: "success",
+        button: false,
+        timer: 3000
+    });
+
+</script>
+@endpush
+@endif
+
 @push('style')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
-<link href="{{ asset('assets/js/picker/mdtimepicker.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/backend/js/picker/mdtimepicker.css') }}" rel="stylesheet">
 @endpush
 
 
@@ -18,8 +33,9 @@
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                         <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-                        <li class="breadcrumb-item"><a href="#">Kursus</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Unit Pengelola Kursus</li>
+                        <li class="breadcrumb-item"><a href="{{ route('unit.home') }}">Home</a></li>
+                        <li class="breadcrumb-item" aria-current="page"><a href="{{ route('unit.kursus.home') }}">Unit Pengelola Kursus</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Form Input Detail Kursus</li>
                     </ol>
                 </nav>
             </div>
@@ -27,11 +43,11 @@
 
         <div class="card border-light shadow-sm components-section">
             <div class="card-header">
-                <h4>Form Pengaturan Kursus Kelompok & Private</h4>
+                <h4>Form Input Kursus {{ $kursus->nama_kursus }} (Kelompok & Private)</h4>
             </div>
             <div class="card-body">
                 
-                <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                <ul class="nav nav-pills nav-fill mb-2" id="pills-tab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-kelompok" role="tab" aria-controls="pills-kelompok" aria-selected="true">Kelompok</a>
                     </li>
@@ -50,12 +66,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             
-                                            <div class="form-group">
+                                            <div class="mb-2">
                                                 <label for="">Status</label>
                     
-                                                <div class="form-check">
+                                                <div class="form-check form-switch">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" name="status" class="js-switch" {{ $kursus_unit_kelompok->status == 'aktif' ? 'checked' : '' }}>
+                                                        <input type="checkbox" name="status" class="form-check-input js-switch" {{ $kursus_unit_kelompok->status == 'aktif' ? 'checked' : '' }}>
                                                         
                                                     </label>
                                                 </div>
@@ -67,7 +83,7 @@
                     
                                     <div class="row">
                                         <div class="col-md">
-                                            <div class="form-group">
+                                            <div class="mb-2">
                                                 <label for="">Harga Kursus</label>
                                                 <input type="number" id="biaya_kursus" name="biaya_kursus"
                                                     class="input-sm form-control-sm form-control"
@@ -79,7 +95,7 @@
                                         </div>
                                     </div>
                     
-                                    <div class="form-group">
+                                    <div class="mb-2">
                                         <button class="btn btn-primary" type="submit">
                                             Simpan
                                         </button>
@@ -90,7 +106,7 @@
                                     <form action="{{ route('unit.kursus.update', $kursus_unit_kelompok->id) }}" method="post" class="form-horizontal">
                                         @csrf
                                         @method('put')
-                                        <div class="row form-group">
+                                        <div class="row mb-2">
                                             <div class="col-md-2 text-center"><label class=" form-control-label">Senin</label> <input type="hidden" name="hari" value="1"></div>
                                             @if ($senin)
                                             <div class="col-md-3"><input type="text" name="waktu_mulai" value="{{ $senin->waktu_mulai }}" class="form-control timepicker1"></div>
@@ -108,7 +124,7 @@
                                     <form action="{{ route('unit.kursus.update', $kursus_unit_kelompok->id) }}" method="post" class="form-horizontal">
                                         @csrf
                                         @method('put')
-                                        <div class="row form-group">
+                                        <div class="row mb-2">
                                             <div class="col-md-2 text-center"><label class=" form-control-label">Selasa</label> <input type="hidden" name="hari" value="2"></div>
                                             @if ($selasa)
                                             <div class="col-md-3"><input type="text" name="waktu_mulai" value="{{ $selasa->waktu_mulai }}" class="form-control timepicker1"></div>
@@ -126,7 +142,7 @@
                                     <form action="{{ route('unit.kursus.update', $kursus_unit_kelompok->id) }}" method="post" class="form-horizontal">
                                         @csrf
                                         @method('put')
-                                        <div class="row form-group">
+                                        <div class="row mb-2">
                                             <div class="col-md-2 text-center"><label class=" form-control-label">Rabu</label> <input type="hidden" name="hari" value="3"></div>
                                             @if ($rabu)
                                             <div class="col-md-3"><input type="text" name="waktu_mulai" value="{{ $rabu->waktu_mulai }}" class="form-control timepicker1"></div>
@@ -144,7 +160,7 @@
                                     <form action="{{ route('unit.kursus.update', $kursus_unit_kelompok->id) }}" method="post" class="form-horizontal">
                                         @csrf
                                         @method('put')
-                                        <div class="row form-group">
+                                        <div class="row mb-2">
                                             <div class="col-md-2 text-center"><label class=" form-control-label">Kamis</label> <input type="hidden" name="hari" value="4"></div>
                                             @if ($kamis)
                                             <div class="col-md-3"><input type="text" name="waktu_mulai" value="{{ $kamis->waktu_mulai }}" class="form-control timepicker1"></div>
@@ -162,7 +178,7 @@
                                     <form action="{{ route('unit.kursus.update', $kursus_unit_kelompok->id) }}" method="post" class="form-horizontal">
                                         @csrf
                                         @method('put')
-                                        <div class="row form-group">
+                                        <div class="row mb-2">
                                             <div class="col-md-2 text-center"><label class=" form-control-label">Jum'at</label> <input type="hidden" name="hari" value="5"></div>
                                             @if ($jumat)
                                             <div class="col-md-3"><input type="text" name="waktu_mulai" value="{{ $jumat->waktu_mulai }}" class="form-control timepicker1"></div>
@@ -180,7 +196,7 @@
                                     <form action="{{ route('unit.kursus.update', $kursus_unit_kelompok->id) }}" method="post" class="form-horizontal">
                                         @csrf
                                         @method('put')
-                                        <div class="row form-group">
+                                        <div class="row mb-2">
                                             <div class="col-md-2 text-center"><label class=" form-control-label">Sabtu</label> <input type="hidden" name="hari" value="6"></div>
                                             @if ($sabtu)
                                             <div class="col-md-3"><input type="text" name="waktu_mulai" value="{{ $sabtu->waktu_mulai }}" class="form-control timepicker1"></div>
@@ -198,7 +214,7 @@
                                     <form action="{{ route('unit.kursus.update', $kursus_unit_kelompok->id) }}" method="post" class="form-horizontal">
                                         @csrf
                                         @method('put')
-                                        <div class="row form-group">
+                                        <div class="row mb-2">
                                             <div class="col-md-2 text-center"><label class=" form-control-label">Minggu</label> <input type="hidden" name="hari" value="7"></div>
                                             @if ($minggu)
                                             <div class="col-md-3"><input type="text" name="waktu_mulai" value="{{ $minggu->waktu_mulai }}" class="form-control timepicker1"></div>
@@ -227,12 +243,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             
-                                            <div class="form-group">
+                                            <div class="mb-2">
                                                 <label for="">Status</label>
                     
-                                                <div class="form-check">
+                                                <div class="form-check form-switch">
                                                     <label class="form-check-label">
-                                                        <input type="checkbox" name="status" class="js-switch" {{ $kursus_unit_private->status == 'aktif' ? 'checked' : '' }}>
+                                                        <input type="checkbox" name="status" class="form-check-input js-switch" {{ $kursus_unit_private->status == 'aktif' ? 'checked' : '' }}>
                                                         
                                                     </label>
                                                 </div>
@@ -244,7 +260,7 @@
                     
                                     <div class="row">
                                         <div class="col-md">
-                                            <div class="form-group">
+                                            <div class="mb-2">
                                                 <label for="">Harga Kursus</label>
                                                 <input type="number" id="biaya_kursus" name="biaya_kursus"
                                                     class="input-sm form-control-sm form-control"
@@ -256,7 +272,7 @@
                                         </div>
                                     </div>
                     
-                                    <div class="form-group">
+                                    <div class="mb-2">
                                         <button class="btn btn-primary" type="submit">
                                             Simpan
                                         </button>
@@ -276,10 +292,10 @@
             <div class="card-body">
                 <form action="{{ route('unit.kursus.materi', $kursus->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
+                    <div class="form-row mb-2">
+                        <div class="mb-2 col-md-2">
                             <label for="bab">BAB</label>
-                            <select name="bab" id="bab" class="form-control { $errors->first('bab') ? 'is-invalid' : '' }}">
+                            <select name="bab" id="bab" class="form-select {{  $errors->first('bab') ? 'is-invalid' : ''  }}">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -295,16 +311,16 @@
                                 {{$errors->first('bab')}}
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="mb-2 col-md-4">
                             <label for="judul">Judul</label>
-                            <input type="judul" name="judul" id="judul" class="form-control { $errors->first('judul') ? 'is-invalid' : '' }}" value="{{ old('judul') }}">
+                            <input type="judul" name="judul" id="judul" class="form-control {{  $errors->first('judul') ? 'is-invalid' : ''  }}" value="{{ old('judul') }}">
                             <div class="invalid-feedback">
                                 {{$errors->first('judul')}}
                             </div>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="mb-2 col-md-4">
                             <label for="file">File</label>
-                            <input type="file" name="file" id="file" class="form-control { $errors->first('file') ? 'is-invalid' : '' }}">
+                            <input type="file" name="file" id="file" class="form-control {{  $errors->first('file') ? 'is-invalid' : ''  }}">
                             <div class="invalid-feedback">
                                 {{$errors->first('file')}}
                             </div>
@@ -312,13 +328,14 @@
                         
                     </div>
                     <div class="form-row">
+                        <label for="konten">Detail Materi</label>
                         <textarea id="konten" name="konten">{{ old('konten') }}</textarea>
                         <div class="invalid-feedback">
                             {{$errors->first('judul')}}
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="my-2 col-md-4">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </div>
@@ -374,9 +391,7 @@
         });
 
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
-<script src="{{ asset('assets/js/picker/mdtimepicker.js') }}"></script>
+<script src="{{ asset('assets/backend/js/picker/mdtimepicker.js') }}"></script>
 <script>
     let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     elems.forEach(function (html) {
