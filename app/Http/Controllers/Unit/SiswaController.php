@@ -210,31 +210,66 @@ class SiswaController extends Controller
 
     public function konfirmasi_siswa()
     {
-        $semua_siswa = SiswaKursus::with(['siswa', 'kursus_unit'])
-            ->whereHas('kursus_unit', function ($q) {
-                $q->where('unit_id', Auth::id());
-            })
-            ->where('status_sertifikat', 'daftar')
-            ->get();
-        // dd($semua_siswa);
-        return view('unit.siswa.konfirmasi', compact('semua_siswa'));
+        if (request()->ajax()) {
+            $query = SiswaKursus::with(['siswa', 'kursus_unit'])
+                ->whereHas('kursus_unit', function ($q) {
+                    $q->where('unit_id', Auth::id());
+                })
+                ->where('status_sertifikat', 'daftar')
+                ->latest()
+                ->get();
+
+            return DataTables::of($query)
+                ->addColumn('action', function ($item) {
+                    return
+                        '<div class="btn-group">
+                                    <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon icon-sm">
+                                            <span class="fas fa-ellipsis-h icon-dark"></span>
+                                        </span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
+                                        <a class="text-info dropdown-item" href="' . route('unit.siswa.detail', $item->id) . '"><span
+                                        class="fas fa-eye mr-2"></span>Detail</a>  
+                                    </div>
+                                </div>';
+                })
+                ->addColumn('nama_siswa', function ($item) {
+                    return $item->siswa->nama_siswa;
+                })
+                ->addColumn('kursus', function ($item) {
+                    return $item->kursus_unit->kursus->nama_kursus;
+                })
+                ->addColumn('type', function ($item) {
+                    return $item->kursus_unit->type->nama_type;
+                })
+                ->rawColumns(['action'])
+                ->make();
+        }
+
+        return view('unit.siswa.konfirmasi');
     }
 
-    public function update_konfirmasi(Request $request)
+    public function detail_siswa($id)
     {
-        $cek_data = SiswaKursus::find($request->siswa);
-        if ($cek_data) {
-            SiswaKursus::where('id', $request->siswa)
-                ->update([
-                    'status_sertifikat' => 'terima'
-                ]);
+        return view('unit.siswa.detail_siswa', [
+            'siswa' => SiswaKursus::with(['siswa', 'kursus_unit'])
+                ->findOrFail($id)
+        ]);
+    }
 
-            return response()->json([
-                'message' => 'Siswa berhasil diterima.'
+    public function update_konfirmasi($id)
+    {
+        SiswaKursus::findOrFail($id)
+            ->update([
+                'status_sertifikat' => 'terima'
             ]);
-        } else {
-            // abort(500, 'Terjadi kesalahan request.');
-            return response()->json(['message' => 'Terjadi kesalahan requesting.'], 404);
-        }
+
+        return redirect()->route('unit.siswa.konfirmasi')->with(
+            'status',
+            'Siswa berhasil diterima.'
+        );
     }
 }
