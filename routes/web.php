@@ -109,9 +109,10 @@ Route::prefix('unit')
         Route::post('/galeri/tambah', 'Unit\GaleriController@store')->name('unit.galeri.tambah');
         Route::delete('/galeri/{id}', 'Unit\GaleriController@destroy')->name('unit.galeri.hapus');
 
-        // nilai
-        Route::get('/siswa/konfirmasi', 'Unit\SiswaController@konfirmasi_siswa')->name('unit.siswa.konfirmasi');
-        Route::put('/siswa/konfirmasi', 'Unit\SiswaController@update_konfirmasi')->name('unit.konfirmasi.update');
+        // siswa
+        Route::get('/pendaftar/konfirmasi', 'Unit\SiswaController@konfirmasi_siswa')->name('unit.siswa.konfirmasi');
+        Route::get('/pendaftar/konfirmasi/{id}', 'Unit\SiswaController@detail_siswa')->name('unit.siswa.detail');
+        Route::put('/pendaftar/konfirmasi/{id}/update', 'Unit\SiswaController@update_konfirmasi')->name('unit.siswa.update');
 
         Route::get('/siswa/kelompok', 'Unit\SiswaController@index_kelompok')->name('unit.siswa.kelompok');
         Route::get('/siswa/kelompok/{id}', 'Unit\SiswaController@card_kelompok')->name('unit.siswa.kelompok.card');
@@ -164,7 +165,7 @@ Route::prefix('user')
 Route::middleware('auth:siswa,unit,manager')->group(function () {
     Route::get('unit/materi/{filename}', 'Unit\KursusController@download_materi')->name('materi.download');
 });
-        
+
 
 Route::get('/', 'Web\FrontController@index')->name('front.index');
 Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.pusat');
