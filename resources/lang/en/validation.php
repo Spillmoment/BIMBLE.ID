@@ -79,7 +79,7 @@ return [
     ],
     'max' => [
         'numeric' => 'Inputan :attribute seharusnya tidak lebih besar dari :max.',
-        'file' => 'Inputan :attribute seharusnya lebih besar dari :max kilobytes.',
+        'file' => 'Inputan :attribute seharusnya tidak lebih besar dari :max kilobytes.',
         'string' => 'Inputan :attribute seharusnya lebih besar dari :max karakter.',
         'array' => 'Inputan :attribute seharusnya memiliki lebih dari :max item.',
     ],
