@@ -2,25 +2,52 @@
 
 namespace App\Http\Controllers\Unit;
 
-use App\Fasilitas;
 use App\Galeri;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Yajra\DataTables\Facades\DataTables;
 
 class GaleriController extends Controller
 {
 
-
     public function index()
     {
-        $galeri_unit = Galeri::where('unit_id', Auth::id())
-            ->latest()->get();
-        // dd($galeri_unit);
-        return view('unit.galeri.index', [
-            'galeri_unit' => $galeri_unit
-        ]);
+
+        if (request()->ajax()) {
+            $query = Galeri::where('unit_id', Auth::id())
+                ->latest()->get();
+
+            return DataTables::of($query)
+                ->addColumn('action', function ($item) {
+                    return
+                        '<div class="btn-group">
+                                    <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <span class="icon icon-sm">
+                                            <span class="fas fa-ellipsis-h icon-dark"></span>
+                                        </span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="action' .  $item->siswa_id . '">
+                                        <a class="text-info dropdown-item" href="' . route('unit.siswa.kelompok.card', $item->siswa_id) . '"><span
+                                        class="fas fa-eye mr-2"></span>Detail</a>  
+                                    </div>
+                                </div>';
+                })
+                ->addColumn('nama_siswa', function ($item) {
+                    return $item->siswa->nama_siswa;
+                })
+                ->addColumn('kursus', function ($item) {
+                    return $item->kursus_unit->kursus->nama_kursus;
+                })
+                ->rawColumns(['status_sertifikat', 'action'])
+                ->make();
+        }
+
+
+        return view('unit.galeri.index');
     }
 
 
