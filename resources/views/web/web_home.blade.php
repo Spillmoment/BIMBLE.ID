@@ -58,7 +58,8 @@
                                         <br>
                                         <button class="btn btn-outline-light btn-lg py-2" style="background-color: unset !important;
                                     color: unset !important; border-radius: 40px;">
-                                            <a href="#mulai" class="text-light" style="text-decoration: none">Lihat
+                                            <a href="#mulai" class="text-light"
+                                                style="text-decoration: none;font-size: 14px;">Lihat
                                                 Kursus </a>
                                             <i class="fas fa-angle-right"></i> </button>
                                 </div>
