@@ -48,8 +48,9 @@ Route::prefix('manager')
         // Unit
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
-        Route::get('siswa-unit/detail', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
+        Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
         Route::get('siswa-unit/{id}/confirm', 'Admin\SiswaUnitController@confirm')->name('siswa.unit.confirm');
+        Route::get('siswa-unit/{id}/confirm_down', 'Admin\SiswaUnitController@confirm_down')->name('siswa.unit.confirm_down');
         // Banner
         Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
         // Pendaftar Unit
@@ -163,6 +164,10 @@ Route::prefix('user')
 
 Route::middleware('auth:siswa,unit,manager')->group(function () {
     Route::get('unit/materi/{filename}', 'Unit\KursusController@download_materi')->name('materi.download');
+});
+
+Route::middleware('auth:siswa,manager')->group(function () {
+    Route::get('manager/sertifikat/{filename}', 'Admin\SiswaUnitController@download_sertifikat')->name('sertifikat.download');
 });
         
 
