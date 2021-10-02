@@ -28,7 +28,7 @@
         </div>
         <div class="col-xs-1"></div>
         <div class="col-lg-8">
-            <h4 class="mb-4  mt-2 text-center"> Unit Kursus </h4>
+            <h4 class="mb-4  mt-2 text-center"> Unit Pengelola </h4>
             <div class="row mt-2">
                 <!-- venue item-->
                 @foreach ($kursus_unit as $item)
