@@ -177,7 +177,7 @@ class KursusController extends Controller
             'bab' => 'required|numeric|between:1,10',
             'judul' => 'required',
             'konten' => 'required',
-            'file' => 'required|max:2000|mimes:pdf',
+            'file' => 'required|max:5000|mimes:pdf,word,ppt',
         ]);
 
         $cek_bab = Materi::where('kursus_id', $kursus_id)->where('unit_id', Auth::id())->where('bab', $request->bab)->first();

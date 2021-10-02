@@ -1,82 +1,107 @@
-@extends('admin.layouts.tutor')
+@extends('unit.layouts.app')
 
-@section('title','Unit - Halaman Siswa')
+@section('title','Unit - Halaman Siswa Kursus Private')
 
 @section('content')
-<!-- Breadcrumbs-->
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Siswa</h1>
-                    </div>
-                </div>
+
+
+@if(session('status'))
+@push('scripts')
+<script>
+    swal({
+        title: "Success",
+        text: "{{session('status')}}",
+        icon: "success",
+        button: false,
+        timer: 2000
+    });
+
+</script>
+@endpush
+@endif
+
+<div class="row">
+    <div class="col-12 mb-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">List Siswa Private</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">Table Siswa Private</h2>
             </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li class="active">Type Private</li>
-                        </ol>
-                    </div>
+
+        </div>
+        <div class="card border-light shadow-sm components-section">
+            <div class="row">
+                <div class="card-body">
+                    <table class="table table-hover" id="siswakelTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Siswa</th>
+                                <th>Kursus</th>
+                                <th>Status</th>
+                                <th>Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <footer class="footer section py-2">
+
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-<!-- /.breadcrumbs-->
-
-<div class="content">
-
-    <div class="row">
-
-        @if (!$list_siswa->isEmpty())
-            
-            @foreach ($list_siswa as $data)
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nama Siswa</th>
-                        <th>Kursus</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="{{ route('unit.siswa.private.card', $data->id) }}">{{ $data->siswa->nama_siswa }}</a></td>
-                        <td>{{ $data->kursus_unit->kursus->nama_kursus }}</td>
-                        <td>
-                            @switch($data->status_sertifikat)
-                                @case('terima')
-                                    <span class="badge badge-primary">Siswa</span>
-                                    @break
-                                @case('lulus')
-                                    <span class="badge badge-success">Lulus</span>
-                                    @break
-                                @default
-                                    <button class="btn btn-success"><i class="fa fa-download"></i> Lulus</button>
-                            @endswitch
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            @endforeach
-        @else
-        <h2>Tidak tersesia data siswa di kursus type private</h2>
-            
-        @endif
-
-        <div class="col-lg-12">
-            <div class="card">
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-<!-- .animated -->
 
 @endsection
+
+@push('scripts')
+<script>
+    // AJAX DataTable
+    var datatable = $('#siswakelTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: true,
+        ajax: {
+            url: '{!! url()->current() !!}',
+        },
+        columns: [{
+                "data": 'id',
+                "sortable": false,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            {
+                data: 'nama_siswa',
+                name: 'siswa.nama_siswa'
+            },
+            {
+                data: 'kursus',
+                name: 'kursus.nama_kursus'
+            },
+            {
+                data: 'status_sertifikat',
+                name: 'status_sertifikat'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                width: '20%'
+            },
+        ],
+
+    });
+
+</script>
+@endpush

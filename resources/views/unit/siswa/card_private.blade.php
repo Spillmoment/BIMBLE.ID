@@ -1,9 +1,11 @@
-@extends('admin.layouts.tutor')
+@extends('unit.layouts.app')
 
-@section('title','Unit - Halaman Siswa')
+@section('title','Unit - Detail Siswa Kelompok')
+
+@section('content')
 
 @if(session('status'))
-@push('after-script')
+@push('scripts')
 <script>
     swal({
         title: "Success",
@@ -18,7 +20,7 @@
 @endif
 
 @if($errors->any())
-@push('after-script')
+@push('scripts')
 <script>
     swal({
         title: "Error",
@@ -32,95 +34,86 @@
 @endpush
 @endif
 
-@section('content')
-<!-- Breadcrumbs-->
-<div class="breadcrumbs">
-    <div class="breadcrumbs-inner">
-        <div class="row m-0">
-            <div class="col-sm-4">
-                <div class="page-header float-left">
-                    <div class="page-title">
-                        <h1>Data siswa, {{ $siswa->nama_siswa }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="page-header float-right">
-                    <div class="page-title">
-                        <ol class="breadcrumb text-right">
-                            <li class="active">Type Private</li>
-                        </ol>
-                    </div>
-                </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="mb-3 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
+            <div class="d-block mb-md-0 ">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-user-circle"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">Siswa Private</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Detail Siswa Private</li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </div>
-</div>
-<!-- /.breadcrumbs-->
 
-<div class="content">
-    
-    <div class="row">
-        <div class="col-lg-12">
+        <h4>Data Siswa {{ $siswa->nama_siswa }}</h4>
 
         @foreach ($list_siswa as $data)
-            
-        <div class="card mb-3" style="max-width: 350px;">
-            <div class="card-deck">
-                <div class="card">
-                <img src="{{ url('assets/images/kursus/'. $data->kursus_unit->kursus->gambar_kursus) }}" class="card-img-top" alt="Gambar kursus">
+        <div class="col-md-4 my-4">
+            <div class="card shadow-lg border-light components-section">
+                <img class="card-img-top"
+                    src="{{ url('assets/images/kursus/'. $data->kursus_unit->kursus->gambar_kursus) }}" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{ $data->kursus_unit->kursus->nama_kursus }}</h5>
+                    <hr>
                     <form action="{{ route('unit.siswa.private.edit', $data->id) }}" method="post">
                         @csrf
                         @method('put')
-                        <table class="table table-borderless">
-                            <tr>
-                                <td>Nilai</td>
-                                <td>
-                                    @if ($data->status_sertifikat == 'sertifikat')
-                                        <input class="form-control" type="text" name="none" value="{{ $data->nilai }}" readonly>
-                                    @else
-                                    <input class="form-control" type="text" name="nilai" value="{{ $data->nilai }}">
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Status</td>
-                                <td>
-                                    @if ($data->status_sertifikat == 'sertifikat')
-                                        <span class="text-secondary"><em>"Siswa sudah mendapat sertifikat"</em></span>
-                                    @else
-                                    <small><em>* Untuk mengajukan sertifikat, ubah status menjadi <strong>Lulus</strong>. </em></small>
-                                    <select name="status_sertifikat" class="form-control">
-                                        <option value="terima" {{ ($data->status_sertifikat === 'terima') ? 'Selected' : '' }}>Siswa</option>
-                                        <option value="lulus" {{ ($data->status_sertifikat === 'lulus') ? 'Selected' : '' }}>Lulus</option>
-                                    </select>
-                                        
-                                    @endif
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><button type="submit" class="btn btn-warning">Ubah</button></td>
-                            </tr>
-                        </table>
+                        <div class="mb-3">
+                            <label for="nilai">Nilai</label>
+                            @if ($data->status_sertifikat == 'sertifikat')
+                            <input id="nilai" class="form-control" type="number" name="none" value="{{ $data->nilai }}"
+                                readonly>
+                            @else
+                            <input id="nilai" placeholder="Masukkan Nilai" class="form-control" type="number"
+                                name="nilai" value="{{ $data->nilai }}">
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            <label for="status">Status</label>
+                            <div class="mb-2">
+                                @if ($data->status_sertifikat == 'sertifikat')
+                                <span class="text-secondary"><em>"Siswa sudah mendapat
+                                        sertifikat"</em></span>
+                                @else
+                                <small><em>* Untuk mengajukan sertifikat, ubah status menjadi
+                                        <strong>Lulus</strong>. </em></small>
+                            </div>
+                            <select name="status_sertifikat" class="form-select">
+                                <option value="terima" {{ ($data->status_sertifikat === 'terima') ? 'selected' : '' }}>
+                                    Siswa</option>
+                                <option value="lulus" {{ ($data->status_sertifikat === 'lulus') ? 'selected' : '' }}>
+                                    Lulus
+                                </option>
+                            </select>
+
+                            @endif
+                        </div>
+                        <div class="mb-3">
+                            @if(!is_null($data->nilai))
+                            <button type="submit" class="btn btn-warning btn-sm btn-block">Update</button>
+                            @else
+                            <button type="submit" class="btn btn-primary btn-sm btn-block">Simpan</button>
+                            @endif
+                        </div>
+
                     </form>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Last updated {{ $data->updated_at->format('j F Y') }}</small>
-                </div>
+                    <small class="text-muted">terakhir diupdate {{ $data->updated_at->format('j F Y') }}</small>
                 </div>
             </div>
         </div>
-
         @endforeach
 
-            
- 
-        </div>        
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-template d-flex justify-content-center">
+                {{ $list_siswa->appends(Request::all())->links() }}
+            </ul>
+        </nav>
     </div>
-
 </div>
 
 @endsection
