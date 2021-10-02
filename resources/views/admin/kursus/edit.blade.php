@@ -39,7 +39,7 @@
 
                             <div class="mb-3">
                                 <label for="kategori">Pilih Kategori</label>
-                                <select class="form-control" name="kategori_id" id="kategori">
+                                <select class="form-select" name="kategori_id" id="kategori">
                                     @foreach ($kategori as $kat)
                                     <option value="{{ $kat->id }}" @if($kursus->kategori_id == $kat->id) selected
                                         @endif>
