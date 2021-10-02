@@ -5,14 +5,16 @@
 @push('style')
 <style>
     .accordion .card-header:after {
-        font-family: 'FontAwesome';  
+        font-family: 'FontAwesome';
         content: "\f068";
-        float: right; 
+        float: right;
     }
+
     .accordion .card-header.collapsed:after {
         /* symbol for "collapsed" panels */
-        content: "\f067"; 
+        content: "\f067";
     }
+
 </style>
 @endpush
 
@@ -74,12 +76,14 @@
                                 <div id="accordion" class="accordion">
                                     <div class="card mb-0">
                                         @foreach ($materis as $materi)
-                                        <div class="card-header collapsed" data-toggle="collapse" href="#modul-{{ $materi->bab }}">
+                                        <div class="card-header collapsed" data-toggle="collapse"
+                                            href="#modul-{{ $materi->bab }}">
                                             <a class="card-title">
                                                 Modul {{ $materi->bab }} - {{ $materi->judul }}
                                             </a>
                                         </div>
-                                        <div id="modul-{{ $materi->bab }}" class="card-body collapse" data-parent="#accordion" >
+                                        <div id="modul-{{ $materi->bab }}" class="card-body collapse"
+                                            data-parent="#accordion">
                                             {!! $materi->konten !!}
                                         </div>
 
@@ -172,7 +176,7 @@
                     <div class="text-block pt-1 pb-0">
                         <table class="w-100">
                             <tr>
-                                <th class="pt-3">Unit Kursus</th>
+                                <th class="pt-3">Unit Pengelola</th>
                                 <td class="font-weight-bold text-right pt-3 text-capitalize">
                                     {{ $kursus_unit->unit->nama_unit }} </td>
                             </tr>
@@ -294,6 +298,7 @@
                 </div>
                 @endif
 
+                @auth('siswa')
                 <button type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false"
                     aria-controls="leaveReview" class="btn btn-outline-primary">Review Kursus Ini</button>
                 <div id="leaveReview" class="collapse mt-4">
@@ -301,8 +306,6 @@
                     <form id="contact-form" method="post" action="{{ route('komentar.post', $kursus_unit->id) }}"
                         class="form">
                         @csrf
-
-
                         <div class="form-group">
                             <label for="review" class="form-label">Review</label>
                             <textarea rows="4" name="komentar" id="review" placeholder="Masukkan Review"
@@ -315,6 +318,9 @@
                         <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
                     </form>
                 </div>
+                @endauth
+
+
             </div>
 
         </div>
