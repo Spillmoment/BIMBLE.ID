@@ -69,7 +69,7 @@
                     </li>
                     @endif
                     @for($i = 1; $i <= $kursus_unit->lastPage(); $i++)
-                        <li class="page-item active"><a
+                        <li class="page-item {{ $i == $kursus_unit->currentPage() ? 'active' : '' }}"><a
                                 class="page-link {{ $i == $kursus_unit->currentPage() ? 'current' : '' }}"
                                 href="{{ $kursus_unit->url($i) }}">{{ $i }}</a></li>
                         @endfor
