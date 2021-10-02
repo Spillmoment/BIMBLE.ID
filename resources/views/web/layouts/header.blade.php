@@ -31,11 +31,11 @@
                             Pendaftaran Unit</a>
                     </li>
 
-                    <li class="nav-item mx-2"><a style="border-radius: 40px" class="btn btn-primary"
+                    <li class="nav-item mx-2"><a style="border-radius: 30px" class="btn btn-primary"
                             href="{{ route('siswa.register') }}" class="nav-link  
                                 {{ (Request::route()->getName() == 'siswa.register') ? 'active' : '' }}">Register</a>
                     </li>
-                    <li class="nav-item"><a style="border-radius: 40px" class="btn btn-primary"
+                    <li class="nav-item"><a style="border-radius: 30px" class="btn btn-primary"
                             href="{{ route('siswa.login') }}" class="nav-link 
                                  {{ (Request::route()->getName() == 'siswa.login') ? 'active' : '' }}">
                             Login
