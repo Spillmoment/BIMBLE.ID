@@ -29,8 +29,8 @@
               <td class="text-black-50">{{ $data->kursus_unit->unit->nama_unit }}</td>
               <td class="text-black-50">{{ $data->nilai }}</td>
               <td>
-                @if ($data->status_sertifikat == 'sertifikat')
-                    <p>Sertifikat masih proses dicetak.</p>
+                @if ($data->sertifikat != null)
+                  <a href="{{ route('sertifikat.download', $data->sertifikat) }}" class="btn btn-primary btn-sm "> <i class="fas fa-download"></i> Download </a>
                 @else
                   @if ($data->file == null)
                     <form action="{{ route('sertifikat.update', $data->id) }}" method="post" enctype="multipart/form-data">
@@ -46,7 +46,8 @@
                       </div>
                     </form>
                   @else
-                    <p>File Upload :</p>
+                    <p>Sertifikat masih dalam prosess.</p>
+                    <p>Dengan bukti pembayaran :</p>
                     <img src="{{ asset('storage/pembayaran/'.$data->file) }}" height="150px" alt="" title="">
                   @endif
                 @endif
