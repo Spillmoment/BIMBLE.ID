@@ -82,15 +82,6 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="materi">Materi Kursus</label>
-                                <textarea name="materi"
-                                    class="form-control {{ $errors->first('materi') ? 'is-invalid' : '' }}" id="materi"
-                                    rows="3" placeholder="Materi Kursus">{{old('materi', $kursus->materi)}}</textarea>
-                                <div class="invalid-feedback">
-                                    {{$errors->first('materi')}}
-                                </div>
-                            </div>
 
                             <div class="mb-3 ">
                                 <label for="keterangan">Keterangan</label>
