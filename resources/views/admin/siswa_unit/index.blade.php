@@ -22,10 +22,10 @@
     @foreach ($unit as $item)
     <div class="col-sm-3 my-4">
         <div class="card shadow-lg">
-            <img class="card-img-top" src="{{ url('assets/images/unit/'. $item->kursus_unit->unit->gambar_unit) }}"
+            <img class="card-img-top" src="{{ url('assets/images/unit/'. $item->gambar_unit) }}"
                 alt="">
             <div class="card-body">
-                <h5 class="card-title">{{ $item->kursus_unit->unit->nama_unit }}</h5>
+                <h5 class="card-title">{{ $item->nama_unit }}</h5>
                 <a href="{{ route('siswa.unit.detail', $item->id) }}" class="btn btn-primary btn-sm float-right my-1">
                     <i class="fas fa-eye"></i> Detail Unit</a>
             </div>
@@ -33,11 +33,11 @@
     </div>
     @endforeach
 
-    <nav aria-label="Page navigation example">
+    {{-- <nav aria-label="Page navigation example">
         <ul class="pagination pagination-template d-flex justify-content-center">
             {{ $unit->appends(Request::all())->links() }}
         </ul>
-    </nav>
+    </nav> --}}
 </div>
 
 @endsection
