@@ -170,7 +170,6 @@ class MentorController extends Controller
         $request->validate([
             'mentor_id' => 'required|numeric',
             'kursus_unit_id' => 'required|numeric',
-            'pengalaman' => 'required'
         ]);
 
         $cek_data = MentorKursus::where('mentor_id', $request->mentor_id)->where('kursus_unit_id', $request->kursus_unit_id)->first();
@@ -181,7 +180,6 @@ class MentorController extends Controller
             MentorKursus::create([
                 'mentor_id' => $request->mentor_id,
                 'kursus_unit_id' => $request->kursus_unit_id,
-                'pengalaman' => $request->pengalaman
             ]);
 
             return redirect()->route('penempatan.index')
