@@ -61,15 +61,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 ">
-                        <label for="pengalaman">Pengalaman</label>
-                        <textarea name="pengalaman" cols="30" rows="5"
-                            class="form-control {{ $errors->first('pengalaman') ? 'is-invalid' : '' }}">{{ old('pengalaman') }}</textarea>
-                        <div class="invalid-feedback">
-                            {{$errors->first('pengalaman')}}
-                        </div>
-                    </div>
-
                     <div class="mb-3">
                         <button class="btn btn-primary btn-block" type="submit">
                             Tambah Mentor
