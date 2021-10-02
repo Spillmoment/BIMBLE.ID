@@ -29,7 +29,6 @@ class KursusRequest extends FormRequest
             'gambar_kursus' => 'sometimes|nullable|image|mimes:jpeg,jpg,png,bmp',
             'keterangan'    => 'required',
             'tentang'       => 'required',
-            'materi'        => 'required',
         ];
     }
 }
