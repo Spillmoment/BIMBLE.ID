@@ -4,7 +4,8 @@
 
 @push('style')
 <link href="{{ asset('assets/js/picker/mdtimepicker.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/frontend/vendor/Swiper/4.4.1/css/swiper.min.css') }}" id="theme-stylesheet">
+<link rel="stylesheet" href="{{ asset('assets/frontend/vendor/Swiper/4.4.1/css/swiper.min.css') }}"
+    id="theme-stylesheet">
 <style>
     .nav .nav-pills .nav-justified li a {
         width: 50px;
@@ -28,34 +29,13 @@
 </section>
 
 
-<div class="container pt-5 pb-6">
+<div class="container pt-5">
 
-    <div class="row mb-5">
-        <div class="col-lg-8">
-            <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                        aria-controls="pills-home" aria-selected="true">Deskripsi</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-                        aria-controls="pills-profile" aria-selected="false">Materi</a>
-                </li>
-
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active py-2" id="pills-home" role="tabpanel"
-                    aria-labelledby="pills-home-tab">
-                    <div class="text-block">
-                        {!! $kursus->tentang !!}
-                    </div>
-                </div>
-                <div class="tab-pane fade py-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="card border-0 shadow-lg">
-                        <div class="card-body">
-                            {!! $kursus->materi !!}
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-10">
+            <div class="text-block">
+                <div class="text-block">
+                    {!! $kursus->tentang !!}
                 </div>
             </div>
         </div>
@@ -64,44 +44,42 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="text-block">
-                <h4>Pilih Unit Kursus </h4>
-
+                <h4 class="mt-5">Pilih Unit Pengelola </h4>
                 <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4 mt-3">
                     <div class="mr-3">
-    
                         @if (Request::get('startday') != null || Request::get('endday') != null)
                         <span class="text-item text-capitalize"><strong>
-                            Hari: 
-                             {{ Request::get('startday') == '1' ? 'senin' : '' }} 
-                             {{ Request::get('startday') == '2' ? 'selasa' : '' }} 
-                             {{ Request::get('startday') == '3' ? 'rabu' : '' }} 
-                             {{ Request::get('startday') == '4' ? 'kamis' : '' }} 
-                             {{ Request::get('startday') == '5' ? "jum'at" : '' }} 
-                             {{ Request::get('startday') == '6' ? 'sabtu' : '' }} 
-                             {{ Request::get('startday') == '7' ? 'minggu' : '' }} 
-                             @if (!empty(Request::get('endday')))
-                             @if (Request::get('startday') != 0 && Request::get('startday') != $batas)  
+                                Hari:
+                                {{ Request::get('startday') == '1' ? 'senin' : '' }}
+                                {{ Request::get('startday') == '2' ? 'selasa' : '' }}
+                                {{ Request::get('startday') == '3' ? 'rabu' : '' }}
+                                {{ Request::get('startday') == '4' ? 'kamis' : '' }}
+                                {{ Request::get('startday') == '5' ? "jum'at" : '' }}
+                                {{ Request::get('startday') == '6' ? 'sabtu' : '' }}
+                                {{ Request::get('startday') == '7' ? 'minggu' : '' }}
+                                @if (!empty(Request::get('endday')))
+                                @if (Request::get('startday') != 0 && Request::get('startday') != $batas)
                                 -
-                             @endif
-                             {{ Request::get('endday') == '1' ? 'senin' : '' }} 
-                             {{ Request::get('endday') == '2' ? 'selasa' : '' }} 
-                             {{ Request::get('endday') == '3' ? 'rabu' : '' }} 
-                             {{ Request::get('endday') == '4' ? 'kamis' : '' }} 
-                             {{ Request::get('endday') == '5' ? "jum'at" : '' }} 
-                             {{ Request::get('endday') == '6' ? 'sabtu' : '' }} 
-                             {{ Request::get('endday') == '7' ? 'minggu' : '' }} 
-                             @endif
+                                @endif
+                                {{ Request::get('endday') == '1' ? 'senin' : '' }}
+                                {{ Request::get('endday') == '2' ? 'selasa' : '' }}
+                                {{ Request::get('endday') == '3' ? 'rabu' : '' }}
+                                {{ Request::get('endday') == '4' ? 'kamis' : '' }}
+                                {{ Request::get('endday') == '5' ? "jum'at" : '' }}
+                                {{ Request::get('endday') == '6' ? 'sabtu' : '' }}
+                                {{ Request::get('endday') == '7' ? 'minggu' : '' }}
+                                @endif
                             </strong>
-                        
+
                         </span>
                         @else
                         <strong>Semua Unit</strong>
                         @endif
                     </div>
-    
+
                 </div>
 
-                <div class="row mt-4 mb-2" id="card-kursus">
+                <div class="row mt-3 mb-2" id="card-kursus">
                     @forelse ($kursus_unit as $item)
                     <div class="col-md-4 mb-3">
                         <div class="card h-100 border-0 shadow-lg hover-animate">
@@ -114,7 +92,7 @@
                                 alt="{{ $item->unit->nama_unit }}" class="img-fluid" height="200px"/>
                                 <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug, 'type' => 2]) }}"
                                     class="tile-link"></a>
-                               
+
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
@@ -157,17 +135,24 @@
                             <div>
                                 <label for="form_sort" class="form-label ">hari kursus</label>
                                 <select name="startday" id="startday" data-style="btn-selectpicker"
-                                    class="selectpicker form-control">   
+                                    class="selectpicker form-control">
                                     @if(Request::get('startday') == 0 && Request::get('startday') != $batas)
                                     <option value="0">Pilih Hari</option>
                                     @endif
-                                    <option value="7" {{ Request::get('startday') == '7' ? 'selected' : ''}}>Minggu</option>
-                                    <option value="1" {{ Request::get('startday') == '1' ? 'selected' : ''}}>Senin</option>
-                                    <option value="2" {{ Request::get('startday') == '2' ? 'selected' : ''}}>Selasa</option>
-                                    <option value="3" {{ Request::get('startday') == '3' ? 'selected' : ''}}>Rabu</option>
-                                    <option value="4" {{ Request::get('startday') == '4' ? 'selected' : ''}}>Kamis</option>
-                                    <option value="5" {{ Request::get('startday') == '5' ? 'selected' : ''}}>Jum'at</option>
-                                    <option value="6" {{ Request::get('startday') == '6' ? 'selected' : ''}}>Sabtu</option>
+                                    <option value="7" {{ Request::get('startday') == '7' ? 'selected' : ''}}>Minggu
+                                    </option>
+                                    <option value="1" {{ Request::get('startday') == '1' ? 'selected' : ''}}>Senin
+                                    </option>
+                                    <option value="2" {{ Request::get('startday') == '2' ? 'selected' : ''}}>Selasa
+                                    </option>
+                                    <option value="3" {{ Request::get('startday') == '3' ? 'selected' : ''}}>Rabu
+                                    </option>
+                                    <option value="4" {{ Request::get('startday') == '4' ? 'selected' : ''}}>Kamis
+                                    </option>
+                                    <option value="5" {{ Request::get('startday') == '5' ? 'selected' : ''}}>Jum'at
+                                    </option>
+                                    <option value="6" {{ Request::get('startday') == '6' ? 'selected' : ''}}>Sabtu
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group text-center">
@@ -177,13 +162,19 @@
                                     @if(Request::get('endday') == 0 && Request::get('endday') != $batas)
                                     <option value="0">Pilih Hari</option>
                                     @endif
-                                    <option value="7" {{ Request::get('endday') == '7' ? 'selected' : ''}}>Minggu</option>
-                                    <option value="1" {{ Request::get('endday') == '1' ? 'selected' : ''}}>Senin</option>
-                                    <option value="2" {{ Request::get('endday') == '2' ? 'selected' : ''}}>Selasa</option>
+                                    <option value="7" {{ Request::get('endday') == '7' ? 'selected' : ''}}>Minggu
+                                    </option>
+                                    <option value="1" {{ Request::get('endday') == '1' ? 'selected' : ''}}>Senin
+                                    </option>
+                                    <option value="2" {{ Request::get('endday') == '2' ? 'selected' : ''}}>Selasa
+                                    </option>
                                     <option value="3" {{ Request::get('endday') == '3' ? 'selected' : ''}}>Rabu</option>
-                                    <option value="4" {{ Request::get('endday') == '4' ? 'selected' : ''}}>Kamis</option>
-                                    <option value="5" {{ Request::get('endday') == '5' ? 'selected' : ''}}>Jum'at</option>
-                                    <option value="6" {{ Request::get('endday') == '6' ? 'selected' : ''}}>Sabtu</option>
+                                    <option value="4" {{ Request::get('endday') == '4' ? 'selected' : ''}}>Kamis
+                                    </option>
+                                    <option value="5" {{ Request::get('endday') == '5' ? 'selected' : ''}}>Jum'at
+                                    </option>
+                                    <option value="6" {{ Request::get('endday') == '6' ? 'selected' : ''}}>Sabtu
+                                    </option>
                                 </select>
                             </div>
 
@@ -195,7 +186,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block text-uppercase" id="action-cari">Cari</button>
+                            <button type="submit" class="btn btn-primary btn-block text-uppercase"
+                                id="action-cari">Cari</button>
                         </div>
                     </form>
                 </div>
