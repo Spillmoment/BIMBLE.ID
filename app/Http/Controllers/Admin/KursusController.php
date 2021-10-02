@@ -81,11 +81,10 @@ class KursusController extends Controller
         $data['background'] = $request->file('gambar_kursus');
         $nama_back = rand(1, 999) . "-" . $data['background']->getClientOriginalName();
         $data['background'] = Image::make($data['background']->getRealPath());
-        $data['background']->resize(1000, 1000)->save(public_path('assets/images/background-kursus/' . $nama_back));
+        $data['background']->save(public_path('assets/images/background-kursus/' . $nama_back));
         $data['background'] = $nama_back;
 
         $data['status'] = 'aktif';
-
 
         Kursus::create($data);
         return redirect()->route('kursus.index')
