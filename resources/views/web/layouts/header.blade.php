@@ -5,17 +5,7 @@
             <div class="d-flex align-items-center">
                 <a href="{{ URL::to('/') }}" class="navbar-brand py-1">
                     <img src="{{ asset('assets/frontend/img/logo.png') }}" alt="Directory logo" style="height: 40px;"></a>
-                <form action="{{ route('front.kursus') }}" id="search" class="form-inline d-none d-sm-flex scroll" >
-                    <div
-                        class="input-label-absolute input-label-absolute-left input-reset input-expand ml-lg-2 ml-xl-3">
-                        <label for="search_search" class="label-absolute"><i class="fa fa-search"></i><span
-                                class="sr-only">What
-                                are you looking for?</span></label>
-                        <input id="search_search" name="keyword" placeholder="Search" aria-label="Search"
-                            class="form-control form-control-sm border-0 shadow-lg-0 bg-gray-200" value="{{ Request::get('keyword') }}">
-                        <button type="reset" class="btn btn-reset btn-sm"><i class="fa-times fas"></i></button>
-                    </div>
-                </form>
+                
             </div>
             <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
                 aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i
