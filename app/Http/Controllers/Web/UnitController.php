@@ -12,6 +12,7 @@ use App\Galeri;
 use App\GaleriKursus;
 use App\Jadwal;
 use App\Materi;
+use App\MentorKursus;
 use App\SiswaKursus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -98,7 +99,8 @@ class UnitController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $kursus = Kursus::where('slug', $slug_kursus)->firstOrFail();
+        $kursus = Kursus::where('slug', $slug_kursus)
+            ->firstOrFail();
 
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('kursus_id', $kursus->id)
@@ -108,27 +110,28 @@ class UnitController extends Controller
 
         $jadwal = Jadwal::where('kursus_unit_id', $kursus_unit->id)->get();
 
-        $kursus_lainya = KursusUnit::with(['kursus', 'unit'])
+        $check_kursus = SiswaKursus::where('siswa_id', Auth::id())
+            ->where('kursus_unit_id', $kursus_unit->id)->exists();
+
+        $materi = Materi::where('kursus_id', $kursus->id)
             ->where('unit_id', $unit->id)
-            ->get();
+            ->orderBy('bab', 'ASC')->get();
 
-        $gallery = GaleriKursus::with('kursus')
-            ->where('kursus_id', $kursus->id)
-            ->orderBy('created_at', 'DESC')
-            ->paginate(9);
+        $mentor_kursus = MentorKursus::query()->with(['kursus_unit', 'mentor'])
+            ->where('kursus_unit_id', $kursus_unit->id)
+            ->get()
+            ->map(function ($item) {
+                return $item->mentor;
+            });
 
-        $check_kursus = SiswaKursus::where('siswa_id', Auth::id())->where('kursus_unit_id', $kursus_unit->id)->exists();
-
-        $materi = Materi::where('kursus_id', $kursus->id)->where('unit_id', $unit->id)->orderBy('bab', 'ASC')->get();
-
+        // dd($mentor_kursus);
         return view('web.web_unit_kursus_detail', [
             'unit' => $unit,
             'kursus_unit' => $kursus_unit,
             'jadwals' => $jadwal,
-            'kursus_lainya' => $kursus_lainya,
-            'gallery' => $gallery,
             'check_kursus' => $check_kursus,
-            'materis' => $materi
+            'materis' => $materi,
+            'mentor' => $mentor_kursus
         ]);
     }
 }
