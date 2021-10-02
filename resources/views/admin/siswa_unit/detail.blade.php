@@ -27,7 +27,7 @@
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                         <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-                        <li class="breadcrumb-item"><a href="#">Kursus</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('siswa.unit') }}">Kursus</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Halaman Siswa Unit</li>
                     </ol>
                 </nav>
@@ -54,7 +54,11 @@
                             @foreach ($siswa as $item)
                             <tr>
                                 <td>{{ $item->siswa->nama_siswa }}</td>
-                                <td>{{ $item->kursus_unit->kursus->nama_kursus }}</td>
+                                <td>
+                                    {{ $item->kursus_unit->kursus->nama_kursus }} 
+                                    <br>
+                                    <span class="blockquote-footer">{{ $item->kursus_unit->type->nama_type }}</footer>
+                                </td>
                                 <td><img src="{{ url('storage/siswa/'. $item->siswa->foto) }}" height="70px"
                                         width="100px"></td>
                                 <td>
@@ -76,14 +80,35 @@
                                     <button class="btn btn-primary btn-sm" data-toggle="modal"
                                         data-target="#modal-file"> <i class="fas fa-eye"></i> Detail
                                     </button>
+                                    <!-- Modal Content -->
+                                    <div class="modal fade" id="modal-file" tabindex="-1" role="dialog" aria-labelledby="modal-file"
+                                    aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h2 class="h6 modal-title">Detail Bukti Upload </h2>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <img src="{{ asset('storage/pembayaran/'.$item->file) }}" width="600" height="450">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-link text-danger ml-auto"
+                                                        data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @else
                                     N/A
                                     @endisset
                                 </td>
                                 <td>
                                     @if ($item->status_sertifikat == 'sertifikat')
-                                    <button class="btn btn-primary btn-sm "> <i class="fas fa-print"></i> Cetak
-                                    </button>
+                                    <a href="{{ route('sertifikat.download', $item->sertifikat) }}" class="btn btn-primary btn-sm "> <i class="fas fa-print"></i> Cetak
+                                    </a>
                                     @else
                                     <button class="btn btn-danger btn-sm "> <i class="fas fa-times"></i>
                                         Belum tersedia
@@ -91,9 +116,11 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm"
-                                        href="{{ route('siswa.unit.confirm', $item->id) }}"> <i
-                                            class="fas fa-check"></i> Setujui </a>
+                                    @if ($item->status_sertifikat == 'sertifikat')
+                                        <a class="btn btn-warning btn-sm" href="{{ route('siswa.unit.confirm_down', $item->id) }}"> <i class="fas fa-check"></i> Hapus Sertifikat </a>
+                                    @else
+                                        <a class="btn btn-primary btn-sm" href="{{ route('siswa.unit.confirm', $item->id) }}"> <i class="fas fa-check"></i> Setujui </a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
@@ -106,27 +133,6 @@
             </div>
         </div>
 
-        <!-- Modal Content -->
-        <div class="modal fade" id="modal-file" tabindex="-1" role="dialog" aria-labelledby="modal-file"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="h6 modal-title">Detail Bukti Upload </h2>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="{{ url('assets/images/file/ada.jpg') }}" width="600" height="450">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link text-danger ml-auto"
-                            data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
