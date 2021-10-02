@@ -66,11 +66,11 @@
 
     <div class="row">
         <div class="col-lg-8">
-            <div class="text-block">
-                <h4>Pilih Unit Kursus </h4>
-                <div class="row mt-4 mb-2">
+            <div class="text-block mb-2">
+                <h4>Pilih Unit Pengelola </h4>
+                <div class="row mt-5 mb-2">
                     @forelse ($kursus_unit as $item)
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-4 mb-5">
                         <div class="card h-100 border-0 shadow-lg hover-animate">
                             <div class="card-img-top overflow-hidden gradient-overlay">
                                 <img @if ($item->unit->gambar_unit != null)
@@ -81,7 +81,7 @@
                                 alt="{{ $item->unit->nama_unit }}" class="img-fluid" height="200px"/>
                                 <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug, 'type' => 1]) }}"
                                     class="tile-link"></a>
-                               
+
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
