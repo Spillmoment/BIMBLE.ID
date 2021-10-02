@@ -11,7 +11,7 @@ class Kursus extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'kategori_id', 'nama_kursus', 'slug', 'gambar_kursus', 'keterangan', 'tentang', 'status', 'materi'
+        'kategori_id', 'nama_kursus', 'slug', 'gambar_kursus', 'background', 'keterangan', 'tentang', 'status', 'materi'
     ];
 
     use SoftDeletes;
