@@ -10,11 +10,10 @@ use App\Mentor;
 use Illuminate\Http\Request;
 use App\Unit;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\UserOldPassword;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -34,7 +33,11 @@ class DashboardController extends Controller
         $fasilitas = Fasilitas::where('unit_id', Auth::id())->count();
         $galeri = Galeri::where('unit_id', Auth::id())->count();
 
-        return view('unit.dashboard.index', compact('kursus', 'mentor', 'fasilitas', 'galeri'));
+        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=3513');
+        $kecamatan = json_decode($response->getBody(), true); 
+        // dd($kecamatan);
+
+        return view('unit.dashboard.index', compact('kursus', 'mentor', 'fasilitas', 'galeri', 'kecamatan'));
     }
 
     public function profile()
@@ -93,19 +96,34 @@ class DashboardController extends Controller
 
     public function update_profile_lokasi(Request $request, $slug)
     {
+        // dd($request->get_kecamatan, $request->get_desa);
         $user = Unit::where('slug', $slug)->first();
         $request->validate([
-            'alamat'    => 'required|min:3|max:200',
+            // 'alamat'    => 'required|min:3|max:200',
+            'get_kecamatan'    => 'required',
+            'get_desa'    => 'required',
             'latitude'  => 'nullable|required_with:longitude|max:15',
             'longitude' => 'nullable|required_with:latitude|max:15',
         ]);
 
-        $data = $request->all();
+        if ($request->get_kecamatan == '0' || $request->get_desa == '0') {
+            $user->update([
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude
+            ]);
+        } else {
+            $user->update([
+                'alamat' => $request->kecamatan.' - '.$request->get_desa,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude
+            ]);
+        }
 
-        $user->update($data);
         return redirect()->back()->with([
             'status' => 'Lokasi diupdate'
         ]);
+
+        
     }
 
     public function update_profile_banner(Request $request, $slug)
