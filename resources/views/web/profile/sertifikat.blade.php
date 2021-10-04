@@ -12,7 +12,7 @@
                     <th scope="col" width="30">Nama Kursus</th>
                     <th scope="col" width="200">Penyedia Kursus</th>
                     <th scope="col" width="30">Nilai</th>
-                    <th scope="col" width="180">Kirim File</th>
+                    <th scope="col" width="180">File</th>
                 </tr>
             </thead>
             <tbody>
