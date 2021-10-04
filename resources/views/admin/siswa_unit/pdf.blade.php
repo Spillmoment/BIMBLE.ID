@@ -1,152 +1,170 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style>
-      /* @import url('https://fonts.googleapis.com/css?family=Saira+Condensed:700'); */
 
-      hr {
-        background-color: #be2d24;
-        height: 3px;
-        margin: 5px;
-      }
+<head>
 
-      div#cert-footer {
-        position: absolute;
-        width: 60%;
-        top: 550px;
-        text-align: center;
-      }
+    <style type="text/css">
+        span.cls_002 {
+            font-family: Arial, serif;
+            font-size: 29.1px;
+            color: rgb(152, 0, 0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none;
+        }
 
-      #cert-stamp, #cert-ceo-sign {
-        width: 60%;
-        display: inline-block;
-      }
+        div.cls_002 {
+            font-family: Arial, serif;
+            font-size: 26.1px;
+            color: rgb(152, 0, 0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none;
+        }
 
-      div#cert-issued-by, div#cert-ceo-design {
-        width: 40%;
-        display: inline-block;
-        float: left;
-      }
+        span.cls_003 {
+            font-family: Arial, serif;
+            font-size: 20.1px;
+            color: rgb(0, 0, 0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      div#cert-ceo-design {
-        margin-left: 10%;
-      }
+        div.cls_003 {
+            font-family: Arial, serif;
+            font-size: 20.1px;
+            color: rgb(0, 0, 0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none;
+        }
 
-      h1 {
-        font-family: 'Saira Condensed', sans-serif;
-        margin: 5px 0px;
-      }
+        span.cls_004 {
+            font-family: Arial, serif;
+            font-size: 34.0px;
+            color: rgb(152, 0, 0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      body {
-        width: 950px;
-        height: 690px;
-        position: absolute;
-        left: 30px;
-        top: 30px;
-        border: 3px solid red;
-      }
+        div.cls_004 {
+            font-family: Arial, serif;
+            font-size: 34.0px;
+            color: rgb(152, 0, 0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      p {
-        font-family: 'Arial', sans-serif;
-        font-size: 18px;
-        margin: 5px 0px;
-      }
+        span.cls_005 {
+            font-family: Arial, serif;
+            font-size: 16px;
+            color: rgb(0, 0, 0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      html {
-        display: inline-block;
-        width: 1024px;
-        height: 768px;
-        border: 2px solid red;
-        background: #eee url("https://i.pinimg.com/originals/b3/17/db/b317db24945589699a4ef18150dc5b73.jpg") no-repeat; background-size: 100%;
-      }
+        div.cls_005 {
+            font-family: Arial, serif;
+            font-size: 13.1px;
+            color: rgb(0, 0, 0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      h1#cert-holder {
-        font-size: 50px;
-        color: #be2d24;
-      }
+        span.cls_006 {
+            font-family: Arial, serif;
+            font-size: 13.1px;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      p.smaller {
-        font-size: 17px !important;
-      }
+        div.cls_006 {
+            font-family: Arial, serif;
+            font-size: 13.1px;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      div#cert-desc {
-        width: 70%;
-      }
+        span.cls_007 {
+            font-family: Arial, serif;
+            font-size: 16.1px;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      p#cert-from {
-        color: #be2d24;
-        font-family: 'Saira Condensed', sans-serif;
-      }
+        div.cls_007 {
+            font-family: Arial, serif;
+            font-size: 16.1px;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
 
-      div#cert-verify {
-        opacity: 1;
-        position: absolute;
-        top: 740px;
-        left: 60%;
-        font-size: 12px;
-        color: grey;
-      }
+        span.cls_008 {
+            font-family: Arial, serif;
+            font-size: 15.1px;
+            color: rgb(0, 0, 0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+
+        div.cls_008 {
+            font-family: Arial, serif;
+            font-size: 15.1px;
+            color: rgb(0, 0, 0);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+
     </style>
-  </head>
-  <body>
-    <h1 id="cert-title">
-      Certificate of Proficiency
-    </h1>
-    <br><br><br><br>
-    
-    <p class="smaller" id="cert-declaration">
-      THIS IS TO CERTIFY THAT
-    </p>
-    
-    <h1 id="cert-holder">
-      {{ $data->siswa->nama_siswa }}
-    </h1>
-    
-    <p class="smaller" id='cert-completed-line'>
-      has successfully completed the
-    </p>
-    
-    <h2 id="cert-course">
-      Course in Question
-    </h2>
-    
-    <div id="cert-desc"
-      <p class="smaller" id='cert-details'>
-        which includes the knowledge of English for Technical Conversations, Applied Mathematics, General Robotics Science, Basic Computing, Web & Mobile Development and Basic User Interface Design.
-      </p>
+    <script type="text/javascript"
+        src="5d75e948-250b-11ec-a980-0cc47a792c0a_id_5d75e948-250b-11ec-a980-0cc47a792c0a_files/wz_jsgraphics.js">
+    </script>
+</head>
+
+<body>
+    <div
+        style="position:absolute;left:50%;margin-left:-421px;top:0px;width:842px;height:596px;border-style:outset;overflow:hidden">
+        <div style="position:absolute;left:0px;top:0px">
+            <img src="{{ public_path('assets/images/background1.png') }}" width="842" height="596">
+        </div>
+        <div style="position:absolute;left:240.47px;top:135.63px" class="cls_002"><span class="cls_002">Sertifikat
+                Penyelesaian Kursus</span></div>
+        <div style="position:absolute;left:290.53px;top:180.66px" class="cls_003"><span class="cls_003">
+                dengan bangga diberikan kepada
+            </span></div>
+        <div style="position:absolute;left:320.49px;top:212.99px; text-align: center" class="cls_004"><span
+                class="cls_004">{{ $data->siswa->nama_siswa }} </span></div>
+        <div style="position:absolute;left:209.81px;top:270.97px" class="cls_005"><span class="cls_005">telah berhasil
+                menyelesaikan kursus</span><span class="cls_006">
+                {{ $data->kursus_unit->kursus->nama_kursus }}</span><span class="cls_005">.</span></div>
+        <div style="position:absolute;left:175.79px;top:292.34px" class="cls_005"><span class="cls_005">Bimble adalah
+                platform kursus offline yang update dengan perkembangan teknologi</span></div>
+
+        <div style="position:absolute;left:345.43px;top:361.34px" class="cls_005"><span class="cls_005">{{
+        $data->updated_at->format('d F Y') }}</span></div>
+        <div style="position:absolute;left:357.71px;top:455.00px" class="cls_007"><span class="cls_007">LPPK
+                Unuja</span></div>
+        <div style="position:absolute;left:336.46px;top:487.54px" class="cls_008"><span class="cls_008">Bimble
+                Course Lead,</span></div>
+        <div style="position:absolute;left:330.58px;top:506.29px" class="cls_008"><span class="cls_008">
+                Universitas Nurul Jadid
+            </span></div>
     </div>
-    
-    <br>
-    <p id="cert-from" class="smaller">
-      &nbsp; from www.companywebsite.com
-    </p>
-    
-    <br>
-    <p class="smaller" id='cert-issued'>
-     <b>Issued on:</b> 12 Agustus 2021.
-    </p>
-    
-    <div id="cert-footer">
-      <div id="cert-issued-by">
-        <img id="cert-stamp" src="https://i7.pngguru.com/preview/585/794/452/paper-rubber-stamp-postage-stamps-company-seal-seal-thumbnail.jpg">
-        <hr>
-        <p>Issued by<br>THE COMPANY S.L.</p>
-      </div>
-      <div id="cert-ceo-design">
-        <img id="cert-ceo-sign" src="https://i7.pngguru.com/preview/585/794/452/paper-rubber-stamp-postage-stamps-company-seal-seal-thumbnail.jpg">
-        <hr>
-        <p>Company Ceo<br>CEO of The Company</p>
-      </div>
-    </div>
-    
-    <div id="cert-verify">
-        Verify at companywebsite.ai/verify/XYZ12ER56129F. <br> 
-        Company has confirmed the participation of this individual in the course.
-      </div>
-    
-    
-    
-  </body>
+
+</body>
+
 </html>
