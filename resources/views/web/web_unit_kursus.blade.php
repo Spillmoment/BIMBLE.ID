@@ -1,6 +1,6 @@
 @extends('web.layouts.main')
 
-@section('title', 'Unit - ' . $unit->nama_unit )
+@section('title', $unit->nama_unit )
 @section('content')
 
 <section class="hero py-6 py-lg-7 text-white dark-overlay">
@@ -168,7 +168,10 @@
                                 </div>
                                 <div class="card-body d-flex align-items-center">
                                     <div class="w-100">
-                                        <h6 class="card-title"><a
+                                        <a class="badge text-primary text-uppercase" style="background: #d1e7ff; font-size: 11px; font-weight: 600; padding-top: 5px; padding-bottom: 5px;">
+                                            {{ $item->kursus->kategori->nama_kategori }}
+                                            </a>
+                                        <h6 class="card-title my-3"><a
                                                 href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug])  }}"
                                                 class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
                                         <div class="d-flex card-subtitle mb-3">
@@ -215,7 +218,10 @@
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
-                                    <h6 class="card-title"><a
+                                    <a class="badge text-primary text-uppercase" style="background: #d1e7ff; font-size: 11px; font-weight: 600; padding-top: 5px; padding-bottom: 5px;">
+                                        {{ $item->kursus->kategori->nama_kategori }}
+                                        </a>
+                                    <h6 class="card-title my-3"><a
                                             href="{{ route('unit.detail.kursus', [$item->unit->slug,$item->kursus->slug])  }}"
                                             class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
                                     <div class="d-flex card-subtitle mb-3">
