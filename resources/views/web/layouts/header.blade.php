@@ -73,6 +73,8 @@
                                     href="{{ route('user.kursus') }}">Kursus Saya</a>
                                 <a class="dropdown-item  {{ Route::currentRouteName() == 'sertifikat.index' ? 'active' : '' }}"
                                     href="{{ route('sertifikat.index') }}">Sertifikat</a>
+                                <a class="dropdown-item  {{ Route::currentRouteName() == 'profile.pengaturan' ? 'active' : '' }}"
+                                    href="{{ route('profile.pengaturan') }}">Pengaturan</a>
                                 <a class="dropdown-item" href="{{ route('siswa.logout') }}">
                                     <i class="fas fa-sign-out-alt mr-2 text-muted"></i>
                                     Keluar
