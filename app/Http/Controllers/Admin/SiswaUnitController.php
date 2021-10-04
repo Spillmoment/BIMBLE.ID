@@ -43,15 +43,19 @@ class SiswaUnitController extends Controller
             ->groupBy('siswa_id', 'kursus_unit_id')
             ->paginate(9);
 
+        $unit = KursusUnit::with('unit')->where('unit_id', $unit_id)->first();
+
         return view('admin.siswa_unit.detail', [
-            'siswa' => $siswa
+            'siswa' => $siswa,
+            'unit'  => $unit
         ]);
     }
 
     public function confirm($id)
     {
         $data = SiswaKursus::with(['siswa', 'kursus_unit'])->find($id);
-        $pdf = PDF::loadView('admin.siswa_unit.pdf', compact('data'))->setPaper('F4', 'landscape');
+        $pdf = PDF::loadView('admin.siswa_unit.pdf', compact('data'))
+            ->setPaper('F4', 'landscape');
         $filename = $data->siswa->nama_siswa . '-' . date('dmyHis') . '.pdf';
         Storage::put('public/sertifikat/' . $filename, $pdf->output());
 
