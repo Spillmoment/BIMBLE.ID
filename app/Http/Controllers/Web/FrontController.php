@@ -19,13 +19,17 @@ class FrontController extends Controller
 
         $kursus_kelompok = KursusUnit::where('type_id', 2)
             ->where('status', 'aktif')
-            ->with(['kursus', 'type'])->groupBy('kursus_id')
-            ->latest()->take(4)->get();
+            ->with(['kursus.kategori', 'type'])
+            ->groupBy('kursus_id')
+            ->latest()
+            ->take(4)->get();
 
         $kursus_private = KursusUnit::where('type_id', 1)
             ->where('status', 'aktif')
-            ->with(['kursus', 'type'])->groupBy('kursus_id')
-            ->latest()->take(4)->get();
+            ->with(['kursus.kategori', 'type'])
+            ->groupBy('kursus_id')
+            ->latest()
+            ->take(4)->get();
 
         $type = Type::all();
 
