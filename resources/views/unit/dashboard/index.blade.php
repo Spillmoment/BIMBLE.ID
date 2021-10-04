@@ -207,18 +207,48 @@
                     accept-charset="UTF-8">
                     @csrf
                     @method('put')
+
                     <div class="mb-3">
                         <label for="alamat">Alamat</label>
-                        <textarea name="alamat"
-                            class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}" id="alamat"
-                            rows="4"
-                            placeholder="Alamat">{{ old('alamat',Auth::guard('unit')->user()->alamat) }}</textarea>
-                        <div class="invalid-feedback">
-                            {{$errors->first('alamat')}}
-                        </div>
                     </div>
 
                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3>
+                                <label for="kecamatan" class="control-label">Kecamatan</label>
+                                <select name="get_kecamatan" id="get_kecamatan" class="form-control {{ $errors->has('get_kecamatan') ? ' is-invalid' : '' }}">
+                                    @if (Auth::guard('unit')->user()->alamat != null)
+                                        <option value="0">{{ strtok(auth()->user()->alamat, '-') }}</option>
+                                    @endif
+
+                                    @foreach ($kecamatan['kecamatan'] as $data)
+                                        <option value="{{ $data['id'] }}">{{ $data['nama'] }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">
+                                    {{$errors->first('get_kecamatan')}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3>
+                                <label for="desa" class="control-label">Desa</label>
+                                <select name="get_desa" id="get_desa" class="form-control {{ $errors->has('get_desa') ? ' is-invalid' : '' }}">
+                                    @if (Auth::guard('unit')->user()->alamat != null)
+                                        <option value="0">{{ substr(auth()->user()->alamat, strpos(auth()->user()->alamat, "-") + 1) }}</option>
+                                    @else
+                                        <option value="0">desa</option>
+                                    @endif
+                                </select>
+                                <input type="hidden" name="kecamatan" id="kecamatan" value="">
+                                <div class="invalid-feedback">
+                                    {{$errors->first('get_desa')}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
                         <div class="col-md-6">
                             <div class="mb-3>
                                 <label for="latitude" class="control-label">latitude</label>
@@ -295,6 +325,40 @@
 @endpush
 @push('scripts')
 <script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+
+{{-- API for alamat desa --}}
+<script>
+    $( document ).ready(function() {
+
+        $(document).on('change','#get_kecamatan',function() {
+            let kecamatanId = $(this).val();
+
+            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan='+kecamatanId;
+
+            let add = " ";
+
+            $.ajax({
+                url: endpoint,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    // add += '<option value="0" disabled="true" selected="true">-Desa-</option>';
+                    for(let i=0; i<result.kelurahan.length; i++){
+                        add += '<option value="'+result.kelurahan[i].nama+'">'+result.kelurahan[i].nama+'</option>';
+                    }
+
+                    $('#get_desa').html(" ");
+                    $("#get_desa").append(add);
+
+                    let get_text_kec = $("#get_kecamatan option:selected").text();
+                    document.getElementById("kecamatan").value = get_text_kec;
+
+                }
+            })
+        });
+    });
+</script>
+
 <script>
     var readURL = function (input) {
         if (input.files && input.files[0]) {
