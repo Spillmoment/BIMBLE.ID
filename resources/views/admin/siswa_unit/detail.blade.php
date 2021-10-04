@@ -31,7 +31,7 @@
                         <li class="breadcrumb-item active" aria-current="page">Halaman Siswa Unit</li>
                     </ol>
                 </nav>
-                <h2 class="h4">Table Siswa Unit</h2>
+                <h2 class="h4 mt-3">Table Siswa  {{ $unit->unit->nama_unit }}</h2>
             </div>
 
         </div>
