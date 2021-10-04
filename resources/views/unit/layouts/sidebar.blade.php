@@ -50,7 +50,7 @@
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-toggle="collapse" data-target="#submenu-galeri">
                     <span>
-                        <span class="sidebar-icon"><span class="fas fa-user-circle"></span></span>
+                        <span class="sidebar-icon"><span class="fas fa-camera"></span></span>
                        Galeri
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
@@ -60,12 +60,11 @@
                     <ul class="flex-column nav">
                         <li
                             class="nav-item {{ (Request::route()->getName() == 'unit.galeri.tambah') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('unit.galeri.tambah') }}"><span>Kursus
-                                    Kelompok</span></a>
+                            <a class="nav-link" href="{{ route('unit.galeri.tambah') }}"><span>Tambah Galeri</span></a>
                         </li>
                         <li
                             class="nav-item {{ (Request::route()->getName() == 'unit.siswa.private') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('unit.siswa.private') }}"><span>Kursus Private</span></a>
+                            <a class="nav-link" href="{{ route('unit.siswa.private') }}"><span>Data Galeri</span></a>
                         </li>
                     </ul>
                 </div>
