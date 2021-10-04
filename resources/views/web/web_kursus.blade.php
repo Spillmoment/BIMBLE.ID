@@ -98,16 +98,32 @@
 
             </div>
         </div>
+     
     </div>
+    
+    <nav class="mb-4">
+        @if($kursus_unit->lastPage() > 1)
+        <ul class="pagination pagination-template d-flex justify-content-center">
+            @if($kursus_unit->currentPage() != $kursus_unit->onFirstPage())
+            <li class="page-item"><a class="page-link" href="{{ $kursus_unit->previousPageUrl() }}">Previous</a>
+            </li>
+            @endif
+            @for($i = 1; $i <= $kursus_unit->lastPage(); $i++)
+                <li class="page-item {{ $i == $kursus_unit->currentPage() ? 'active' : '' }}"><a
+                        class="page-link {{ $i == $kursus_unit->currentPage() ? 'current' : '' }}"
+                        href="{{ $kursus_unit->url($i) }}">{{ $i }}</a></li>
+                @endfor
+                @if($kursus_unit->currentPage() != $kursus_unit->lastPage())
+                <li class="page-item"><a class="page-link" href="{{ $kursus_unit->nextPageUrl()  }}">Next</a>
+                </li>
+                @endif
+        </ul>
+        @endif
+    </nav>
 </div>
 
 </div>
-<!-- Pagination -->
-<nav aria-label="Page navigation example">
-    <ul class="pagination pagination-template d-flex justify-content-center">
-        {{ $kursus_unit->appends(Request::all())->links() }}
-    </ul>
-</nav>
+
 </div>
 </div>
 </div>

@@ -287,7 +287,7 @@
         </div>
         <div class="card mt-3">
             <div class="card-header">
-                <h4>Materi kursus {{ $kursus->nama_kursus }}</h4>
+                <h4>Materi Kursus {{ $kursus->nama_kursus }}</h4>
             </div>
             <div class="card-body">
                 <form action="{{ route('unit.kursus.materi', $kursus->id) }}" method="post" enctype="multipart/form-data">

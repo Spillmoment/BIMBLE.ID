@@ -75,8 +75,15 @@ class KursusController extends Controller
         $data['gambar_kursus'] = $request->file('gambar_kursus');
         $nama_gambar = rand(1, 999) . "-" . $data['gambar_kursus']->getClientOriginalName();
         $data['gambar_kursus'] = Image::make($data['gambar_kursus']->getRealPath());
-        $data['gambar_kursus']->resize(500, 300)->save(public_path('assets/images/kursus/' . $nama_gambar));;
+        $data['gambar_kursus']->resize(500, 300)->save(public_path('assets/images/kursus/' . $nama_gambar));
         $data['gambar_kursus'] = $nama_gambar;
+
+        $data['background'] = $request->file('gambar_kursus');
+        $nama_back = rand(1, 999) . "-" . $data['background']->getClientOriginalName();
+        $data['background'] = Image::make($data['background']->getRealPath());
+        $data['background']->save(public_path('assets/images/background-kursus/' . $nama_back));
+        $data['background'] = $nama_back;
+
         $data['status'] = 'aktif';
 
         Kursus::create($data);
@@ -111,11 +118,19 @@ class KursusController extends Controller
 
         if (!empty($data['gambar_kursus'])) {
             File::delete(public_path('assets/images/kursus/' . $kursus->gambar_kursus));
+            File::delete(public_path('assets/images/background-kursus/' . $kursus->background));
+
             $nama_foto = rand(1, 999) . "-" . $data['gambar_kursus']->getClientOriginalName();
             $data['gambar_kursus'] = Image::make($data['gambar_kursus']->getRealPath());
             $data['gambar_kursus']->resize(500, 300);
             $data['gambar_kursus']->save(public_path('assets/images/kursus/' . $nama_foto));
             $data['gambar_kursus'] = $nama_foto;
+
+            $data['background'] = $request->file('gambar_kursus');
+            $nama_back = rand(1, 999) . "-" . $data['background']->getClientOriginalName();
+            $data['background'] = Image::make($data['background']->getRealPath());
+            $data['background']->save(public_path('assets/images/background-kursus/' . $nama_back));
+            $data['background'] = $nama_back;
         }
 
         $kursus->update($data);

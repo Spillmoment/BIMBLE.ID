@@ -155,7 +155,6 @@ Route::prefix('user')
     ->middleware('auth:siswa')
     ->group(function () {
         Route::post('/pesan_kursus/{kursus_unit_id}', 'Siswa\KursusController@pesan_kursus')->name('user.pesan');
-
         Route::get('/kursus', 'Siswa\KursusController@kursus')->name('user.kursus');
         Route::get('/materi/{kursus_unit_id}', 'Siswa\KursusController@materi')->name('user.materi');
 
@@ -170,7 +169,7 @@ Route::middleware('auth:siswa,unit,manager')->group(function () {
 Route::middleware('auth:siswa,manager')->group(function () {
     Route::get('manager/sertifikat/{filename}', 'Admin\SiswaUnitController@download_sertifikat')->name('sertifikat.download');
 });
-        
+
 
 Route::get('/', 'Web\FrontController@index')->name('front.index');
 Route::get('/pusat_bantuan', 'Web\FrontController@pusat_bantuan')->name('front.pusat');

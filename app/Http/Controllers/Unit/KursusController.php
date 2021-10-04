@@ -19,11 +19,15 @@ class KursusController extends Controller
     {
         $list_kursus = Kursus::with(['kursus_unit' => function ($q) {
             $q->where('unit_id', Auth::id());
-        }])->get();
+        }])
+            ->latest()
+            ->get();
 
         $kursus_unit = KursusUnit::with(['kursus', 'unit'])
             ->where('unit_id', Auth::id())
-            ->groupBy('kursus_id')->paginate(6);
+            ->groupBy('kursus_id')
+            ->latest()
+            ->paginate(6);
         // dd($kursus_unit);
 
         return view('unit.kursus.index', [

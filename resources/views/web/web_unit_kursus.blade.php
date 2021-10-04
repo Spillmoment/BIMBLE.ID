@@ -15,7 +15,7 @@
         <!-- Breadcrumbs -->
         <ol class="breadcrumb text-white justify-content-center no-border mb-0">
             <li class="breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
-            <li class="breadcrumb-item active">Unit Kursus </li>
+            <li class="breadcrumb-item active">Unit Pengelola </li>
         </ol>
         <h1 class="hero-heading">Selamat Datang Di Unit {{ $unit->nama_unit }}</h1>
     </div>

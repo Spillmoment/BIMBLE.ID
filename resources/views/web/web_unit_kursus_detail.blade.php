@@ -1,20 +1,6 @@
 @extends('web.layouts.main')
 
-@section('title', 'Detail Kursus ' . $kursus_unit->kursus->nama_kursus )
-
-@push('style')
-<style>
-    .accordion .card-header:after {
-        font-family: 'FontAwesome';  
-        content: "\f068";
-        float: right; 
-    }
-    .accordion .card-header.collapsed:after {
-        /* symbol for "collapsed" panels */
-        content: "\f067"; 
-    }
-</style>
-@endpush
+@section('title', $kursus_unit->kursus->nama_kursus )
 
 @section('content')
 
@@ -45,206 +31,66 @@
 </section>
 
 
-<div class="container pt-5 pb-6">
+<div class="container py-6">
     <div class="row">
         <div class="col-lg-8">
 
-            <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                        aria-controls="pills-home" aria-selected="true">Deskripsi</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-                        aria-controls="pills-profile" aria-selected="false">Materi</a>
-                </li>
-
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active py-1" id="pills-home" role="tabpanel"
-                    aria-labelledby="pills-home-tab">
-                    <div class="text-block">
-                        <p class="text-muted font-weight-light"> {!! $kursus_unit->kursus->tentang !!}</p>
-                    </div>
-                </div>
-                <div class="tab-pane fade py-2" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="card border-0 shadow-lg">
-                        <div class="card-body">
-                            <div class="container">
-                                <div id="accordion" class="accordion">
-                                    <div class="card mb-0">
-                                        @foreach ($materis as $materi)
-                                        <div class="card-header collapsed" data-toggle="collapse" href="#modul-{{ $materi->bab }}">
-                                            <a class="card-title">
-                                                Modul {{ $materi->bab }} - {{ $materi->judul }}
-                                            </a>
-                                        </div>
-                                        <div id="modul-{{ $materi->bab }}" class="card-body collapse" data-parent="#accordion" >
-                                            {!! $materi->konten !!}
-                                        </div>
-
-                                        @endforeach
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-block ">
-                <h4 class="mb-4">Fasilitas </h4>
-                <div class="row mt-3">
-                    @forelse ($unit->fasilitas as $f)
-                    <div class="col-md-6">
-                        <ul class="list-unstyled text-muted">
-                            <li class="mb-2">
-                                <i class="
-                                   {{ $f->item != '' ? 'fa fa-check' : '' }}
-                                   {{ $f->item == 'wifi' ? 'fa fa-wifi' : '' }}
-                                   {{ $f->item == 'tv' ? 'fa fa-tv' : '' }}
-                                   {{ $f->item == 'toilet' ? 'fa fa-shower' : '' }}
-                                   {{ $f->item == 'komputer' ? 'fa fa-laptop' : '' }}
-                                    text-secondary w-1rem mr-3 text-center"></i>
-                                <span class="text-sm">{{ $f->item }}</span></li>
-                        </ul>
-                    </div>
-                    @empty
-                    <div class="col">
-                        <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
-                            <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
-                            <p>Belum ada fasilitas untuk kursus ini</p>
-                        </div>
-                    </div>
-                    @endforelse
-
-                </div>
+            <div class="text-block mb-2">
+                <h4 class="mb-4">Deskripsi </h4>
+                <p class="text-muted font-weight-light"> {!! $kursus_unit->kursus->tentang !!}</p>
             </div>
 
             <div class="text-block mb-2">
-                <h4 class="mb-3">Galeri </h4>
-                <div class="row gallery ml-n1 mr-n1">
-                    @forelse ($gallery as $item)
-                    @foreach (explode('|', $item->gambar) as $image)
-                    <div class="col-lg-4 col-6 px-1 mb-2">
-                        <a href="/storage/image/{{$image}}" data-fancybox="gallery"
-                            title="{{ $kursus_unit->kursus->nama_kursus }}">
-                            <img src="/storage/image/{{$image}}" alt="" class="img-fluid mt-2"></a>
-                    </div>
-                    @endforeach
+                <h4 class="mb-3">Kurikulum Kursus</h4>
 
-                    @empty
-                    <div class="col">
-                        <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
-                            <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong></h5>
-                            <p>Belum ada galeri untuk kursus ini</p>
+                <!--Accordion wrapper-->
+                <div class="accordion md-accordion mt-2" id="accordionEx" role="tablist" aria-multiselectable="true">
+                    <!-- Accordion card -->
+                    <div class="card border-1">
+                        <!-- Card header -->
+                        @forelse ($materis as $materi)
+                        <div class="card-header" role="tab" id="headingThree3">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx"
+                                href="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+                                <span class="text-muted"> Modul {{ $materi->bab }}</span>
+                                <br>
+                                <span class="mt-2 font-weight-bold text-dark">{{ $materi->judul }}</span> <i
+                                    class="fas fa-angle-down rotate-icon float-right"></i>
+
+                            </a>
                         </div>
-                    </div>
-                    @endforelse
-                </div>
-            </div>
 
-
-
-        </div>
-
-        <div class="col-lg-4">
-
-            <div class="card border-0 shadow-lg">
-                <div class="card-header text-primary text-center">
-                    <h6 class="text-primary text-center">Detail Kursus </h6>
-                </div>
-                <div class="card-body p-4">
-                    <div class="text-block pb-3">
-                        <div class="media align-items-center">
-                            <div class="">
-                                <h6> <a href="#" class="text-reset"></a>
-                                    {{ $kursus_unit->kursus->nama_kursus }}
-                                </h6>
-                                <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
+                        <!-- Card body -->
+                        <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
+                            data-parent="#accordionEx">
+                            <div class="card-body">
+                                {!! $materi->konten !!}
                             </div>
-                            <img src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}" alt=""
-                                width="100" class="ml-3 rounded">
                         </div>
-                    </div>
-
-                    <div class="text-block pt-1 pb-0">
-                        <table class="w-100">
-                            <tr>
-                                <th class="pt-3">Unit Kursus</th>
-                                <td class="font-weight-bold text-right pt-3 text-capitalize">
-                                    {{ $kursus_unit->unit->nama_unit }} </td>
-                            </tr>
-                            <tr>
-                                <th class="pt-3">Type Kursus</th>
-                                <td class="font-weight-bold text-right pt-3 text-capitalize">
-                                    {{ $kursus_unit->type->nama_type }} </td>
-                            </tr>
-                            <tr>
-
-                                <th class="pt-3">Harga</th>
-                                <td class="font-weight-bold text-right pt-3">
-                                    @if ($kursus_unit->biaya_kursus != null)
-                                    @currency($kursus_unit->biaya_kursus).00
-                                    @else
-                                    Harga belum ada
-                                    @endif
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="card-footer bg-light py-2 border-top">
-                    <div class="media align-items-center">
-                        <div class="media-body">
-                            @guest('siswa')
-                            <p class="text-primary text-sm"> Belum punya akun ? </p>
-                            <a href="{{ route('siswa.register') }}" class="btn btn-success btn-block">Register</a>
-                            @endguest
-
-                            @auth('siswa')
-                            @if ($check_kursus != null)
-                            <div class="alert alert-success" role="alert">
-                                <a href="{{ route('user.kursus') }}" class="btn btn-success btn-block">Lihat Kursus</a>
+                        @empty
+                        <div class="col">
+                            <br>
+                            <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                                <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong>
+                                </h5>
+                                <p>Kurikulum kursus masih belum tersedia/</p>
                             </div>
-                            @else
-                            <form action="{{ route('user.pesan', $kursus_unit->id) }}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-primary btn-block btn-rounded-md btn-active">
-                                    Pesan
-                                </button>
-
-                            </form>
-                            @endif
-                            @endauth
-
                         </div>
+                        @endforelse
 
                     </div>
+                    <!-- Accordion card -->
+
                 </div>
+                <!-- Accordion wrapper -->
             </div>
 
             {{-- Jadwal section --}}
-
             <div class="card border-0 shadow-lg mt-3">
-                <div class="card-header text-primary text-center">
-                    <h6 class="text-primary text-center"> </h6>
+                <div class="card-header">
+                    <h6 class="text-primary"> Jadwal Kursus </h6>
                 </div>
                 <div class="card-body p-4">
-                    <div class="text-block pb-3">
-                        <div class="media align-items-center">
-                            <div class="">
-                                <h6> <a href="#" class="text-reset"></a>
-                                    Jadwal Kursus
-                                </h6>
-                            </div>
-                            <img src="{{ Storage::url('public/'. $kursus_unit->kursus->gambar_kursus) }}" alt=""
-                                width="100" class="ml-3 rounded">
-                        </div>
-                    </div>
-
                     <div class="text-block pt-1 pb-0">
                         <table class="w-100">
                             @php
@@ -253,7 +99,7 @@
                             @forelse ($jadwals as $jadwal)
                             <tr>
                                 <th class="pt-3">{{ $init_hari[$jadwal->hari] }}</th>
-                                <td class="text-right pt-3 text-capitalize">
+                                <td class="pt-3 text-capitalize">
                                     {{ substr($jadwal->waktu_mulai, 0,-3) }} -
                                     {{ substr($jadwal->waktu_selesai, 0,-3) }} </td>
                             </tr>
@@ -262,7 +108,7 @@
                                 <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
                                     <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong>
                                     </h5>
-                                    <p>Jadwal masih belum tersedia, silahkan hubungi unit pada kontak diatas.</p>
+                                    <p>Jadwal kursus masih belum tersedia.</p>
                                 </div>
                             </div>
                             @endforelse
@@ -294,6 +140,7 @@
                 </div>
                 @endif
 
+                @auth('siswa')
                 <button type="button" data-toggle="collapse" data-target="#leaveReview" aria-expanded="false"
                     aria-controls="leaveReview" class="btn btn-outline-primary">Review Kursus Ini</button>
                 <div id="leaveReview" class="collapse mt-4">
@@ -301,8 +148,6 @@
                     <form id="contact-form" method="post" action="{{ route('komentar.post', $kursus_unit->id) }}"
                         class="form">
                         @csrf
-
-
                         <div class="form-group">
                             <label for="review" class="form-label">Review</label>
                             <textarea rows="4" name="komentar" id="review" placeholder="Masukkan Review"
@@ -315,10 +160,123 @@
                         <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
                     </form>
                 </div>
+                @endauth
+
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 mt-3">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header text-primary text-center">
+                    <h6 class="text-primary text-center">Detail Kursus </h6>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-block pb-3">
+                        <div class="media align-items-center">
+                            <div class="">
+                                <h6> <a href="#" class="text-reset"></a>
+                                    {{ $kursus_unit->kursus->nama_kursus }}
+                                </h6>
+                                <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-block pt-1 pb-0">
+                        <table class="w-100">
+                            <tr>
+                                <th class="pt-3">Unit Pengelola</th>
+                                <td class="font-weight-bold text-right pt-3 text-capitalize">
+                                    {{ $kursus_unit->unit->nama_unit }} </td>
+                            </tr>
+                            <tr>
+                                <th class="pt-3">Type Kursus</th>
+                                <td class="font-weight-bold text-right pt-3 text-capitalize">
+                                    {{ $kursus_unit->type->nama_type }} </td>
+                            </tr>
+                            <tr>
+
+                                <th class="pt-3">Harga</th>
+                                <td class="font-weight-bold text-right pt-3">
+                                    @if ($kursus_unit->biaya_kursus != null)
+                                    @currency($kursus_unit->biaya_kursus)
+                                    @else
+                                    Harga belum ada
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light py-2 border-top">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            @guest('siswa')
+                            <p class="text-primary text-sm"> Belum punya akun ? </p>
+                            <a href="{{ route('siswa.register') }}" class="btn btn-success btn-block">Register</a>
+                            @endguest
+
+                            @auth('siswa')
+                            @if ($check_kursus != null)
+                            <div class="alert alert-success" role="alert">
+                                <span>Kamu sudah terdaftar di <br> Kursus ini.</span>
+                            </div>
+                            <a href="{{ route('user.kursus') }}" class="btn btn-success btn-block">Lihat Kursus</a>
+                            @else
+                            <form action="{{ route('user.pesan', $kursus_unit->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-primary btn-block btn-rounded-md btn-active">
+                                    Pesan
+                                </button>
+
+                            </form>
+                            @endif
+                            @endauth
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
+            <br>
+
+            <div class="card border-0 shadow">
+                <div class="card-header">
+                    <h6 class="text-primary text-center">Profil Mentor </h6>
+                </div>
+                <div class="card-body p-4">
+                    @forelse ($mentor as $item)
+                    <div class="text-block pb-3">
+                        <div class="media align-items-center">
+                            <img src="{{ Storage::url('public/' . $item->foto) }}" alt="" width="90" height="80"
+                                class="rounded-circle mr-3">
+                            <div class="media-body">
+                                <h6> <a href="detail-rooms.html" class="text-reset">{{ $item->nama_mentor }}</a></h6>
+                                <p class="text-muted text-sm mb-0">{{ $item->kompetensi }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="text-muted font-weight-900 text-sm">
+                            {{ $item->pengalaman }}
+                        </p>
+                    </div>
+                    @empty
+                    <div class="alert alert-info" role="alert">
+                        <span>Belum ada mentor yang terdaftar di kursus ini.</span>
+                    </div>
+                    @endforelse
+
+
+                </div>
+
+            </div>
         </div>
+
     </div>
+</div>
 </div>
 @endsection
 

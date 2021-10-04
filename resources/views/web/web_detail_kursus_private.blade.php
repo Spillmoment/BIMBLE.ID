@@ -24,6 +24,10 @@
             <div class="text-white mb-4 mb-lg-0">
                 <div class="badge badge-pill badge-transparent px-3 py-2 mb-4 text-capitalize">Kursus Private</div>
                 <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
+
+                <div class="text-block">
+                    {!! $kursus->tentang !!}
+                </div>
             </div>
         </div>
     </div>
@@ -32,45 +36,13 @@
 
 <div class="container pt-5 pb-6">
 
-    <div class="row mb-5">
-        <div class="col-lg-8">
-            <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                        aria-controls="pills-home" aria-selected="true">Deskripsi</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
-                        aria-controls="pills-profile" aria-selected="false">Materi</a>
-                </li>
-
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active py-2" id="pills-home" role="tabpanel"
-                    aria-labelledby="pills-home-tab">
-                    <div class="text-block">
-                        {!! $kursus->tentang !!}
-                    </div>
-                </div>
-                <div class="tab-pane fade py-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="card border-0 shadow-lg">
-                        <div class="card-body">
-                            {!! $kursus->materi !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
     <div class="row">
-        <div class="col-lg-8">
-            <div class="text-block">
-                <h4>Pilih Unit Kursus </h4>
-                <div class="row mt-4 mb-2">
+        <div class="col-lg-12">
+            <div class="text-block mb-2">
+                <h4>Pilih Unit Pengelola Kursus</h4>
+                <div class="row mt-5 mb-2">
                     @forelse ($kursus_unit as $item)
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-5">
                         <div class="card h-100 border-0 shadow-lg hover-animate">
                             <div class="card-img-top overflow-hidden gradient-overlay">
                                 <img @if ($item->unit->gambar_unit != null)
@@ -81,7 +53,7 @@
                                 alt="{{ $item->unit->nama_unit }}" class="img-fluid" height="200px"/>
                                 <a href="{{ route('unit.detail.kursus', [$item->unit->slug, $item->kursus->slug, 'type' => 1]) }}"
                                     class="tile-link"></a>
-                               
+
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
