@@ -17,17 +17,12 @@
 @section('content')
 
 <section style="background-image: url('{{ url('assets/images/background-kursus/'. $kursus->background) }}');"
-    class="py-6 d-flex align-items-end dark-overlay bg-cover">
+    class="py-7 d-flex align-items-end dark-overlay bg-cover">
     <div class="container overlay-content">
         <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
             <div class="text-white mb-4 mb-lg-0">
                 <div class="badge badge-pill badge-transparent px-3 py-2 mb-4 text-capitalize">Kursus Kelompok</div>
                 <h1 class="text-shadow verified">{{ $kursus->nama_kursus  }}</h1>
-
-                <div class="text-block">
-                    {!! $kursus->tentang !!}
-                </div>
-
             </div>
         </div>
     </div>
@@ -35,10 +30,19 @@
 
 
 <div class="container pt-5">
+    <div class="row">   
+        <div class="col-9">
+            <h6 class="verified">Kategori: <em>{{ $kursus->kategori->nama_kategori }}</em></h6>
+            <div class="text-block">
+                <h4 class="mt-4 mb-2">Deskripsi </h4>
+                <p class="text-muted font-weight-light">  {!! $kursus->tentang !!} </p>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-8">
             <div class="text-block">
-                <h4 class="mt-5">Pilih Unit Pengelola Kursus</h4>
+                <h4 class="mt-3">Pilih Unit Pengelola</h4>
                 <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4 mt-3">
                     <div class="mr-3">
                         @if (Request::get('startday') != null || Request::get('endday') != null)
