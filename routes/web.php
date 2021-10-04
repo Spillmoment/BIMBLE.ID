@@ -187,5 +187,6 @@ Route::get('/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
 Route::get('/unit/{slug}/kursus/{slug_kursus}', 'Web\UnitController@show_kursus')->name('unit.detail.kursus');
 Route::post('komentar/{id}/post', 'Web\KomentarController@post')->name('komentar.post');
 Route::get('/daftar-unit', 'Web\UnitController@list')->name('unit.list');
+Route::get('/daftar-unit/getAutocomplete','Web\UnitController@getAutocomplete')->name('unit.getAutocomplte');
 Route::get('/daftar/unit', 'Web\UnitController@index')->name('unit.daftar');
 Route::post('/unit/add', 'Web\UnitController@post')->name('unit.add');
