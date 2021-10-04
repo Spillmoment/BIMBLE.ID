@@ -1,6 +1,6 @@
 @extends('web.layouts.main')
 
-@section('title', 'Detail Kursus ' . $kursus_unit->kursus->nama_kursus )
+@section('title', $kursus_unit->kursus->nama_kursus )
 
 @section('content')
 
@@ -48,7 +48,7 @@
                     <!-- Accordion card -->
                     <div class="card border-1">
                         <!-- Card header -->
-                        @foreach ($materis as $materi)
+                        @forelse ($materis as $materi)
                         <div class="card-header" role="tab" id="headingThree3">
                             <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx"
                                 href="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
@@ -59,7 +59,6 @@
 
                             </a>
                         </div>
-                        @endforeach
 
                         <!-- Card body -->
                         <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
@@ -68,6 +67,16 @@
                                 {!! $materi->konten !!}
                             </div>
                         </div>
+                        @empty
+                        <div class="col">
+                            <br>
+                            <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                                <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong>
+                                </h5>
+                                <p>Kurikulum kursus masih belum tersedia/</p>
+                            </div>
+                        </div>
+                        @endforelse
 
                     </div>
                     <!-- Accordion card -->
@@ -99,7 +108,7 @@
                                 <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
                                     <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong>
                                     </h5>
-                                    <p>Jadwal masih belum tersedia, silahkan hubungi unit pada kontak diatas.</p>
+                                    <p>Jadwal kursus masih belum tersedia.</p>
                                 </div>
                             </div>
                             @endforelse
@@ -191,7 +200,7 @@
                                 <th class="pt-3">Harga</th>
                                 <td class="font-weight-bold text-right pt-3">
                                     @if ($kursus_unit->biaya_kursus != null)
-                                    @currency($kursus_unit->biaya_kursus).00
+                                    @currency($kursus_unit->biaya_kursus)
                                     @else
                                     Harga belum ada
                                     @endif
@@ -212,8 +221,9 @@
                             @auth('siswa')
                             @if ($check_kursus != null)
                             <div class="alert alert-success" role="alert">
-                                <a href="{{ route('user.kursus') }}" class="btn btn-success btn-block">Lihat Kursus</a>
+                                <span>Kamu sudah terdaftar di <br> Kursus ini.</span>
                             </div>
+                            <a href="{{ route('user.kursus') }}" class="btn btn-success btn-block">Lihat Kursus</a>
                             @else
                             <form action="{{ route('user.pesan', $kursus_unit->id) }}" method="post">
                                 @csrf
@@ -238,8 +248,8 @@
                     <h6 class="text-primary text-center">Profil Mentor </h6>
                 </div>
                 <div class="card-body p-4">
+                    @forelse ($mentor as $item)
                     <div class="text-block pb-3">
-                        @foreach ($mentor as $item)
                         <div class="media align-items-center">
                             <img src="{{ Storage::url('public/' . $item->foto) }}" alt="" width="90" height="80"
                                 class="rounded-circle mr-3">
@@ -248,12 +258,16 @@
                                 <p class="text-muted text-sm mb-0">{{ $item->kompetensi }}</p>
                             </div>
                         </div>
-                        @endforeach
                         <hr>
                         <p class="text-muted font-weight-900 text-sm">
                             {{ $item->pengalaman }}
                         </p>
                     </div>
+                    @empty
+                    <div class="alert alert-info" role="alert">
+                        <span>Belum ada mentor yang terdaftar di kursus ini.</span>
+                    </div>
+                    @endforelse
 
 
                 </div>
