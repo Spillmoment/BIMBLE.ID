@@ -27,11 +27,27 @@ class UnitController extends Controller
                 ->where('status', '1')
                 ->latest()->paginate(9);
         }
+        
+        if ($request->place) {
+            $unit = Unit::where('alamat', 'like', '%' . $request->place . '%')
+                ->where('status', '1')
+                ->latest()->paginate(9);
+        }
 
         return view('web.web_daftar_unit', [
             'unit' => $unit
         ]);
     }
+
+    public function getAutocomplete(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = Unit::select('id', 'alamat')->where('alamat', 'LIKE', '%'.$cari.'%')->get();
+            return response()->json($data);
+        }
+     }
+  
 
     public function index()
     {
