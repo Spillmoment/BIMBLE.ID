@@ -29,9 +29,8 @@
                         @endforeach
                     </select>
                 </div>
-
-                <button type="submit" class="btn btn-primary"> <i class="fas fa-search mr-1"></i>
-                    Cari Kursus
+                <button type="submit" class="btn btn-primary btn-md">
+                    <i class="fas fa-filter"></i> Filter
                 </button>
             </form>
 
@@ -70,12 +69,12 @@
                         </div>
                         <div class="card-body d-flex align-items-center">
                             <div class="w-100">
-                                <h6 class="card-title"><a
+                                <a class="badge text-primary text-uppercase" style="background: #d1e7ff; font-size: 11px; font-weight: 600; padding-top: 5px; padding-bottom: 5px;">
+                                    {{ $item->kursus->kategori->nama_kategori }}
+                                    </a>
+                                <h6 class="card-title mt-3"><a
                                         href="{{ Request::get('type') == 2 ? route('front.detail.private', $item->kursus->slug) : route('front.detail.kelompok', $item->kursus->slug) }}"
                                         class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a></h6>
-                                <div class="d-flex card-subtitle mb-3">
-                                    <p class="flex-grow-1 mb-0 text-muted text-sm"></p>
-                                </div>
 
                             </div>
                         </div>
