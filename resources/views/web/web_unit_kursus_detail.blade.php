@@ -73,7 +73,7 @@
                             <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
                                 <h5><i class="fa fa-info-circle" aria-hidden="true"></i> <strong> Info! </strong>
                                 </h5>
-                                <p>Kurikulum kursus masih belum tersedia/</p>
+                                <p>Kurikulum kursus masih belum tersedia</p>
                             </div>
                         </div>
                         @endforelse
@@ -168,7 +168,7 @@
 
         <div class="col-lg-4 mt-3">
             <div class="card border-0 shadow-lg">
-                <div class="card-header text-primary text-center">
+                <div class="card-header text-primary text-center bg-gray-200">
                     <h6 class="text-primary text-center">Detail Kursus </h6>
                 </div>
                 <div class="card-body p-4">
@@ -244,7 +244,7 @@
             <br>
 
             <div class="card border-0 shadow">
-                <div class="card-header">
+                <div class="card-header bg-gray-200">
                     <h6 class="text-primary text-center">Profil Mentor </h6>
                 </div>
                 <div class="card-body p-4">
