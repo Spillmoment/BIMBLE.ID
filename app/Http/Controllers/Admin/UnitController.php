@@ -67,8 +67,6 @@ class UnitController extends Controller
     public function store(UnitRequest $request)
     {
         $data = $request->all();
-        $nama_slug = $data['nama_unit'];
-        $data['slug'] = Str::slug($nama_slug, '-');
         $data['password'] = Hash::make($data['password']);
 
         Unit::create($data);
