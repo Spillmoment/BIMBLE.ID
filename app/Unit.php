@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\TutorResetPasswordNotification;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Unit extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
+    use Sluggable;
+
 
     protected $table = 'unit';
     protected $guard = 'unit';
@@ -20,6 +23,15 @@ class Unit extends Authenticatable
         'nama_unit', 'slug', 'alamat', 'latitude', 'longitude', 'deskripsi', 'gambar_unit', 'password',
         'status', 'whatsapp', 'telegram', 'instagram', 'email', 'username', 'bukti_alumni', 'no_telp', 'gambar_unit'
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'nama_unit'
+            ]
+        ];
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -50,7 +62,7 @@ class Unit extends Authenticatable
     {
         return $this->hasMany(KursusUnit::class, 'unit_id', 'id');
     }
-    
+
     public function materi()
     {
         return $this->hasMany(Materi::class, 'unit_id', 'id');
@@ -70,5 +82,4 @@ class Unit extends Authenticatable
     {
         return $this->hasMany(Galeri::class, 'unit_id', 'id');
     }
-    
 }
