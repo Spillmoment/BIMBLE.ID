@@ -46,7 +46,7 @@ class KursusController extends Controller
                         </div>';
                 })
                 ->addColumn('kategori', function ($item) {
-                    return $item->kategori->nama_kategori;
+                    return $item->kategori->nama_kategori ?? '';
                 })
                 ->editColumn('gambar_kursus', function ($item) {
                     return '<img src="' . url('assets/images/kursus/' . $item->gambar_kursus) . '" style="max-height: 40px;"/>';
