@@ -31,6 +31,7 @@ class BannerController extends Controller
         ]);
 
         $banner = Banner::findOrFail($id);
+       
         $data = $request->all();
 
         if (!empty($data['gambar_banner'])) {

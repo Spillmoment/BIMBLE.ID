@@ -19,7 +19,7 @@
     <div class="col-12 mb-4">
         <div class="card border-light shadow-sm components-section">
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data" action="{{route('unit.store')}}">
+                <form method="post" action="{{route('unit.store')}}">
                     @csrf
                     <div class="row mb-4">
                         <div class="col-lg-12 col-sm-6">
@@ -31,6 +31,15 @@
                                     placeholder="Nama Unit">
                                 <div class="invalid-feedback">
                                     {{$errors->first('nama_unit')}}
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="deskripsi">Deskripsi</label>
+                                <textarea name="deskripsi"
+                                    class="form-control {{ $errors->first('deskripsi') ? 'is-invalid' : '' }}"
+                                    id="deskripsi" rows="3" placeholder="Deskripsi">{{old('deskripsi')}}</textarea>
+                                <div class="invalid-feedback">
+                                    {{$errors->first('deskripsi')}}
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -83,16 +92,7 @@
                                     {{$errors->first('instagram')}}
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="username">Username</label>
-                                <input type="text"
-                                    class="form-control {{ $errors->first('username') ? 'is-invalid' : '' }}"
-                                    name="username" id="username" value="{{old('username')}}"
-                                    placeholder="Username Unit">
-                                <div class="invalid-feedback">
-                                    {{$errors->first('username')}}
-                                </div>
-                            </div>
+
                             <div class="mb-3">
                                 <label for="password">Password</label>
                                 <input type="password"

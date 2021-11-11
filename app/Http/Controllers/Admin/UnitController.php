@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UnitRequest;
 use Illuminate\Http\Request;
 use App\Unit;
 use Illuminate\Support\Arr;
@@ -63,24 +64,9 @@ class UnitController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(UnitRequest $request)
     {
-        $request->validate([
-            'nama_unit'             => 'required|min:3|max:100',
-            'deskripsi'             => 'required|min:10',
-            'alamat'                => 'required|min:3|max:200',
-            'email'                 => 'required|email|unique:unit',
-            'whatsapp'              => 'required',
-            'telegram'              => 'required',
-            'instagram'             => 'required',
-            'username'              => 'required|max:100|unique:unit',
-            'password'              => 'required|min:3',
-            'konfirmasi_password'   => 'required|same:password|min:3'
-        ]);
-
         $data = $request->all();
-        $nama_slug = $data['nama_unit'];
-        $data['slug'] = Str::slug($nama_slug, '-');
         $data['password'] = Hash::make($data['password']);
 
         Unit::create($data);
@@ -101,22 +87,8 @@ class UnitController extends Controller
     }
 
 
-    public function update(Request $request, Unit $unit)
+    public function update(UnitRequest $request, Unit $unit)
     {
-        $request->validate([
-            'nama_unit'             => 'required|min:3|max:100',
-            'deskripsi'             => 'required|min:10',
-            'alamat'                => 'required|min:3|max:200',
-            'email'                 => 'required|email|unique:unit,email,' . $unit->id,
-            'gambar_unit'           => 'sometimes|nullable|image|mimes:jpg,jpeg,png,bmp',
-            'username'              => 'required|min:3|max:100|unique:unit,username,' . $unit->id,
-            'whatsapp'              => 'required',
-            'telegram'              => 'required',
-            'instagram'             => 'required',
-            'password'              => 'sometimes|nullable|min:3',
-            'konfirmasi_password'   => 'sometimes|same:password|nullable|min:3',
-            'status'                => 'required',
-        ]);
 
         $data = $request->all();
 
