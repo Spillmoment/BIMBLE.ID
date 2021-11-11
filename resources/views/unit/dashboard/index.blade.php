@@ -214,7 +214,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="mb-3>
+                            <div class="mb-3">
                                 <label for="kecamatan" class="control-label">Kecamatan</label>
                                 <select name="get_kecamatan" id="get_kecamatan" class="form-control {{ $errors->has('get_kecamatan') ? ' is-invalid' : '' }}">
                                     @if (Auth::guard('unit')->user()->alamat != null)
@@ -231,7 +231,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3>
+                            <div class="mb-3">
                                 <label for="desa" class="control-label">Desa</label>
                                 <select name="get_desa" id="get_desa" class="form-control {{ $errors->has('get_desa') ? ' is-invalid' : '' }}">
                                     @if (Auth::guard('unit')->user()->alamat != null)
