@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\KursusUnit;
-use Illuminate\Http\Request;
 use App\SiswaKursus;
 use App\Unit;
 use Illuminate\Support\Facades\Response;
