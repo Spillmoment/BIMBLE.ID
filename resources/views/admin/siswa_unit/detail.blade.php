@@ -31,7 +31,7 @@
                         <li class="breadcrumb-item active" aria-current="page">Halaman Siswa Unit</li>
                     </ol>
                 </nav>
-                <h2 class="h4 mt-3">Table Siswa  {{ $unit->unit->nama_unit }}</h2>
+                <h2 class="h4 mt-3">Table Siswa {{ $unit->unit->nama_unit }}</h2>
             </div>
 
         </div>
@@ -55,7 +55,7 @@
                             <tr>
                                 <td>{{ $item->siswa->nama_siswa }}</td>
                                 <td>
-                                    {{ $item->kursus_unit->kursus->nama_kursus }} 
+                                    {{ $item->kursus_unit->kursus->nama_kursus }}
                                     <br>
                                     <span class="blockquote-footer">{{ $item->kursus_unit->type->nama_type }}</footer>
                                 </td>
@@ -81,18 +81,20 @@
                                         data-target="#modal-file"> <i class="fas fa-eye"></i> Detail
                                     </button>
                                     <!-- Modal Content -->
-                                    <div class="modal fade" id="modal-file" tabindex="-1" role="dialog" aria-labelledby="modal-file"
-                                    aria-hidden="true">
+                                    <div class="modal fade" id="modal-file" tabindex="-1" role="dialog"
+                                        aria-labelledby="modal-file" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h2 class="h6 modal-title">Detail Bukti Upload </h2>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <img src="{{ asset('storage/pembayaran/'.$item->file) }}" width="600" height="450">
+                                                    <img src="{{ asset('storage/pembayaran/'.$item->file) }}"
+                                                        width="600" height="450">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-link text-danger ml-auto"
@@ -107,7 +109,9 @@
                                 </td>
                                 <td>
                                     @if ($item->status_sertifikat == 'sertifikat')
-                                    <a href="{{ route('sertifikat.download', $item->sertifikat) }}" class="btn btn-primary btn-sm "> <i class="fas fa-print"></i> Cetak
+                                    <a href="/storage/sertifikat/{{ $item->sertifikat }}" class="btn btn-primary btn-sm"
+                                        target="_blank">
+                                        <i class="fas fa-print"></i> Cetak
                                     </a>
                                     @else
                                     <button class="btn btn-danger btn-sm "> <i class="fas fa-times"></i>
@@ -117,9 +121,13 @@
                                 </td>
                                 <td>
                                     @if ($item->status_sertifikat == 'sertifikat')
-                                        <a class="btn btn-warning btn-sm" href="{{ route('siswa.unit.confirm_down', $item->id) }}"> <i class="fas fa-check"></i> Hapus Sertifikat </a>
+                                    <a class="btn btn-warning btn-sm"
+                                        href="{{ route('siswa.unit.confirm_down', $item->id) }}"> <i
+                                            class="fas fa-check"></i> Hapus Sertifikat </a>
                                     @else
-                                        <a class="btn btn-primary btn-sm" href="{{ route('siswa.unit.confirm', $item->id) }}"> <i class="fas fa-check"></i> Setujui </a>
+                                    <a class="btn btn-primary btn-sm"
+                                        href="{{ route('siswa.unit.confirm', $item->id) }}"> <i
+                                            class="fas fa-check"></i> Setujui </a>
                                     @endif
                                 </td>
                             </tr>
