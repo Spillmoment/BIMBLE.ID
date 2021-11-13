@@ -34,6 +34,13 @@
                 <h2 class="h4">Table Kategori</h2>
             </div>
 
+            <div class="float-right mt-6">
+                <br>
+                <a href="{{ route('kategori.create') }}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"></i> Tambah Kategori
+                </a>
+            </div>
+
         </div>
         <div class="card border-light shadow-sm components-section">
             <div class="row">
