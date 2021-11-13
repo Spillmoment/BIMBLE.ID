@@ -42,7 +42,7 @@
                         {{$errors->first('email')}}
                     </div>
                 </div>
-            </div> <!-- form-row.// -->
+            </div>
 
             <div class="form-row">
 
@@ -77,6 +77,54 @@
 
             </div>
             <div class="form-row">
+                <div class="col form-group">
+                    <label for="provinsi" class="control-label">provinsi</label>
+                    <select name="get_provinsi" id="get_provinsi" class="form-control {{ $errors->has('get_provinsi') ? ' is-invalid' : '' }}">
+                        {{-- @if (Auth::guard('unit')->user()->alamat != null)
+                            <option value="0">{{ strtok(auth()->user()->alamat, '-') }}</option>
+                        @endif --}}
+
+                        @foreach ($provinsi['provinsi'] as $data)
+                            <option value="{{ $data['id'] }}">{{ $data['nama'] }}</option>
+                        @endforeach
+                    </select>
+                    <div class="invalid-feedback">
+                        {{$errors->first('get_provinsi')}}
+                    </div>
+
+                    <label for="kabupaten" class="control-label mt-3">kabupaten</label>
+                    <select name="get_kabupaten" id="get_kabupaten" class="form-control {{ $errors->has('get_kabupaten') ? ' is-invalid' : '' }}">
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{$errors->first('get_kabupaten')}}
+                    </div>
+                    
+                    <label for="kecamatan" class="control-label mt-3">Kecamatan</label>
+                    <select name="get_kecamatan" id="get_kecamatan" class="form-control {{ $errors->has('get_kecamatan') ? ' is-invalid' : '' }}">
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{$errors->first('get_kecamatan')}}
+                    </div>
+
+                    <label for="desa" class="control-label mt-3">desa</label>
+                    <select name="get_desa" id="get_desa" class="form-control {{ $errors->has('get_desa') ? ' is-invalid' : '' }}">
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                        <option value="">fek</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        {{$errors->first('get_desa')}}
+                    </div>
+                </div>
 
                 <div class="col form-group">
                     <label for="foto" class="form-label">Foto</label>
@@ -87,14 +135,6 @@
                     </div>
                     <div class="invalid-feedback">
                         {{$errors->first('foto')}}
-                    </div>
-                </div>
-
-                <div class="col form-group">
-                    <label for="alamat" class="form-label">Alamat</label>
-                    <textarea readonly rows="4" name="alamat" id="alamat" placeholder="Masukkan Alamat" class="form-control {{ $errors->first('alamat') ? 'is-invalid' : '' }}" />{{old('alamat',Auth::user()->alamat) }}</textarea>
-                    <div class="invalid-feedback">
-                        {{$errors->first('alamat')}}
                     </div>
                 </div>
 
@@ -149,5 +189,32 @@
 
     });
 
+</script>
+
+
+<script>
+    $( document ).ready(function() {
+        // API for alamat kabupaten
+        $(document).on('change','#get_provinsi',function() {
+            let kabupatenId = $(this).val();
+            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='+kabupatenId;
+            let add = " ";
+
+            $.ajax({
+                url: endpoint,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    for(let i=0; i<result.kota_kabupaten.length; i++){
+                        add += '<option value="'+result.kota_kabupaten[i].nama+'">'+result.kota_kabupaten[i].nama+'</option>';
+                    }
+
+                    $('#get_kabupaten').html(" ");
+                    $("#get_kabupaten").append(add);
+
+                }
+            })
+        });
+    });
 </script>
 @endpush

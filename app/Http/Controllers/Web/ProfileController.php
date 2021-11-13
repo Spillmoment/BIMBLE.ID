@@ -11,6 +11,7 @@ use App\Rules\UserOldPassword;
 use App\Kursus;
 use App\Siswa;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 
 class ProfileController extends Controller
 {
@@ -21,7 +22,9 @@ class ProfileController extends Controller
 
     public function profile()
     {
-        return view('web.web_profile');
+        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
+        $provinsi = json_decode($response->getBody(), true); 
+        return view('web.web_profile', compact('provinsi'));
     }
 
     public function pengaturan()
