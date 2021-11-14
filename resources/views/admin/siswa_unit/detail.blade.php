@@ -41,97 +41,18 @@
                     <table class="table table-hover" id="siswaTable">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama Siswa</th>
                                 <th>Kursus</th>
                                 <th>Foto</th>
                                 <th>Status</th>
-                                <th>File</th>
                                 <th>Sertifikat</th>
-                                <th>Action</th>
+                                <th>File</th>
+                                {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($siswa as $item)
-                            <tr>
-                                <td>{{ $item->siswa->nama_siswa }}</td>
-                                <td>
-                                    {{ $item->kursus_unit->kursus->nama_kursus }}
-                                    <br>
-                                    <span class="blockquote-footer">{{ $item->kursus_unit->type->nama_type }}</footer>
-                                </td>
-                                <td><img src="{{ url('storage/siswa/'. $item->siswa->foto) }}" height="70px"
-                                        width="100px"></td>
-                                <td>
-                                    @php
-                                    $sertif = $item->status_sertifikat
-                                    @endphp
-                                    @if ($sertif == 'daftar')
-                                    <button class="btn btn-primary btn-sm">Daftar</button>
-                                    @elseif($sertif == 'terima')
-                                    <button class="btn btn-info btn-sm">Siswa</button>
-                                    @elseif($sertif == 'lulus')
-                                    <button class="btn btn-success btn-sm">Lulus</button>
-                                    @else
-                                    <button class="btn btn-gray btn-sm">Tuntas</button>
-                                    @endif
-                                </td>
-                                <td>
-                                    @isset($item->file)
-                                    <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#modal-file"> <i class="fas fa-eye"></i> Detail
-                                    </button>
-                                    <!-- Modal Content -->
-                                    <div class="modal fade" id="modal-file" tabindex="-1" role="dialog"
-                                        aria-labelledby="modal-file" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h2 class="h6 modal-title">Detail Bukti Upload </h2>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <img src="{{ asset('storage/pembayaran/'.$item->file) }}"
-                                                        width="600" height="450">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-link text-danger ml-auto"
-                                                        data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @else
-                                    N/A
-                                    @endisset
-                                </td>
-                                <td>
-                                    @if ($item->status_sertifikat == 'sertifikat')
-                                    <a href="/storage/sertifikat/{{ $item->sertifikat }}" class="btn btn-primary btn-sm"
-                                        target="_blank">
-                                        <i class="fas fa-print"></i> Cetak
-                                    </a>
-                                    @else
-                                    <button class="btn btn-danger btn-sm "> <i class="fas fa-times"></i>
-                                        Belum tersedia
-                                    </button>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if ($item->status_sertifikat == 'sertifikat')
-                                    <a class="btn btn-warning btn-sm"
-                                        href="{{ route('siswa.unit.confirm_down', $item->id) }}"> <i
-                                            class="fas fa-check"></i> Hapus Sertifikat </a>
-                                    @else
-                                    <a class="btn btn-primary btn-sm"
-                                        href="{{ route('siswa.unit.confirm', $item->id) }}"> <i
-                                            class="fas fa-check"></i> Setujui </a>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
+                            
                         </tbody>
                     </table>
                     <footer class="footer section py-2">
@@ -148,7 +69,7 @@
 @push('scripts')
 <script>
     // AJAX DataTable
-    var datatable = $('#kursusTable').DataTable({
+    var datatable = $('#siswaTable').DataTable({
         processing: true,
         serverSide: true,
         ordering: true,
@@ -163,24 +84,36 @@
                 }
             },
             {
-                data: 'nama_kursus',
-                name: 'nama_kursus'
+                data: 'siswa',
+                name: 'siswa.nama_siswa'
             },
             {
-                data: 'kategori',
-                name: 'kategori.nama_kategori'
+                data: 'kursus',
+                name: 'kursus.nama_kursus'
             },
             {
-                data: 'gambar_kursus',
-                name: 'gambar_kursus'
+                data: 'foto',
+                name: 'foto'
             },
             {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-                width: '20%'
+                data: 'status',
+                name: 'status_sertifikat'
             },
+            {
+                data: 'status_sertifikat',
+                name: 'status_sertifikat'
+            },
+            {
+                data: 'file',
+                name: 'file'
+            },
+            // {
+            //     data: 'action',
+            //     name: 'action',
+            //     orderable: false,
+            //     searchable: false,
+            //     width: '20%'
+            // },
         ],
 
     });
