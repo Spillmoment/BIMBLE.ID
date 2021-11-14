@@ -26,7 +26,7 @@
               alt="">
           <div class="card-body">
               <h5 class="card-title">{{ $item->unit->nama_unit }}</h5>
-              <a href="{{ route('unit-kursus.detail', $item->id) }}" class="btn btn-primary btn-sm float-right my-1">
+              <a href="{{ route('unit-kursus.detail', $item->unit->id) }}" class="btn btn-primary btn-sm float-right my-1">
                   <i class="fas fa-eye"></i> Detail</a>
           </div>
       </div>
