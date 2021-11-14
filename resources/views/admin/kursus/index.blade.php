@@ -31,9 +31,10 @@
                         <li class="breadcrumb-item active" aria-current="page">Halaman Kursus</li>
                     </ol>
                 </nav>
-                <h2 class="h4">Table Kursus</h2>
+                <h2 class="h4">List Kursus</h2>
             </div>
 
+            
             <div class="float-right mt-6">
                 <br>
                 <a href="{{ route('kursus.create') }}" class="btn btn-primary btn-sm">
