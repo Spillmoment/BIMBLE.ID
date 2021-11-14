@@ -94,10 +94,6 @@
 
                     <label for="kabupaten" class="control-label mt-3">kabupaten</label>
                     <select name="get_kabupaten" id="get_kabupaten" class="form-control {{ $errors->has('get_kabupaten') ? ' is-invalid' : '' }}">
-                        <option value="">fek</option>
-                        <option value="">fek</option>
-                        <option value="">fek</option>
-                        <option value="">fek</option>
                     </select>
                     <div class="invalid-feedback">
                         {{$errors->first('get_kabupaten')}}
@@ -105,10 +101,6 @@
                     
                     <label for="kecamatan" class="control-label mt-3">Kecamatan</label>
                     <select name="get_kecamatan" id="get_kecamatan" class="form-control {{ $errors->has('get_kecamatan') ? ' is-invalid' : '' }}">
-                        <option value="">fek</option>
-                        <option value="">fek</option>
-                        <option value="">fek</option>
-                        <option value="">fek</option>
                     </select>
                     <div class="invalid-feedback">
                         {{$errors->first('get_kecamatan')}}
@@ -116,10 +108,6 @@
 
                     <label for="desa" class="control-label mt-3">desa</label>
                     <select name="get_desa" id="get_desa" class="form-control {{ $errors->has('get_desa') ? ' is-invalid' : '' }}">
-                        <option value="">fek</option>
-                        <option value="">fek</option>
-                        <option value="">fek</option>
-                        <option value="">fek</option>
                     </select>
                     <div class="invalid-feedback">
                         {{$errors->first('get_desa')}}
@@ -196,8 +184,8 @@
     $( document ).ready(function() {
         // API for alamat kabupaten
         $(document).on('change','#get_provinsi',function() {
-            let kabupatenId = $(this).val();
-            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='+kabupatenId;
+            let provinsiId = $(this).val();
+            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='+provinsiId;
             let add = " ";
 
             $.ajax({
@@ -206,7 +194,7 @@
                 dataType: 'json',
                 success: function(result){
                     for(let i=0; i<result.kota_kabupaten.length; i++){
-                        add += '<option value="'+result.kota_kabupaten[i].nama+'">'+result.kota_kabupaten[i].nama+'</option>';
+                        add += '<option value="'+result.kota_kabupaten[i].nama+'" data-kabupaten-id="'+result.kota_kabupaten[i].id+'">'+result.kota_kabupaten[i].nama+'</option>';
                     }
 
                     $('#get_kabupaten').html(" ");
@@ -215,6 +203,57 @@
                 }
             })
         });
+
+        // API for alamat kecamatan
+        $(document).on('change','#get_kabupaten',function() {
+            let kabupatenId = $(this).find(':selected').data('kabupaten-id')
+            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota='+kabupatenId;
+            let add = " ";
+
+            $.ajax({
+                url: endpoint,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    for(let i=0; i<result.kecamatan.length; i++){
+                        add += '<option value="'+result.kecamatan[i].nama+'" data-kecamatan-id="'+result.kecamatan[i].id+'">'+result.kecamatan[i].nama+'</option>';
+                    }
+
+                    $('#get_kecamatan').html(" ");
+                    $("#get_kecamatan").append(add);
+
+                }
+            })
+        });
+
+        // API for alamat desa
+        $(document).on('change','#get_kecamatan',function() {
+            let kecamatanId = $(this).find(':selected').data('kecamatan-id')
+            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan='+kecamatanId;
+            let add = " ";
+
+            $.ajax({
+                url: endpoint,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    for(let i=0; i<result.kelurahan.length; i++){
+                        add += '<option value="'+result.kelurahan[i].nama+'">'+result.kelurahan[i].nama+'</option>';
+                    }
+
+                    $('#get_desa').html(" ");
+                    $("#get_desa").append(add);
+
+                }
+            })
+        });
+
+        // If data exist
+        let data_provinsi = "{{ Auth::user()->alamat_province }}";
+        let data_kabupaten = "{{ Auth::user()->alamat_district }}";
+        let data_kecamatan = "{{ Auth::user()->alamat_sub_district }}";
+        let data_desa = "{{ Auth::user()->alamat_village }}";
+
     });
 </script>
 @endpush
