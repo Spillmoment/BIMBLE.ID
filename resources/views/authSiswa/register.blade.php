@@ -38,8 +38,8 @@
 
                                 <div class="form-check form-check-inline">
                                     <label for="jenis_kelamin">
-                                        <input type="radio" name="jenis_kelamin" value="L" id="jenis_kelamin"
-                                            {{!old('jenis_kelamin') ? 'checked' : ''}}> Laki-Laki
+                                        <input type="radio" name="jenis_kelamin" value="L" id="jenis_kelamin" checked
+                                            {{old('jenis_kelamin') ? 'checked' : ''}}> Laki-Laki
                                         <input type="radio" name="jenis_kelamin" value="P" id="jenis_kelamin"
                                             {{old('jenis_kelamin') ? 'checked' : ''}}> Perempuan
                                     </label>
@@ -60,6 +60,21 @@
                                     placeholder="Masukkan Alamat Email">
 
                                 @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="no_telp" class="form-label">Nomor Telephone</label>
+
+                                <input id="no_telp" type="number" class="form-control @error('no_telp') is-invalid @enderror"
+                                    name="no_telp" value="{{ old('no_telp') }}" required
+                                    placeholder="Masukkan No Telp">
+
+                                @error('no_telp')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
