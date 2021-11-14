@@ -12,7 +12,7 @@ class KomentarController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Komentar::query()->with(['kursus_unit'])
+            $query = Komentar::query()->with(['kursus_unit.unit', 'kursus_unit.kursus'])
                 ->latest();
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -47,7 +47,7 @@ class KomentarController extends Controller
                         return $kur->unit->nama_unit;
                     })->implode("");
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action', 'kursus', 'unit'])
                 ->make();
         }
 
