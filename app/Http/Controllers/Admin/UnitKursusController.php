@@ -23,8 +23,7 @@ class UnitKursusController extends Controller
     public function detail($id) {
     
         $kursus_unit = KursusUnit::with(['unit','kursus'])
-            ->where('id',$id)
-            ->groupBy('kursus_id')
+            ->where('unit_id',$id)
             ->get();
         
         
