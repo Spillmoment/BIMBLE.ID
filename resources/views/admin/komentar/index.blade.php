@@ -85,11 +85,11 @@
             },
             {
                 data: 'kursus',
-                name: 'kursus.nama_kursus'
+                name: 'kursus_unit.kursus.nama_kursus'
             },
             {
                 data: 'unit',
-                name: 'unit.nama_unit'
+                name: 'kursus_unit.unit.nama_unit'
             },
             {
                 data: 'action',
