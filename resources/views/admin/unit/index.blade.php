@@ -34,6 +34,13 @@
                 <h2 class="h4">Table Unit</h2>
             </div>
 
+            <div class="float-right mt-6">
+                <br>
+                <a href="{{ route('unit.create') }}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"></i> Tambah Unit
+                </a>
+            </div>
+
         </div>
         <div class="card border-light shadow-sm components-section">
             <div class="row">

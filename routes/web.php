@@ -51,8 +51,10 @@ Route::prefix('manager')
         Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
         Route::get('siswa-unit/{id}/confirm', 'Admin\SiswaUnitController@confirm')->name('siswa.unit.confirm');
         Route::get('siswa-unit/{id}/confirm_down', 'Admin\SiswaUnitController@confirm_down')->name('siswa.unit.confirm_down');
+        
         // Banner
         Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
+        
         // Pendaftar Unit
         Route::get('pendaftar/{id}/status', 'Admin\PendaftarUnitController@setStatus')
             ->name('pendaftar-unit.status');
@@ -60,6 +62,12 @@ Route::prefix('manager')
             ->name('download');
         Route::resource('pendaftar-unit', 'Admin\PendaftarUnitController')
             ->only(['index', 'show', 'destroy']);
+
+        // Unit Kursus
+        Route::get('unit-kursus', 'Admin\UnitKursusController@index')
+            ->name('unit-kursus.index');
+        Route::get('unit-kursus/{id}', 'Admin\UnitKursusController@detail')
+            ->name('unit-kursus.detail');
     });
 
 

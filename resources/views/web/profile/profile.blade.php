@@ -66,12 +66,12 @@
                 </div>
 
                 <div class="col form-group">
-                    <label for="username" class="form-label"> Username</label>
-                    <input name="username" id="username" type="text" placeholder="Masukkan Username"
-                        class="form-control {{ $errors->first('username') ? 'is-invalid' : '' }}"
-                        readonly value="{{old('username',  Auth::user()->username) }}">
+                    <label for="no_telp" class="form-label"> No Telp</label>
+                    <input name="no_telp" id="no_telp" type="text" placeholder="Masukkan No Telp"
+                        class="form-control {{ $errors->first('no_telp') ? 'is-invalid' : '' }}"
+                        readonly value="{{old('no_telp',  Auth::user()->no_telp) }}">
                     <div class="invalid-feedback">
-                        {{$errors->first('username')}}
+                        {{$errors->first('no_telp')}}
                     </div>
                 </div>
 
@@ -163,14 +163,14 @@
         $('#ubah').on('click', function() {
 				$('#nama_lengkap').prop('readonly', false)
 				$('#email').prop('readonly', false)
-				$('#username').prop('readonly', false)
+				$('#no_telp').prop('readonly', false)
 				$('#alamat').prop('readonly', false)
 			});
 
 			$('button[type="reset"]').on('click', function() {
 				$('#nama_lengkap').prop('readonly', true)
 				$('#email').prop('readonly', true)
-				$('#username').prop('readonly', true)
+				$('#no_telp').prop('readonly', true)
 				$('#alamat').prop('readonly', true)
 				$('#foto').prop('readonly', true)
 			});

@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\AuthSiswa;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Siswa;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -24,11 +21,9 @@ class RegisterController extends Controller
         $request->validate([
             'nama_siswa'    => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:L,P',
-            'agama'         => 'required|string|max:255',
-            'alamat'        => 'required|string|max:255',
             'foto'          => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'username'      => 'required|string|max:255|unique:siswa',
             'email'         => 'required|string|email|max:255|unique:siswa',
+            'no_telp'       => 'required|between:9,13|unique:siswa',
             'password'      => 'required|string|min:3|confirmed',
         ]);
 
@@ -44,11 +39,9 @@ class RegisterController extends Controller
             $create_siswa = Siswa::create([
                 'nama_siswa' => $request->nama_siswa,
                 'jenis_kelamin' => $request->jenis_kelamin,
-                'agama' => $request->agama,
-                'alamat' => $request->alamat,
                 'foto' => $fileName,
-                'username' => $request->username,
                 'email' => $request->email,
+                'no_telp' => $request->no_telp,
                 'password' => Hash::make($request->password),
             ]);
         }

@@ -33,7 +33,7 @@
                           <img class="user-avatar md-avatar rounded-circle" alt="Image placeholder"
                               src="https://aitec.polije.ac.id/wp-content/plugins/elementskit/widgets/pinterest-feed/assets/images/profile-thumbnail.png">
                           <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
-                              <span class="mb-0 font-small font-weight-bold">{{ Auth::user()->nama }}</span>
+                              <span class="mb-0 font-small font-weight-bold">{{ Auth::user()->nama ?? '' }}</span>
                           </div>
                       </div>
                   </a>

@@ -38,12 +38,12 @@
         <div class="row">
             <div class="col-12">
 
-                @include('admin.layouts._sidebar-manager')
+                @include('admin.layouts.sidebar-manager')
 
                 <main class="content">
 
                 
-                @include('admin.layouts._header-manager')
+                @include('admin.layouts.header-manager')
                   
 
                     @yield('content')

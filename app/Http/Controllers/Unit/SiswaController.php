@@ -53,7 +53,7 @@ class SiswaController extends Controller
                 ->addColumn('kursus', function ($item) {
                     return $item->kursus_unit->kursus->nama_kursus;
                 })
-                ->editColumn('status_sertifikat', function ($item) {
+                ->editColumn('status', function ($item) {
                     switch ($item->status_sertifikat) {
                         case 'terima':
                             return '<span class="btn btn-primary btn-sm">Siswa</span>';
