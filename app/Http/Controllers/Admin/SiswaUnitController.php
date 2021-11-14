@@ -9,6 +9,8 @@ use App\Unit;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+use Yajra\DataTables\DataTables;
+
 
 class SiswaUnitController extends Controller
 {
@@ -31,7 +33,10 @@ class SiswaUnitController extends Controller
 
     public function detail_siswa($unit_id)
     {
-        $siswa = SiswaKursus::with(['siswa', 'kursus_unit', 'kursus_unit.unit'])
+        $unit = KursusUnit::with('unit')->where('unit_id', $unit_id)->first();
+
+        if (request()->ajax()) {
+            $query = SiswaKursus::with(['siswa', 'kursus_unit', 'kursus_unit.unit'])
             ->whereHas('kursus_unit.unit', function ($q) use ($unit_id) {
                 $q->where('unit_id', $unit_id);
             })
@@ -39,13 +44,77 @@ class SiswaUnitController extends Controller
                 $q->where('status_sertifikat', 'lulus')
                     ->orWhere('status_sertifikat', 'sertifikat');
             })
-            ->groupBy('siswa_id', 'kursus_unit_id')
-            ->paginate(9);
+            ->groupBy('siswa_id', 'kursus_unit_id');
 
-        $unit = KursusUnit::with('unit')->where('unit_id', $unit_id)->first();
+            return DataTables::of($query)
+                ->addColumn('action', function ($item) {
+                    return
+                        '<div class="btn-group">
+                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <span class="icon icon-sm">
+                                    <span class="fas fa-ellipsis-h icon-dark"></span>
+                                </span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
+                                <a class="dropdown-item" href="' . route('kursus.show', $item->id) . '"><span
+                                        class="fas fa-eye mr-2"></span>Detail</a>
+                                
+                                <form action="' . route('kursus.destroy', $item->id) . '" method="POST">
+                                    ' . method_field('delete') . csrf_field() . '
+                                    <button id="deleteButton" type="submit" class="dropdown-item text-danger" data-name="' . $item->nama_kursus .  '">
+                                        <span class="fas fa-trash-alt mr-2"></span>Hapus</a>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>';
+                })
+                ->addColumn('siswa', function ($item) {
+                    return $item->siswa->nama_siswa ?? '';
+                })
+                ->addColumn('kursus', function ($item) {
+                    return $item->kursus_unit->kursus->nama_kursus ?? '';
+                })
+                ->editColumn('foto', function ($item) {
+                    return '<img src="' . url('storage/siswa/'. $item->siswa->foto) . '" style="max-height: 40px;"/>';
+                })
+                ->editColumn('status', function ($item) {
+                    switch ($item->status_sertifikat) {
+                        case 'daftar':
+                            return ' <button class="btn btn-primary btn-sm">Daftar</button>';    
+                            break;
+                        case 'terima':
+                            return  '<button class="btn btn-info btn-sm">Siswa</button>';
+                            break;
+                        case 'lulus':
+                            return '<button class="btn btn-success btn-sm">Lulus</button>';
+                            break;
+                        default:
+                            return ' <button class="btn btn-gray btn-sm">Tuntas</button>';
+                            break;
+                    }
+                })
+                ->editColumn('status_sertifikat',function($item) {
+                    if ($item->status_sertifikat == 'sertifikat') {
+                        return '<a class="btn btn-warning btn-sm"
+                        href="' . route('siswa.unit.confirm_down', $item->id) . '"> <i
+                            class="fas fa-check"></i> Hapus Sertifikat </a>';
+                            }
+                    else {
+                        return '<a class="btn btn-primary btn-sm"
+                        href="' . route('siswa.unit.confirm', $item->id) . '"> <i
+                        class="fas fa-check"></i> Setujui </a>';
+                    }
+                    })
+                ->editColumn('file',function($item) {
+                    return view('admin.siswa_unit.modal',['item' => $item]);
+                })
+                ->rawColumns(['action', 'foto','status','status_sertifikat','file'])
+                ->make();
+        }
 
         return view('admin.siswa_unit.detail', [
-            'siswa' => $siswa,
             'unit'  => $unit
         ]);
     }
@@ -87,4 +156,6 @@ class SiswaUnitController extends Controller
         $filepath = storage_path() . '/' . 'app' . '/public/sertifikat/' . $filename;
         return Response::download($filepath);
     }
+
+    
 }
