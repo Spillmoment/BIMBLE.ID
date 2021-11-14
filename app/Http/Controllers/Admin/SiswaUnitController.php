@@ -33,18 +33,18 @@ class SiswaUnitController extends Controller
 
     public function detail_siswa($unit_id)
     {
-        $unit = KursusUnit::with('unit')->where('unit_id', $unit_id)->first();
+        $unit = KursusUnit::with('unit', 'kursus')->where('unit_id', $unit_id)->first();
 
         if (request()->ajax()) {
-            $query = SiswaKursus::with(['siswa', 'kursus_unit', 'kursus_unit.unit'])
-            ->whereHas('kursus_unit.unit', function ($q) use ($unit_id) {
-                $q->where('unit_id', $unit_id);
-            })
-            ->where(function ($q) {
-                $q->where('status_sertifikat', 'lulus')
-                    ->orWhere('status_sertifikat', 'sertifikat');
-            })
-            ->groupBy('siswa_id', 'kursus_unit_id');
+            $query = SiswaKursus::with(['siswa', 'kursus_unit.kursus', 'kursus_unit.unit'])
+                ->whereHas('kursus_unit.unit', function ($q) use ($unit_id) {
+                    $q->where('unit_id', $unit_id);
+                })
+                ->where(function ($q) {
+                    $q->where('status_sertifikat', 'lulus')
+                        ->orWhere('status_sertifikat', 'sertifikat');
+                })
+                ->groupBy('siswa_id', 'kursus_unit_id');
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -77,12 +77,12 @@ class SiswaUnitController extends Controller
                     return $item->kursus_unit->kursus->nama_kursus ?? '';
                 })
                 ->editColumn('foto', function ($item) {
-                    return '<img src="' . url('storage/siswa/'. $item->siswa->foto) . '" style="max-height: 40px;"/>';
+                    return '<img src="' . url('storage/siswa/' . $item->siswa->foto) . '" style="max-height: 40px;"/>';
                 })
                 ->editColumn('status', function ($item) {
                     switch ($item->status_sertifikat) {
                         case 'daftar':
-                            return ' <button class="btn btn-primary btn-sm">Daftar</button>';    
+                            return ' <button class="btn btn-primary btn-sm">Daftar</button>';
                             break;
                         case 'terima':
                             return  '<button class="btn btn-info btn-sm">Siswa</button>';
@@ -95,22 +95,21 @@ class SiswaUnitController extends Controller
                             break;
                     }
                 })
-                ->editColumn('status_sertifikat',function($item) {
+                ->editColumn('status_sertifikat', function ($item) {
                     if ($item->status_sertifikat == 'sertifikat') {
                         return '<a class="btn btn-warning btn-sm"
                         href="' . route('siswa.unit.confirm_down', $item->id) . '"> <i
                             class="fas fa-check"></i> Hapus Sertifikat </a>';
-                            }
-                    else {
+                    } else {
                         return '<a class="btn btn-primary btn-sm"
                         href="' . route('siswa.unit.confirm', $item->id) . '"> <i
                         class="fas fa-check"></i> Setujui </a>';
                     }
-                    })
-                ->editColumn('file',function($item) {
-                    return view('admin.siswa_unit.modal',['item' => $item]);
                 })
-                ->rawColumns(['action', 'foto','status','status_sertifikat','file'])
+                ->editColumn('file', function ($item) {
+                    return view('admin.siswa_unit.modal', ['item' => $item]);
+                })
+                ->rawColumns(['action', 'siswa', 'kursus', 'foto', 'status', 'status_sertifikat', 'file'])
                 ->make();
         }
 
@@ -156,6 +155,4 @@ class SiswaUnitController extends Controller
         $filepath = storage_path() . '/' . 'app' . '/public/sertifikat/' . $filename;
         return Response::download($filepath);
     }
-
-    
 }
