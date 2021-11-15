@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                     <footer class="footer section py-2">
@@ -89,11 +89,11 @@
             },
             {
                 data: 'kursus',
-                name: 'kursus.nama_kursus'
+                name: 'kursus_unit.kursus.nama_kursus'
             },
             {
                 data: 'foto',
-                name: 'foto'
+                name: 'siswa.foto'
             },
             {
                 data: 'status',

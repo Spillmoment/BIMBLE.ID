@@ -94,9 +94,9 @@
                             <a class="nav-link" href="{{ route('pendaftar-unit.index') }}"><span>Pendaftar
                                     Unit</span></a>
                         </li>
-                        {{-- <li class="nav-item {{ (Request::route()->getName() == 'unit.kursus') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('unit.kursus') }}"><span>Unit Kursus</span></a>
-                        </li> --}}
+                        <li class="nav-item {{ (Request::route()->getName() == 'unit-kursus.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('unit-kursus.index') }}"><span>Unit Kursus</span></a>
+                        </li>
                     </ul>
                 </div>
             </li>

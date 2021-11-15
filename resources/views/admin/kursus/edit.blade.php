@@ -98,23 +98,20 @@
                             <div class="mb-3">
                                 <label for="my-input">Status</label>
 
-                                <div class="form-check" style="font-size: 17px">
+                                <div class="form-check-label">
                                     <label class="form-check-label" for="active">Aktif </label>
-                                    <span class="ml-4">
+                                 
                                         <input {{ $kursus->status == 'aktif' ? "checked" : ""}} value="1" name="status"
-                                            type="radio" class="form-check-input mt-2" id="active">
-                                    </span>
-
+                                            type="radio" class="form-check-input" id="active">
                                     <label class="form-check-label" for="inactive">Nonaktif </label>
-                                    <span class="ml-4">
-                                        <input {{$kursus->status == 'nonaktif' ? "checked" : ""}} value="0"
-                                            name="status" type="radio" class="form-check-input mt-2" id="inactive">
-                                    </span>
+                                 
+                                        <input {{ $kursus->status == 'nonaktif' ? "checked" : ""}} value="0"
+                                            name="status" type="radio" class="form-check-input" id="inactive">
 
                                 </div>
-                                <button type="submit" class="btn btn-block btn-primary">
-                                    Simpan</button>
                             </div>
+                            <button type="submit" class="btn btn-block btn-primary">
+                                Simpan</button>
                         </div>
                     </div>
 

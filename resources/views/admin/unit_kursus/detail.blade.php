@@ -1,32 +1,103 @@
 @extends('admin.layouts.app-manager')
 
-@section('title', 'Admin - Halaman Detail Unit Kursus')
+@section('title', 'Admin - Halaman Kursus Unit')
 
 @section('content')
 
+@if (session('status'))
+@push('scripts')
+<script>
+    swal({
+        title: "Berhasil",
+        text: "{{ session('status') }}",
+        icon: "success",
+        button: false,
+        timer: 3000
+    });
+
+</script>
+@endpush
+@endif
+
 <div class="row">
-  <div class="mb-3 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
-      <div class="d-block mb-md-0 ">
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-              <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                  <li class="breadcrumb-item"><a href="#"><span class="fas fa-landmark"></span></a></li>
-                  <li class="breadcrumb-item"><a href="#">Detail Unit Kursus</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Halaman Detail Unit Kursus</li>
-              </ol>
-          </nav>
-      </div>
-  </div>
+    <div class="col-12 mb-4">
 
-  <div class="col-12">
-    <ul>
-      <li>
-        @foreach ($query as $item)
-        {{ $item->kursus->nama_kursus }}
-        @endforeach
-      </li>
-    </ul>
-  </div>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="#">Kursus Unit</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Halaman Kursus Unit</li>
+                    </ol>
+                </nav>
+                <h2 class="h4">List Kursus Unit</h2>
+            </div>
 
+        </div>
+        <div class="card border-light shadow-sm components-section">
+            <div class="row">
+                <div class="card-body">
+                    <table class="table table-hover" id="kursusUnitTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Kursus</th>
+                                <th>Kategori</th>
+                                <th>Gambar Kursus</th>
+                                <th>Biaya Kursus</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <footer class="footer section py-2">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection
+@push('scripts')
+<script>
+    // AJAX DataTable
+    var datatable = $('#kursusUnitTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: true,
+        ajax: {
+            url: '{!! url()->current() !!}',
+        },
+        columns: [{
+                "data": 'id',
+                "sortable": false,
+                render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
+            {
+                data: 'kursus',
+                name: 'kursus.nama_kursus'
+            },
+            {
+                data: 'kategori',
+                name: 'kursus.kategori.nama_kategori',
+            },
+            {
+                data: 'gambar_kursus',
+                name: 'kursus.gambar_kursus'
+            },
+            {
+                data: 'biaya_kursus',
+                name: 'biaya_kursus'
+            }
+        ],
+
+    });
+
+</script>
+@endpush
