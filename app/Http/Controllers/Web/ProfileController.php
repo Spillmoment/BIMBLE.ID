@@ -34,15 +34,16 @@ class ProfileController extends Controller
 
     public function update_profile(Request $request, $id)
     {
-
         $request->validate([
             'nama_siswa'    => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:L,P',
-            // 'agama'         => 'required|string|max:255',
             'foto'          => 'nullable|sometimes|image|mimes:jpeg,png,jpg|max:2048',
-            'username'      => 'required|string|max:255|unique:siswa,username,' . $id,
             'email'         => 'required|string|email|max:255|unique:siswa,email,' . $id,
-            'alamat'        => 'required'
+            'no_telp'       => 'required|between:9,13|unique:siswa' . $id,
+            'get_provinsi'  => 'required',
+            'get_kabupaten' => 'required',
+            'get_kecamatan' => 'required',
+            'get_desa'      => 'required'
         ]);
 
         $user = Siswa::findOrFail($id);
@@ -57,18 +58,26 @@ class ProfileController extends Controller
             $user->update([
                 'nama_siswa' => $request->nama_siswa,
                 'email' => $request->email,
+                'no_telp' => $request->no_telp,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'username' => $request->username,
-                'alamat' => $request->alamat,
+                'alamat_province' => $request->get_provinsi,
+                'alamat_district' => $request->get_kabupaten,
+                'alamat_sub_district' => $request->get_kecamatan,
+                'alamat_village' => $request->get_desa,
                 'foto' => $fileName,
             ]);
         } else {
             $user->update([
                 'nama_siswa' => $request->nama_siswa,
                 'email' => $request->email,
+                'no_telp' => $request->no_telp,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'username' => $request->username,
-                'alamat' => $request->alamat,
+                'alamat_province' => $request->get_provinsi,
+                'alamat_district' => $request->get_kabupaten,
+                'alamat_sub_district' => $request->get_kecamatan,
+                'alamat_village' => $request->get_desa,
             ]);
         }
 
