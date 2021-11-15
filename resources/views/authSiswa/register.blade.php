@@ -53,6 +53,62 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="provinsi" class="form-label">Provinsi</label>
+
+                                <select name="get_provinsi" id="get_provinsi" class="form-control @error('get_provinsi') is-invalid @enderror">
+                                    <option value="">Pilih Provinsi</option>
+                                    @foreach ($provinsi['provinsi'] as $data)
+                                        <option value="{{ $data['id'].'.'.$data['nama'] }}" data-provinsi-id="{{ $data['id'] }}">{{ $data['nama'] }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('get_provinsi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kabupaten" class="form-label">Kabupaten</label>
+
+                                <select name="get_kabupaten" id="get_kabupaten" class="form-control @error('get_kabupaten') is-invalid @enderror">
+                                </select>
+
+                                @error('get_kabupaten')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kecamatan" class="form-label">Kecamatan</label>
+
+                                <select name="get_kecamatan" id="get_kecamatan" class="form-control @error('get_kecamatan') is-invalid @enderror">
+                                </select>
+
+                                @error('get_kecamatan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="desa" class="form-label">Desa</label>
+
+                                <select name="get_desa" id="get_desa" class="form-control @error('get_desa') is-invalid @enderror">
+                                </select>
+
+                                @error('get_desa')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="email" class="form-label">Alamat Email</label>
 
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -132,5 +188,74 @@
 
     </div>
 </div>
-@include('web.layouts.script')
+
 @include('web.layouts.footer')
+@include('web.layouts.script')
+
+<script>
+    $( document ).ready(function() {
+        // API for alamat kabupaten
+        $(document).on('change','#get_provinsi',function() {
+            let provinsiId = $(this).find(':selected').data('provinsi-id');
+            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='+provinsiId;
+            let add = " ";
+
+            $.ajax({
+                url: endpoint,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    for(let i=0; i<result.kota_kabupaten.length; i++){
+                        add += '<option value="'+result.kota_kabupaten[i].id+'.'+result.kota_kabupaten[i].nama+'" data-kabupaten-id="'+result.kota_kabupaten[i].id+'">'+result.kota_kabupaten[i].nama+'</option>';
+                    }
+
+                    $('#get_kabupaten').html(" ");
+                    $("#get_kabupaten").append('<option></option>'+add);
+                }
+            })
+        });
+
+        // API for alamat kecamatan
+        $(document).on('change','#get_kabupaten',function() {
+            let kabupatenId = $(this).find(':selected').data('kabupaten-id')
+            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota='+kabupatenId;
+            let add = " ";
+
+            $.ajax({
+                url: endpoint,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    for(let i=0; i<result.kecamatan.length; i++){
+                        add += '<option value="'+result.kecamatan[i].id+'.'+result.kecamatan[i].nama+'" data-kecamatan-id="'+result.kecamatan[i].id+'">'+result.kecamatan[i].nama+'</option>';
+                    }
+
+                    $('#get_kecamatan').html(" ");
+                    $("#get_kecamatan").append('<option></option>'+add);
+                }
+            })
+        });
+
+        // API for alamat desa
+        $(document).on('change','#get_kecamatan',function() {
+            let kecamatanId = $(this).find(':selected').data('kecamatan-id')
+            let endpoint = 'https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan='+kecamatanId;
+            let add = " ";
+
+            $.ajax({
+                url: endpoint,
+                contentType: "application/json",
+                dataType: 'json',
+                success: function(result){
+                    for(let i=0; i<result.kelurahan.length; i++){
+                        add += '<option value="'+result.kelurahan[i].id+'.'+result.kelurahan[i].nama+'">'+result.kelurahan[i].nama+'</option>';
+                    }
+
+                    $('#get_desa').html(" ");
+                    $("#get_desa").append('<option></option>'+add);
+                }
+            })
+        });
+    });
+</script>
+
