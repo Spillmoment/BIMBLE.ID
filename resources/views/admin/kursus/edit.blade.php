@@ -100,13 +100,13 @@
 
                                 <div class="form-check-label">
                                     <label class="form-check-label" for="active">Aktif </label>
-                                 
-                                        <input {{ $kursus->status == 'aktif' ? "checked" : ""}} value="1" name="status"
-                                            type="radio" class="form-check-input" id="active">
+
+                                    <input {{ $kursus->status == 'aktif' ? "checked" : ""}} value="1" name="status"
+                                        type="radio" class="form-check-input" id="active">
                                     <label class="form-check-label" for="inactive">Nonaktif </label>
-                                 
-                                        <input {{ $kursus->status == 'nonaktif' ? "checked" : ""}} value="0"
-                                            name="status" type="radio" class="form-check-input" id="inactive">
+
+                                    <input {{ $kursus->status == 'nonaktif' ? "checked" : ""}} value="0" name="status"
+                                        type="radio" class="form-check-input" id="inactive">
 
                                 </div>
                             </div>
