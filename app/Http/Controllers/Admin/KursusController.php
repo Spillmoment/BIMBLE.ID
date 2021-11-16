@@ -7,6 +7,7 @@ use App\Kursus;
 use App\Http\Requests\KursusRequest;
 use Illuminate\Support\Str;
 use App\GaleriKursus;
+use App\Http\Traits\KursusImageTraits;
 use App\Kategori;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\File;
@@ -14,6 +15,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class KursusController extends Controller
 {
+    use KursusImageTraits;
     public function index()
     {
 
@@ -58,6 +60,7 @@ class KursusController extends Controller
         return view('admin.kursus.index');
     }
 
+
     public function create()
     {
         $kategori = Kategori::latest()->get();
@@ -72,20 +75,11 @@ class KursusController extends Controller
         $nama_kursus = $data['nama_kursus'];
 
         $data['slug'] = Str::slug($nama_kursus, '-');
-        $data['gambar_kursus'] = $request->file('gambar_kursus');
-        $nama_gambar = rand(1, 999) . "-" . $data['gambar_kursus']->getClientOriginalName();
-        $data['gambar_kursus'] = Image::make($data['gambar_kursus']->getRealPath());
-        $data['gambar_kursus']->resize(500, 300)->save(public_path('assets/images/kursus/' . $nama_gambar));
-        $data['gambar_kursus'] = $nama_gambar;
 
-        $data['background'] = $request->file('gambar_kursus');
-        $nama_back = rand(1, 999) . "-" . $data['background']->getClientOriginalName();
-        $data['background'] = Image::make($data['background']->getRealPath());
-        $data['background']->save(public_path('assets/images/background-kursus/' . $nama_back));
-        $data['background'] = $nama_back;
+        $data['gambar_kursus'] = $this->uploadImage($request, 'gambar_kursus');
+        $data['background'] = $this->uploadImage($request, 'background');
 
         $data['status'] = 'aktif';
-
         Kursus::create($data);
         return redirect()->route('kursus.index')
             ->with(['status' => 'Data Kursus Berhasil Ditambahkan']);
@@ -120,21 +114,13 @@ class KursusController extends Controller
             File::delete(public_path('assets/images/kursus/' . $kursus->gambar_kursus));
             File::delete(public_path('assets/images/background-kursus/' . $kursus->background));
 
-            $nama_foto = rand(1, 999) . "-" . $data['gambar_kursus']->getClientOriginalName();
-            $data['gambar_kursus'] = Image::make($data['gambar_kursus']->getRealPath());
-            $data['gambar_kursus']->resize(500, 300);
-            $data['gambar_kursus']->save(public_path('assets/images/kursus/' . $nama_foto));
-            $data['gambar_kursus'] = $nama_foto;
-
-            $data['background'] = $request->file('gambar_kursus');
-            $nama_back = rand(1, 999) . "-" . $data['background']->getClientOriginalName();
-            $data['background'] = Image::make($data['background']->getRealPath());
-            $data['background']->save(public_path('assets/images/background-kursus/' . $nama_back));
-            $data['background'] = $nama_back;
+            $data['gambar_kursus'] = $this->uploadImage($request, 'gambar_kursus');
+            $data['background'] = $this->uploadImage($request, 'background');
         }
 
         $kursus->update($data);
-        return redirect()->route('kursus.index')->with(['status' => 'Data Kursus Berhasil Di Update']);
+        return redirect()->route('kursus.index')
+            ->with(['status' => 'Data Kursus Berhasil Di Update']);
     }
 
 
@@ -142,6 +128,7 @@ class KursusController extends Controller
     {
         $kursus = Kursus::findOrFail($id);
         File::delete(public_path('assets/images/kursus/' . $kursus->gambar_kursus));
+        File::delete(public_path('assets/images/background-kursus/' . $kursus->background));
         $kursus->forceDelete();
         return redirect()->route('kursus.index')
             ->with(['status' => 'Data Kursus Berhasil Dihapus']);
