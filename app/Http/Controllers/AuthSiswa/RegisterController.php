@@ -7,6 +7,7 @@ use App\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 class RegisterController extends Controller
 {
@@ -25,6 +26,10 @@ class RegisterController extends Controller
             'email'         => 'required|string|email|max:255|unique:siswa',
             'no_telp'       => 'required|between:9,13|unique:siswa',
             'password'      => 'required|string|min:3|confirmed',
+            'get_provinsi'  => 'required',
+            'get_kabupaten' => 'required',
+            'get_kecamatan' => 'required',
+            'get_desa'      => 'required'
         ]);
 
         $fileName = null;
@@ -43,6 +48,10 @@ class RegisterController extends Controller
                 'email' => $request->email,
                 'no_telp' => $request->no_telp,
                 'password' => Hash::make($request->password),
+                'alamat_province' => $request->get_provinsi,
+                'alamat_district' => $request->get_kabupaten,
+                'alamat_sub_district' => $request->get_kecamatan,
+                'alamat_village' => $request->get_desa,
             ]);
         }
 
@@ -52,6 +61,8 @@ class RegisterController extends Controller
 
     public function registrationForm()
     {
-        return view('authSiswa.register');
+        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
+        $provinsi = json_decode($response->getBody(), true); 
+        return view('authSiswa.register', compact('provinsi'));
     }
 }

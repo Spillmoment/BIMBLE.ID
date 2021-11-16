@@ -26,7 +26,7 @@ class AddNoToSiswa extends Migration
     public function down()
     {
         Schema::table('siswa', function (Blueprint $table) {
-            //
+            $table->dropColumn('no_tlp');
         });
     }
 }
