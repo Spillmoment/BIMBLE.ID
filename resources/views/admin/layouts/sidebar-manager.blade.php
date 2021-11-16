@@ -101,26 +101,25 @@
                 </div>
             </li>
 
-             <!-- Sidebar Siswa -->
-             <li
-             class="nav-item {{ request()->is('manager/siswa-unit*') ? 'active' : '' }}">
-             <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-                 data-toggle="collapse" data-target="#submenu-siswa">
-                 <span>
-                     <span class="sidebar-icon"><span class="fas fa-users"></span></span>
-                     Siswa
-                 </span>
-                 <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
-             </span>
-             <div class="multi-level collapse {{ request()->is('manager/siswa-unit*') ? 'show' : '' }}"
-                 role="list" id="submenu-siswa" aria-expanded="false">
-                 <ul class="flex-column nav">
-                    <li class="nav-item {{ (Request::route()->getName() == 'siswa.unit') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('siswa.unit') }}"><span>Daftar Siswa</span></a>
-                    </li>
-                 </ul>
-             </div>
-         </li>
+            <!-- Sidebar Siswa -->
+            <li class="nav-item {{ request()->is('manager/siswa-unit*') ? 'active' : '' }}">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    data-toggle="collapse" data-target="#submenu-siswa">
+                    <span>
+                        <span class="sidebar-icon"><span class="fas fa-users"></span></span>
+                        Siswa
+                    </span>
+                    <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
+                </span>
+                <div class="multi-level collapse {{ request()->is('manager/siswa-unit*') ? 'show' : '' }}" role="list"
+                    id="submenu-siswa" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item {{ (Request::route()->getName() == 'siswa.unit') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('siswa.unit') }}"><span>Daftar Siswa</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
             <!-- Sidebar  Pengaturan -->
             <li class="nav-item {{ (request()->is('manager/banner*')) ? 'active' : '' }}">
@@ -137,6 +136,9 @@
                     <ul class="flex-column nav">
                         <li class="nav-item {{ (Request::route()->getName() == 'banner.index') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('banner.index') }}"><span>Banner Web</span></a>
+                        </li>
+                        <li class="nav-item {{ (Request::route()->getName() == 'banner.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('banner.index') }}"><span>Template Sertifikat</span></a>
                         </li>
                     </ul>
                 </div>
