@@ -17,8 +17,18 @@ class UnitController extends Controller
     public function index()
     {
 
+        $unit = Unit::where('status', '1')
+            ->orWhere('status', '0')
+            ->groupBy('status')
+            ->get();
+
         if (request()->ajax()) {
-            $query = Unit::query()->where('status', '1')->latest();
+
+            $query = Unit::where('status', '1')
+                ->orWhere('status', '0')
+                ->latest()
+                ->get();
+
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return
@@ -51,11 +61,18 @@ class UnitController extends Controller
                         return 'N/A';
                     }
                 })
-                ->rawColumns(['action', 'gambar_unit'])
+                ->addColumn('status', function ($item) {
+                    if ($item->status == '1') {
+                        return '<button class="btn btn-primary btn-sm">Aktif</button>';
+                    } else {
+                        return '<button class="btn btn-danger btn-sm">Nonaktif</button>';
+                    }
+                })
+                ->rawColumns(['action', 'gambar_unit', 'status'])
                 ->make();
         }
 
-        return view('admin.unit.index');
+        return view('admin.unit.index', compact('unit'));
     }
 
     public function create()
