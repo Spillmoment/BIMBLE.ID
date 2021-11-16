@@ -34,7 +34,7 @@
                 <h2 class="h4">List Kursus</h2>
             </div>
 
-            
+
             <div class="float-right mt-6">
                 <br>
                 <a href="{{ route('kursus.create') }}" class="btn btn-primary btn-sm">
@@ -42,9 +42,24 @@
                 </a>
             </div>
 
+
+
         </div>
         <div class="card border-light shadow-sm components-section">
+
+            <div class="row my-1">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <div class="btn-group float-right mr-2">
+                        <a class="btn btn-sm btn-outline-success">Export Excel</a>
+                        <a class="btn btn-sm btn-outline-danger">Export PDF</a>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="row">
+
                 <div class="card-body">
                     <table class="table table-hover" id="kursusTable">
                         <thead>
