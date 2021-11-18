@@ -38,7 +38,7 @@
         <div class="card border-light shadow-sm components-section">
             <div class="row">
                 <div class="card-body">
-                    <table class="table table-hover" id="komentarTable">
+                    <table class="table table-hover table-striped table-responsive" id="komentarTable">
                         <thead>
                             <tr>
                                 <th>No</th>

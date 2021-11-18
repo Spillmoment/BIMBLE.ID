@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 @if (session('status'))
 @push('scripts')
 <script>
@@ -44,7 +45,7 @@
         </div>
         <div class="card border-light shadow-sm components-section">
             <div class="row my-1">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <select data-column="0" class="form-select filter-select">
                         <option selected>Pilih Status</option>
                         @foreach ($unit as $item)
@@ -54,15 +55,15 @@
                 </div>
                 <div class="col-md-4">
                     <div class="btn-group float-right mr-2">
-                        <a class="btn btn-sm btn-outline-success">Export Excel</a>
+                        <a href="{{ route('unit.excel') }}" class="btn btn-sm btn-outline-success">Export Excel</a>
                         <a class="btn btn-sm btn-outline-danger">Export PDF</a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="card-body">
-                    <table class="table table-hover" id="unitTable">
-                        <thead>
+                    <table class="table table-hover table-striped table-responsive" id="unitTable">
+                        <thead class="font-weight-bold">
                             <tr>
                                 <th>No</th>
                                 <th>Nama Unit</th>
@@ -88,10 +89,15 @@
 
 @endsection
 @push('scripts')
+
 <script>
     $(document).ready(function () {
         // AJAX DataTable
         var table = $('#unitTable').DataTable({
+            /*  dom: 'lBfrtip',
+             buttons: [
+                 'copy', 'excel', 'pdf', 'csv', 'print',
+             ], */
             processing: true,
             serverSide: true,
             ordering: true,

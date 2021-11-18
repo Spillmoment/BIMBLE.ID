@@ -36,7 +36,7 @@
         <div class="card border-light shadow-sm components-section">
             <div class="row">
                 <div class="card-body">
-                    <table class="table table-hover" id="siswakelTable">
+                    <table class="table table-hover table-striped table-responsive" id="siswakelTable">
                         <thead>
                             <tr>
                                 <th>No</th>
