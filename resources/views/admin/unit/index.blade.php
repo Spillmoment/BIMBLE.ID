@@ -56,7 +56,7 @@
                 <div class="col-md-4">
                     <div class="btn-group float-right mr-2">
                         <a href="{{ route('unit.excel') }}" class="btn btn-sm btn-outline-success">Export Excel</a>
-                        <a class="btn btn-sm btn-outline-danger">Export PDF</a>
+                        <a href="{{ route('unit.pdf') }}" class="btn btn-sm btn-outline-danger">Export PDF</a>
                     </div>
                 </div>
             </div>
