@@ -47,6 +47,7 @@ Route::prefix('manager')
         Route::resource('gallery', 'Admin\GalleryController');
         // Unit
         Route::get('unit_excel', 'Admin\UnitController@cetak_excel')->name('unit.excel');
+        Route::get('unit_pdf', 'Admin\UnitController@cetak_pdf')->name('unit.pdf');
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
         Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
