@@ -113,16 +113,14 @@
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
-                                    <a class="badge text-primary text-uppercase" style="background: #d1e7ff; font-size: 11px; font-weight: 600; padding-top: 5px; padding-bottom: 5px;">
-                                    {{ $item->kursus->kategori->nama_kategori }}
+                                    <a class="badge text-primary text-uppercase"
+                                        style="background: #d1e7ff; font-size: 11px; font-weight: 600; padding-top: 5px; padding-bottom: 5px;">
+                                        {{ $item->kursus->kategori->nama_kategori }}
                                     </a>
                                     <h6 class="card-title my-3"><a
                                             href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
                                             class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
                                     </h6>
-                                    {{-- <hr>
-                                    <span class="fas fa-home" style="color: #007bff"></span> <a class="text-muted ml-1" style="color: #677294; font: 400 15px/28px 'Poppins', sans-serif">{{ $item->unit->count() }} Unit</a> 
-                                    <span class="fas fa-user ml-5" style="color: #007bff"></span> <a class="text-muted ml-1" style="color: #677294; font: 400 15px/28px 'Poppins', sans-serif">5 Mentor</a>     --}}
                                 </div>
                             </div>
                         </div>
@@ -147,14 +145,15 @@
                             </div>
                             <div class="card-body d-flex align-items-center">
                                 <div class="w-100">
-                                    <a class="badge text-primary text-uppercase" style="background: #d1e7ff; font-size: 11px; font-weight: 600; padding-top: 5px; padding-bottom: 5px;">
+                                    <a class="badge text-primary text-uppercase"
+                                        style="background: #d1e7ff; font-size: 11px; font-weight: 600; padding-top: 5px; padding-bottom: 5px;">
                                         {{ $item->kursus->kategori->nama_kategori }}
-                                        </a>
+                                    </a>
                                     <h6 class="card-title my-3"><a
                                             href="{{ route('front.detail.kelompok', $item->kursus->slug) }}"
                                             class="text-decoration-none text-dark">{{ $item->kursus->nama_kursus }}</a>
                                     </h6>
-                                    
+
                                 </div>
                             </div>
                         </div>
