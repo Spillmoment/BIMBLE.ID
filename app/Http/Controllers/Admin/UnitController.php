@@ -135,4 +135,8 @@ class UnitController extends Controller
         $tgl = now();
         return Excel::download(new UnitExports, 'Laporan-Unit-' . $tgl . '.xlsx');
     }
+
+    public function cetak_pdf()
+    {
+    }
 }
