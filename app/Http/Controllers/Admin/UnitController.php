@@ -9,8 +9,9 @@ use App\Unit;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UnitExports;
 
 class UnitController extends Controller
 {
@@ -61,7 +62,7 @@ class UnitController extends Controller
                         return 'N/A';
                     }
                 })
-                ->addColumn('status', function ($item) {
+                ->editColumn('status', function ($item) {
                     if ($item->status == '1') {
                         return '<button class="btn btn-primary btn-sm">Aktif</button>';
                     } else {
@@ -121,12 +122,17 @@ class UnitController extends Controller
         ]);
     }
 
-
     public function destroy(Unit $unit)
     {
         Storage::delete('public/' . $unit->gambar_unit);
         $unit->forceDelete();
         return redirect()->route('unit.index')
             ->with(['status' => 'Data unit Berhasil Dihapus']);
+    }
+
+    public function cetak_excel()
+    {
+        $tgl = now();
+        return Excel::download(new UnitExports, 'Laporan-Unit-' . $tgl . '.xlsx');
     }
 }
