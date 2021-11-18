@@ -46,15 +46,16 @@ Route::prefix('manager')
         // Gallery
         Route::resource('gallery', 'Admin\GalleryController');
         // Unit
+        Route::get('unit_excel', 'Admin\UnitController@cetak_excel')->name('unit.excel');
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
         Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
         Route::get('siswa-unit/{id}/confirm', 'Admin\SiswaUnitController@confirm')->name('siswa.unit.confirm');
         Route::get('siswa-unit/{id}/confirm_down', 'Admin\SiswaUnitController@confirm_down')->name('siswa.unit.confirm_down');
-        
+
         // Banner
         Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
-        
+
         // Pendaftar Unit
         Route::get('pendaftar/{id}/status', 'Admin\PendaftarUnitController@setStatus')
             ->name('pendaftar-unit.status');
@@ -194,6 +195,6 @@ Route::get('/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
 Route::get('/unit/{slug}/kursus/{slug_kursus}', 'Web\UnitController@show_kursus')->name('unit.detail.kursus');
 Route::post('komentar/{id}/post', 'Web\KomentarController@post')->name('komentar.post');
 Route::get('/daftar-unit', 'Web\UnitController@list')->name('unit.list');
-Route::get('/daftar-unit/getAutocomplete','Web\UnitController@getAutocomplete')->name('unit.getAutocomplte');
+Route::get('/daftar-unit/getAutocomplete', 'Web\UnitController@getAutocomplete')->name('unit.getAutocomplte');
 Route::get('/daftar/unit', 'Web\UnitController@index')->name('unit.daftar');
 Route::post('/unit/add', 'Web\UnitController@post')->name('unit.add');
