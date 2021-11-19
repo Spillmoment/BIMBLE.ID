@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\KomentarExports;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Komentar;
 use Yajra\DataTables\Facades\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class KomentarController extends Controller
 {
@@ -55,17 +58,6 @@ class KomentarController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function show($id)
     {
         return view('admin.komentar.show', [
@@ -73,24 +65,25 @@ class KomentarController extends Controller
         ]);
     }
 
-
-    public function edit($id)
-    {
-        //
-    }
-
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-
     public function destroy(Komentar $komentar)
     {
         $komentar->delete();
         return redirect()->route('komentar.index')->with([
             'status' => 'Data Komentar Berhasil Dihapus!'
         ]);
+    }
+
+    public function export_excel()
+    {
+        $tgl = now();
+        return Excel::download(new KomentarExports, 'Laporan-Komentar-' . $tgl . '.xlsx');
+    }
+
+    public function export_pdf()
+    {
+        $tgl = now();
+        $komentar = Komentar::latest()->get();
+        $pdf = PDF::loadview('admin.komentar.pdf', ['komentar' => $komentar]);
+        return $pdf->download('laporan-komentar-' . $tgl . '.pdf');
     }
 }
