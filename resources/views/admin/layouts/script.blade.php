@@ -35,7 +35,7 @@
 <script src="{{ asset('assets/backend/vendor/simplebar/dist/simplebar.min.js') }}"></script>
 
 <!-- Github buttons -->
-<script async defer src="https://buttons.github.io/buttons.js')"></script>
+{{-- <script async defer src="https://buttons.github.io/buttons.js')"></script> --}}
 
 <!-- Volt JS -->
 <script src="{{ asset('assets/backend/js/volt.js') }}"></script>
