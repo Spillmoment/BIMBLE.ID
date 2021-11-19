@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\KursusExports;
 use App\Http\Controllers\Controller;
 use App\Kursus;
 use App\Http\Requests\KursusRequest;
@@ -9,17 +10,27 @@ use Illuminate\Support\Str;
 use App\GaleriKursus;
 use App\Http\Traits\KursusImageTraits;
 use App\Kategori;
-use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use PDF;
 
 class KursusController extends Controller
 {
     use KursusImageTraits;
-    public function index()
+    public function index(Request $request)
     {
+        $kategori = Kategori::latest()->get();
 
         if (request()->ajax()) {
+
+            /* if ($request->input('kategori') != null) {
+                $query = Kursus::where('kategori_id', $request->kategori);
+            } else {
+                $query = Kursus::query()->with(['kategori'])->latest();
+            } */
+
             $query = Kursus::query()->with(['kategori'])->latest();
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -57,7 +68,7 @@ class KursusController extends Controller
                 ->make();
         }
 
-        return view('admin.kursus.index');
+        return view('admin.kursus.index', compact('kategori'));
     }
 
 
@@ -148,5 +159,19 @@ class KursusController extends Controller
             'kursus' => $kursus,
             'items' => $gallery
         ]);
+    }
+
+    public function export_excel()
+    {
+        $tgl = now();
+        return Excel::download(new KursusExports, 'Laporan-Kursus-' . $tgl . '.xlsx');
+    }
+
+    public function export_pdf()
+    {
+        $tgl = now();
+        $kursus = Kursus::latest()->get();
+        $pdf = PDF::loadview('admin.kursus.pdf', ['kursus' => $kursus]);
+        return $pdf->download('laporan-kursus-' . $tgl . '.pdf');
     }
 }
