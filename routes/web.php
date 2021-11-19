@@ -44,6 +44,10 @@ Route::prefix('manager')
         // Kategori
         Route::resource('kategori', 'Admin\KategoriController')->except('show');
         // Komentar
+        Route::get('komentar_excel', 'Admin\KomentarController@export_excel')
+            ->name('komentar.excel');
+        Route::get('komentar_pdf', 'Admin\KomentarController@export_pdf')
+            ->name('komentar.pdf');
         Route::resource('komentar', 'Admin\KomentarController');
         // Gallery
         Route::resource('gallery', 'Admin\GalleryController');

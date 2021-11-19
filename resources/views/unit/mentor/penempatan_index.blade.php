@@ -21,7 +21,7 @@
 <div class="row">
     <div class="col-12 mb-4">
 
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3">
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -30,7 +30,7 @@
                         <li class="breadcrumb-item active" aria-current="page">Penempatan Mentor</li>
                     </ol>
                 </nav>
-                <h2 class="h4">Table Penempatan Mentor</h2>
+                <h2 class="h4 mt-1">Table Penempatan Mentor</h2>
 
             </div>
             <div class="mt-4">
@@ -38,7 +38,7 @@
                     <i class="fas fa-plus"></i> Tambah Data</a>
             </div>
         </div>
-        <div class="card border-light shadow-sm components-section">
+        <div class="card border-light shadow-sm components-section mt-3">
             <div class="row">
                 <div class="card-body">
                     <table class="table table-hover table-striped table-responsive" id="penempatanTable">

@@ -8,7 +8,7 @@
     <div class="row my-3">
         <div class="col-sm-12">
     
-            <div class="card border-light shadow-sm components-section">
+            <div class="card border-light shadow-sm components-section mt-3">
                 <div class="card-header">
                    <h5> Pilihan Kursus</h5>
                 </div>

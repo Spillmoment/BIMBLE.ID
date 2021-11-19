@@ -159,7 +159,7 @@
     </div>
 
     <div class="col-sm-6">
-        <div class="card border-light shadow-sm components-section">
+        <div class="card border-light shadow-sm components-section mt-3">
                <div class="card-header">
                     <h5> Foto Unit</h5>
                  </div>
@@ -286,7 +286,7 @@
     </div>
 
     <div class="col-lg-12">
-        <div class="card border-light shadow-sm components-section">
+        <div class="card border-light shadow-sm components-section mt-3">
             <form method="post"
                 action="{{route('unit.update-profil.deskripsi', Auth::guard('unit')->user()->slug)}}">
                 @csrf

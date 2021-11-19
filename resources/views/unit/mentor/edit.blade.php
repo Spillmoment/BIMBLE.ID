@@ -18,7 +18,7 @@
 
 <div class="row">
     <div class="col-12 mb-4">
-        <div class="card border-light shadow-sm components-section">
+        <div class="card border-light shadow-sm components-section mt-3">
             <div class="card-body">
 
                 <form method="post" enctype="multipart/form-data" action="{{route('mentor.update',[$mentor->id])}}">
