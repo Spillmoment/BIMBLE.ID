@@ -51,20 +51,15 @@
                     data-toggle="collapse" data-target="#submenu-galeri">
                     <span>
                         <span class="sidebar-icon"><span class="fas fa-camera"></span></span>
-                       Galeri
+                        Galeri
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
                 </span>
                 <div class="multi-level collapse {{ (request()->is('unit/galeri*')) ? 'show' : '' }}" role="list"
                     id="submenu-galeri" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li
-                            class="nav-item {{ (Request::route()->getName() == 'unit.galeri.tambah') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('unit.galeri.tambah') }}"><span>Tambah Galeri</span></a>
-                        </li>
-                        <li
-                            class="nav-item {{ (Request::route()->getName() == 'unit.siswa.private') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('unit.siswa.private') }}"><span>Data Galeri</span></a>
+                        <li class="nav-item {{ (Request::route()->getName() == 'unit.galeri.home') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('unit.galeri.home') }}"><span>Data Galeri</span></a>
                         </li>
                     </ul>
                 </div>
