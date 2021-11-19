@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UnitRequest;
-use Illuminate\Http\Request;
 use App\Unit;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\UnitExports;
+use PDF;
 
 class UnitController extends Controller
 {
@@ -130,13 +130,19 @@ class UnitController extends Controller
             ->with(['status' => 'Data unit Berhasil Dihapus']);
     }
 
-    public function cetak_excel()
+    public function export_excel()
     {
         $tgl = now();
         return Excel::download(new UnitExports, 'Laporan-Unit-' . $tgl . '.xlsx');
     }
 
-    public function cetak_pdf()
+    public function export_pdf()
     {
+        $tgl = now();
+        $unit = Unit::where('status', '1')
+            ->orWhere('status', '0')
+            ->latest()->get();
+        $pdf = PDF::loadview('admin.unit.pdf', ['unit' => $unit]);
+        return $pdf->download('laporan-unit-' . $tgl . '.pdf');
     }
 }
