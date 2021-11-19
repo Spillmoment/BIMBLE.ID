@@ -16,17 +16,29 @@
                         <li class="breadcrumb-item active" aria-current="page">Detail Unit</li>
                     </ol>
                 </nav>
-                <h2 class="h4">Table Unit</h2>
             </div>
 
         </div>
         <div class="card border-light shadow-sm components-section">
             <div class="card-header">
-                <h3 class="card-title">Detail Unit {{ $unit->nama_unit }}</h3>
+                <h4 class="card-title">Detail Unit {{ $unit->nama_unit }}</h4>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mx-2">
+                    <a href="{{ route('unit.index') }}" class="btn btn-primary btn-sm"> <i class="fa fa-angle-left"
+                            aria-hidden="true"></i> Kembali</a>
+                </div>
             </div>
             <div class="row">
                 <div class="card-body">
-                    <table class="table table-striped mt-2">
+                    <style>
+                        th,
+                        td {
+                            font-weight: 600;
+                        }
+
+                    </style>
+                    <table class="table table-striped ">
                         <tr>
                             <th>Nama Unit </th>
                             <td>{{ $unit->nama_unit }}</td>
@@ -51,23 +63,14 @@
                         </tr>
 
                         <tr>
-                            <th>Username</th>
-                            <td>{{ $unit->username != null ? $unit->username : 'Belum ada username' }}</td>
-                        </tr>
-
-                        <tr>
                             <th>Foto</th>
                             <td>
-                                @if ($unit->gambar_unit)
-                                <img src="{{ url('assets/images/unit'. $unit->gambar_unit) }}" alt=""
+                                @isset($unit->gambar_unit)
+                                <img src="{{ asset('assets/images/unit/'. $unit->gambar_unit) }}" alt=""
                                     class="img-thumbnail mb-2" width="150px">
-                                <br>
-                                <button type="submit" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#modelId">
-                                    <i class="fa fa-eye    "></i> Lihat</button>
                                 @else
-                                foto unit belum ada
-                                @endif
+                                Gambar belum ada
+                                @endisset
                             </td>
                         </tr>
 
@@ -88,11 +91,20 @@
                             <th>Status</th>
 
                             @if ($unit->status == 1)
-                            <td><span class="btn btn-success">Aktif</span></td>
+                            <td><span class="btn btn-success btn-sm">Aktif</span></td>
                             @else
-                            <td><span class="btn btn-danger">Nonaktif</span></td>
+                            <td><span class="btn btn-danger btn-sm">Nonaktif</span></td>
                             @endif
                         </tr>
+
+                        <tr>
+                            <th>File Alumni</th>
+                            <td>
+                                <a href="/storage/file/{{ $unit->bukti_alumni }}"
+                                    target="_blank">{{ $unit->bukti_alumni }}</a>
+                            </td>
+                        </tr>
+
                     </table>
                     <footer class="footer section py-2">
 
