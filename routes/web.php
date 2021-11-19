@@ -38,6 +38,8 @@ Route::prefix('manager')
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
         // Kursus
         Route::get('kursus-gallery/{id}', 'Admin\KursusController@gallery')->name('kursus.gallery');
+        Route::get('kursus_excel', 'Admin\KursusController@export_excel')->name('kursus.excel');
+        Route::get('kursus_pdf', 'Admin\KursusController@export_pdf')->name('kursus.pdf');
         Route::resource('kursus', 'Admin\KursusController');
         // Kategori
         Route::resource('kategori', 'Admin\KategoriController')->except('show');
@@ -46,8 +48,8 @@ Route::prefix('manager')
         // Gallery
         Route::resource('gallery', 'Admin\GalleryController');
         // Unit
-        Route::get('unit_excel', 'Admin\UnitController@cetak_excel')->name('unit.excel');
-        Route::get('unit_pdf', 'Admin\UnitController@cetak_pdf')->name('unit.pdf');
+        Route::get('unit_excel', 'Admin\UnitController@export_excel')->name('unit.excel');
+        Route::get('unit_pdf', 'Admin\UnitController@export_pdf')->name('unit.pdf');
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
         Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
@@ -117,7 +119,8 @@ Route::prefix('unit')
 
         // galeri
         Route::get('/galeri', 'Unit\GaleriController@index')->name('unit.galeri.home');
-        Route::post('/galeri/tambah', 'Unit\GaleriController@store')->name('unit.galeri.tambah');
+        Route::post('/galeri/tambah', 'Unit\GaleriController@store')
+            ->name('unit.galeri.tambah');
         Route::delete('/galeri/{id}', 'Unit\GaleriController@destroy')->name('unit.galeri.hapus');
 
         // siswa
