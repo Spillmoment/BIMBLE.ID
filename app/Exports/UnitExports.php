@@ -13,7 +13,9 @@ class UnitExports implements FromView, ShouldAutoSize
     public function view(): View
     {
         return view('admin.unit.export', [
-            'unit' => Unit::latest()->get()
+            'unit' => Unit::where('status', '1')
+                ->orWhere('status', '0')
+                ->latest()->get()
         ]);
     }
 }
