@@ -9,7 +9,7 @@ use App\Unit;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 
 
 class SiswaUnitController extends Controller
