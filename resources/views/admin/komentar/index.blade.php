@@ -27,15 +27,25 @@
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                         <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-                        <li class="breadcrumb-item"><a href="#">Kursus</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Halaman Komentar Kursus</li>
+                        <li class="breadcrumb-item"><a href="#">Komentar</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Komentar Kursus</li>
                     </ol>
                 </nav>
-                <h2 class="h4">Table Komentar Kursus</h2>
+                <h2 class="h4 mt-1">Data Komentar Kursus</h2>
             </div>
-
         </div>
-        <div class="card border-light shadow-sm components-section">
+
+        <div class="d-flex flex-row-reverse bd-highlight">
+            <div class="btn-group">
+                <a href="{{ route('komentar.excel') }}" class="btn btn-sm btn-success mx-1">
+                    <i class="fas fa-file-excel"></i> Export Excel</a>
+                <a href="{{ route('komentar.pdf') }}" class="btn btn-sm btn-danger mx-1">
+                    <i class="fas fa-file-pdf"></i> Export PDF</a>
+            </div>
+        </div>
+
+
+        <div class="card border-light shadow-sm components-section mt-3">
             <div class="row">
                 <div class="card-body">
                     <table class="table table-hover table-striped table-responsive" id="komentarTable">
@@ -45,7 +55,7 @@
                                 <th>Nama</th>
                                 <th>Kursus</th>
                                 <th>Unit</th>
-                                <th>Option</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
