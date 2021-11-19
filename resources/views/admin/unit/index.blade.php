@@ -21,8 +21,7 @@
 @endif
 
 <div class="row">
-    <div class="col-12 mb-4">
-
+    <div class="col-12">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
@@ -44,7 +43,7 @@
 
         </div>
         <div class="card border-light shadow-sm components-section">
-            <div class="row my-1">
+            <div class="row my-1 mx-1">
                 <div class="col-md-3">
                     <select data-column="0" class="form-select filter-select">
                         <option selected>Pilih Status</option>
@@ -54,33 +53,29 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <div class="btn-group float-right mr-2">
+                    <div class="btn-group">
                         <a href="{{ route('unit.excel') }}" class="btn btn-sm btn-outline-success">Export Excel</a>
                         <a href="{{ route('unit.pdf') }}" class="btn btn-sm btn-outline-danger">Export PDF</a>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="card-body">
-                    <table class="table table-hover table-striped table-responsive" id="unitTable">
-                        <thead class="font-weight-bold">
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Unit</th>
-                                <th>Email</th>
-                                <th>Alamat</th>
-                                <th>Gambar Unit</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <table class="table table-hover table-striped table-responsive" id="unitTable" width="100%">
+                    <thead class="font-weight-bold">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Unit</th>
+                            <th>Email</th>
+                            <th>Alamat</th>
+                            <th>Gambar Unit</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                        </tbody>
-                    </table>
-                    <footer class="footer section py-2">
-
-                </div>
+                    </tbody>
+                </table>
 
             </div>
         </div>
