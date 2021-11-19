@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 @if (session('status'))
 @push('scripts')
 <script>
@@ -20,8 +21,7 @@
 @endif
 
 <div class="row">
-    <div class="col-12 mb-4">
-
+    <div class="col-12">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
@@ -43,26 +43,39 @@
 
         </div>
         <div class="card border-light shadow-sm components-section">
-            <div class="row">
-                <div class="card-body">
-                    <table class="table table-hover" id="unitTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Unit</th>
-                                <th>Email</th>
-                                <th>Alamat</th>
-                                <th>Gambar Unit</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                    <footer class="footer section py-2">
-
+            <div class="row my-1 mx-1">
+                <div class="col-md-3">
+                    <select data-column="0" class="form-select filter-select">
+                        <option selected>Pilih Status</option>
+                        @foreach ($unit as $item)
+                        <option value="{{ $item->id }}">{{ $item->status == '1' ? 'Aktif' : 'Nonaktif' }}</option>
+                        @endforeach
+                    </select>
                 </div>
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        <a href="{{ route('unit.excel') }}" class="btn btn-sm btn-outline-success">Export Excel</a>
+                        <a href="{{ route('unit.pdf') }}" class="btn btn-sm btn-outline-danger">Export PDF</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table table-hover table-striped table-responsive" id="unitTable" width="100%">
+                    <thead class="font-weight-bold">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Unit</th>
+                            <th>Email</th>
+                            <th>Alamat</th>
+                            <th>Gambar Unit</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
 
             </div>
         </div>
@@ -71,68 +84,65 @@
 
 @endsection
 @push('scripts')
+
 <script>
-    // AJAX DataTable
-    var datatable = $('#unitTable').DataTable({
-        processing: true,
-        serverSide: true,
-        ordering: true,
-        ajax: {
-            url: '{!! url()->current() !!}',
-        },
-        columns: [{
-                "data": 'id',
-                "sortable": false,
-                render: function (data, type, row, meta) {
-                    return meta.row + meta.settings._iDisplayStart + 1;
-                }
+    $(document).ready(function () {
+        // AJAX DataTable
+        var table = $('#unitTable').DataTable({
+            /*  dom: 'lBfrtip',
+             buttons: [
+                 'copy', 'excel', 'pdf', 'csv', 'print',
+             ], */
+            processing: true,
+            serverSide: true,
+            ordering: true,
+            ajax: {
+                url: "{{ route('unit.index') }}",
             },
-            {
-                data: 'nama_unit',
-                name: 'nama_unit'
-            },
-            {
-                data: 'email',
-                name: 'email'
-            },
-            {
-                data: 'alamat',
-                name: 'alamat'
-            },
-            {
-                data: 'gambar_unit',
-                name: 'gambar_unit'
-            },
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-                width: '20%'
-            },
-        ],
-
-    });
-
-    $('button#deleteButton').on('click', function (e) {
-        var name = $(this).data('name');
-        e.preventDefault();
-        swal({
-                title: "Yakin!",
-                text: "menghapus unit  " + name + "?",
-                icon: "warning",
-                dangerMode: true,
-                buttons: {
-                    cancel: "Cancel",
-                    confirm: "OK",
+            columns: [{
+                    "data": 'id',
+                    "sortable": false,
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
                 },
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $(this).closest("form").submit();
-                }
-            });
-    });
+                {
+                    data: 'nama_unit',
+                    name: 'nama_unit'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'alamat',
+                    name: 'alamat'
+                },
+                {
+                    data: 'gambar_unit',
+                    name: 'gambar_unit'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    width: '20%'
+                },
+            ],
+        });
+
+        $('.filter-select').change(function () {
+            table.columns($(this).data('column'))
+                .search($(this).val())
+                .draw();
+        });
+
+    })
 
 </script>
 @endpush

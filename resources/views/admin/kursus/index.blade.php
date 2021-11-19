@@ -22,7 +22,8 @@
 <div class="row">
     <div class="col-12 mb-4">
 
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4 mt-3">
+
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -31,22 +32,38 @@
                         <li class="breadcrumb-item active" aria-current="page">Halaman Kursus</li>
                     </ol>
                 </nav>
-                <h2 class="h4">List Kursus</h2>
+                <h2 class="h4">Daftar Kursus</h2>
             </div>
+        </div>
 
-            
-            <div class="float-right mt-6">
-                <br>
-                <a href="{{ route('kursus.create') }}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-plus    "></i> Tambah Kursus
+        <div class="d-flex flex-row-reverse bd-highlight">
+            <div class="btn-group">
+                <a href="{{ route('kursus.excel') }}" class="btn btn-sm btn-success mx-1">
+                    <i class="fas fa-file-excel"></i> Export Excel</a>
+                <a href="{{ route('kursus.pdf') }}" class="btn btn-sm btn-danger mx-1">
+                    <i class="fas fa-file-pdf"></i> Export PDF</a>
+                <a href="{{ route('kursus.create') }}" class="btn btn-primary btn-sm mx-1">
+                    <i class="fas fa-plus"></i> Tambah Kursus
                 </a>
             </div>
-
         </div>
-        <div class="card border-light shadow-sm components-section">
+
+
+        <div class="card border-light shadow-sm components-section mt-3">
+            <div class="row my-1 mx-1">
+                <div class="col-md-3">
+                    <select id="filter-kategori" data-column="0" class="form-select filter">
+                        <option selected>Pilih Kategori</option>
+                        @foreach ($kategori as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="row">
+
                 <div class="card-body">
-                    <table class="table table-hover" id="kursusTable">
+                    <table class="table table-hover table-striped" id="kursusTable">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -140,13 +157,17 @@
 @endsection
 @push('scripts')
 <script>
-    // AJAX DataTable
+    let kategori = $('#filter-kategori').val()
+
     var datatable = $('#kursusTable').DataTable({
         processing: true,
         serverSide: true,
         ordering: true,
         ajax: {
             url: '{!! url()->current() !!}',
+            data: function (d) {
+                d.kategori = kategori
+            }
         },
         columns: [{
                 "data": 'id',
@@ -177,6 +198,11 @@
         ],
 
     });
+
+    $('.filter').on('change', function () {
+        kategori = $('#filter-kategori').val();
+        datatable.ajax.reload();
+    })
 
     $('button#deleteButton').on('click', function (e) {
         var name = $(this).data('name');

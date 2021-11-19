@@ -38,6 +38,8 @@ Route::prefix('manager')
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
         // Kursus
         Route::get('kursus-gallery/{id}', 'Admin\KursusController@gallery')->name('kursus.gallery');
+        Route::get('kursus_excel', 'Admin\KursusController@export_excel')->name('kursus.excel');
+        Route::get('kursus_pdf', 'Admin\KursusController@export_pdf')->name('kursus.pdf');
         Route::resource('kursus', 'Admin\KursusController');
         // Kategori
         Route::resource('kategori', 'Admin\KategoriController')->except('show');
@@ -46,15 +48,17 @@ Route::prefix('manager')
         // Gallery
         Route::resource('gallery', 'Admin\GalleryController');
         // Unit
+        Route::get('unit_excel', 'Admin\UnitController@export_excel')->name('unit.excel');
+        Route::get('unit_pdf', 'Admin\UnitController@export_pdf')->name('unit.pdf');
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
         Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
         Route::get('siswa-unit/{id}/confirm', 'Admin\SiswaUnitController@confirm')->name('siswa.unit.confirm');
         Route::get('siswa-unit/{id}/confirm_down', 'Admin\SiswaUnitController@confirm_down')->name('siswa.unit.confirm_down');
-        
+
         // Banner
         Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
-        
+
         // Pendaftar Unit
         Route::get('pendaftar/{id}/status', 'Admin\PendaftarUnitController@setStatus')
             ->name('pendaftar-unit.status');
@@ -115,7 +119,8 @@ Route::prefix('unit')
 
         // galeri
         Route::get('/galeri', 'Unit\GaleriController@index')->name('unit.galeri.home');
-        Route::post('/galeri/tambah', 'Unit\GaleriController@store')->name('unit.galeri.tambah');
+        Route::post('/galeri/tambah', 'Unit\GaleriController@store')
+            ->name('unit.galeri.tambah');
         Route::delete('/galeri/{id}', 'Unit\GaleriController@destroy')->name('unit.galeri.hapus');
 
         // siswa
@@ -194,6 +199,6 @@ Route::get('/unit/{slug}', 'Web\UnitController@show')->name('unit.detail');
 Route::get('/unit/{slug}/kursus/{slug_kursus}', 'Web\UnitController@show_kursus')->name('unit.detail.kursus');
 Route::post('komentar/{id}/post', 'Web\KomentarController@post')->name('komentar.post');
 Route::get('/daftar-unit', 'Web\UnitController@list')->name('unit.list');
-Route::get('/daftar-unit/getAutocomplete','Web\UnitController@getAutocomplete')->name('unit.getAutocomplte');
+Route::get('/daftar-unit/getAutocomplete', 'Web\UnitController@getAutocomplete')->name('unit.getAutocomplte');
 Route::get('/daftar/unit', 'Web\UnitController@index')->name('unit.daftar');
 Route::post('/unit/add', 'Web\UnitController@post')->name('unit.add');

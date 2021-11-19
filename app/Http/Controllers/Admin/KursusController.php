@@ -2,24 +2,37 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\KursusExports;
 use App\Http\Controllers\Controller;
 use App\Kursus;
 use App\Http\Requests\KursusRequest;
 use Illuminate\Support\Str;
 use App\GaleriKursus;
+use App\Http\Traits\KursusImageTraits;
 use App\Kategori;
 use App\SiswaKursus;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use PDF;
 
 class KursusController extends Controller
 {
-    public function index()
+    use KursusImageTraits;
+    public function index(Request $request)
     {
+        $kategori = Kategori::latest()->get();
 
         if (request()->ajax()) {
+
+            /* if ($request->input('kategori') != null) {
+                $query = Kursus::where('kategori_id', $request->kategori);
+            } else {
+                $query = Kursus::query()->with(['kategori'])->latest();
+            } */
+
             $query = Kursus::query()->with(['kategori'])->latest();
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
@@ -72,11 +85,13 @@ class KursusController extends Controller
 
         return view('admin.kursus.index', 
             [
+                'kategori' => $kategori,
                 'siswa_chart' => $siswa_diagram,
                 // 'count_active_diactive' => $count_active_diactive->toArray()
             ]
         );
     }
+
 
     public function create()
     {
@@ -92,20 +107,11 @@ class KursusController extends Controller
         $nama_kursus = $data['nama_kursus'];
 
         $data['slug'] = Str::slug($nama_kursus, '-');
-        $data['gambar_kursus'] = $request->file('gambar_kursus');
-        $nama_gambar = rand(1, 999) . "-" . $data['gambar_kursus']->getClientOriginalName();
-        $data['gambar_kursus'] = Image::make($data['gambar_kursus']->getRealPath());
-        $data['gambar_kursus']->resize(500, 300)->save(public_path('assets/images/kursus/' . $nama_gambar));
-        $data['gambar_kursus'] = $nama_gambar;
 
-        $data['background'] = $request->file('gambar_kursus');
-        $nama_back = rand(1, 999) . "-" . $data['background']->getClientOriginalName();
-        $data['background'] = Image::make($data['background']->getRealPath());
-        $data['background']->save(public_path('assets/images/background-kursus/' . $nama_back));
-        $data['background'] = $nama_back;
+        $data['gambar_kursus'] = $this->uploadImage($request, 'gambar_kursus');
+        $data['background'] = $this->uploadImage($request, 'background');
 
         $data['status'] = 'aktif';
-
         Kursus::create($data);
         return redirect()->route('kursus.index')
             ->with(['status' => 'Data Kursus Berhasil Ditambahkan']);
@@ -140,21 +146,13 @@ class KursusController extends Controller
             File::delete(public_path('assets/images/kursus/' . $kursus->gambar_kursus));
             File::delete(public_path('assets/images/background-kursus/' . $kursus->background));
 
-            $nama_foto = rand(1, 999) . "-" . $data['gambar_kursus']->getClientOriginalName();
-            $data['gambar_kursus'] = Image::make($data['gambar_kursus']->getRealPath());
-            $data['gambar_kursus']->resize(500, 300);
-            $data['gambar_kursus']->save(public_path('assets/images/kursus/' . $nama_foto));
-            $data['gambar_kursus'] = $nama_foto;
-
-            $data['background'] = $request->file('gambar_kursus');
-            $nama_back = rand(1, 999) . "-" . $data['background']->getClientOriginalName();
-            $data['background'] = Image::make($data['background']->getRealPath());
-            $data['background']->save(public_path('assets/images/background-kursus/' . $nama_back));
-            $data['background'] = $nama_back;
+            $data['gambar_kursus'] = $this->uploadImage($request, 'gambar_kursus');
+            $data['background'] = $this->uploadImage($request, 'background');
         }
 
         $kursus->update($data);
-        return redirect()->route('kursus.index')->with(['status' => 'Data Kursus Berhasil Di Update']);
+        return redirect()->route('kursus.index')
+            ->with(['status' => 'Data Kursus Berhasil Di Update']);
     }
 
 
@@ -162,6 +160,7 @@ class KursusController extends Controller
     {
         $kursus = Kursus::findOrFail($id);
         File::delete(public_path('assets/images/kursus/' . $kursus->gambar_kursus));
+        File::delete(public_path('assets/images/background-kursus/' . $kursus->background));
         $kursus->forceDelete();
         return redirect()->route('kursus.index')
             ->with(['status' => 'Data Kursus Berhasil Dihapus']);
@@ -181,5 +180,19 @@ class KursusController extends Controller
             'kursus' => $kursus,
             'items' => $gallery
         ]);
+    }
+
+    public function export_excel()
+    {
+        $tgl = now();
+        return Excel::download(new KursusExports, 'Laporan-Kursus-' . $tgl . '.xlsx');
+    }
+
+    public function export_pdf()
+    {
+        $tgl = now();
+        $kursus = Kursus::latest()->get();
+        $pdf = PDF::loadview('admin.kursus.pdf', ['kursus' => $kursus]);
+        return $pdf->download('laporan-kursus-' . $tgl . '.pdf');
     }
 }

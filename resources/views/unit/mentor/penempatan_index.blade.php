@@ -41,7 +41,7 @@
         <div class="card border-light shadow-sm components-section">
             <div class="row">
                 <div class="card-body">
-                    <table class="table table-hover" id="penempatanTable">
+                    <table class="table table-hover table-striped table-responsive" id="penempatanTable">
                         <thead>
                             <tr>
                                 <th>No</th>

@@ -30,19 +30,20 @@ class GaleriController extends Controller
                                         </span>
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="action' .  $item->siswa_id . '">
-                                        <a class="text-info dropdown-item" href="' . route('unit.siswa.kelompok.card', $item->siswa_id) . '"><span
-                                        class="fas fa-eye mr-2"></span>Detail</a>  
+                                    <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
+                                    <form action="' . route('unit.galeri.hapus', $item->id) . '" method="POST">
+                                    ' . method_field('delete') . csrf_field() . '
+                                    <button id="deleteButton" type="submit" class="dropdown-item text-danger" data-name="' . $item->unit->nama_unit .  '">
+                                        <span class="fas fa-trash-alt mr-2"></span>Hapus</a>
+                                    </button>
+                                </form>
                                     </div>
                                 </div>';
                 })
-                ->addColumn('nama_siswa', function ($item) {
-                    return $item->siswa->nama_siswa;
+                ->editColumn('gambar', function ($item) {
+                    return view('unit.galeri.image', compact('item'));
                 })
-                ->addColumn('kursus', function ($item) {
-                    return $item->kursus_unit->kursus->nama_kursus;
-                })
-                ->rawColumns(['status_sertifikat', 'action'])
+                ->rawColumns(['action', 'gambar'])
                 ->make();
         }
 

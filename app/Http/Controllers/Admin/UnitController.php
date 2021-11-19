@@ -4,21 +4,32 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UnitRequest;
-use Illuminate\Http\Request;
 use App\Unit;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UnitExports;
+use PDF;
 
 class UnitController extends Controller
 {
     public function index()
     {
 
+        $unit = Unit::where('status', '1')
+            ->orWhere('status', '0')
+            ->groupBy('status')
+            ->get();
+
         if (request()->ajax()) {
-            $query = Unit::query()->where('status', '1')->latest();
+
+            $query = Unit::where('status', '1')
+                ->orWhere('status', '0')
+                ->latest()
+                ->get();
+
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return
@@ -51,11 +62,18 @@ class UnitController extends Controller
                         return 'N/A';
                     }
                 })
-                ->rawColumns(['action', 'gambar_unit'])
+                ->editColumn('status', function ($item) {
+                    if ($item->status == '1') {
+                        return '<button class="btn btn-primary btn-sm">Aktif</button>';
+                    } else {
+                        return '<button class="btn btn-danger btn-sm">Nonaktif</button>';
+                    }
+                })
+                ->rawColumns(['action', 'gambar_unit', 'status'])
                 ->make();
         }
 
-        return view('admin.unit.index');
+        return view('admin.unit.index', compact('unit'));
     }
 
     public function create()
@@ -104,12 +122,27 @@ class UnitController extends Controller
         ]);
     }
 
-
     public function destroy(Unit $unit)
     {
         Storage::delete('public/' . $unit->gambar_unit);
         $unit->forceDelete();
         return redirect()->route('unit.index')
             ->with(['status' => 'Data unit Berhasil Dihapus']);
+    }
+
+    public function export_excel()
+    {
+        $tgl = now();
+        return Excel::download(new UnitExports, 'Laporan-Unit-' . $tgl . '.xlsx');
+    }
+
+    public function export_pdf()
+    {
+        $tgl = now();
+        $unit = Unit::where('status', '1')
+            ->orWhere('status', '0')
+            ->latest()->get();
+        $pdf = PDF::loadview('admin.unit.pdf', ['unit' => $unit]);
+        return $pdf->download('laporan-unit-' . $tgl . '.pdf');
     }
 }

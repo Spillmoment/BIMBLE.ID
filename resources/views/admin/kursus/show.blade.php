@@ -16,16 +16,29 @@
                         <li class="breadcrumb-item active" aria-current="page">Detail Kursus</li>
                     </ol>
                 </nav>
-                <h2 class="h4">Detail Kursus {{ $kursus->nama_kursus }}</h2>
             </div>
 
         </div>
         <div class="card border-light shadow-sm components-section">
+            <div class="card-header">
+                <h4 class="card-title">Detail Kursus {{ $kursus->nama_kursus }}</h4>
+            </div>
             <div class="row">
-                <div class="card-body">
+                <div class="col-md-3 mx-2">
                     <a href="{{ route('kursus.index') }}" class="btn btn-primary btn-sm"> <i class="fa fa-angle-left"
                             aria-hidden="true"></i> Kembali</a>
-                    <table class="table table-striped mt-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="card-body">
+                    <style>
+                        th,
+                        td {
+                            font-weight: 600;
+                        }
+
+                    </style>
+                    <table class="table table-striped">
 
                         <tr>
                             <th>Nama Kursus </th>
@@ -35,12 +48,12 @@
                         <tr>
                             <th>Gambar Kursus</th>
                             <td>
+                                @isset($kursus->gambar_kursus)
                                 <img src="{{ url('assets/images/kursus/' . $kursus->gambar_kursus) }}" alt=""
                                     class="img-thumbnail mb-2" width="150px">
-                                <br>
-                                <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#modelId">
-                                    <i class="fas fa-eye"></i> Lihat</button>
+                                @else
+                                Gambar belum ada
+                                @endisset
                             </td>
                         </tr>
 
@@ -50,13 +63,8 @@
                         </tr>
 
                         <tr>
-                            <th>Materi</th>
-                            <td>{!! $kursus->materi !!}</td>
-                        </tr>
-
-                        <tr>
                             <th>Deskripsi</th>
-                            <td>{!! $kursus->deskripsi !!}</td>
+                            <td>{!! $kursus->deskripsi ? $kursus->deskripsi : 'deskripsi belum ada' !!}</td>
                         </tr>
 
                         <tr>
@@ -65,8 +73,6 @@
                         </tr>
 
                     </table>
-
-                    <footer class="footer section py-2">
 
                 </div>
 

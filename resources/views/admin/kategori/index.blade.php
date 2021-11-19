@@ -45,7 +45,7 @@
         <div class="card border-light shadow-sm components-section">
             <div class="row">
                 <div class="card-body">
-                    <table class="table table-hover" id="kursusTable">
+                    <table class="table table-hover table-striped table-responsive" id="kursusTable">
                         <thead>
                             <tr>
                                 <th>No</th>

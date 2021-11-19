@@ -30,12 +30,12 @@
 
 
 <div class="container pt-5">
-    <div class="row">   
+    <div class="row">
         <div class="col-9">
             <h6 class="verified">Kategori: <em>{{ $kursus->kategori->nama_kategori }}</em></h6>
             <div class="text-block">
                 <h4 class="mt-4 mb-2">Deskripsi </h4>
-                <p class="text-muted font-weight-light">  {!! $kursus->tentang !!} </p>
+                <p class="text-muted font-weight-light"> {!! $kursus->tentang !!} </p>
             </div>
         </div>
     </div>
@@ -205,7 +205,8 @@
 
 @push('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="{{ asset('assets/js/picker/mdtimepicker.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/picker/mdtimepicker.js') }}"></script>
+
 <script>
     $(document).ready(function () {
 
