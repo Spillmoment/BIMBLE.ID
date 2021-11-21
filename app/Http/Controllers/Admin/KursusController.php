@@ -10,7 +10,9 @@ use Illuminate\Support\Str;
 use App\GaleriKursus;
 use App\Http\Traits\KursusImageTraits;
 use App\Kategori;
-use Illuminate\Http\Request;
+use App\SiswaKursus;
+use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
@@ -68,7 +70,26 @@ class KursusController extends Controller
                 ->make();
         }
 
-        return view('admin.kursus.index', compact('kategori'));
+        $siswa_diagram_data = SiswaKursus::select(DB::raw("(COUNT(*)) as count"), 'unit.nama_unit')
+                            ->join('kursus_unit', 'siswa_kursus.kursus_unit_id', '=', 'kursus_unit.id')
+                            ->join('unit', 'kursus_unit.unit_id', '=', 'unit.id')
+                            ->groupBy('kursus_unit.unit_id')
+                            ->get();
+        $siswa_diagram = $siswa_diagram_data->toArray();
+        // dd($siswa_diagram);
+        
+        // $count_active_diactive = Unit::select(DB::raw("(COUNT(*)) as count"), 'status')
+        //     ->whereYear('created_at', date('Y'))
+        //     ->groupBy('status')
+        //     ->get();
+
+        return view('admin.kursus.index', 
+            [
+                'kategori' => $kategori,
+                'siswa_chart' => $siswa_diagram,
+                // 'count_active_diactive' => $count_active_diactive->toArray()
+            ]
+        );
     }
 
 
