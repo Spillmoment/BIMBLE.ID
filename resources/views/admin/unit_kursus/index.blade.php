@@ -11,27 +11,40 @@
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                     <li class="breadcrumb-item"><a href="#"><span class="fas fa-landmark"></span></a></li>
                     <li class="breadcrumb-item"><a href="#">Unit Kursus</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Halaman Unit Kursus</li>
+                    <li class="breadcrumb-item active" aria-current="page">Data Unit Kursus</li>
                 </ol>
             </nav>
         </div>
     </div>
 
-    <h4>Unit Pengelola Kursus</h4>
+    <h4>Daftar Unit Pengelola Kursus</h4>
 
     @foreach ($query as $item)
-    <div class="col-sm-3 my-4">
-        <div class="card shadow-lg">
-            <img class="card-img-top" src="{{ url('assets/images/unit/'. $item->unit->gambar_unit) }}" alt="">
-            <div class="card-body">
-                <h5 class="card-title">{{ $item->unit->nama_unit }}</h5>
-                <a href="{{ route('unit-kursus.detail', $item->unit->id) }}"
-                    class="btn btn-primary btn-sm float-right my-1">
-                    <i class="fas fa-eye"></i> Detail</a>
+    <div class="col-md-4 my-4">
+        <div class="card shadow-lg mb-3" style="max-width: 700px;">
+            <div class="row g-0">
+                <div class="col-md-4 mt-1">
+                    <img src="{{ url('assets/images/unit/'. $item->unit->gambar_unit) }}" class="card-img-top"
+                        alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $item->unit->nama_unit }}</h5>
+                        <a href="{{ route('unit-kursus.detail', $item->unit->id) }}"
+                            class="btn btn-primary btn-sm float-right my-1">
+                            <i class="fas fa-eye"></i> Detail</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     @endforeach
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-md">
+            {{ $query->links() }}
+        </ul>
+    </nav>
 
 </div>
 
