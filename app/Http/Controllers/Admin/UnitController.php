@@ -55,13 +55,6 @@ class UnitController extends Controller
                             </div>
                         </div>';
                 })
-                ->editColumn('gambar_unit', function ($item) {
-                    if (!empty($item->gambar_unit)) {
-                        return '<img src="' . url('assets/images/unit/' . $item->gambar_unit) . '" style="max-height: 40px;"/>';
-                    } else {
-                        return 'N/A';
-                    }
-                })
                 ->editColumn('status', function ($item) {
                     if ($item->status == '1') {
                         return '<button class="btn btn-primary btn-sm">Aktif</button>';
@@ -142,7 +135,8 @@ class UnitController extends Controller
         $unit = Unit::where('status', '1')
             ->orWhere('status', '0')
             ->latest()->get();
-        $pdf = PDF::loadview('admin.unit.pdf', ['unit' => $unit]);
+        $pdf = PDF::loadview('admin.unit.pdf', ['unit' => $unit])
+            ->setPaper('F4', 'landscape');
         return $pdf->download('laporan-unit-' . $tgl . '.pdf');
     }
 }
