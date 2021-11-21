@@ -9,6 +9,7 @@ use App\SiswaKursus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class KursusController extends Controller
 {
@@ -90,15 +91,21 @@ class KursusController extends Controller
         $cek_data = SiswaKursus::find($id);
 
         if ($cek_data) {
-            $extention = $request->file('file')->extension();
-            $filename = Auth::id() . '-' . date('dmyHis') . '.' . $extention;
-            Storage::putFileAs('public/pembayaran', $request->file('file'), $filename);
+            $upload = $request->file('file');
+            $nama_back = date('dmyHis') . "-" . $upload->getClientOriginalName();
+            $uploads = Image::make($upload->getRealPath());
+            $uploads->save(public_path('assets/images/bukti-siswa/' . $nama_back));
+            $uploads = $nama_back;
 
             $cek_data->update([
-                'file' => $filename
+                'file' => $uploads
             ]);
 
-            return redirect()->back()->with(['status' => 'File Berhasil Diupload.']);
+            if ($cek_data->file != null) {
+                return redirect()->back()->with(['status' => 'File Berhasil Di Update']);
+            } else {
+                return redirect()->back()->with(['status' => 'File Berhasil Di Upload.']);
+            }
         }
     }
 }
