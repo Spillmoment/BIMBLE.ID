@@ -31,10 +31,19 @@
                         <li class="breadcrumb-item active" aria-current="page">Pendaftar Unit</li>
                     </ol>
                 </nav>
-                <h2 class="h4 mt-1">Table Unit</h2>
+                <h2 class="h4 mt-1">Data Pendaftar Unit</h2>
             </div>
-
         </div>
+
+        <div class="d-flex flex-row-reverse bd-highlight">
+            <div class="btn-group">
+                <a href="{{ route('pendaftar-unit.excel') }}" class="btn btn-sm btn-success mx-1">
+                    <i class="fas fa-file-excel"></i> Export Excel</a>
+                <a href="{{ route('pendaftar-unit.pdf') }}" class="btn btn-sm btn-danger mx-1">
+                    <i class="fas fa-file-pdf"></i> Export PDF</a>
+            </div>
+        </div>
+
         <div class="card border-light shadow-sm components-section mt-3">
             <div class="row">
                 <div class="card-body">
