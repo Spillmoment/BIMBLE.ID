@@ -12,8 +12,8 @@ class UnitPendaftarExports implements FromView, ShouldAutoSize
 {
     public function view(): View
     {
-        return view('admin.unit.export', [
-            'unit' => Unit::latest()->get()
+        return view('admin.pendaftar.export', [
+            'unit' => Unit::where('status', '2')->latest()->get()
         ]);
     }
 }
