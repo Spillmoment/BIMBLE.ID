@@ -28,7 +28,7 @@ class UnitController extends Controller
                 ->where('status', '1')
                 ->latest()->paginate(9);
         }
-        
+
         if ($request->place) {
             $unit = Unit::where('alamat', 'like', '%' . $request->place . '%')
                 ->where('status', '1')
@@ -44,11 +44,11 @@ class UnitController extends Controller
     {
         if ($request->has('q')) {
             $cari = $request->q;
-            $data = Unit::select('id', 'alamat')->where('alamat', 'LIKE', '%'.$cari.'%')->get();
+            $data = Unit::select('id', 'alamat')->where('alamat', 'LIKE', '%' . $cari . '%')->get();
             return response()->json($data);
         }
-     }
-  
+    }
+
 
     public function index()
     {
@@ -127,7 +127,11 @@ class UnitController extends Controller
         $jadwal = Jadwal::where('kursus_unit_id', $kursus_unit->id)->get();
 
         $check_kursus = SiswaKursus::where('siswa_id', Auth::id())
-            ->where('kursus_unit_id', $kursus_unit->id)->exists();
+            ->where('kursus_unit_id', $kursus_unit->id)
+            ->where('status_sertifikat', 'daftar')
+            ->first();
+
+        $check_file =  SiswaKursus::where('siswa_id', Auth::id())->first();
 
         $materi = Materi::where('kursus_id', $kursus->id)
             ->where('unit_id', $unit->id)
@@ -146,8 +150,9 @@ class UnitController extends Controller
             'kursus_unit' => $kursus_unit,
             'jadwals' => $jadwal,
             'check_kursus' => $check_kursus,
+            'check_file' => $check_file,
             'materis' => $materi,
-            'mentor' => $mentor_kursus
+            'mentor' => $mentor_kursus,
         ]);
     }
 }
