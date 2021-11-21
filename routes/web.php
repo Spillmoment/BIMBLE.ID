@@ -68,8 +68,11 @@ Route::prefix('manager')
             ->name('pendaftar-unit.status');
         Route::get('/pendaftar/download/{file}', 'Admin\PendaftarUnitController@download')
             ->name('download');
-        Route::resource('pendaftar-unit', 'Admin\PendaftarUnitController')
-            ->only(['index', 'show', 'destroy']);
+        Route::get('pendaftar_unit_excel', 'Admin\PendaftarUnitController@export_excel')
+            ->name('pendaftar-unit.excel');
+        Route::get('pendaftar_unit_pdf', 'Admin\PendaftarUnitController@export_pdf')
+            ->name('pendaftar-unit.pdf');
+        Route::resource('pendaftar-unit', 'Admin\PendaftarUnitController');
 
         // Unit Kursus
         Route::get('unit-kursus', 'Admin\UnitKursusController@index')
