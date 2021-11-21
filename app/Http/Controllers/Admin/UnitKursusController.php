@@ -12,11 +12,10 @@ class UnitKursusController extends Controller
 {
     public function index()
     {
-
         $kursus_unit = KursusUnit::with(['unit', 'kursus'])
             ->groupBy('unit_id')
             ->latest()
-            ->get();
+            ->paginate(6);
 
         return view('admin.unit_kursus.index', [
             'query' => $kursus_unit
