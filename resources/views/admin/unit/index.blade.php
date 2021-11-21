@@ -59,22 +59,23 @@
                 </div>
             </div>
             <div class="row">
-                <table class="table table-hover table-striped table-responsive" id="unitTable" width="100%">
-                    <thead class="font-weight-bold">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Unit</th>
-                            <th>Email</th>
-                            <th>Alamat</th>
-                            <th>Gambar Unit</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <div class="card-body">
+                    <table class="table table-hover table-striped table-responsive" id="unitTable" width="100%">
+                        <thead class="font-weight-bold">
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Unit</th>
+                                <th>Email</th>
+                                <th>Alamat</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
@@ -116,10 +117,6 @@
                 {
                     data: 'alamat',
                     name: 'alamat'
-                },
-                {
-                    data: 'gambar_unit',
-                    name: 'gambar_unit'
                 },
                 {
                     data: 'status',
