@@ -87,6 +87,8 @@ Route::prefix('manager')
         // Keuangan
         Route::get('keuangan', 'Admin\KeuanganController@index')
             ->name('keuangan.index');
+        Route::put('keuangan/{id}', 'Admin\KeuanganController@update_status')
+            ->name('keuangan.update');
     });
 
 
