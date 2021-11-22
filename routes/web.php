@@ -83,6 +83,10 @@ Route::prefix('manager')
             ->name('unit-kursus.index');
         Route::get('unit-kursus/{id}', 'Admin\UnitKursusController@detail')
             ->name('unit-kursus.detail');
+
+        // Keuangan
+        Route::get('keuangan', 'Admin\KeuanganController@index')
+            ->name('keuangan.index');
     });
 
 
