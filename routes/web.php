@@ -75,6 +75,10 @@ Route::prefix('manager')
         Route::resource('pendaftar-unit', 'Admin\PendaftarUnitController');
 
         // Unit Kursus
+        Route::get('unit-kursus-export/{id}', 'Admin\UnitKursusController@export_excel')
+            ->name('unit-kursus.excel');
+        Route::get('unit-kursus-pdf/{id}', 'Admin\UnitKursusController@export_pdf')
+            ->name('unit-kursus.pdf');
         Route::get('unit-kursus', 'Admin\UnitKursusController@index')
             ->name('unit-kursus.index');
         Route::get('unit-kursus/{id}', 'Admin\UnitKursusController@detail')
