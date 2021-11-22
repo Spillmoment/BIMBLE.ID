@@ -22,8 +22,7 @@
 <div class="row">
     <div class="col-12 mb-4">
 
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4 mt-3">
-
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3">
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -32,7 +31,7 @@
                         <li class="breadcrumb-item active" aria-current="page">Halaman Kursus</li>
                     </ol>
                 </nav>
-                <h2 class="h4">Daftar Kursus</h2>
+                <h2 class="h4 mt-1">Daftar Kursus</h2>
             </div>
         </div>
 
@@ -84,16 +83,16 @@
             </div>
         </div>
 
-        <div class="row justify-content-md-center">
+        {{--    <div class="row justify-content-md-center">
             <div class="col-12 mb-4">
                 <div class="card bg-yellow-alt shadow-sm">
                     <div class="card-header d-flex flex-row align-items-center flex-0">
                         <div class="d-block">
                             <div class="h5 font-weight-normal mb-2">Sales Value</div>
                             <h2 class="h3">$10,567</h2>
-                            <div class="small mt-2"> 
-                                <span class="font-weight-bold mr-2">Yesterday</span>                              
-                                <span class="fas fa-angle-up text-success"></span>                                   
+                            <div class="small mt-2">
+                                <span class="font-weight-bold mr-2">Yesterday</span>
+                                <span class="fas fa-angle-up text-success"></span>
                                 <span class="text-success font-weight-bold">10.57%</span>
                             </div>
                         </div>
@@ -111,8 +110,10 @@
                 <div class="card border-light shadow-sm">
                     <div class="card-body">
                         <div class="row d-block d-xl-flex align-items-center">
-                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
-                                <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"><span class="fas fa-chart-line"></span></div>
+                            <div
+                                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0"><span
+                                        class="fas fa-chart-line"></span></div>
                                 <div class="d-sm-none">
                                     <h2 class="h5">Total Unit</h2>
                                     <h3 class="mb-1" id="label-count-unit1"></h3>
@@ -123,9 +124,10 @@
                                     <h2 class="h5">Total Unit</h2>
                                     <h3 class="mb-1" id="label-count-unit2"></h3>
                                 </div>
-                                <small><span id="unit-month-data"></span>, <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> Month</small> 
-                                <div class="small mt-2" id="percent-unit-label">                               
-                                    
+                                <small><span id="unit-month-data"></span>, <span class="icon icon-small"><span
+                                            class="fas fa-globe-europe"></span></span> Month</small>
+                                <div class="small mt-2" id="percent-unit-label">
+
                                 </div>
                             </div>
                         </div>
@@ -136,7 +138,8 @@
                 <div class="card border-light shadow-sm">
                     <div class="card-body">
                         <div class="row d-block d-xl-flex align-items-center">
-                            <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                            <div
+                                class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
                                 <div class="ct-chart-traffic-share ct-golden-section ct-series-a"></div>
                             </div>
                             <div class="col-12 col-xl-7 px-xl-0">
@@ -150,7 +153,7 @@
             </div>
         </div>
 
-
+ --}}
     </div>
 </div>
 
@@ -226,7 +229,7 @@
 
 </script>
 
-<script>
+{{-- <script>
     const doc = document;
     doc.addEventListener("DOMContentLoaded", function(event) {
         //Chartist
@@ -275,6 +278,6 @@
         });
     
     });
-    </script>
+    </script> --}}
 
 @endpush

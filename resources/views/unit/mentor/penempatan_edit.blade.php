@@ -26,7 +26,7 @@
         @endif
 
 
-        <div class="card border-light shadow-sm components-section">
+        <div class="card border-light shadow-sm components-section mt-3">
             <div class="card-header">
                 <strong class="card-title">Edit Penempatan Mentor<span class="text-primary mt-1">
                         {{ $mentor_kursus->mentor->nama_mentor }}</span></strong>

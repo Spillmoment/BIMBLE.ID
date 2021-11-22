@@ -28,7 +28,7 @@
 <div class="row my-3">
     <div class="col-sm-12">
 
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3">
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="card border-light shadow-sm components-section">
+        <div class="card border-light shadow-sm components-section mt-3">
             <div class="card-header">
                 <h4>Form Input Kursus {{ $kursus->nama_kursus }} (Kelompok & Private)</h4>
             </div>

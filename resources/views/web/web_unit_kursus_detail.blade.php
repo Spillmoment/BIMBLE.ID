@@ -167,83 +167,9 @@
         </div>
 
         <div class="col-lg-4 mt-3">
-            <div class="card border-0 shadow-lg">
-                <div class="card-header text-primary text-center bg-gray-200">
-                    <h6 class="text-primary text-center">Detail Kursus </h6>
-                </div>
-                <div class="card-body p-4">
-                    <div class="text-block pb-3">
-                        <div class="media align-items-center">
-                            <div class="">
-                                <h6> <a href="#" class="text-reset"></a>
-                                    {{ $kursus_unit->kursus->nama_kursus }}
-                                </h6>
-                                <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="text-block pt-1 pb-0">
-                        <table class="w-100">
-                            <tr>
-                                <th class="pt-3">Unit Pengelola</th>
-                                <td class="font-weight-bold text-right pt-3 text-capitalize">
-                                    {{ $kursus_unit->unit->nama_unit }} </td>
-                            </tr>
-                            <tr>
-                                <th class="pt-3">Type Kursus</th>
-                                <td class="font-weight-bold text-right pt-3 text-capitalize">
-                                    {{ $kursus_unit->type->nama_type }} </td>
-                            </tr>
-                            <tr>
-
-                                <th class="pt-3">Harga</th>
-                                <td class="font-weight-bold text-right pt-3">
-                                    @if ($kursus_unit->biaya_kursus != null)
-                                    @currency($kursus_unit->biaya_kursus)
-                                    @else
-                                    Harga belum ada
-                                    @endif
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="card-footer bg-light py-2 border-top">
-                    <div class="media align-items-center">
-                        <div class="media-body">
-                            @guest('siswa')
-                            <p class="text-primary text-sm"> Belum punya akun ? </p>
-                            <a href="{{ route('siswa.register') }}" class="btn btn-success btn-block">Register</a>
-                            @endguest
-
-                            @auth('siswa')
-                            @if ($check_kursus != null)
-                            <div class="alert alert-success" role="alert">
-                                <span>Kamu sudah terdaftar di <br> Kursus ini.</span>
-                            </div>
-                            <a href="{{ route('user.kursus') }}" class="btn btn-success btn-block">Lihat Kursus</a>
-                            @else
-                            <form action="{{ route('user.pesan', $kursus_unit->id) }}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-primary btn-block btn-rounded-md btn-active">
-                                    Pesan
-                                </button>
-
-                            </form>
-                            @endif
-                            @endauth
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="card border-0 shadow">
+            <!-- Section Mentor -->
+            <div class="card border-0 shadow-lg mt-1">
                 <div class="card-header bg-gray-200">
                     <h6 class="text-primary text-center">Profil Mentor </h6>
                 </div>
@@ -254,7 +180,8 @@
                             <img src="{{ Storage::url('public/' . $item->foto) }}" alt="" width="90" height="80"
                                 class="rounded-circle mr-3">
                             <div class="media-body">
-                                <h6> <a href="detail-rooms.html" class="text-reset">{{ $item->nama_mentor }}</a></h6>
+                                <h6> <a href="detail-rooms.html" class="text-reset">{{ $item->nama_mentor }}</a>
+                                </h6>
                                 <p class="text-muted text-sm mb-0">{{ $item->kompetensi }}</p>
                             </div>
                         </div>
@@ -273,6 +200,165 @@
                 </div>
 
             </div>
+            <!-- -->
+
+            <!-- Section Kursus -->
+            <div class="card border-0 shadow-lg">
+                <div class="card-header text-primary text-center bg-gray-200">
+                    <h6 class="text-primary text-center">Detail Kursus </h6>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="text-block pb-3">
+                        <div class="media align-items-center">
+                            <div class="">
+                                <h6> <a href="#" class="text-reset"></a>
+                                    {{ $kursus_unit->kursus->nama_kursus }}
+                                </h6>
+                                <p class="text-muted text-sm mb-0"> {{ $kursus_unit->kursus->keterangan }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-block pt-1 pb-0">
+                        <table class="w-100">
+                            <tr>
+                                <th class="pt-3 text-gray-700">Unit Pengelola</th>
+                                <td class="font-weight-bold text-right pt-3 text-capitalize">
+                                    {{ $kursus_unit->unit->nama_unit }} </td>
+                            </tr>
+                            <tr>
+                                <th class="pt-3 text-gray-700">Type Kursus</th>
+                                <td class="font-weight-bold text-right pt-3 text-capitalize">
+                                    {{ $kursus_unit->type->nama_type }} </td>
+                            </tr>
+                            <tr>
+
+                                <th class="pt-3 text-gray-700">Harga</th>
+                                <td class="font-weight-bold text-right pt-3">
+                                    @if ($kursus_unit->biaya_kursus != null)
+                                    @currency($kursus_unit->biaya_kursus)
+                                    @else
+                                    Harga belum ada
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Section Detail Kursus -->
+                <div class="card-footer bg-light py-2 border-top">
+                    <div class="media align-items-center">
+                        <div class="media-body">
+                            @guest('siswa')
+                            <p class="text-primary text-sm"> Belum punya akun ? </p>
+                            <a href="{{ route('siswa.register') }}" class="btn btn-success btn-block">Register</a>
+                            @endguest
+
+                            @auth('siswa')
+                            @if ($check_kursus != null)
+                            <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                                <span class="font-weight-500">
+                                    Silahkan melakukan konfirmasi pembayaran sesuai dengan harga kursus yang tertera
+                                </span>
+                            </div>
+                            @else
+                            @if ($check_success != null)
+                            <div class="alert alert-success col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                                <span class="font-weight-900">
+                                    Selamat anda sudah mengambil
+                                    <br> kursus <strong>
+                                        {{ $check_success->kursus_unit->kursus->nama_kursus }}
+                                    </strong>
+                                </span>
+                            </div>
+                            <a class="btn btn-success btn-block" href="{{ route('user.kursus') }}">Lihat Kursus</a>
+                            @else
+                            <form action="{{ route('user.pesan', $kursus_unit->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-primary btn-block btn-rounded-md btn-active">
+                                    Pesan
+                                </button>
+                            </form>
+                            @endif
+                            @endif
+                            @endauth
+                        </div>
+                    </div>
+                </div>
+                <!-- -->
+
+            </div>
+            <!-- -->
+
+            <!-- Section Detail Pembayaran -->
+            @auth('siswa')
+            @if ($check_kursus != null)
+            <div class="card border-0 shadow-lg mt-1">
+                <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <strong>{{ session('status') }}</strong>
+                    </div>
+                    @endif
+                    <div class="text-block">
+                        <div class="media align-items-center">
+                            <div class="">
+
+                                <img src="https://alzafa.com/wp-content/uploads/2016/12/logo-bank-bni-e1429736787644.jpeg"
+                                    width="120px" height="40px">
+                                <p style="color: 34364a;" class="my-1"> PT.BIMBLE ID (Admin Bimble)</p>
+                                <p class="font-weight-bold" class="my-1">0826428529</p>
+                                <hr>
+
+                                @if ($check_kursus->file == null)
+                                <div class="form-group">
+                                    <form action="{{ route('sertifikat.update', $check_kursus->id) }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('put')
+                                        <label for="bukti">Upload Bukti Pembayaran: </label>
+                                        <input type="file" class="form-control-file" name="file" id="bukti" required>
+                                        <small id="fileHelpId" class="form-text text-muted">Upload harus format
+                                            jpg/png</small>
+                                        <br>
+                                        <button type="submit" class="text-light btn btn-block"
+                                            style="background-color: #2447f9;">Konfirmasi
+                                            Pembayaran</button>
+                                    </form>
+                                </div>
+                                @else
+                                <div class="form-group">
+                                    <form action="{{ route('sertifikat.update', $check_kursus->id) }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('put')
+                                        <label for="bukti">Update Bukti Pembayaran: </label>
+                                        <input type="file" class="form-control-file" name="file" id="bukti" required>
+                                        <small id="fileHelpId" class="form-text text-muted">Upload harus format
+                                            jpg/png</small>
+                                        <br>
+                                        <button type="submit" class="text-light btn btn-block"
+                                            style="background-color: #2447f9;">Update
+                                            Pembayaran</button>
+                                    </form>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endauth
+            <!-- -->
+
+
         </div>
 
     </div>

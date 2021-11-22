@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UnitPendaftarExports;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Unit;
 use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Facades\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class PendaftarUnitController extends Controller
 {
@@ -44,17 +47,6 @@ class PendaftarUnitController extends Controller
         return view('admin.pendaftar.index');
     }
 
-    public function create()
-    {
-        abort(404);
-    }
-
-
-    public function store()
-    {
-        abort(404);
-    }
-
 
     public function show($id)
     {
@@ -63,17 +55,6 @@ class PendaftarUnitController extends Controller
         ]);
     }
 
-
-    public function edit()
-    {
-        abort(404);
-    }
-
-
-    public function update()
-    {
-        abort(404);
-    }
 
     public function setStatus(Request $request, $id)
     {
@@ -103,5 +84,19 @@ class PendaftarUnitController extends Controller
     {
         $file_path = public_path('storage/file/' . $file);
         return response()->download($file_path);
+    }
+
+    public function export_excel()
+    {
+        $tgl = now();
+        return Excel::download(new UnitPendaftarExports, 'laporan-pendaftar-unit-' . $tgl . '.xlsx');
+    }
+
+    public function export_pdf()
+    {
+        $tgl = now();
+        $unit = Unit::where('status', '2')->latest()->get();
+        $pdf = PDF::loadview('admin.pendaftar.pdf', ['unit' => $unit]);
+        return $pdf->download('laporan-pendaftar-unit-' . $tgl . '.pdf');
     }
 }

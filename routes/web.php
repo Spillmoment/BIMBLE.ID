@@ -44,6 +44,10 @@ Route::prefix('manager')
         // Kategori
         Route::resource('kategori', 'Admin\KategoriController')->except('show');
         // Komentar
+        Route::get('komentar_excel', 'Admin\KomentarController@export_excel')
+            ->name('komentar.excel');
+        Route::get('komentar_pdf', 'Admin\KomentarController@export_pdf')
+            ->name('komentar.pdf');
         Route::resource('komentar', 'Admin\KomentarController');
         // Gallery
         Route::resource('gallery', 'Admin\GalleryController');
@@ -64,10 +68,17 @@ Route::prefix('manager')
             ->name('pendaftar-unit.status');
         Route::get('/pendaftar/download/{file}', 'Admin\PendaftarUnitController@download')
             ->name('download');
-        Route::resource('pendaftar-unit', 'Admin\PendaftarUnitController')
-            ->only(['index', 'show', 'destroy']);
+        Route::get('pendaftar_unit_excel', 'Admin\PendaftarUnitController@export_excel')
+            ->name('pendaftar-unit.excel');
+        Route::get('pendaftar_unit_pdf', 'Admin\PendaftarUnitController@export_pdf')
+            ->name('pendaftar-unit.pdf');
+        Route::resource('pendaftar-unit', 'Admin\PendaftarUnitController');
 
         // Unit Kursus
+        Route::get('unit-kursus-export/{id}', 'Admin\UnitKursusController@export_excel')
+            ->name('unit-kursus.excel');
+        Route::get('unit-kursus-pdf/{id}', 'Admin\UnitKursusController@export_pdf')
+            ->name('unit-kursus.pdf');
         Route::get('unit-kursus', 'Admin\UnitKursusController@index')
             ->name('unit-kursus.index');
         Route::get('unit-kursus/{id}', 'Admin\UnitKursusController@detail')
