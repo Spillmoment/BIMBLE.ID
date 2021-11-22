@@ -111,12 +111,18 @@
                     </span>
                     <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
                 </span>
-                <div class="multi-level collapse {{ request()->is('manager/siswa-unit*') ? 'show' : '' }}" role="list"
-                    id="submenu-siswa" aria-expanded="false">
+                <div class="multi-level collapse {{ request()->is('manager/siswa-unit*') || request()->is('manager/konfirmasi-siswa*') ? 'show' : '' }}"
+                    role="list" id="submenu-siswa" aria-expanded="false">
                     <ul class="flex-column nav">
+                        <li
+                            class="nav-item {{ (Request::route()->getName() == 'siswa-konfirmasi.index') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('siswa-konfirmasi.index') }}"><span> Konfirmasi
+                                    Siswa</span></a>
+                        </li>
                         <li class="nav-item {{ (Request::route()->getName() == 'siswa.unit') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('siswa.unit') }}"><span>Daftar Siswa</span></a>
                         </li>
+
                     </ul>
                 </div>
             </li>
