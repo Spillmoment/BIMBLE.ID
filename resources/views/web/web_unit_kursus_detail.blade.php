@@ -168,6 +168,41 @@
 
         <div class="col-lg-4 mt-3">
 
+            <!-- Section Mentor -->
+            <div class="card border-0 shadow-lg mt-1">
+                <div class="card-header bg-gray-200">
+                    <h6 class="text-primary text-center">Profil Mentor </h6>
+                </div>
+                <div class="card-body p-4">
+                    @forelse ($mentor as $item)
+                    <div class="text-block pb-3">
+                        <div class="media align-items-center">
+                            <img src="{{ Storage::url('public/' . $item->foto) }}" alt="" width="90" height="80"
+                                class="rounded-circle mr-3">
+                            <div class="media-body">
+                                <h6> <a href="detail-rooms.html" class="text-reset">{{ $item->nama_mentor }}</a>
+                                </h6>
+                                <p class="text-muted text-sm mb-0">{{ $item->kompetensi }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="text-muted font-weight-900 text-sm">
+                            {{ $item->pengalaman }}
+                        </p>
+                    </div>
+                    @empty
+                    <div class="alert alert-info" role="alert">
+                        <span>Belum ada mentor yang terdaftar di kursus ini.</span>
+                    </div>
+                    @endforelse
+
+
+                </div>
+
+            </div>
+            <!-- -->
+
+            <!-- Section Kursus -->
             <div class="card border-0 shadow-lg">
                 <div class="card-header text-primary text-center bg-gray-200">
                     <h6 class="text-primary text-center">Detail Kursus </h6>
@@ -188,18 +223,18 @@
                     <div class="text-block pt-1 pb-0">
                         <table class="w-100">
                             <tr>
-                                <th class="pt-3">Unit Pengelola</th>
+                                <th class="pt-3 text-gray-700">Unit Pengelola</th>
                                 <td class="font-weight-bold text-right pt-3 text-capitalize">
                                     {{ $kursus_unit->unit->nama_unit }} </td>
                             </tr>
                             <tr>
-                                <th class="pt-3">Type Kursus</th>
+                                <th class="pt-3 text-gray-700">Type Kursus</th>
                                 <td class="font-weight-bold text-right pt-3 text-capitalize">
                                     {{ $kursus_unit->type->nama_type }} </td>
                             </tr>
                             <tr>
 
-                                <th class="pt-3">Harga</th>
+                                <th class="pt-3 text-gray-700">Harga</th>
                                 <td class="font-weight-bold text-right pt-3">
                                     @if ($kursus_unit->biaya_kursus != null)
                                     @currency($kursus_unit->biaya_kursus)
@@ -212,7 +247,7 @@
                     </div>
                 </div>
 
-                <!-- Section  -->
+                <!-- Section Detail Kursus -->
                 <div class="card-footer bg-light py-2 border-top">
                     <div class="media align-items-center">
                         <div class="media-body">
@@ -229,12 +264,24 @@
                                 </span>
                             </div>
                             @else
+                            @if ($check_success != null)
+                            <div class="alert alert-success col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                                <span class="font-weight-900">
+                                    Selamat anda sudah mengambil
+                                    <br> kursus <strong>
+                                        {{ $check_success->kursus_unit->kursus->nama_kursus }}
+                                    </strong>
+                                </span>
+                            </div>
+                            <a class="btn btn-success btn-block" href="{{ route('user.kursus') }}">Lihat Kursus</a>
+                            @else
                             <form action="{{ route('user.pesan', $kursus_unit->id) }}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-primary btn-block btn-rounded-md btn-active">
                                     Pesan
                                 </button>
                             </form>
+                            @endif
                             @endif
                             @endauth
                         </div>
@@ -243,11 +290,11 @@
                 <!-- -->
 
             </div>
+            <!-- -->
 
             <!-- Section Detail Pembayaran -->
             @auth('siswa')
             @if ($check_kursus != null)
-
             <div class="card border-0 shadow-lg mt-1">
                 <div class="card-body">
                     @if (session('status'))
@@ -311,38 +358,7 @@
             @endauth
             <!-- -->
 
-            <!-- Section Mentor -->
-            <div class="card border-0 shadow-lg mt-1">
-                <div class="card-header bg-gray-200">
-                    <h6 class="text-primary text-center">Profil Mentor </h6>
-                </div>
-                <div class="card-body p-4">
-                    @forelse ($mentor as $item)
-                    <div class="text-block pb-3">
-                        <div class="media align-items-center">
-                            <img src="{{ Storage::url('public/' . $item->foto) }}" alt="" width="90" height="80"
-                                class="rounded-circle mr-3">
-                            <div class="media-body">
-                                <h6> <a href="detail-rooms.html" class="text-reset">{{ $item->nama_mentor }}</a></h6>
-                                <p class="text-muted text-sm mb-0">{{ $item->kompetensi }}</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <p class="text-muted font-weight-900 text-sm">
-                            {{ $item->pengalaman }}
-                        </p>
-                    </div>
-                    @empty
-                    <div class="alert alert-info" role="alert">
-                        <span>Belum ada mentor yang terdaftar di kursus ini.</span>
-                    </div>
-                    @endforelse
 
-
-                </div>
-
-            </div>
-            <!-- -->
         </div>
 
     </div>
