@@ -24,7 +24,6 @@ class SiswaUnitController extends Controller
         }
 
         $unit_filter = Unit::find($data_id_unit);
-        // dd($unit_filter);
 
         return view('admin.siswa_unit.index', [
             'unit' => $unit_filter
@@ -109,7 +108,7 @@ class SiswaUnitController extends Controller
                 ->editColumn('file', function ($item) {
                     return view('admin.siswa_unit.modal', ['item' => $item]);
                 })
-                ->rawColumns(['action', 'siswa', 'kursus', 'foto', 'status', 'status_sertifikat', 'file'])
+                ->rawColumns(['action', 'foto', 'status', 'status_sertifikat', 'file'])
                 ->make();
         }
 
