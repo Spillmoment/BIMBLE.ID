@@ -49,9 +49,11 @@ Route::prefix('manager')
         Route::get('komentar_pdf', 'Admin\KomentarController@export_pdf')
             ->name('komentar.pdf');
         Route::resource('komentar', 'Admin\KomentarController');
+
         // Gallery
         Route::resource('gallery', 'Admin\GalleryController');
-        // Unit
+
+        // Siswa Unit
         Route::get('unit_excel', 'Admin\UnitController@export_excel')->name('unit.excel');
         Route::get('unit_pdf', 'Admin\UnitController@export_pdf')->name('unit.pdf');
         Route::resource('unit', 'Admin\UnitController');
@@ -59,6 +61,16 @@ Route::prefix('manager')
         Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
         Route::get('siswa-unit/{id}/confirm', 'Admin\SiswaUnitController@confirm')->name('siswa.unit.confirm');
         Route::get('siswa-unit/{id}/confirm_down', 'Admin\SiswaUnitController@confirm_down')->name('siswa.unit.confirm_down');
+
+        // Konfirmasi Siswa
+        Route::get('/konfirmasi-siswa', 'Admin\KonfirmasiSiswaController@index')
+            ->name('siswa-konfirmasi.index');
+        Route::get('/konfirmasi-siswa/{id}/detail', 'Admin\KonfirmasiSiswaController@detail')
+            ->name('siswa-konfirmasi.detail');
+        Route::put('/konfirmasi-siswa/{id}/confirm', 'Admin\KonfirmasiSiswaController@confirm')
+            ->name('siswa-konfirmasi.confirm');
+        Route::put('/konfirmasi-siswa/{id}/cancel', 'Admin\KonfirmasiSiswaController@cancel')
+            ->name('siswa-konfirmasi.cancel');
 
         // Banner
         Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);
