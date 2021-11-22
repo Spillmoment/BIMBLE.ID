@@ -9,7 +9,6 @@ use App\Unit;
 use App\Kursus;
 use App\KursusUnit;
 use App\Galeri;
-use App\GaleriKursus;
 use App\Jadwal;
 use App\Materi;
 use App\MentorKursus;
@@ -126,12 +125,17 @@ class UnitController extends Controller
 
         $jadwal = Jadwal::where('kursus_unit_id', $kursus_unit->id)->get();
 
-        $check_kursus = SiswaKursus::where('siswa_id', Auth::id())
+        $check_kursus = SiswaKursus::with(['kursus_unit', 'siswa'])
+            ->where('siswa_id', Auth::id())
             ->where('kursus_unit_id', $kursus_unit->id)
             ->where('status_sertifikat', 'daftar')
             ->first();
 
-        $check_file =  SiswaKursus::where('siswa_id', Auth::id())->first();
+        $check_success = SiswaKursus::with(['kursus_unit', 'siswa'])
+            ->where('siswa_id', Auth::id())
+            ->where('kursus_unit_id', $kursus_unit->id)
+            ->where('status_sertifikat', 'terima')
+            ->first();
 
         $materi = Materi::where('kursus_id', $kursus->id)
             ->where('unit_id', $unit->id)
@@ -150,7 +154,7 @@ class UnitController extends Controller
             'kursus_unit' => $kursus_unit,
             'jadwals' => $jadwal,
             'check_kursus' => $check_kursus,
-            'check_file' => $check_file,
+            'check_success' => $check_success,
             'materis' => $materi,
             'mentor' => $mentor_kursus,
         ]);
