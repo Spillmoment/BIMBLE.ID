@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "maatwebsite/excel": "^3.1",
+        "realrashid/sweet-alert": "^4.1",
         "yajra/laravel-datatables-buttons": "^4.13",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
