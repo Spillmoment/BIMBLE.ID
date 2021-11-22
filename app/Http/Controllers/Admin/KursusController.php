@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use App\Exports\KursusExports;
 use App\Http\Controllers\Controller;
 use App\Kursus;
@@ -12,7 +13,6 @@ use App\Http\Traits\KursusImageTraits;
 use App\Kategori;
 use App\SiswaKursus;
 use Illuminate\Support\Facades\DB;
-use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
@@ -27,13 +27,12 @@ class KursusController extends Controller
 
         if (request()->ajax()) {
 
-            /* if ($request->input('kategori') != null) {
+            if ($request->input('kategori') != 0) {
                 $query = Kursus::where('kategori_id', $request->kategori);
             } else {
                 $query = Kursus::query()->with(['kategori'])->latest();
-            } */
+            }
 
-            $query = Kursus::query()->with(['kategori'])->latest();
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
                     return
@@ -71,19 +70,20 @@ class KursusController extends Controller
         }
 
         $siswa_diagram_data = SiswaKursus::select(DB::raw("(COUNT(*)) as count"), 'unit.nama_unit')
-                            ->join('kursus_unit', 'siswa_kursus.kursus_unit_id', '=', 'kursus_unit.id')
-                            ->join('unit', 'kursus_unit.unit_id', '=', 'unit.id')
-                            ->groupBy('kursus_unit.unit_id')
-                            ->get();
+            ->join('kursus_unit', 'siswa_kursus.kursus_unit_id', '=', 'kursus_unit.id')
+            ->join('unit', 'kursus_unit.unit_id', '=', 'unit.id')
+            ->groupBy('kursus_unit.unit_id')
+            ->get();
         $siswa_diagram = $siswa_diagram_data->toArray();
         // dd($siswa_diagram);
-        
+
         // $count_active_diactive = Unit::select(DB::raw("(COUNT(*)) as count"), 'status')
         //     ->whereYear('created_at', date('Y'))
         //     ->groupBy('status')
         //     ->get();
 
-        return view('admin.kursus.index', 
+        return view(
+            'admin.kursus.index',
             [
                 'kategori' => $kategori,
                 'siswa_chart' => $siswa_diagram,
