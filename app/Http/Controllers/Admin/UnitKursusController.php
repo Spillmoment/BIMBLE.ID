@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\UnitKursusExports;
 use App\Http\Controllers\Controller;
 use App\KursusUnit;
+use App\Type;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,19 +25,29 @@ class UnitKursusController extends Controller
         ]);
     }
 
-    public function detail($id)
+    public function detail(Request $request, $id)
     {
 
         $unit = KursusUnit::with(['unit', 'kursus.kategori', 'type'])
             ->where('unit_id', $id)->first();
 
+        $type = Type::latest()->get();
+
         if (request()->ajax()) {
 
-            $query = KursusUnit::query()
-                ->with(['unit', 'kursus.kategori'])
-                ->where('unit_id', $id)
-                ->where('type_id', '2')
-                ->latest();
+            if ($request->input('type') != 0) {
+                $query = KursusUnit::query()
+                    ->with(['unit', 'kursus.kategori', 'type'])
+                    ->where('unit_id', $id)
+                    ->where('type_id', $request->type)
+                    ->latest();
+            } else {
+                $query = KursusUnit::query()
+                    ->with(['unit', 'kursus.kategori', 'type'])
+                    ->where('unit_id', $id)
+                    ->where('type_id', '2')
+                    ->latest();
+            }
 
             return DataTables::of($query)
                 ->addColumn('kursus', function ($item) {
@@ -70,7 +81,8 @@ class UnitKursusController extends Controller
         }
 
         return view('admin.unit_kursus.detail', [
-            'unit' => $unit
+            'unit' => $unit,
+            'type' => $type
         ]);
     }
 

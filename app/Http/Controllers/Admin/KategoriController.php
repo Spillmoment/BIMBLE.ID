@@ -7,6 +7,7 @@ use App\Kategori;
 use App\Http\Requests\KategoriRequest;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class KategoriController extends Controller
@@ -17,26 +18,7 @@ class KategoriController extends Controller
             $query = Kategori::query()->latest();
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
-                    return
-                        '<div class="btn-group">
-                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <span class="icon icon-sm">
-                                    <span class="fas fa-ellipsis-h icon-dark"></span>
-                                </span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                <a class="dropdown-item" href="' . route('kategori.edit', $item->id) . '"><span
-                                        class="fas fa-edit mr-2"></span>Sunting</a>
-                                <form action="' . route('kategori.destroy', $item->id) . '" method="POST">
-                                    ' . method_field('delete') . csrf_field() . '
-                                    <button id="deleteButton" type="submit" class="dropdown-item text-danger" data-name="' . $item->nama_kategori .  '">
-                                        <span class="fas fa-trash-alt mr-2"></span>Hapus</a>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>';
+                    return view('admin.kategori.action', compact('item'));
                 })
                 ->rawColumns(['action'])
                 ->make();
@@ -45,12 +27,10 @@ class KategoriController extends Controller
         return view('admin.kategori.index');
     }
 
-
     public function create()
     {
         return view('admin.kategori.create');
     }
-
 
     public function store(KategoriRequest $request)
     {
@@ -59,14 +39,9 @@ class KategoriController extends Controller
         $data['slug'] = Str::slug($nama_kat, '-');
         Kategori::create($data);
 
-        return redirect()->route('kategori.index')
-            ->with('status', 'Kategori berhasil ditambahkan');
-    }
-
-
-    public function show(Kategori $kategori)
-    {
-        //
+        Alert::success('Success', 'Kategori berhasil ditambahkan')
+            ->autoClose(3000);
+        return redirect()->route('kategori.index');
     }
 
     public function edit(Kategori $kategori)
@@ -82,14 +57,17 @@ class KategoriController extends Controller
         $data['slug'] = Str::slug($nama_kat, '-');
 
         $kategori->update($data);
-        return redirect()->route('kategori.index')
-            ->with('status', 'Kategori berhasil diupdate');
+        Alert::success('Success', 'Kategori berhasil diupdate')
+            ->autoClose(3000);;
+        return redirect()->route('kategori.index');
     }
 
 
     public function destroy(Kategori $kategori)
     {
         $kategori->delete();
-        return back()->with('status', 'Kategori berhasil dihapus');
+        Alert::success('Success', 'Kategori berhasil dihapus')
+            ->autoClose(3000);;
+        return back();
     }
 }

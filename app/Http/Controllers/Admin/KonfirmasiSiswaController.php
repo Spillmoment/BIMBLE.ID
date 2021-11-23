@@ -46,7 +46,7 @@ class KonfirmasiSiswaController extends Controller
                         </div>';
                 })
                 ->addColumn('siswa', function ($item) {
-                    return  '<a href="#">'.$item->siswa->nama_siswa.'</a>';
+                    return  '<a href="#">' . $item->siswa->nama_siswa . '</a>';
                 })
                 ->addColumn('unit', function ($item) {
                     return $item->kursus_unit->unit->nama_unit ?? '';
@@ -57,7 +57,7 @@ class KonfirmasiSiswaController extends Controller
                 ->editColumn('file', function ($item) {
                     return view('admin.siswa_konfirmasi.modal', ['item' => $item]);
                 })
-                ->rawColumns(['action', 'foto', 'file','siswa'])
+                ->rawColumns(['action', 'foto', 'file', 'siswa'])
                 ->make();
         }
 
@@ -68,9 +68,10 @@ class KonfirmasiSiswaController extends Controller
     {
         $siswa_kursus = SiswaKursus::with(['siswa', 'kursus_unit'])->findOrFail($id);
         $rule_gaji = RuleGaji::latest()->first();
-// dd($rule_gaji);
-        return view('admin.siswa_konfirmasi.detail', ['data' => $siswa_kursus, 'rule_gaji' => $rule_gaji
-    ]);
+        // dd($rule_gaji);
+        return view('admin.siswa_konfirmasi.detail', [
+            'data' => $siswa_kursus, 'rule_gaji' => $rule_gaji
+        ]);
     }
 
     public function invalid_message(Request $request, $id)
@@ -82,16 +83,16 @@ class KonfirmasiSiswaController extends Controller
 
         if (is_null($request->invalid_message)) {
             return redirect()->route('siswa-konfirmasi.invalid', $id)
-            ->with('message_null', 'Anda belum memberikan pesan.');
+                ->with('message_null', 'Anda belum memberikan pesan.');
         }
 
         $siswa_kursus = SiswaKursus::findOrFail($id);
         $siswa_kursus->update([
             'invalid_message' => $request->invalid_message,
         ]);
-    
+
         return redirect()->route('siswa-konfirmasi.invalid', $id)
-        ->with('invalid', 'Pesan berhasil terkirim');
+            ->with('invalid', 'Pesan berhasil terkirim');
     }
 
     public function confirm($id)
@@ -99,17 +100,17 @@ class KonfirmasiSiswaController extends Controller
         $siswa_kursus = SiswaKursus::findOrFail($id);
         if ($siswa_kursus->status_sertifikat == 'daftar') {
             $confirm = $siswa_kursus->update([
-                'status_sertifikat' => 'terima', 
+                'status_sertifikat' => 'terima',
                 'invalid_message' => null,
             ]);
         }
 
         if ($confirm) {
             $check_keuangan = Keuangan::with('rule_gaji')->where('unit_id', $siswa_kursus->kursus_unit->unit_id)
-                                ->where('status', 'inactive')
-                                ->whereMonth('created_at', date('m'))
-                                ->whereYear('created_at', date('Y'))
-                                ->first();
+                ->where('status', 'inactive')
+                ->whereMonth('created_at', date('m'))
+                ->whereYear('created_at', date('Y'))
+                ->first();
             $biaya_kursus = $siswa_kursus->kursus_unit->biaya_kursus;
 
             if ($check_keuangan) {
@@ -134,15 +135,14 @@ class KonfirmasiSiswaController extends Controller
             }
                         
             return redirect()->route('siswa-konfirmasi.index')
-            ->with('status', 'Siswa berhasil terkonfirmasi.');
+                ->with('status', 'Siswa berhasil terkonfirmasi.');
         }
-
     }
 
     public function cancel(Request $request)
     {
     }
-    
+
     public function notification()
     {
         $check_pendaftaran = SiswaKursus::where('status_sertifikat', 'daftar')->whereNotNull('file')->count();

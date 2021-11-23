@@ -58,9 +58,16 @@ Route::prefix('manager')
         Route::get('unit_pdf', 'Admin\UnitController@export_pdf')->name('unit.pdf');
         Route::resource('unit', 'Admin\UnitController');
         Route::get('siswa-unit', 'Admin\SiswaUnitController@index')->name('siswa.unit');
-        Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')->name('siswa.unit.detail');
-        Route::get('siswa-unit/{id}/confirm', 'Admin\SiswaUnitController@confirm')->name('siswa.unit.confirm');
+        Route::get('siswa-unit/detail/{unit_id}', 'Admin\SiswaUnitController@detail_siswa')
+            ->name('siswa.unit.detail');
+        Route::get('siswa-unit/{id}/confirm', 'Admin\SiswaUnitController@confirm')
+            ->name('siswa.unit.confirm');
         Route::get('siswa-unit/{id}/confirm_down', 'Admin\SiswaUnitController@confirm_down')->name('siswa.unit.confirm_down');
+        Route::get('siswa-unit/export/{id}/private/{type}', 'Admin\SiswaUnitController@export_private')
+            ->name('siswa-unit.private');
+        Route::get('siswa-unit/export/{id}/kelompok/{type}', 'Admin\SiswaUnitController@export_kelompok')
+            ->name('siswa-unit.kelompok');
+
 
         // Konfirmasi Siswa
         Route::get('/konfirmasi-siswa', 'Admin\KonfirmasiSiswaController@index')
@@ -235,3 +242,5 @@ Route::get('/daftar-unit', 'Web\UnitController@list')->name('unit.list');
 Route::get('/daftar-unit/getAutocomplete', 'Web\UnitController@getAutocomplete')->name('unit.getAutocomplte');
 Route::get('/daftar/unit', 'Web\UnitController@index')->name('unit.daftar');
 Route::post('/unit/add', 'Web\UnitController@post')->name('unit.add');
+
+Route::get('test', fn () => view('admin.siswa_konfirmasi.invoice'));

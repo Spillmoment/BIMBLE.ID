@@ -44,9 +44,7 @@ class GalleryController extends Controller
                     return $item->kursus->nama_kursus;
                 })
                 ->editColumn('gambar', function ($item) {
-                    foreach (explode('|', $item->gambar) as $image) {
-                        return '<img src="/storage/image/' . $image . '" style="max-height: 40px;">';
-                    }
+                    return view('admin.gallery.image', compact('item'));
                 })
                 ->rawColumns(['action', 'kursus', 'gambar'])
                 ->make();

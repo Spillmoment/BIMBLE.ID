@@ -258,11 +258,19 @@
 
                             @auth('siswa')
                             @if ($check_kursus != null)
+                            @if ($check_kursus->file != null)
+                            <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
+                                <span class="font-weight-500">
+                                    Konfirmasi pembayaran anda akan segera di cek oleh admin
+                                </span>
+                            </div>
+                            @else
                             <div class="alert alert-info col-lg-12 col-sm-12 col-md-12 text-center text-black">
                                 <span class="font-weight-500">
                                     Silahkan melakukan konfirmasi pembayaran sesuai dengan harga kursus yang tertera
                                 </span>
                             </div>
+                            @endif
                             @else
                             @if ($check_success != null)
                             <div class="alert alert-success col-lg-12 col-sm-12 col-md-12 text-center text-black">

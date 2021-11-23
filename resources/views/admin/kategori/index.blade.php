@@ -4,21 +4,6 @@
 
 @section('content')
 
-@if (session('status'))
-@push('scripts')
-<script>
-    swal({
-        title: "Berhasil",
-        text: "{{ session('status') }}",
-        icon: "success",
-        button: false,
-        timer: 3000
-    });
-
-</script>
-@endpush
-@endif
-
 <div class="row">
     <div class="col-12 mb-4">
 
@@ -31,7 +16,7 @@
                         <li class="breadcrumb-item active" aria-current="page">Halaman Kategori</li>
                     </ol>
                 </nav>
-                <h2 class="h4 mt-1">Table Kategori</h2>
+                <h2 class="h4 mt-1">List Data Kategori</h2>
             </div>
 
             <div class="float-right mt-6">
@@ -102,26 +87,6 @@
             },
         ],
 
-    });
-
-    $('button#deleteButton').on('click', function (e) {
-        var name = $(this).data('name');
-        e.preventDefault();
-        swal({
-                title: "Yakin!",
-                text: "menghapus kategori  " + name + "?",
-                icon: "warning",
-                dangerMode: true,
-                buttons: {
-                    cancel: "Cancel",
-                    confirm: "OK",
-                },
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $(this).closest("form").submit();
-                }
-            });
     });
 
 </script>
