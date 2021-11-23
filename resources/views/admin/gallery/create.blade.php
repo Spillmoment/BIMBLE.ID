@@ -35,7 +35,8 @@
                             </div>
 
                             <div class="form-file mb-3">
-                                <input type="file" class="form-file-input" id="customFile" multiple name="gambar[]">
+                                <input type="file" class="form-file-input" id="customFile" multiple name="gambar[]"
+                                    required>
                                 <label class="form-file-label" for="customFile">
                                     <span class="form-file-text">Upload Gambar Lebih Dari Satu ...</span>
                                     <span class="form-file-button">Browse</span>

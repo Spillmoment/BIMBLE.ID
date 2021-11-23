@@ -47,6 +47,16 @@
 
 
         <div class="card border-light shadow-sm components-section mt-3">
+            <div class="row my-1 mx-1">
+                <div class="col-md-3">
+                    <select id="filter-type" data-column="0" class="form-select filter text-capitalize">
+                        <option selected>Pilih Type Kursus</option>
+                        @foreach ($type as $item)
+                        <option value="{{ $item->id }}">{{ $item->nama_type }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="row">
                 <div class="card-body">
                     <table class="table table-hover table-striped table-responsive" id="kursusUnitTable">
@@ -77,6 +87,7 @@
 @endsection
 @push('scripts')
 <script>
+    let type = $('#filter-type').val()
     // AJAX DataTable
     var datatable = $('#kursusUnitTable').DataTable({
         processing: true,
@@ -84,6 +95,9 @@
         ordering: true,
         ajax: {
             url: '{!! url()->current() !!}',
+            data: function (d) {
+                d.type = type
+            }
         },
         columns: [{
                 "data": 'id',
@@ -121,6 +135,11 @@
         ],
 
     });
+
+    $('.filter').on('change', function () {
+        type = $('#filter-type').val();
+        datatable.ajax.reload();
+    })
 
 </script>
 @endpush

@@ -16,7 +16,6 @@
                         <li class="breadcrumb-item active" aria-current="page">Detail Pendaftar Unit</li>
                     </ol>
                 </nav>
-                <h2 class="h4 mt-1">Table Unit</h2>
             </div>
 
         </div>
