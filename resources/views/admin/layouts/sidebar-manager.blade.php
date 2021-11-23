@@ -127,6 +127,14 @@
                 </div>
             </li>
 
+            <!-- Sidebar Keuangan -->
+            <li class="nav-item  {{ (request()->is('manager/keuangan*')) ? 'active' : '' }}">
+                <a href="{{ route('keuangan.index') }}" class="nav-link">
+                    <span class="sidebar-icon"><span class="fas fa-hand-holding-usd"></span></span>
+                    <span>Keuangan</span>
+                </a>
+            </li>
+            
             <!-- Sidebar  Pengaturan -->
             <li class="nav-item {{ (request()->is('manager/banner*')) ? 'active' : '' }}">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
