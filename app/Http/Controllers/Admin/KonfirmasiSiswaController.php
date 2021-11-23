@@ -75,4 +75,8 @@ class KonfirmasiSiswaController extends Controller
     public function cancel(Request $request)
     {
     }
+
+    public function cetak_invoice()
+    {
+    }
 }
