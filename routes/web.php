@@ -74,10 +74,14 @@ Route::prefix('manager')
             ->name('siswa-konfirmasi.index');
         Route::get('/konfirmasi-siswa/{id}/detail', 'Admin\KonfirmasiSiswaController@detail')
             ->name('siswa-konfirmasi.detail');
+        Route::put('/konfirmasi-siswa/{id}/detail', 'Admin\KonfirmasiSiswaController@invalid_message')
+            ->name('siswa-konfirmasi.invalid');
         Route::put('/konfirmasi-siswa/{id}/confirm', 'Admin\KonfirmasiSiswaController@confirm')
             ->name('siswa-konfirmasi.confirm');
         Route::put('/konfirmasi-siswa/{id}/cancel', 'Admin\KonfirmasiSiswaController@cancel')
             ->name('siswa-konfirmasi.cancel');
+        Route::get('/konfirmasi-siswa/get_notification', 'Admin\KonfirmasiSiswaController@notification')
+            ->name('siswa-konfirmasi.notification');
 
         // Banner
         Route::resource('banner', 'Admin\BannerController')->only(['index', 'update']);

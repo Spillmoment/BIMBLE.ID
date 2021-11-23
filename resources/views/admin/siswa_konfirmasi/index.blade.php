@@ -45,7 +45,6 @@
                                 <th>Nama Siswa</th>
                                 <th>Unit</th>
                                 <th>Kursus</th>
-                                <th>Foto</th>
                                 <th>File</th>
                                 <th>Action</th>
                             </tr>
@@ -94,11 +93,6 @@
                 data: 'kursus',
                 name: 'kursus_unit.kursus.nama_kursus'
             },
-            {
-                data: 'foto',
-                name: 'siswa.foto'
-            },
-
             {
                 data: 'file',
                 name: 'file'

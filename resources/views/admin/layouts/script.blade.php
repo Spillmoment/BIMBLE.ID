@@ -39,3 +39,20 @@
 
 <!-- Volt JS -->
 <script src="{{ asset('assets/backend/js/volt.js') }}"></script>
+
+{{-- Make notification --}}
+<script>
+  $( document ).ready(function() {
+    $.ajax({
+      url: '{{ route('siswa-konfirmasi.notification') }}',
+      type: 'GET',
+      data: '',
+      success: function( data ){
+        console.log(data.state)
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+  });
+</script>
