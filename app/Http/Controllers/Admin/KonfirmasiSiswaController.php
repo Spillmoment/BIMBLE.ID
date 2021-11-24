@@ -95,7 +95,7 @@ class KonfirmasiSiswaController extends Controller
             ->with('invalid', 'Pesan berhasil terkirim');
     }
 
-    public function confirm(Request $request, $id)
+    public function confirm($id)
     {
         $siswa_kursus = SiswaKursus::findOrFail($id);
         if ($siswa_kursus->status_sertifikat == 'daftar') {
@@ -112,14 +112,28 @@ class KonfirmasiSiswaController extends Controller
                 ->whereYear('created_at', date('Y'))
                 ->first();
             $biaya_kursus = $siswa_kursus->kursus_unit->biaya_kursus;
-            $percentage = $check_keuangan->rule_gaji->unit;
-            $count_pendapatan = intval(($percentage / 100) * $biaya_kursus);
-            $total_pendapatan = intval($check_keuangan->nominal) + $count_pendapatan;
 
-            $check_keuangan->update([
-                'nominal' => $total_pendapatan
-            ]);
+            if ($check_keuangan) {
+                $percentage = $check_keuangan->rule_gaji->unit;
+                $count_pendapatan = intval(($percentage/100) * $biaya_kursus);
+                $total_pendapatan = intval($check_keuangan->nominal) + $count_pendapatan;
 
+                $check_keuangan->update([
+                    'nominal' => $total_pendapatan
+                ]);
+            } else {
+                $last_rule = RuleGaji::latest('created_at')->first();
+                $percentage = $last_rule->unit;
+                $count_pendapatan = intval(($percentage/100) * $biaya_kursus);
+
+                $keuangan = New Keuangan();
+                $keuangan->unit_id = $siswa_kursus->kursus_unit->unit_id;
+                $keuangan->rule_gaji_id = $last_rule->id;
+                $keuangan->nominal = $count_pendapatan;
+                $keuangan->status = 'inactive';
+                $keuangan->save();
+            }
+                        
             return redirect()->route('siswa-konfirmasi.index')
                 ->with('status', 'Siswa berhasil terkonfirmasi.');
         }

@@ -117,7 +117,7 @@
                         <li
                             class="nav-item {{ (Request::route()->getName() == 'siswa-konfirmasi.index') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('siswa-konfirmasi.index') }}"><span> Konfirmasi
-                                    Siswa <span class="badge bg-secondary">9</span> </span></a>
+                                    Siswa</span> <span id="confirm-badge"></span></a>
                         </li>
                         <li class="nav-item {{ (Request::route()->getName() == 'siswa.unit') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('siswa.unit') }}"><span>Daftar Siswa</span></a>

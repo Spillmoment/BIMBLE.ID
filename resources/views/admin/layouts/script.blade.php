@@ -48,7 +48,9 @@
       type: 'GET',
       data: '',
       success: function( data ){
-        console.log(data.state)
+        if (data.total_pendaftar > 0) {
+          document.getElementById('confirm-badge').innerHTML=`<span class="badge bg-secondary">${data.total_pendaftar}</span>`
+        }
       },
       error: function (error) {
         console.log(error);
