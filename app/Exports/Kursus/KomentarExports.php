@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\Kursus;
 
 use App\Komentar;
 
