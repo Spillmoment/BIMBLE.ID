@@ -164,16 +164,15 @@ Route::prefix('unit')
         Route::delete('/galeri/{id}', 'Unit\GaleriController@destroy')->name('unit.galeri.hapus');
 
         // siswa
-        Route::get('/pendaftar/konfirmasi', 'Unit\SiswaController@konfirmasi_siswa')->name('unit.siswa.konfirmasi');
-        Route::get('/pendaftar/konfirmasi/{id}', 'Unit\SiswaController@detail_siswa')->name('unit.siswa.detail');
-        Route::put('/pendaftar/konfirmasi/{id}/update', 'Unit\SiswaController@update_konfirmasi')->name('unit.siswa.update');
-
         Route::get('/siswa/kelompok', 'Unit\SiswaController@index_kelompok')->name('unit.siswa.kelompok');
         Route::get('/siswa/kelompok/{id}', 'Unit\SiswaController@card_kelompok')->name('unit.siswa.kelompok.card');
         Route::put('/siswa/kelompok/{id}', 'Unit\SiswaController@edit_card_kelompok')->name('unit.siswa.kelompok.edit');
         Route::get('/siswa/private', 'Unit\SiswaController@index_private')->name('unit.siswa.private');
         Route::get('/siswa/private/{id}', 'Unit\SiswaController@card_private')->name('unit.siswa.private.card');
         Route::put('/siswa/private/{id}', 'Unit\SiswaController@edit_card_private')->name('unit.siswa.private.edit');
+
+        // Monitor Gaji
+        Route::get('/salary', 'Unit\SalaryController@index')->name('unit.salary');
     });
 
 // Auth Siswa
