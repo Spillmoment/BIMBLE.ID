@@ -117,13 +117,6 @@
                 </div>
             </li>
 
-            <li class="nav-item {{ Request::route()->getName() == 'unit.siswa.konfirmasi' ? 'active' : '' }}">
-                <a href="{{ route('unit.siswa.konfirmasi') }}" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-registered"></span></span>
-                    <span>Konfirmasi Siswa</span>
-                </a>
-            </li>
-
             <li class="nav-item {{ Request::route()->getName() == 'unit.fasilitas.home' ? 'active' : '' }}">
                 <a href="{{ route('unit.fasilitas.home') }}" class="nav-link">
                     <span class="sidebar-icon"><span class="fas fa-building"></span></span>
@@ -131,6 +124,12 @@
                 </a>
             </li>
 
+            <li class="nav-item {{ Request::route()->getName() == 'unit.salary' ? 'active' : '' }}">
+                <a href="{{ route('unit.salary') }}" class="nav-link">
+                    <span class="sidebar-icon"><span class="fas fa-hand-holding-usd"></span></span>
+                    <span>Cek Gaji</span>
+                </a>
+            </li>
 
         </ul>
     </div>
