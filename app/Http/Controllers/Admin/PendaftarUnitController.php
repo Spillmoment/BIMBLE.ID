@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\UnitPendaftarExports;
+use App\Exports\Unit\UnitPendaftarExports;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Unit;

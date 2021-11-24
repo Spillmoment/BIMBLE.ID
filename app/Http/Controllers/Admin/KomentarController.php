@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\KomentarExports;
+use App\Exports\Kursus\KomentarExports;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Komentar;

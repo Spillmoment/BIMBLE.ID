@@ -53,6 +53,42 @@
             </div>
         </div>
 
+        <div class="d-flex flex-row-reverse bd-highlight">
+            <!-- Button Modal -->
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
+                data-target="#modal-default">Default</button>
+            <!-- Modal Content -->
+            <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="h6 modal-title">Terms of Service</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>With less than a month to go before the European Union enacts new consumer privacy laws
+                                for its citizens, companies around the world are updating their terms of service
+                                agreements to comply.</p>
+                            <p>The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on
+                                May 25 and is meant to ensure a common set of data rights in the European Union. It
+                                requires organizations to notify users as
+                                soon as possible of high-risk data breaches that could personally affect them.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-secondary">I Got It</button>
+                            <button type="button" class="btn btn-link text-danger ml-auto"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal Content -->
+
+
         <div class="card border-light shadow-sm components-section mt-3">
             <div class="row my-1 mx-1">
                 <div class="col-md-3">

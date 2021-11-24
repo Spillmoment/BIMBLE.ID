@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\UnitExports;
+use App\Exports\Unit\UnitExports;
 use PDF;
 
 class UnitController extends Controller

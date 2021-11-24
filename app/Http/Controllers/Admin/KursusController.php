@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\Kursus\KursusExports;
 use Illuminate\Http\Request;
-use App\Exports\KursusExports;
 use App\Http\Controllers\Controller;
 use App\Kursus;
 use App\Http\Requests\KursusRequest;

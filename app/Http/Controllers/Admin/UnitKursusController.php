@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\UnitKursusExports;
+use App\Exports\Unit\UnitKursusExports;
 use App\Http\Controllers\Controller;
 use App\KursusUnit;
 use App\Type;
