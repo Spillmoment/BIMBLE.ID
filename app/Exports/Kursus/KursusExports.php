@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\Kursus;
 
-use App\Unit;
+use App\Kursus;
 
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class SiswaExports implements FromView, ShouldAutoSize
+class KursusExports implements FromView, ShouldAutoSize
 {
     public function view(): View
     {
-        return view('admin.unit.export', [
-            'unit' => Unit::latest()->get()
+        return view('admin.kursus.export', [
+            'kursus' => Kursus::latest()->get()
         ]);
     }
 }

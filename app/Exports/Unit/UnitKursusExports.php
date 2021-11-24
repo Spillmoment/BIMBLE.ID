@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exports;
+namespace App\Exports\Unit;
 
 use App\KursusUnit;
 
