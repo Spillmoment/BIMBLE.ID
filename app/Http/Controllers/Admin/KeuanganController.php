@@ -11,12 +11,13 @@ class KeuanganController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Keuangan::query()->latest();
+            $query = Keuangan::query()->with(['unit'])
+                ->latest();
             return DataTables::of($query)
-                ->addColumn('action', function ($item){
+                ->addColumn('action', function ($item) {
                     return view('admin.keuangan.action', compact('item'));
                 })
-                ->editColumn('created_at', function ($item){
+                ->editColumn('created_at', function ($item) {
                     return $item->created_at->format('d M Y');
                 })
                 ->addColumn('unit', function ($item) {
@@ -40,12 +41,12 @@ class KeuanganController extends Controller
         $keuangan = Keuangan::findOrFail($id);
         if ($keuangan->status == 'inactive') {
             $keuangan->update([
-                    'status' => 'active',
-                ]);
-            
+                'status' => 'active',
+            ]);
+
             return redirect()->route('keuangan.index')
                 ->with('status', 'Permintaan berhasil diupdate');
-        }else{
+        } else {
             $keuangan->update([
                 'status' => 'inactive',
             ]);
@@ -54,5 +55,4 @@ class KeuanganController extends Controller
                 ->with('status', 'Status diurungkan !');
         }
     }
-
 }
