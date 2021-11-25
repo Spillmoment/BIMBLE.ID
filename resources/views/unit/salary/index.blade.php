@@ -9,10 +9,10 @@
     swal({
         title: "Success",
         text: "{{session('status')}}",
-        icon: "success",
-        button: false,
-        timer: 2000
-    });
+icon: "success",
+button: false,
+timer: 2000
+});
 
 </script>
 @endpush
@@ -25,7 +25,8 @@
             <div class="d-block mb-4 mb-md-0">
                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                        <li class="breadcrumb-item"><a href="{{ route('unit.home') }}"><span class="fas fa-home"></span></a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('unit.home') }}"><span
+                                    class="fas fa-home"></span></a></li>
                         <li class="breadcrumb-item"><a href="{{ route('unit.salary') }}">Cek Salary</a></li>
                     </ol>
                 </nav>
@@ -33,17 +34,15 @@
             </div>
 
         </div>
-        
+
         <div class="card border-light shadow-sm components-section mt-3">
             <div class="row my-1 mx-1">
                 <div class="col-md-3">
                     <select data-column="0" id="status_form" class="form-select filter-select">
-                        <option value="">Pilih Status</option> 
+                        <option value="">Pilih Status</option>
                         @foreach ($status as $item)
-                            <option value="{{ $item->id }}">{{ $item->status }}</option>
+                        <option value="{{ $item->id }}">{{ $item->status }}</option>
                         @endforeach
-                        {{-- <option value="active">Aktif</option>
-                        <option value="inactive">Tidak Aktif</option> --}}
                     </select>
                 </div>
             </div>
