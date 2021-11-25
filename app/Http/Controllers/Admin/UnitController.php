@@ -62,7 +62,7 @@ class UnitController extends Controller
                         return '<button class="btn btn-danger btn-sm">Nonaktif</button>';
                     }
                 })
-                ->rawColumns(['action', 'gambar_unit', 'status'])
+                ->rawColumns(['action', 'status'])
                 ->make();
         }
 
