@@ -40,8 +40,8 @@ class KursusController extends Controller
     {
         $id_unit = Auth::id();
         KursusUnit::insert(array(
-            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 1, 'biaya_kursus' => 0, 'status' => 'nonaktif'),
-            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 2, 'biaya_kursus' => 0, 'status' => 'nonaktif'),
+            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 1, 'biaya_kursus' => 0, 'status' => 'nonaktif', 'created_at' => now()),
+            array('kursus_id' => $request->kursus_id, 'unit_id'  => $id_unit, 'type_id' => 2, 'biaya_kursus' => 0, 'status' => 'nonaktif', 'created_at' => now()),
         ));
 
         $kursus = Kursus::find($request->kursus_id);
