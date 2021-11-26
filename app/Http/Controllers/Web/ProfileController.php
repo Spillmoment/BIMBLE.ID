@@ -34,12 +34,13 @@ class ProfileController extends Controller
 
     public function update_profile(Request $request, $id)
     {
+        
         $request->validate([
             'nama_siswa'    => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:L,P',
             'foto'          => 'nullable|sometimes|image|mimes:jpeg,png,jpg|max:2048',
             'email'         => 'required|string|email|max:255|unique:siswa,email,' . $id,
-            'no_telp'       => 'required|between:9,13|unique:siswa' . $id,
+            'no_telp'       => 'required|between:9,13|unique:siswa,no_telp,'.$id,
             'get_provinsi'  => 'required',
             'get_kabupaten' => 'required',
             'get_kecamatan' => 'required',
