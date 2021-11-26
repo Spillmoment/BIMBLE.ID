@@ -4,131 +4,103 @@
 
 @section('content')
 
-@if (session('status'))
-@push('scripts')
-<script>
-    swal({
-        title: "Berhasil",
-        text: "{{ session('status') }}",
-        icon: "success",
-        button: false,
-        timer: 3000
-    });
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-4">
 
-</script>
-@endpush
-@endif
-
-<div class="row">
-    <div class="col-12 mb-4">
-
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3">
-            <div class="d-block mb-4 mb-md-0">
-                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('siswa.unit') }}">Kursus</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Siswa Unit {{ $unit->unit->nama_unit }}
-                        </li>
-                    </ol>
-                </nav>
-                <h2 class="h4 mt-3">List Data Siswa {{ $unit->unit->nama_unit }}</h2>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3">
+                <div class="d-block mb-4 mb-md-0">
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                            <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('siswa.unit') }}">Kursus</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Siswa Unit
+                                {{ $unit->unit->nama_unit }}
+                            </li>
+                        </ol>
+                    </nav>
+                    <h2 class="h4 mt-3">List Data Siswa {{ $unit->unit->nama_unit }}</h2>
+                </div>
             </div>
-        </div>
 
-        <div class="btn-toolbar dropdown">
-            <button class="btn btn-primary btn-sm mr-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <span class="fas fa-file-export mr-2"></span>Export
-            </button>
-            <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
-                <a class="dropdown-item font-weight-bold"
-                    href="{{ route('siswa-unit.kelompok',[$unit->unit_id, $kelompok->id]) }}">
-                    <span class="fas fa-address-book text-success">
-                    </span>Kursus Kelompok</a>
-                <a class="dropdown-item font-weight-bold"
-                    href="{{ route('siswa-unit.private', [$unit->unit_id, $private->id]) }}">
-                    <span class="fas fa-address-book text-danger">
-                    </span>Kursus Private</a>
-            </div>
-        </div>
-
-        <div class="d-flex flex-row-reverse bd-highlight">
-            <!-- Button Modal -->
-            <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
-                data-target="#modal-default">Default</button>
-            <!-- Modal Content -->
-            <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="h6 modal-title">Terms of Service</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>With less than a month to go before the European Union enacts new consumer privacy laws
-                                for its citizens, companies around the world are updating their terms of service
-                                agreements to comply.</p>
-                            <p>The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on
-                                May 25 and is meant to ensure a common set of data rights in the European Union. It
-                                requires organizations to notify users as
-                                soon as possible of high-risk data breaches that could personally affect them.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-secondary">I Got It</button>
-                            <button type="button" class="btn btn-link text-danger ml-auto"
-                                data-dismiss="modal">Close</button>
-                        </div>
+            <div class="d-flex flex-row-reverse bd-highlight">
+                <div class="btn-toolbar dropdown">
+                    <button class="btn btn-success btn-sm mr-2 dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <span class="fas fa-file-excel mr-2"></span>Export Excel
+                    </button>
+                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
+                        <a class="dropdown-item font-weight-bold"
+                            href="{{ route('siswa-unit.excel_kelompok',[$unit->unit_id, $kelompok->id]) }}">
+                            <span class="fas fa-address-book text-success">
+                            </span>Kursus Kelompok</a>
+                        <a class="dropdown-item font-weight-bold"
+                            href="{{ route('siswa-unit.excel_private', [$unit->unit_id, $private->id]) }}">
+                            <span class="fas fa-address-book text-danger">
+                            </span>Kursus Private</a>
+                    </div>
+                </div>
+                <div class="btn-toolbar dropdown">
+                    <button class="btn btn-danger btn-sm mr-2 dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <span class="fas fa-file-pdf mr-2"></span>Export PDF
+                    </button>
+                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-left mt-2">
+                        <a class="dropdown-item font-weight-bold"
+                            href="{{ route('siswa-unit.pdf',[$unit->unit_id, $kelompok->id]) }}">
+                            <span class="fas fa-address-book text-success">
+                            </span>Kursus Kelompok</a>
+                        <a class="dropdown-item font-weight-bold"
+                            href="{{ route('siswa-unit.pdf', [$unit->unit_id, $private->id]) }}">
+                            <span class="fas fa-address-book text-danger">
+                            </span>Kursus Private</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- End of Modal Content -->
 
 
-        <div class="card border-light shadow-sm components-section mt-3">
-            <div class="row my-1 mx-1">
-                <div class="col-md-3">
-                    <select id="filter-type" data-column="0" class="form-select filter text-capitalize">
-                        <option selected>Pilih Type Kursus</option>
-                        @foreach ($type as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama_type }}</option>
-                        @endforeach
-                    </select>
+            <div class="card border-light shadow-sm components-section mt-3">
+                <div class="row my-1 mx-1">
+                    <div class="col-md-3">
+                        <select id="filter-type" data-column="0" class="form-select filter text-capitalize">
+                            <option selected>Pilih Type Kursus</option>
+                            @foreach ($type as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama_type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card-body">
+                        <table class="table table-hover table-striped table-responsive" id="siswaTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Siswa</th>
+                                    <th>Kursus</th>
+                                    <th>Type Kursus</th>
+                                    <th>Foto</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <footer class="footer section py-2">
+
+                    </div>
+
                 </div>
             </div>
-            <div class="row">
-                <div class="card-body">
-                    <table class="table table-hover table-striped table-responsive" id="siswaTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Siswa</th>
-                                <th>Kursus</th>
-                                <th>Type Kursus</th>
-                                <th>Foto</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                        </tbody>
-                    </table>
-                    <footer class="footer section py-2">
-
-                </div>
-
-            </div>
         </div>
-
     </div>
-</div>
 
+</div>
 @endsection
+
 @push('scripts')
 <script>
     let type = $('#filter-type').val()
