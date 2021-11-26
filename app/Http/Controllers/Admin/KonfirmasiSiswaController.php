@@ -9,6 +9,7 @@ use App\Siswa;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\SiswaKursus;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KonfirmasiSiswaController extends Controller
 {
@@ -19,31 +20,12 @@ class KonfirmasiSiswaController extends Controller
                 ->where(function ($q) {
                     $q->where('status_sertifikat', 'daftar');
                 })
+                ->whereNotNull('file')
                 ->groupBy('siswa_id', 'kursus_unit_id');
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
-                    return
-                        '<div class="btn-group">
-                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <span class="icon icon-sm">
-                                    <span class="fas fa-ellipsis-h icon-dark"></span>
-                                </span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                <a class="dropdown-item" href="' . route('siswa-konfirmasi.detail', $item->id) . '"><span
-                                        class="fas fa-eye mr-2"></span>Detail</a>
-                                
-                                <form action="' . route('siswa-konfirmasi.cancel', $item->id) . '" method="POST">
-                                    ' . method_field('delete') . csrf_field() . '
-                                    <button id="deleteButton" type="submit" class="dropdown-item text-danger" data-name="' . $item->siswa->nama_siswa .  '">
-                                        <span class="fas fa-trash-alt mr-2"></span>Hapus</a>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>';
+                    return view('admin.siswa_konfirmasi.action', compact('item'));
                 })
                 ->addColumn('siswa', function ($item) {
                     return  '<a href="#">' . $item->siswa->nama_siswa . '</a>';
@@ -115,7 +97,7 @@ class KonfirmasiSiswaController extends Controller
 
             if ($check_keuangan) {
                 $percentage = $check_keuangan->rule_gaji->unit;
-                $count_pendapatan = intval(($percentage/100) * $biaya_kursus);
+                $count_pendapatan = intval(($percentage / 100) * $biaya_kursus);
                 $total_pendapatan = intval($check_keuangan->nominal) + $count_pendapatan;
 
                 $check_keuangan->update([
@@ -124,28 +106,34 @@ class KonfirmasiSiswaController extends Controller
             } else {
                 $last_rule = RuleGaji::latest('created_at')->first();
                 $percentage = $last_rule->unit;
-                $count_pendapatan = intval(($percentage/100) * $biaya_kursus);
+                $count_pendapatan = intval(($percentage / 100) * $biaya_kursus);
 
-                $keuangan = New Keuangan();
+                $keuangan = new Keuangan();
                 $keuangan->unit_id = $siswa_kursus->kursus_unit->unit_id;
                 $keuangan->rule_gaji_id = $last_rule->id;
                 $keuangan->nominal = $count_pendapatan;
                 $keuangan->status = 'inactive';
                 $keuangan->save();
             }
-                        
+
             return redirect()->route('siswa-konfirmasi.index')
                 ->with('status', 'Siswa berhasil terkonfirmasi.');
         }
     }
 
-    public function cancel(Request $request)
+    public function destroy($id)
     {
+        $siswa = SiswaKursus::with('siswa')->findOrFail($id);
+        $siswa->delete();
+        Alert::success('success', 'Data Siswa ' . $siswa->siswa->nama_siswa .
+            ' Berhasil Dihapus')->autoClose(3000);
+        return back();
     }
 
     public function notification()
     {
-        $check_pendaftaran = SiswaKursus::where('status_sertifikat', 'daftar')->whereNotNull('file')->count();
+        $check_pendaftaran = SiswaKursus::where('status_sertifikat', 'daftar')
+            ->whereNotNull('file')->count();
         return response()->json([
             'total_pendaftar' => $check_pendaftaran,
             'state' => 'CA',
