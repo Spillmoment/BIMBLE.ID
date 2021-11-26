@@ -84,8 +84,7 @@
                 $.ajax({
                     type: 'post',
                     // dataType: "json",
-                    url: '{{ route('
-                    unit.kursus.tambah ') }}',
+                    url: '{{ route('unit.kursus.tambah') }}',
                     data: {
                         kursus_id: id_kursus
                     },
@@ -129,8 +128,7 @@
                             $.ajax({
                                 type: 'delete',
                                 // dataType: "json",
-                                url: '{{ route('
-                                unit.kursus.hapus ') }}',
+                                url: '{{ route('unit.kursus.hapus') }}',
                                 data: {
                                     kursus_id: id_kursus
                                 },

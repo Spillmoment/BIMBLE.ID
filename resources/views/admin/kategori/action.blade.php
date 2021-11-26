@@ -27,7 +27,7 @@
         event.preventDefault();
         swal({
             title: 'Apakah Anda Yakin?',
-            text: "Menghapus Kategori  " + name + "?",
+            text: "Menghapus Kategori  " + name,
             icon: 'warning',
             buttons: ["Cancel", "Yes!"],
         }).then((willDelete) => {
