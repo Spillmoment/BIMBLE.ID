@@ -1,6 +1,9 @@
 @isset($item->file)
 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-file"> <i class="fas fa-eye"></i> Detail
-</button>
+</button> <br>
+@if (!is_null($item->invalid_message))
+    <span class="text-warning">Bukti transfer masih dalam proses pembaharuan.</span>
+@endif
 <!-- Modal Content -->
 <div class="modal fade" id="modal-file" tabindex="-1" role="dialog" aria-labelledby="modal-file" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
