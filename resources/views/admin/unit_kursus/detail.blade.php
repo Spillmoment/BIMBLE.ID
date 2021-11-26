@@ -19,66 +19,102 @@
 @endpush
 @endif
 
-<div class="row">
-    <div class="col-12 mb-4">
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-4">
 
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3">
-            <div class="d-block mb-4 mb-md-0">
-                <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                    <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                        <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-                        <li class="breadcrumb-item"><a href="#">Kursus Unit</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Halaman Kursus Unit
-                            {{ $unit->unit->nama_unit }}</li>
-                    </ol>
-                </nav>
-                <h2 class="h4 mt-1">List Kursus Unit {{ $unit->unit->nama_unit }}</h2>
-            </div>
-        </div>
-
-        <div class="d-flex flex-row-reverse bd-highlight">
-            <div class="btn-group">
-                <a href="{{ route('unit-kursus.excel',$unit->unit->id) }}" class="btn btn-sm btn-success mx-1">
-                    <i class="fas fa-file-excel"></i> Export Excel</a>
-                <a href="{{ route('unit-kursus.pdf',$unit->unit->id) }}" class="btn btn-sm btn-danger mx-1">
-                    <i class="fas fa-file-pdf"></i> Export PDF</a>
-            </div>
-        </div>
-
-
-        <div class="card border-light shadow-sm components-section mt-3">
-            <div class="row my-1 mx-1">
-                <div class="col-md-3">
-                    <select id="filter-type" data-column="0" class="form-select filter text-capitalize">
-                        <option selected>Pilih Type Kursus</option>
-                        @foreach ($type as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama_type }}</option>
-                        @endforeach
-                    </select>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-3">
+                <div class="d-block mb-4 mb-md-0">
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                        <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                            <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
+                            <li class="breadcrumb-item"><a href="#">Kursus Unit</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Halaman Kursus Unit
+                                {{ $unit->unit->nama_unit }}</li>
+                        </ol>
+                    </nav>
+                    <h2 class="h4 mt-1">List Kursus Unit {{ $unit->unit->nama_unit }}</h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="card-body">
-                    <table class="table table-hover table-striped table-responsive" id="kursusUnitTable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Kursus</th>
-                                <th>Type Kursus</th>
-                                <th>Kategori</th>
-                                <th>Gambar Kursus</th>
-                                <th>Biaya Kursus</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                        </tbody>
-                    </table>
-                    <footer class="footer section py-2">
+            <div class="d-flex flex-row-reverse bd-highlight">
+                <div class="btn-toolbar dropdown">
+                    <div class="btn-group">
 
+                        <button class="btn btn-success btn-sm mr-2 dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-file-excel mr-2"></span>Export Excel
+                        </button>
+
+                        <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
+                            <a class="dropdown-item font-weight-bold"
+                                href="{{ route('unit-kursus.kelompok',[$unit->unit_id, $kelompok->id]) }}">
+                                <span class="fas fa-address-book text-success">
+                                </span>Kursus Kelompok</a>
+                            <a class="dropdown-item font-weight-bold"
+                                href="{{ route('unit-kursus.private', [$unit->unit_id, $private->id]) }}">
+                                <span class="fas fa-address-book text-danger">
+                                </span>Kursus Private</a>
+                        </div>
+
+                    </div>
                 </div>
 
+                <div class="btn-toolbar dropdown">
+                    <div class="btn-group">
+                        <button class="btn btn-danger btn-sm mr-2 dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <span class="fas fa-file-pdf mr-2"></span>Export PDF
+                        </button>
+                        <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
+                            <a class="dropdown-item font-weight-bold"
+                                href="{{ route('unit-kursus.pdf_kelompok',[$unit->unit_id, $kelompok->id]) }}">
+                                <span class="fas fa-address-book text-success">
+                                </span>Kursus Kelompok</a>
+                            <a class="dropdown-item font-weight-bold"
+                                href="{{ route('unit-kursus.pdf_private', [$unit->unit_id, $private->id]) }}">
+                                <span class="fas fa-address-book text-danger">
+                                </span>Kursus Private</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-light shadow-sm components-section mt-3">
+                <div class="row my-1 mx-1">
+                    <div class="col-md-3">
+                        <select id="filter-type" data-column="0" class="form-select filter text-capitalize">
+                            <option selected>Pilih Type Kursus</option>
+                            @foreach ($type as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama_type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card-body">
+                        <table class="table table-hover table-striped table-responsive" id="kursusUnitTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Kursus</th>
+                                    <th>Type Kursus</th>
+                                    <th>Kategori</th>
+                                    <th>Biaya Kursus</th>
+                                    <th>Status</th>
+                                    <th>Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <footer class="footer section py-2">
+
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -92,7 +128,7 @@
     var datatable = $('#kursusUnitTable').DataTable({
         processing: true,
         serverSide: true,
-        ordering: true,
+        ordering: false,
         ajax: {
             url: '{!! url()->current() !!}',
             data: function (d) {
@@ -121,17 +157,20 @@
                 name: 'kursus.kategori.nama_kategori',
             },
             {
-                data: 'gambar_kursus',
-                name: 'kursus.gambar_kursus',
-            },
-            {
                 data: 'biaya_kursus',
                 name: 'biaya_kursus',
             },
             {
                 data: 'status',
                 name: 'status',
-            }
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                width: '20%'
+            },
         ],
 
     });

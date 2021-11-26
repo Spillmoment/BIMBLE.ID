@@ -16,7 +16,7 @@
 
 </style>
 <center>
-    <h5>Laporan Kursus Unit {{ $kursus_unit->unit->nama_unit }}</h4>
+    <h5>Laporan Kursus Private Unit {{ $kursus_unit->unit->nama_unit }}</h4>
     </h5>
 </center>
 
@@ -41,9 +41,9 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->created_at != null ? $item->created_at->format('d F Y') : 'null' }}</td>
                 <td>{{ $item->kursus->nama_kursus }}</td>
-                <td>{{ $item->type->nama_type }}</td>
+                <td>{{ Str::ucfirst($item->type->nama_type) }}</td>
                 <td>{{ $item->kursus->kategori->nama_kategori }}</td>
-                <td> Rp.{{ number_format($item->biaya_kursus) }}</td>
+                <td> @currency($item->biaya_kursus)</td>
                 <td>{{ $item->status }}</td>
             </tr>
             @endforeach
