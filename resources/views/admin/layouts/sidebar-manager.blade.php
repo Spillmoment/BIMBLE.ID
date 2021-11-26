@@ -135,6 +135,29 @@
                 </a>
             </li>
             
+            <!-- Sidebar Grafik -->
+            <li class="nav-item {{ (request()->is('manager/statistik*')) ? 'active' : '' }}">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                    data-toggle="collapse" data-target="#submenu-settings">
+                    <span>
+                        <span class="sidebar-icon"><span class="fas fa-chart-bar"></span></span>
+                        Statistik
+                    </span>
+                    <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
+                </span>
+                <div class="multi-level collapse {{ (request()->is('manager/statistik*')) ? 'show' : '' }}" role="list"
+                    id="submenu-settings" aria-expanded="false">
+                    <ul class="flex-column nav">
+                        <li class="nav-item {{ (Request::route()->getName() == 'statistik.kursus') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('statistik.kursus') }}"><span>Kursus</span></a>
+                        </li>
+                        <li class="nav-item {{ (Request::route()->getName() == 'statistik.siswa') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('statistik.siswa') }}"><span>Siswa</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            
             <!-- Sidebar  Pengaturan -->
             <li class="nav-item {{ (request()->is('manager/banner*')) ? 'active' : '' }}">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
