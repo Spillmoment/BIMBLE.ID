@@ -39,17 +39,11 @@
             <div class="card bg-yellow-alt shadow-sm">
                 <div class="card-header d-flex flex-row align-items-center flex-0">
                     <div class="d-block">
-                        <div class="h5 font-weight-normal mb-2">Sales Value</div>
-                        <h2 class="h3">$10,567</h2>
+                        <div class="h4 font-weight-normal mb-2">Diagram Total Unit</div>
+                        <h5 class="h5">Dalam satuan per bulan</h5>
                         <div class="small mt-2"> 
-                            <span class="font-weight-bold mr-2">Yesterday</span>                              
-                            <span class="fas fa-angle-up text-success"></span>                                   
-                            <span class="text-success font-weight-bold">10.57%</span>
+                            <span class="font-weight-bold mr-2">January - December</span>
                         </div>
-                    </div>
-                    <div class="d-flex ml-auto">
-                        <a href="#" class="btn btn-secondary text-dark btn-sm mr-2">Month</a>
-                        <a href="#" class="btn btn-primary btn-sm mr-3">Week</a>
                     </div>
                 </div>
                 <div class="card-body p-2">
@@ -90,7 +84,7 @@
                             <div class="ct-chart-traffic-share ct-golden-section ct-series-a"></div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
-                            <h2 class="h5 mb-3">Traffic Share</h2>
+                            <h2 class="h5 mb-3">Keaktifan</h2>
                             <h6 class="font-weight-normal text-secondary" id="max-percent"></h6>
                             <h6 class="font-weight-normal text-blue" id="min-percent"></h6>
                         </div>
@@ -113,7 +107,7 @@
         total_unit = total_unit + data_unit[index].count
     }
     document.getElementById('label-count-unit1').innerHTML = `${total_unit} Agensi`;
-    document.getElementById('label-count-unit2').innerHTML = `${total_unit} Agensi`;
+    document.getElementById('label-count-unit2').innerHTML = `<a href="{{ route('unit.index') }}">${total_unit} Agensi</a>`;
 
     // Get data bulan
     let first_month = '';

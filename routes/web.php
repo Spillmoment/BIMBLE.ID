@@ -144,6 +144,10 @@ Route::prefix('manager')
             ->name('keuangan.index');
         Route::put('keuangan/{id}', 'Admin\KeuanganController@update_status')
             ->name('keuangan.update');
+
+        // Statistik
+        Route::get('statistik/kursus', 'Admin\StatistikController@kursus')->name('statistik.kursus');
+        Route::get('statistik/siswa', 'Admin\StatistikController@siswa')->name('statistik.siswa');
     });
 
 

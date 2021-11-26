@@ -133,6 +133,7 @@
                             </div>
                         </div>
 
+
                         <form action="{{ route('siswa-konfirmasi.confirm', $data->id) }}" method="post">
                             @csrf
                             @method('put')
@@ -140,8 +141,10 @@
                                 data-name="{{ $data->siswa->nama_siswa }}" type="submit">Konfirmasi</button>
                         </form>
 
+
                         <div class="mt-3 mb-4 text-center">
-                            <span class="font-weight-bold">Atau kirim pesan kesalahan</span>
+                            <span class="font-weight-bold">Atau kirim pesan kesalahan jika terdapat kesalahan
+                                transaksi.</span>
                         </div>
 
                         <div class="text-center">
