@@ -137,7 +137,7 @@
                     </form>
 
                     <div class="mt-3 mb-4 text-center">
-                        <span class="font-weight-bold">Atau kirim pesan kesalahan</span>
+                        <span class="font-weight-bold">Atau kirim pesan kesalahan jika terdapat kesalahan transaksi.</span>
                     </div>
 
                     <div class="text-center">
