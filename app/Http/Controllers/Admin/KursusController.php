@@ -35,29 +35,7 @@ class KursusController extends Controller
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
-                    return
-                        '<div class="btn-group">
-                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <span class="icon icon-sm">
-                                    <span class="fas fa-ellipsis-h icon-dark"></span>
-                                </span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                <a class="dropdown-item" href="' . route('kursus.show', $item->id) . '"><span
-                                        class="fas fa-eye mr-2"></span>Detail</a>
-                                <a class="dropdown-item" href="' . route('kursus.edit', $item->id) . '"><span
-                                        class="fas fa-edit mr-2"></span>Sunting</a>
-                                <a class="dropdown-item" href="' . route('kursus.gallery', $item->id) . '"><span class="fas fa-images mr-2"></span>Galeri</a>
-                                <form action="' . route('kursus.destroy', $item->id) . '" method="POST">
-                                    ' . method_field('delete') . csrf_field() . '
-                                    <button id="deleteButton" type="submit" class="dropdown-item text-danger" data-name="' . $item->nama_kursus .  '">
-                                        <span class="fas fa-trash-alt mr-2"></span>Hapus</a>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>';
+                    return view('admin.kursus.action', compact('item'));
                 })
                 ->addColumn('kategori', function ($item) {
                     return $item->kategori->nama_kategori ?? '';
