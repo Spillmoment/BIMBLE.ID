@@ -15,6 +15,7 @@ use Yajra\DataTables\DataTables;
 use PDF;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SiswaUnitController extends Controller
 {
@@ -43,23 +44,16 @@ class SiswaUnitController extends Controller
         $private = Type::where('id', '1')->first();
         $kelompok = Type::where('id', '2')->first();
 
-
         if (request()->ajax()) {
             $req = $request->type;
             if (request()->input('type') != 0) {
                 $query = SiswaKursus::with(['siswa', 'kursus_unit.kursus', 'kursus_unit.unit', 'kursus_unit.type'])
-                    ->whereHas(
-                        'kursus_unit.unit',
-                        function ($q) use ($unit_id) {
-                            $q->where('unit_id', $unit_id);
-                        }
-                    )
-                    ->whereHas(
-                        'kursus_unit.type',
-                        function ($q) use ($req) {
-                            $q->where('type_id', $req);
-                        }
-                    )
+                    ->whereHas('kursus_unit.unit', function ($q) use ($unit_id) {
+                        $q->where('unit_id', $unit_id);
+                    })
+                    ->whereHas('kursus_unit.type', function ($q) use ($req) {
+                        $q->where('type_id', $req);
+                    })
                     ->where(function ($q) {
                         $q->where('status_sertifikat', 'lulus')
                             ->orWhere('status_sertifikat', 'sertifikat');
@@ -81,27 +75,7 @@ class SiswaUnitController extends Controller
 
             return DataTables::of($query)
                 ->addColumn('action', function ($item) {
-                    return
-                        '<div class="btn-group">
-                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <span class="icon icon-sm">
-                                    <span class="fas fa-ellipsis-h icon-dark"></span>
-                                </span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                <a class="dropdown-item" href="' . route('kursus.show', $item->id) . '"><span
-                                        class="fas fa-eye mr-2"></span>Detail</a>
-                                
-                                <form action="' . route('kursus.destroy', $item->id) . '" method="POST">
-                                    ' . method_field('delete') . csrf_field() . '
-                                    <button id="deleteButton" type="submit" class="dropdown-item text-danger" data-name="' . $item->nama_kursus .  '">
-                                        <span class="fas fa-trash-alt mr-2"></span>Hapus</a>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>';
+                    return view('admin.siswa_unit.action', compact('item'));
                 })
                 ->addColumn('siswa', function ($item) {
                     return $item->siswa->nama_siswa ?? '';
@@ -143,10 +117,28 @@ class SiswaUnitController extends Controller
         ]);
     }
 
+    public function detail_siswa_id($id)
+    {
+        $data = SiswaKursus::with(['siswa', 'kursus_unit'])
+            ->findOrFail($id);
+        return view('admin.siswa_unit.detail_siswa', compact('data'));
+    }
+
+    public function destroy($id)
+    {
+        $data = SiswaKursus::with(['siswa', 'kursus_unit'])->find($id);
+        Storage::delete('public/sertifikat/' . $data->file);
+        $data->delete();
+
+        Alert::success('Success', 'Siswa Berhasil Di Hapus')
+            ->autoClose(3000);
+        return back();
+    }
+
     public function confirm($id)
     {
         $data = SiswaKursus::with(['siswa', 'kursus_unit'])->find($id);
-        $pdf = PDF::loadView('admin.siswa_unit.pdf', compact('data'))
+        $pdf = PDF::loadView('admin.siswa_unit.pdf_sertif', compact('data'))
             ->setPaper('F4', 'landscape');
         $filename = $data->siswa->nama_siswa . '-' . date('dmyHis') . '.pdf';
         Storage::put('public/sertifikat/' . $filename, $pdf->output());
@@ -157,7 +149,9 @@ class SiswaUnitController extends Controller
                 'sertifikat' => $filename
             ]);
 
-        return back()->with(['status' => 'siswa berhasil dikonfirmasi']);
+        Alert::success('Success', 'Sertifikat Siswa Berhasil Di Konfirmasi')
+            ->autoClose(3000);
+        return back();
     }
 
     public function confirm_down($id)
@@ -172,7 +166,10 @@ class SiswaUnitController extends Controller
                 'sertifikat' => null
             ]);
 
-        return back()->with(['status' => 'Sertifikat siswa berhasil dihapus']);
+
+        Alert::success('Success', 'Sertifikat Siswa Berhasil Di Batalkan')
+            ->autoClose(3000);
+        return back();
     }
 
     public function download_sertifikat($filename)
@@ -199,5 +196,36 @@ class SiswaUnitController extends Controller
             new SiswaPrivate($id, $type),
             'Laporan-Siswa-Private-Unit-' . $unit->unit->nama_unit .  '-' . now() . '.xlsx'
         );
+    }
+
+    public function export_pdf($id, $type)
+    {
+        $kursus_unit = KursusUnit::with('unit', 'kursus')
+            ->where('type_id', $type)
+            ->where('unit_id', $id)->first();
+
+        $query = SiswaKursus::with([
+            'siswa', 'kursus_unit.kursus', 'kursus_unit.unit',
+            'kursus_unit.type'
+        ])
+            ->whereHas('kursus_unit.unit', function ($query) use ($id) {
+                $query->where('unit_id', $id);
+            })
+            ->whereHas('kursus_unit.type', function ($query) use ($type) {
+                $query->where('type_id', $type);
+            })
+            ->where(function ($query) {
+                $query
+                    ->where('status_sertifikat', 'lulus')
+                    ->orWhere('status_sertifikat', 'sertifikat');
+            })
+            ->groupBy('siswa_id', 'kursus_unit_id')
+            ->latest()
+            ->get();
+
+        $pdf = PDF::loadview('admin.siswa_unit.pdf_siswa', compact('kursus_unit', 'query'))
+            ->setPaper('F4', 'landscape');;
+        return $pdf->download('Laporan-Siswa-' . $kursus_unit->type->nama_type . '-Unit-' .
+            $kursus_unit->unit->nama_unit . '-' . now() . '.pdf');
     }
 }

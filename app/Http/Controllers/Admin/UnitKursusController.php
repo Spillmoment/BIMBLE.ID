@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\Unit\UnitKursusExports;
+use App\Exports\UnitKursus\KursusKelompok;
+use App\Exports\UnitKursus\KursusPrivate;
 use App\Http\Controllers\Controller;
+use App\Kursus;
 use App\KursusUnit;
 use App\Type;
 use Illuminate\Http\Request;
@@ -32,6 +34,8 @@ class UnitKursusController extends Controller
             ->where('unit_id', $id)->first();
 
         $type = Type::latest()->get();
+        $private = Type::where('id', '1')->first();
+        $kelompok = Type::where('id', '2')->first();
 
         if (request()->ajax()) {
 
@@ -50,6 +54,10 @@ class UnitKursusController extends Controller
             }
 
             return DataTables::of($query)
+                ->addColumn('action', function ($item) {
+                    return '<a class="btn btn-primary btn-sm" href="' . route('unit-kursus.detail-kursus', $item->id) . '"><span
+                    class="fas fa-eye"></span> Detail</a>';
+                })
                 ->addColumn('kursus', function ($item) {
                     return $item->kursus->nama_kursus;
                 })
@@ -58,13 +66,6 @@ class UnitKursusController extends Controller
                 })
                 ->addColumn('kategori', function ($item) {
                     return $item->kursus->kategori->nama_kategori;
-                })
-                ->addColumn('gambar_kursus', function ($item) {
-                    if (!empty($item->kursus->gambar_kursus)) {
-                        return '<img src="' . url('assets/images/kursus/' . $item->kursus->gambar_kursus) . '" style="max-height: 40px;"/>';
-                    } else {
-                        return 'N/A';
-                    }
                 })
                 ->editColumn('biaya_kursus', function ($item) {
                     return 'Rp.' . number_format($item->biaya_kursus);
@@ -76,39 +77,74 @@ class UnitKursusController extends Controller
                         return '<button class="btn btn-danger btn-sm">Nonaktif</button>';
                     }
                 })
-                ->rawColumns(['gambar_kursus', 'biaya_kursus', 'status'])
+                ->rawColumns(['action', 'biaya_kursus', 'status'])
                 ->make();
         }
 
         return view('admin.unit_kursus.detail', [
             'unit' => $unit,
-            'type' => $type
+            'type' => $type,
+            'private' => $private,
+            'kelompok' => $kelompok
         ]);
     }
 
-    public function export_excel($id)
+    public function detail_kursus($id)
     {
-        $kursus_unit = KursusUnit::with(['unit', 'kursus.kategori'])
+        $kursus_unit = KursusUnit::with(['kursus', 'unit'])
+            ->findOrFail($id);
+        return view('admin.unit_kursus.detail_kursus', compact('kursus_unit'));
+    }
+
+    public function export_kelompok($id, $type)
+    {
+        $unit = KursusUnit::with('unit', 'kursus')
             ->where('unit_id', $id)->first();
         return Excel::download(
-            new UnitKursusExports($id),
-            'Laporan-Kursus-Unit-' . $kursus_unit->unit->nama_unit .  '-' . now() . '.xlsx'
+            new KursusKelompok($id, $type),
+            'Laporan-Siswa-Kelompok-Unit-' . $unit->unit->nama_unit .  '-' . now() . '.xlsx'
         );
     }
 
-    public function export_pdf($id)
+    public function export_private($id, $type)
+    {
+        $unit = KursusUnit::with('unit', 'kursus')
+            ->where('unit_id', $id)->first();
+        return Excel::download(
+            new KursusPrivate($id, $type),
+            'Laporan-Siswa-Private-Unit-' . $unit->unit->nama_unit .  '-' . now() . '.xlsx'
+        );
+    }
+
+    public function export_pdf_kelompok($id, $type)
     {
         $kursus_unit = KursusUnit::with(['unit', 'kursus.kategori'])
             ->where('unit_id', $id)->first();
 
         $query = KursusUnit::with(['unit', 'kursus'])
             ->where('unit_id', $id)
-            ->where('type_id', '2')
+            ->where('type_id', $type)
             ->latest()
             ->get();
 
-        $pdf = PDF::loadview('admin.unit_kursus.pdf', compact('kursus_unit', 'query'));
-        return $pdf->download('Laporan-Kursus-Unit-' .
+        $pdf = PDF::loadview('admin.unit_kursus.pdf_kelompok', compact('kursus_unit', 'query'));
+        return $pdf->download('Laporan-Kursus-Kelompok-Unit-' .
+            $kursus_unit->unit->nama_unit . '-' . now() . '.pdf');
+    }
+
+    public function export_pdf_private($id, $type)
+    {
+        $kursus_unit = KursusUnit::with(['unit', 'kursus.kategori'])
+            ->where('unit_id', $id)->first();
+
+        $query = KursusUnit::with(['unit', 'kursus'])
+            ->where('unit_id', $id)
+            ->where('type_id', $type)
+            ->latest()
+            ->get();
+
+        $pdf = PDF::loadview('admin.unit_kursus.pdf_private', compact('kursus_unit', 'query'));
+        return $pdf->download('Laporan-Kursus-Private-Unit-' .
             $kursus_unit->unit->nama_unit . '-' . now() . '.pdf');
     }
 }
