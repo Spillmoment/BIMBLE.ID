@@ -70,7 +70,9 @@
                                 <a class="dropdown-item {{ Route::currentRouteName() == 'profile.index' ? 'active' : '' }}"
                                     href="{{ route('profile.index') }}">Profil</a>
                                 <a class="dropdown-item  {{ Route::currentRouteName() == 'user.kursus' ? 'active' : '' }}"
-                                    href="{{ route('user.kursus') }}">Kursus Saya</a>
+                                    href="{{ route('user.kursus') }}">Kursus Saya @if ($count_message > 0)
+                                        <span class="badge badge-pill badge-warning" style="border-radius: 10rem">{{ $count_message }}
+                                    </span>@endif</a>
                                 <a class="dropdown-item  {{ Route::currentRouteName() == 'sertifikat.index' ? 'active' : '' }}"
                                     href="{{ route('sertifikat.index') }}">Sertifikat</a>
                                 <a class="dropdown-item  {{ Route::currentRouteName() == 'profile.pengaturan' ? 'active' : '' }}"
