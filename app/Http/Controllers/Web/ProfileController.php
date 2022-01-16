@@ -23,7 +23,7 @@ class ProfileController extends Controller
     public function profile()
     {
         $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
-        $provinsi = json_decode($response->getBody(), true); 
+        $provinsi = json_decode($response->getBody(), true);
         return view('web.web_profile', compact('provinsi'));
     }
 
@@ -34,13 +34,13 @@ class ProfileController extends Controller
 
     public function update_profile(Request $request, $id)
     {
-        
+
         $request->validate([
             'nama_siswa'    => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:L,P',
             'foto'          => 'nullable|sometimes|image|mimes:jpeg,png,jpg|max:2048',
             'email'         => 'required|string|email|max:255|unique:siswa,email,' . $id,
-            'no_telp'       => 'required|between:9,13|unique:siswa,no_telp,'.$id,
+            'no_telp'       => 'required|between:9,13|unique:siswa,no_telp,' . $id,
             'get_provinsi'  => 'required',
             'get_kabupaten' => 'required',
             'get_kecamatan' => 'required',
@@ -50,7 +50,7 @@ class ProfileController extends Controller
         $user = Siswa::findOrFail($id);
 
         if ($request->hasFile('foto')) {
-            File::delete('storage/siswa/' . $user->foto);
+
             $file = $request->file('foto');
             $extension = $file->getClientOriginalExtension();
             $fileName = time() . "." . $extension;
