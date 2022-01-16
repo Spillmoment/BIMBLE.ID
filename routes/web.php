@@ -1,7 +1,9 @@
 <?php
 
+use App\SiswaKursus;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\View;
 
 // Auth Manager
 Route::group(['prefix' => 'manager'], function () {
@@ -279,8 +281,13 @@ Route::prefix('profile')
         // Route::get('kursus', 'Web\ProfileController@kursus')->name('profile.kursus');
         Route::put('update/{id}/pengaturan', 'Web\ProfileController@update_pengaturan')
             ->name('pengaturan.update');
-        Route::get('pengaturan', 'Web\ProfileController@pengaturan')
-            ->name('profile.pengaturan');
+        Route::get('pengaturan', 'Web\ProfileController@pengaturan')->name('profile.pengaturan');
+
+        // show notification to all views
+        View::composer(['*'], function($view){
+            $count_message = SiswaKursus::where('siswa_id', Auth::id())->whereNotNull('invalid_message')->count();
+            $view->with('count_message', $count_message);
+        });
     });
 
 Route::prefix('user')

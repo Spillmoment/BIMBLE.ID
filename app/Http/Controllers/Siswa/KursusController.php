@@ -98,7 +98,8 @@ class KursusController extends Controller
             $uploads = $fileName;
 
             $cek_data->update([
-                'file' => $uploads
+                'file' => $uploads,
+                'invalid_message' => null
             ]);
             return redirect()->back()
                 ->with(['status' => 'Bukti Pembayaran Berhasil Di Upload!']);
@@ -111,7 +112,8 @@ class KursusController extends Controller
             $uploads = $fileName;
 
             $cek_data->update([
-                'file' => $uploads
+                'file' => $uploads,
+                'invalid_message' => null
             ]);
 
             return redirect()->back()

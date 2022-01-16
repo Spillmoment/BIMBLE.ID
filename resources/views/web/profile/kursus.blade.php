@@ -11,7 +11,9 @@
                 <a class="nav-item nav-link active" id="nav-kelas-tab" data-toggle="tab" href="#nav-kelas" role="tab"
                     aria-controls="nav-kelas" aria-selected="true">Kelas saya</a>
                 <a class="nav-item nav-link" id="nav-proses-tab" data-toggle="tab" href="#nav-proses" role="tab"
-                    aria-controls="nav-proses" aria-selected="false">Proses</a>
+                    aria-controls="nav-proses" aria-selected="false">Proses @if ($count_message > 0)
+                    <span class="badge badge-pill badge-warning" style="border-radius: 10rem">{{ $count_message }}
+                </span>@endif</a>
             </div>
         </nav>
 
@@ -72,7 +74,7 @@
                             <th scope="col" width="200">Nama Kursus</th>
                             <th scope="col" width="200">Penyedia Kursus</th>
                             <th scope="col" width="200">Biaya</th>
-                            <th>Status</th>
+                            <th scope="col" width="500">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,8 +86,27 @@
                             <td class="text-black">{{ $data->kursus_unit->unit->nama_unit }}</td>
                             <td class="text-black">@currency($data->kursus_unit->biaya_kursus).00</td>
                             <td>
-                                <span class="badge badge-warning badge-pill">Menunggu konfirmasi</span> <br>
-                                <small class="text-danger">Silahkan langsung mendatangi pengelola unit kursus! </small>
+                                @if ($data->invalid_message != null)
+                                    <span class="text-gray">Pesan kesalahan:</span><br>
+                                    <small class="text-danger font-italic">* {{ $data->invalid_message }}</small>
+                                    <div class="form-group">
+                                        <form action="{{ route('sertifikat.update', $data->id) }}" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('put')
+                                            <input type="file" class="form-control-file" name="file" id="bukti" required>
+                                            <small id="fileHelpId" class="form-text text-muted">Upload harus format
+                                                jpg/png</small>
+                                            <br>
+                                            <button type="submit" class="text-light btn btn-block"
+                                                style="background-color: #2447f9;">Update
+                                                Pembayaran</button>
+                                        </form>
+                                    </div>
+                                @else
+                                    <span class="badge badge-warning badge-pill">Menunggu konfirmasi</span> <br>
+                                    <small class="text-danger">Pengecakan masih berlangsung berurutan.</small>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
